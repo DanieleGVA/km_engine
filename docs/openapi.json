@@ -1,0 +1,837 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "km_engine API",
+    "description": "Knowledge Management Engine API (WP5, Gate G5)",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login",
+        "description": "Public: username+password -> coppia access (15 min) + refresh (14 gg).",
+        "operationId": "login_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Refresh",
+        "description": "Public: refresh token valido -> nuova coppia; rotazione con revoca del vecchio.",
+        "operationId": "refresh_auth_refresh_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logout",
+        "description": "Autenticato: revoca il refresh token passato (la sessione non si rinnova piu').",
+        "operationId": "logout_auth_logout_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Logout Auth Logout Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/healthz": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health check composito (Neo4j + Postgres)",
+        "description": "Health check composito: verifica connettivit\u00e0 Neo4j e Postgres.\n\nReturns:\n    Dict con status per bolt (Neo4j) e psql (Postgres)",
+        "operationId": "healthz_api_v1_healthz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Healthz Api V1 Healthz Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/entities": {
+      "get": {
+        "tags": [
+          "entities"
+        ],
+        "summary": "Lista entit\u00e0 filtrate per visibilit\u00e0",
+        "description": "Ottieni lista entit\u00e0 visibili all'utente autenticato.\n\n- **Filtro visibilit\u00e0**: applicato automaticamente in base a ruoli/teams\n- **Admin bypass**: gli admin vedono tutte le entit\u00e0\n- **lang**: se specificata e != \"en\", i contenuti non tradotti hanno flag untranslated",
+        "operationId": "list_entities_api_v1_entities_get",
+        "parameters": [
+          {
+            "name": "label",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filtro per label",
+              "title": "Label"
+            },
+            "description": "Filtro per label"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filtro per tipo",
+              "title": "Type"
+            },
+            "description": "Filtro per tipo"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Lingua risposta (override)",
+              "title": "Lang"
+            },
+            "description": "Lingua risposta (override)"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response List Entities Api V1 Entities Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/entities/{entity_id}": {
+      "get": {
+        "tags": [
+          "entities"
+        ],
+        "summary": "Ottieni entit\u00e0 per ID",
+        "description": "Ottieni un'entit\u00e0 specifica con i suoi fatti correnti.\n\n- **404**: se l'entit\u00e0 non esiste o non \u00e8 visibile\n- **Filtro visibilit\u00e0**: applicato su entit\u00e0 e fatti",
+        "operationId": "get_entity_api_v1_entities__entity_id__get",
+        "parameters": [
+          {
+            "name": "entity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Entity Id"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Lingua risposta (override)",
+              "title": "Lang"
+            },
+            "description": "Lingua risposta (override)"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Entity Api V1 Entities  Entity Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/entities/{entity_id}/facts": {
+      "get": {
+        "tags": [
+          "entities"
+        ],
+        "summary": "Ottieni fatti di un'entit\u00e0",
+        "description": "Ottieni i fatti di un'entit\u00e0, con opzionale filtro temporale.\n\n- **at_time**: se specificato, restituisce i fatti validi a quel timestamp (FR5.3)\n- **Filtro visibilit\u00e0**: applicato a ogni fatto",
+        "operationId": "list_facts_api_v1_entities__entity_id__facts_get",
+        "parameters": [
+          {
+            "name": "entity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Entity Id"
+            }
+          },
+          {
+            "name": "at_time",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Timestamp per query storica 'al tempo T'",
+              "title": "At Time"
+            },
+            "description": "Timestamp per query storica 'al tempo T'"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Lingua risposta (override)",
+              "title": "Lang"
+            },
+            "description": "Lingua risposta (override)"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response List Facts Api V1 Entities  Entity Id  Facts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/entities/{entity_id}/relations": {
+      "get": {
+        "tags": [
+          "entities"
+        ],
+        "summary": "Ottieni relazioni di un'entit\u00e0",
+        "description": "Ottieni le relazioni RELATES_TO di un'entit\u00e0.\n\n- **Filtro visibilit\u00e0**: applicato all'entit\u00e0 target di ogni relazione",
+        "operationId": "list_relations_api_v1_entities__entity_id__relations_get",
+        "parameters": [
+          {
+            "name": "entity_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Entity Id"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Lingua risposta (override)",
+              "title": "Lang"
+            },
+            "description": "Lingua risposta (override)"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response List Relations Api V1 Entities  Entity Id  Relations Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/search": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Ricerca full-text",
+        "description": "Ricerca full-text su label e value dei fatti.\n\n- **Implementazione**: CONTAINS (documentato; per performance usare indici Neo4j full-text)\n- **Filtro visibilit\u00e0**: applicato a tutti i risultati\n- **match_type**: \"entity\" o \"fact\" indica il tipo di match",
+        "operationId": "search_endpoint_api_v1_search_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Testo da cercare",
+              "title": "Q"
+            },
+            "description": "Testo da cercare"
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filtro per label",
+              "title": "Label"
+            },
+            "description": "Filtro per label"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Lingua risposta (override)",
+              "title": "Lang"
+            },
+            "description": "Lingua risposta (override)"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response Search Endpoint Api V1 Search Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuthSettings": {
+        "properties": {
+          "pg_dsn": {
+            "type": "string",
+            "title": "Pg Dsn",
+            "default": "postgresql://km:km_dev_password@localhost:5432/km_engine"
+          },
+          "jwt_secret": {
+            "type": "string",
+            "title": "Jwt Secret",
+            "default": "dev-only-secret-change-in-prod"
+          },
+          "jwt_algorithm": {
+            "type": "string",
+            "title": "Jwt Algorithm",
+            "default": "HS256"
+          },
+          "access_token_ttl": {
+            "type": "string",
+            "format": "duration",
+            "title": "Access Token Ttl",
+            "default": "PT15M"
+          },
+          "refresh_token_ttl": {
+            "type": "string",
+            "format": "duration",
+            "title": "Refresh Token Ttl",
+            "default": "P14D"
+          },
+          "tenant": {
+            "type": "string",
+            "title": "Tenant",
+            "default": "default"
+          },
+          "admin_username": {
+            "type": "string",
+            "title": "Admin Username",
+            "default": "admin"
+          },
+          "admin_password": {
+            "type": "string",
+            "title": "Admin Password",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "AuthSettings",
+        "description": "Impostazioni auth: DSN Postgres, secret JWT, TTL dei token, bootstrap admin.\n\nLette da variabili d'ambiente con prefisso ``KM_`` (es. ``KM_PG_DSN``) e,\nin dev, dal file ``.env`` della repo root."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LoginRequest": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "LoginRequest"
+      },
+      "LogoutRequest": {
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          }
+        },
+        "type": "object",
+        "required": [
+          "refresh_token"
+        ],
+        "title": "LogoutRequest"
+      },
+      "RefreshRequest": {
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          }
+        },
+        "type": "object",
+        "required": [
+          "refresh_token"
+        ],
+        "title": "RefreshRequest"
+      },
+      "TokenResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "refresh_token": {
+            "type": "string",
+            "title": "Refresh Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type",
+            "default": "bearer"
+          },
+          "expires_in": {
+            "type": "integer",
+            "title": "Expires In"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token",
+          "refresh_token",
+          "expires_in"
+        ],
+        "title": "TokenResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Autenticazione JWT (ADR-002)"
+    },
+    {
+      "name": "entities",
+      "description": "Gestione entit\u00e0"
+    },
+    {
+      "name": "search",
+      "description": "Ricerca full-text"
+    },
+    {
+      "name": "health",
+      "description": "Health check"
+    }
+  ]
+}

@@ -6,7 +6,9 @@ connessione Postgres: l'app layer resta stateless e multi-istanza.
 """
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Request
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 
 from .config import AuthSettings, get_auth_settings
@@ -49,7 +51,7 @@ def _map_error(exc: AuthError) -> HTTPException:
 
 @router.post("/login", response_model=TokenResponse)
 async def login(
-    body: LoginRequest, settings: AuthSettings | None = None
+    body: LoginRequest, settings: Annotated[AuthSettings | None, Depends(get_auth_settings)] = None
 ) -> TokenResponse:
     """Public: username+password -> coppia access (15 min) + refresh (14 gg)."""
     s = settings or get_auth_settings()
@@ -63,7 +65,7 @@ async def login(
 
 @router.post("/refresh", response_model=TokenResponse)
 async def refresh(
-    body: RefreshRequest, settings: AuthSettings | None = None
+    body: RefreshRequest, settings: Annotated[AuthSettings | None, Depends(get_auth_settings)] = None
 ) -> TokenResponse:
     """Public: refresh token valido -> nuova coppia; rotazione con revoca del vecchio."""
     s = settings or get_auth_settings()
@@ -79,7 +81,7 @@ async def refresh(
 async def logout(
     body: LogoutRequest,
     request: Request,
-    settings: AuthSettings | None = None,
+    settings: Annotated[AuthSettings | None, Depends(get_auth_settings)] = None,
 ) -> dict:
     """Autenticato: revoca il refresh token passato (la sessione non si rinnova piu')."""
     s = settings or get_auth_settings()
