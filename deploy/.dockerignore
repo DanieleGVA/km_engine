@@ -1,0 +1,21 @@
+# Build context = repo root. Esclusioni per l'immagine km-api.
+# Nota: il Dockerfile (-f deploy/Dockerfile) e' sempre incluso nel context.
+.git
+.venv
+.pytest_cache
+.ruff_cache
+__pycache__
+*.pyc
+*.pyo
+.env
+.env.*
+!.env.example
+backups
+backups-test
+docs
+tests
+scripts
+db
+graphify-out
+*.log
+.DS_Store

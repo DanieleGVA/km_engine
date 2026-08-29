@@ -1,0 +1,107 @@
+# ============================================================================
+# km_engine — stack completo prod-like (WP7, gate G8) — ADR-003
+#
+# Topologia: nginx (gateway HTTP) -> km-api (stateless, x2) -> neo4j + postgres
+#
+# Differenze dal compose dev (docker-compose.yml di root):
+#   - porte DB (7474/7687/5432) NON pubblicate: raggiungibili solo sulla rete
+#     interna del compose (amministrazione via `docker compose exec`)
+#   - nginx come unico punto di ingresso (porta 80; TLS in iterazione 1/2)
+#   - km-api costruita da deploy/Dockerfile, scale=2, env da deploy/.env
+#   - healthcheck su tutti i servizi + restart: unless-stopped (ADR-003 D4/D7)
+#
+# Avvio:
+#   cp deploy/.env.example deploy/.env   # poi editare i segreti
+#   docker compose -f deploy/docker-compose.yml up -d --build --scale km-api=2
+#   curl http://localhost/api/v1/healthz
+# ============================================================================
+
+name: km-engine-prod
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: km-nginx
+    ports:
+      - "80:80"          # unico ingresso pubblico (MVP: HTTP; TLS iterazione 1/2)
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      km-api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost/healthz >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+
+  km-api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: km-api:0.1.0
+    # scaling orizzontale: 2 repliche di default (ADR-003 D3); override con
+    # `docker compose up -d --scale km-api=N`. Nessun container_name: il
+    # compose genera km-engine-prod-km-api-1/-2 (nomi unici per replica).
+    deploy:
+      replicas: 2
+    env_file:
+      - .env
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      # /healthz risponde 200 anche quando unhealthy (campo "status"):
+      # il check deve parsare il body, non solo lo status HTTP.
+      test: ["CMD-SHELL", "python -c \"import json,urllib.request; d=json.load(urllib.request.urlopen('http://localhost:8000/api/v1/healthz', timeout=5)); exit(0 if d.get('status')=='healthy' else 1)\""]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  neo4j:
+    image: neo4j:5.26
+    container_name: km-neo4j-prod
+    # porte NON pubblicate in prod (ADR-003 D1): solo rete interna
+    environment:
+      NEO4J_AUTH: ${NEO4J_AUTH:?NEO4J_AUTH richiesta in deploy/.env}
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1g
+      NEO4J_server_memory_pagecache_size: 512m
+    volumes:
+      - neo4j-data:/data
+      - ../db/neo4j/:/import:ro
+    healthcheck:
+      test: ["CMD", "wget", "-O-", "http://localhost:7474"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: km-postgres-prod
+    # porte NON pubblicate in prod (ADR-003 D1): solo rete interna
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-km}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD richiesta in deploy/.env}
+      POSTGRES_DB: ${POSTGRES_DB:-km_engine}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-km} -d ${POSTGRES_DB:-km_engine}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    restart: unless-stopped
+
+volumes:
+  neo4j-data:
+  postgres-data:

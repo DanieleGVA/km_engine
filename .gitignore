@@ -21,6 +21,10 @@ graphify/
 graphify-out/
 *.log
 
+# Backup (WP7): destinazione locale dei dump cifrati
+backups/
+backups-test/
+
 # OS / editors
 .DS_Store
 .idea/
