@@ -461,9 +461,10 @@ def localize_response(
     """Localizza la risposta per FR9 (multilingua).
 
     Per il prototipo (iterazione 1):
-    - Se lang == "en" o "it" (inglese è canonico), restituisce dati così come sono
-    - Se lang != "en" e i dati hanno translation_state="pending", aggiunge
-      untranslated=True per segnalare che la traduzione non è disponibile
+    - lang == "en": nessun flag se translation_state="native"; flag
+      untranslated=True se "pending" (rappresentazione EN non ancora pronta)
+    - lang == source_language: contenuto servito nativamente, nessun flag
+    - altri lang con translation_state="pending": flag untranslated=True
     - La traduzione vera è WP4/LLM
 
     Args:
@@ -479,13 +480,23 @@ def localize_response(
 
         result = dict(item)
 
-        # Se la lingua è inglese (canonica), nessun flag necessario
-        if lang.lower() in ("en", "eng", "english"):
+        # FR9.1: la rappresentazione canonica e' inglese. Se non e' ancora
+        # pronta (translation_state=pending), l'utente inglese va avvisato.
+        lang_l = (lang or "").lower()
+        source_lang = (item.get("source_language") or "").lower()
+        state = item.get("translation_state", "native")
+
+        if lang_l in ("en", "eng", "english"):
+            if state == "pending":
+                result["untranslated"] = True
             return result
 
-        # Controlla se c'è translation_state
-        translation_state = item.get("translation_state", "translated")
-        if translation_state == "pending":
+        # FR9.3: contenuto disponibile nativamente nella lingua dell'utente
+        if lang_l == source_lang:
+            return result
+
+        # Traduzione verso la lingua richiesta non disponibile
+        if state == "pending":
             result["untranslated"] = True
 
         return result

@@ -384,7 +384,13 @@ class TestFR9Localization:
     def test_accept_language_flag(
         self, client: TestClient, test_user, repo: GraphRepository
     ) -> None:
-        """Accept-Language: fr con translation_state=pending → untranslated=True."""
+        """FR9: flag untranslated coerente con lingua utente e stato traduzione.
+
+        - fatto francese (source_language=fr) con EN non pronta (pending):
+          utente fr -> nessun flag (contenuto nativo disponibile)
+          utente en -> untranslated=True (rappresentazione EN non pronta)
+          utente de -> untranslated=True (traduzione DE non disponibile)
+        """
         entity_id = f"{WP5_PREFIX}fr_entity"
         repo.create_entity(
             entity_id=entity_id,
@@ -393,7 +399,7 @@ class TestFR9Localization:
             visibility=Visibility(is_public=True),
         )
 
-        # Creiamo un fatto con translation_state=pending
+        # Fatto francese con traduzione EN non ancora pronta (FR9.2 pending)
         with repo.client.session() as session:
             session.run(
                 """
@@ -403,6 +409,8 @@ class TestFR9Localization:
                     property: "description",
                     value: "Valeur en français",
                     translation_state: "pending",
+                    source_language: "fr",
+                    language: "en",
                     valid_from: datetime()
                 })
                 CREATE (e)-[:HAS_FACT]->(f)
@@ -413,25 +421,32 @@ class TestFR9Localization:
 
         token = login_user(client, test_user["username"], test_user["password"])
 
-        # Richiesta in francese
+        # Utente francese: contenuto nativo, nessun flag
         response = client.get(
             f"/api/v1/entities/{entity_id}/facts",
             headers={**auth_header(token), "Accept-Language": "fr"},
         )
         assert response.status_code == 200
         data = response.json()
-        # Il fatto dovrebbe avere untranslated=True
-        assert any(f.get("untranslated") is True for f in data)
+        assert all("untranslated" not in f for f in data)
 
-        # Richiesta in inglese: nessun flag
+        # Utente inglese: EN non pronta -> flag
         response_en = client.get(
             f"/api/v1/entities/{entity_id}/facts",
             headers={**auth_header(token), "Accept-Language": "en"},
         )
         assert response_en.status_code == 200
         data_en = response_en.json()
-        # In inglese, nessun flag untranslated
-        assert all("untranslated" not in f for f in data_en)
+        assert any(f.get("untranslated") is True for f in data_en)
+
+        # Utente tedesco: traduzione DE non disponibile -> flag
+        response_de = client.get(
+            f"/api/v1/entities/{entity_id}/facts",
+            headers={**auth_header(token), "Accept-Language": "de"},
+        )
+        assert response_de.status_code == 200
+        data_de = response_de.json()
+        assert any(f.get("untranslated") is True for f in data_de)
 
 
 class TestRateLimiting:

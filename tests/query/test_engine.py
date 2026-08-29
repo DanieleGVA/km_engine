@@ -434,14 +434,31 @@ class TestGetEntityWithHistory:
 
 
 class TestLocalizeResponse:
-    def test_localize_english_no_flag(self) -> None:
-        """Lingua inglese: nessun flag untranslated."""
+    def test_localize_english_pending_flags(self) -> None:
+        """FR9.1: utente inglese, EN non pronta (pending) -> flag."""
         data = {"id": "1", "label": "Test", "translation_state": "pending"}
+        result = localize_response(data, "en")
+        assert result.get("untranslated") is True
+
+    def test_localize_english_native_no_flag(self) -> None:
+        """FR9.1: utente inglese, contenuto nativo EN -> nessun flag."""
+        data = {"id": "1", "label": "Test", "translation_state": "native"}
         result = localize_response(data, "en")
         assert "untranslated" not in result
 
-    def test_localize_french_pending(self) -> None:
-        """Lingua francese con translation_state=pending: flag untranslated."""
+    def test_localize_source_language_no_flag(self) -> None:
+        """FR9.3: utente nella lingua sorgente -> contenuto nativo, nessun flag."""
+        data = {
+            "id": "1",
+            "label": "Test",
+            "translation_state": "pending",
+            "source_language": "fr",
+        }
+        result = localize_response(data, "fr")
+        assert "untranslated" not in result
+
+    def test_localize_french_pending_other_lang(self) -> None:
+        """Utente francese su contenuto non-francese con pending: flag."""
         data = {"id": "1", "label": "Test", "translation_state": "pending"}
         result = localize_response(data, "fr")
         assert result.get("untranslated") is True
