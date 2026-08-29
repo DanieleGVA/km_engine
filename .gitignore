@@ -29,3 +29,8 @@ backups-test/
 .DS_Store
 .idea/
 .vscode/
+
+# Artefatti runtime/test
+.km_ingest_cache/
+.coverage
+htmlcov/

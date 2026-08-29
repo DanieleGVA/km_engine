@@ -52,27 +52,27 @@ def namespace_for(source_uri: str) -> str:
     return hashlib.sha256(source_uri.encode("utf-8")).hexdigest()[:12]
 
 
-def make_entity_id(namespace: str, node_id: str) -> str:
-    """Deterministic, bounded Entity id with the ``wp4_`` test prefix."""
+def make_entity_id(namespace: str, node_id: str, prefix: str = "wp4_") -> str:
+    """Deterministic, bounded Entity id with a configurable test prefix."""
     digest = hashlib.sha256(node_id.encode("utf-8")).hexdigest()[:24]
-    return f"wp4_{namespace}_{digest}"
+    return f"{prefix}{namespace}_{digest}"
 
 
-def make_source_id(uri: str) -> str:
-    """Deterministic Source id for a file URI."""
+def make_source_id(uri: str, prefix: str = "wp4_") -> str:
+    """Deterministic Source id for a file URI with a configurable prefix."""
     digest = hashlib.sha256(uri.encode("utf-8")).hexdigest()[:24]
-    return f"wp4_src_{digest}"
+    return f"{prefix}src_{digest}"
 
 
 def _source_id_for_source_file(
-    root: Path, source_file: str | None, file_info: dict[str, FileInfo]
+    root: Path, source_file: str | None, file_info: dict[str, FileInfo], prefix: str = "wp4_"
 ) -> str | None:
     if source_file and source_file in file_info:
         return file_info[source_file].source_id
     if source_file:
         candidate = root / source_file
         if candidate.exists():
-            return make_source_id(str(candidate))
+            return make_source_id(str(candidate), prefix=prefix)
     return None
 
 
@@ -82,6 +82,7 @@ def map_extraction(
     namespace: str,
     root: Path,
     file_info: dict[str, FileInfo],
+    prefix: str = "wp4_",
 ) -> tuple[list[EntityRecord], list[FactRecord], list[RelationRecord]]:
     """Convert deduplicated graphify nodes/edges into Neo4j records.
 
@@ -97,7 +98,7 @@ def map_extraction(
         node_id = str(node.get("id", ""))
         if not node_id:
             continue
-        entity_id = make_entity_id(namespace, node_id)
+        entity_id = make_entity_id(namespace, node_id, prefix=prefix)
         id_map[node_id] = entity_id
         label = str(node.get("label") or node_id)
         node_type = node.get("file_type") or "code"
@@ -145,7 +146,7 @@ def map_extraction(
                 target_entity_id=id_map[tgt],
                 relation=relation,
                 confidence=str(edge.get("confidence") or "EXTRACTED"),
-                source_id=_source_id_for_source_file(root, source_file, file_info),
+                source_id=_source_id_for_source_file(root, source_file, file_info, prefix=prefix),
                 source_file=source_file,
                 source_location=edge.get("source_location"),
             )

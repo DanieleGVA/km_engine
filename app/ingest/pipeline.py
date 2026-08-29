@@ -103,11 +103,13 @@ class IngestPipeline:
         hash_cache: HashCache | None = None,
         jobs: JobManager | None = None,
         enable_conflict_detection: bool = True,
+        prefix: str = "wp4_",
     ) -> None:
         self.repo = repo
         self.client = client
         self.conn = conn
         self.settings = settings or IngestSettings()
+        self.prefix = prefix
         self.semantic = semantic_service or StubSemanticService()
         self.extractor = code_extractor or GraphifyCodeExtractor(
             cache_root=self.settings.cache_dir / "graphify_ast"
@@ -243,7 +245,7 @@ class IngestPipeline:
             key = self._cache_key(namespace, rel)
             if self.hash_cache.get(key) == content_hash:
                 continue
-            source_id = make_source_id(str(path))
+            source_id = make_source_id(str(path), prefix=self.prefix)
             file_info[rel] = FileInfo(
                 path=path, rel=rel, content_hash=content_hash, source_id=source_id
             )
@@ -259,7 +261,11 @@ class IngestPipeline:
         if changed:
             result = self.extractor.extract(changed, root)
             entities, facts, relations = map_extraction(
-                result, namespace=namespace, root=root, file_info=file_info
+                result,
+                namespace=namespace,
+                root=root,
+                file_info=file_info,
+                prefix=self.prefix,
             )
             for entity in entities:
                 self.writer.upsert_entity(entity)
@@ -286,7 +292,7 @@ class IngestPipeline:
                 continue
             text = path.read_text(encoding="utf-8", errors="replace")
             info = normalize_language(text)
-            source_id = make_source_id(str(path))
+            source_id = make_source_id(str(path), prefix=self.prefix)
             self.writer.upsert_source(
                 source_id=source_id,
                 uri=str(path),
@@ -320,7 +326,7 @@ class IngestPipeline:
             if self.hash_cache.get(key) == content_hash:
                 continue
             image_bytes = path.read_bytes()
-            source_id = make_source_id(str(path))
+            source_id = make_source_id(str(path), prefix=self.prefix)
             self.writer.upsert_source(
                 source_id=source_id,
                 uri=str(path),
@@ -363,7 +369,9 @@ class IngestPipeline:
 
         written_entity_ids: list[str] = []
         for entity_label, facts in grouped.items():
-            entity_id = make_entity_id(namespace, f"doc:{rel}:{entity_label}")
+            entity_id = make_entity_id(
+                namespace, f"doc:{rel}:{entity_label}", prefix=self.prefix
+            )
             entity = EntityRecord(
                 entity_id=entity_id,
                 label=entity_label,
