@@ -13,6 +13,7 @@
 | 5 | Compatibilità | **Rottura pulita** — nuove interfacce, migrazione una tantum |
 | 6 | Stack | **Python** (riuso di extract/build/cluster/query engine) |
 | 7 | Timeline | **Prototipo in ~2 settimane**, poi iterazioni |
+| 8 | Scope MVP (2026-08-29) | **RTO e TLS fuori scope MVP** — nginx in plain HTTP, backup giornaliero RPO 24h senza target RTO; TLS e RTO formale in iterazione 1/2 |
 
 ---
 
