@@ -1,0 +1,50 @@
+name: km-engine
+
+# FASE FONDAMENTA (giorni 1-2 del work-plan): solo storage.
+# nginx + app layer verranno aggiunti in WP5/WP7.
+
+services:
+  neo4j:
+    image: neo4j:5.26
+    container_name: km-neo4j
+    ports:
+      - "7474:7474"   # HTTP / browser
+      - "7687:7687"   # Bolt
+    environment:
+      NEO4J_AUTH: ${NEO4J_AUTH:-neo4j/km_dev_password}
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1g
+      NEO4J_server_memory_pagecache_size: 512m
+    volumes:
+      - neo4j-data:/data
+      - ./db/neo4j/:/import:ro
+    healthcheck:
+      test: ["CMD", "wget", "-O-", "http://localhost:7474"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: km-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-km}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-km_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-km_engine}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-km} -d ${POSTGRES_DB:-km_engine}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    restart: unless-stopped
+
+volumes:
+  neo4j-data:
+  postgres-data:

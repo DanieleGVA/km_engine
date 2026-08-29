@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Vendored upstream clone of graphify (pinned: commit 281ccaa, v0.9.51)
+# Reused modules are copied into app/ during WP4; never commit the clone.
+graphify/
+
+# Runtime data
+graphify-out/
+*.log
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
