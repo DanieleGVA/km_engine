@@ -12,6 +12,7 @@ dependencies = [
     "pydantic>=2.8",
     "pydantic-settings>=2.4",
     "python-multipart>=0.0.9",
+    "argon2-cffi>=25.1.0",
 ]
 
 [dependency-groups]
