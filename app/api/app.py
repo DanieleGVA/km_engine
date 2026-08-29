@@ -17,12 +17,13 @@ import time
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 import psycopg
-from fastapi import Depends, FastAPI, HTTPException, Query, Request, status
+from fastapi import Body, Depends, FastAPI, HTTPException, Query, Request, status
 from fastapi.responses import JSONResponse
 from neo4j.exceptions import ServiceUnavailable as Neo4jServiceUnavailable
+from pydantic import BaseModel, Field
 
 from app.auth import (
     Principal,
@@ -30,6 +31,20 @@ from app.auth import (
 )
 from app.auth import (
     router as auth_router,
+)
+from app.conflict import (
+    ConflictAlreadyResolvedError,
+    ConflictNotFoundError,
+    ConflictResolutionError,
+    InvalidChoiceError,
+    approve_conflict,
+    list_conflicts,
+    reject_conflict,
+)
+from app.invalidation import (
+    InvalidationError,
+    SourceNotFoundError,
+    invalidate_source,
 )
 from app.query.engine import (
     get_entity_with_history,
@@ -105,6 +120,56 @@ def get_repo(client: Annotated[Neo4jClient, Depends(get_neo4j_client)]) -> Graph
     return GraphRepository(client)
 
 
+def get_pg_conn():
+    """Dependency: connessione Postgres per workflow conflitti/invalidazione."""
+    from app.auth.config import get_auth_settings
+    from app.auth.db import connect
+
+    settings = get_auth_settings()
+    conn = connect(settings)
+    try:
+        yield conn
+    finally:
+        conn.close()
+
+
+def require_roles_for_body(*required: str):
+    """RBAC dependency for POST endpoints that carry a JSON body.
+
+    FastAPI 0.141 treats non-Annotated dependency parameters as body fields;
+    ``app.auth.deps.require_roles`` has such a parameter (``settings``), so it
+    would embed the request body. This local wrapper calls ``auth_required``
+    directly and keeps the dependency signature body-free.
+    """
+    required_set = frozenset(required)
+
+    async def dependency(request: Request) -> Principal:
+        principal = await auth_required(request)
+        if not required_set.intersection(principal.roles):
+            raise HTTPException(
+                status_code=403,
+                detail=(
+                    f"Accesso negato: richiesto uno dei ruoli {sorted(required_set)},"
+                    f" l'utente ha {sorted(principal.roles)}."
+                ),
+            )
+        return principal
+
+    return dependency
+
+
+class ApproveConflictRequest(BaseModel):
+    """Body per POST /api/v1/conflicts/{id}/approve."""
+
+    choice: Literal["a", "b"]
+
+
+class InvalidateSourceRequest(BaseModel):
+    """Body per POST /api/v1/sources/{source_id}/invalidate."""
+
+    reason: str = Field(min_length=1)
+    max_depth: int | None = Field(default=None, ge=0, le=10)
+
 
 def get_response_lang(
     request: Request,
@@ -146,6 +211,8 @@ def create_app() -> FastAPI:
             {"name": "entities", "description": "Gestione entità"},
             {"name": "search", "description": "Ricerca full-text"},
             {"name": "health", "description": "Health check"},
+            {"name": "conflicts", "description": "Conflict check e workflow (FR6)"},
+            {"name": "invalidation", "description": "Fact invalidation e truth-maintenance (FR7)"},
         ],
     )
 
@@ -343,6 +410,99 @@ def create_app() -> FastAPI:
             results = localize_response(results, lang)
 
         return results
+
+    # ------------------------------------------------------------------ Conflicts
+    @app.get(
+        "/api/v1/conflicts",
+        tags=["conflicts"],
+        summary="Lista conflitti (workflow FR6)",
+        response_model=list[dict],
+    )
+    async def list_conflicts_endpoint(
+        principal: Annotated[Principal, Depends(auth_required)],
+        conn: Annotated[psycopg.Connection, Depends(get_pg_conn)],
+        status: Annotated[str | None, Query(description="Filtro stato: pending/approved/rejected")] = None,
+    ) -> list[dict]:
+        """Elenco dei conflitti, opzionalmente filtrati per stato."""
+        if status is not None and status not in ("pending", "approved", "rejected"):
+            raise HTTPException(
+                status_code=422,
+                detail="status must be one of pending, approved, rejected",
+            )
+        return list_conflicts(conn, status=status)
+
+    @app.post(
+        "/api/v1/conflicts/{conflict_id}/approve",
+        tags=["conflicts"],
+        summary="Approva un conflitto scegliendo a o b",
+        response_model=dict,
+    )
+    async def approve_conflict_endpoint(
+        conflict_id: int,
+        body: Annotated[ApproveConflictRequest, Body()],
+        principal: Annotated[Principal, Depends(require_roles_for_body("admin", "editor"))],
+        repo: Annotated[GraphRepository, Depends(get_repo)],
+        conn: Annotated[psycopg.Connection, Depends(get_pg_conn)],
+    ) -> dict:
+        """Applica il valore scelto e invalida l'altro fatto."""
+        try:
+            return approve_conflict(
+                repo, conn, conflict_id, body.choice, principal.user_id
+            )
+        except ConflictNotFoundError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except ConflictAlreadyResolvedError as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+        except (InvalidChoiceError, ConflictResolutionError) as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    @app.post(
+        "/api/v1/conflicts/{conflict_id}/reject",
+        tags=["conflicts"],
+        summary="Rifiuta un conflitto senza modificare il grafo",
+        response_model=dict,
+    )
+    async def reject_conflict_endpoint(
+        conflict_id: int,
+        principal: Annotated[Principal, Depends(require_roles_for_body("admin", "editor"))],
+        conn: Annotated[psycopg.Connection, Depends(get_pg_conn)],
+    ) -> dict:
+        """Rifiuta un conflitto pending."""
+        try:
+            return reject_conflict(conn, conflict_id, principal.user_id)
+        except ConflictNotFoundError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except ConflictAlreadyResolvedError as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+    # ------------------------------------------------------------------ Invalidation
+    @app.post(
+        "/api/v1/sources/{source_id}/invalidate",
+        tags=["invalidation"],
+        summary="Invalida una sorgente e propaga ai fatti dipendenti",
+        response_model=dict,
+    )
+    async def invalidate_source_endpoint(
+        source_id: str,
+        body: Annotated[InvalidateSourceRequest, Body()],
+        principal: Annotated[Principal, Depends(require_roles_for_body("admin", "editor"))],
+        repo: Annotated[GraphRepository, Depends(get_repo)],
+        conn: Annotated[psycopg.Connection, Depends(get_pg_conn)],
+    ) -> dict:
+        """Invalida i fatti DERIVED_FROM la sorgente e propaga ai dipendenti."""
+        try:
+            return invalidate_source(
+                repo,
+                conn,
+                source_id,
+                reason=body.reason,
+                user_id=principal.user_id,
+                max_depth=body.max_depth,
+            )
+        except SourceNotFoundError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        except InvalidationError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     # ------------------------------------------------------------------ Error handling
     @app.exception_handler(HTTPException)

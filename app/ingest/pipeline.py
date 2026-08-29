@@ -8,6 +8,7 @@ from pathlib import Path
 
 import psycopg
 
+from app.conflict.detection import post_ingest_hook
 from app.ingest.config import IngestSettings
 from app.ingest.errors import InvalidJobStateError, JobNotFoundError
 from app.ingest.extractor import (
@@ -101,6 +102,7 @@ class IngestPipeline:
         code_extractor: CodeExtractor | None = None,
         hash_cache: HashCache | None = None,
         jobs: JobManager | None = None,
+        enable_conflict_detection: bool = True,
     ) -> None:
         self.repo = repo
         self.client = client
@@ -117,6 +119,13 @@ class IngestPipeline:
             conn, self.settings.cache_dir / "jobs"
         )
         self.writer = GraphWriter(repo, client)
+        self.enable_conflict_detection = enable_conflict_detection
+
+    def _run_conflict_hook(self, entity_ids: list[str]) -> None:
+        """Run WP6 conflict detection for the Entities touched by a chunk."""
+        if not self.enable_conflict_detection or not entity_ids:
+            return
+        post_ingest_hook(self.repo, self.conn, entity_ids)
 
     # ------------------------------------------------------------------ public
     def run(
@@ -258,6 +267,7 @@ class IngestPipeline:
                 self.writer.upsert_fact(fact)
             for relation in relations:
                 self.writer.upsert_relation(relation)
+            self._run_conflict_hook([entity.entity_id for entity in entities])
 
         for info in file_info.values():
             self.hash_cache.set(
@@ -351,6 +361,7 @@ class IngestPipeline:
         for candidate in candidates:
             grouped.setdefault(candidate.entity_label, []).append(candidate)
 
+        written_entity_ids: list[str] = []
         for entity_label, facts in grouped.items():
             entity_id = make_entity_id(namespace, f"doc:{rel}:{entity_label}")
             entity = EntityRecord(
@@ -365,6 +376,7 @@ class IngestPipeline:
                 source_language=default_source_language,
             )
             self.writer.upsert_entity(entity)
+            written_entity_ids.append(entity_id)
             for candidate in facts:
                 fact_id = f"{entity_id}__{_slug(candidate.property)}"
                 self.writer.upsert_fact(
@@ -380,3 +392,4 @@ class IngestPipeline:
                         source_language=candidate.source_language,
                     )
                 )
+        self._run_conflict_hook(written_entity_ids)
