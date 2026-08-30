@@ -212,7 +212,7 @@ async def test_iteration_a_e2e_flow(ia6_client: Neo4jClient, ia6_pg_conn) -> Non
         )
         canonical_by_doc_id[doc_id] = canonical.canonical_md
 
-    assert len(canonical_by_doc_id) == 15
+    assert len(canonical_by_doc_id) == len(read_corpus())
 
     # 4. Query visibility-aware su Document e CanonicalTerm.
     viewer = Principal(

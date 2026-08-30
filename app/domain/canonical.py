@@ -13,6 +13,7 @@ bidirectional: applying the entries to ``translated.md`` reproduces
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
@@ -196,6 +197,19 @@ def _build_term_map(pack: DomainPackBundle) -> dict[str, tuple[str, str]]:
     return term_map
 
 
+def _strip_item_connectors(item: str) -> str:
+    """Rimuove connettori grammaticali IT residui (``di``, ``e``) da un item.
+
+    La traduzione puo' produrre ``di extra virgin olive oil`` o ``salt e black
+    pepper``; il connettore non fa parte del termine e impedisce il match
+    esatto con labels_en. Deterministico e non distruttivo: il canon-log
+    conserva il prima/dopo (P3).
+    """
+    out = re.sub(r"^(?:di|e)\s+", "", item.strip(), flags=re.IGNORECASE)
+    out = re.sub(r"\s+(?:di|e)\s+", " ", out, flags=re.IGNORECASE)
+    return out.strip().replace("\u2019", "'")
+
+
 def _glossary_id_for_label(pack: DomainPackBundle, label: str) -> str | None:
     """Return the glossary id whose ``labels_en`` equals ``label`` (casefold)."""
     key = label.strip().casefold()
@@ -288,12 +302,13 @@ def canonicalize(
 
         qty_text = _format_decimal(qty)
         item = ingredient.item
-        resolved = term_map.get(item.strip().casefold())
+        lookup = _strip_item_connectors(item)
+        resolved = term_map.get(lookup.casefold())
         if resolved is not None:
             item = resolved[0]
-        elif item not in seen_unresolved:
-            seen_unresolved.add(item)
-            unresolved.append(item)
+        elif lookup not in seen_unresolved:
+            seen_unresolved.add(lookup)
+            unresolved.append(lookup)
 
         ingredients.append((qty_text, unit, item))
 

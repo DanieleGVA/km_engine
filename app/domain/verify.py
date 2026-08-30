@@ -471,15 +471,19 @@ def normalize_terms(text: str, term_map: list[tuple[str, str]]) -> str:
     substring of a longer term or of its replacement is not re-replaced.
     """
     if not term_map:
-        return text.casefold()
-    replacements = {term: replacement for term, replacement in term_map}
+        return text.casefold().replace("\u2019", "'")
+    # Normalizza gli apostrofi unicode (U+2019) a ASCII: i testi reali usano
+    # "sott\u2019olio", i glossari "sott'olio".
+    norm_terms = [(t.casefold().replace("\u2019", "'"), r) for t, r in term_map]
+    replacements = dict(norm_terms)
     pattern = re.compile(
-        r"\b(" + "|".join(re.escape(term) for term, _ in term_map) + r")\b",
+        r"\b(" + "|".join(re.escape(t) for t, _ in norm_terms) + r")\b",
         flags=re.IGNORECASE,
     )
+    norm_text = text.casefold().replace("\u2019", "'")
     return pattern.sub(
-        lambda match: replacements[match.group(1).casefold()],
-        text.casefold(),
+        lambda match: replacements[match.group(1).casefold().replace("\u2019", "'")],
+        norm_text,
     )
 
 

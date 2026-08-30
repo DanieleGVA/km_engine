@@ -86,3 +86,14 @@
   to_unit: bunch
   factor: 1.0
   rounding: null
+
+- rule_id: UNIT-SLICE
+  from_unit: fette
+  to_unit: slice
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-THREAD
+  from_unit: fili
+  to_unit: thread
+  factor: 1.0
+  rounding: null
