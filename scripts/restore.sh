@@ -30,6 +30,8 @@ BACKUP_PASSPHRASE="${BACKUP_PASSPHRASE:-}"
 NEO4J_DB="${NEO4J_DB:-neo4j}"
 POSTGRES_USER="${POSTGRES_USER:-km}"
 POSTGRES_DB="${POSTGRES_DB:-km_engine}"
+CORPUS_DIR="${CORPUS_DIR:-./corpus}"
+PACK_DIR="${PACK_DIR:-./domain-packs}"
 LOG_FILE="${LOG_FILE:-$BACKUP_DIR/restore.log}"
 
 BACKUP_FILE="${1:-}"
@@ -74,7 +76,20 @@ log "Postgres: pg_restore -Fc..."
 docker compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME" exec -T postgres \
     pg_restore -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc < "$WORK/km_engine.pg"
 
-# --- 3. Neo4j: load dump -----------------------------------------------------
+# --- 3. Corpus md + domain pack (WP-E4) -------------------------------------
+# Ripristina i file md inclusi nel backup (se presenti nell'archivio).
+if [[ -d "$WORK/corpus" ]]; then
+    log "Corpus md: ripristino $CORPUS_DIR"
+    mkdir -p "$CORPUS_DIR"
+    cp -a "$WORK/corpus/." "$CORPUS_DIR/"
+fi
+if [[ -d "$WORK/domain-packs" ]]; then
+    log "Domain pack: ripristino $PACK_DIR"
+    mkdir -p "$PACK_DIR"
+    cp -a "$WORK/domain-packs/." "$PACK_DIR/"
+fi
+
+# --- 4. Neo4j: load dump -----------------------------------------------------
 log "Neo4j: stop container..."
 docker compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME" stop neo4j
 log "Neo4j: load database '$NEO4J_DB' (--overwrite-destination)..."
@@ -84,7 +99,16 @@ docker compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME" run --rm --no-deps \
 log "Neo4j: start container..."
 docker compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME" start neo4j
 
-# --- 4. Smoke test -----------------------------------------------------------
+# --- 5. Verifica indice vettoriale (WP-E4) ----------------------------------
+# Il dump Neo4j include schema e indici (full-text + vettoriale). Dopo il load
+# verifichiamo che l'indice vettoriale sia ONLINE.
+log "Verifica indice vettoriale document_embedding_vector..."
+docker compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME" exec -T neo4j \
+    cypher-shell -u neo4j -p "${NEO4J_PASSWORD:-}" \
+    "SHOW INDEXES YIELD name, state WHERE name = 'document_embedding_vector' RETURN name, state;" \
+    || log "ATTENZIONE: verifica indice vettoriale non riuscita (vedi log)."
+
+# --- 6. Smoke test -----------------------------------------------------------
 log "Smoke test: attesa healthcheck dei servizi..."
 for i in $(seq 1 30); do
     status="$(docker compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME" ps --format '{{.Service}}={{.Health}}' 2>/dev/null || true)"

@@ -311,11 +311,15 @@ Neo4j 5.26 (7474/7687) + Postgres 16 (5432), healthcheck, volumi persistenti,
 
 ### 9.2 Stack prod-like (`deploy/docker-compose.yml`)
 ```
-nginx (HTTP:80, rate limit 5r/s auth + 20r/s api, header sicurezza)
+nginx (HTTPS:443 + redirect 80→443, rate limit 5r/s auth + 20r/s api,
+       header sicurezza, HSTS)
   → km-api ×2 (Dockerfile multi-stage con uv, python:3.12-slim, utente non-root)
   → neo4j + postgres (porte DB NON pubblicate)
 ```
-TLS e RTO fuori scope MVP (decisione 2026-08-29); TLS in iterazione 1/2.
+Iterazione E (WP-E1): TLS attivo sul gateway (self-signed in dev via
+`scripts/gen_certs.sh`); OIDC (`app/auth/oidc.py`), rate limiting con store
+condivisibile (`app/api/rate_limit.py`) e hashing argon2id fuori dall'event
+loop. RTO formale resta fuori scope MVP.
 
 ### 9.3 Operatività (`docs/runbook.md`, `scripts/`)
 - `scripts/backup.sh` — dump Neo4j (offline coerente) + `pg_dump -Fc`, tar +
@@ -366,8 +370,14 @@ G7 invalidation ✅ · G8 deploy+resilienza ✅ · G9 QA finale ✅
 3. Q12: ricalcolo automatico dei fatti derivati dopo invalidazione (oggi restano `under_review`).
 4. Traduzione LLM vera all'ingestione (FR9.2) e descrizione immagini (FR1.3): adattatore pronto, manca l'integrazione con una chiave LLM.
 5. Invalidazione automatica su cambio sorgente (FR7.1/7.3): oggi manuale via API.
-6. Full-text del contenuto originale (FR3.5): search usa CONTAINS, servono indici full-text Neo4j.
-7. Benchmark 10GB reale (NFR6) e misure formali NFR3/NFR8.
+6. ~~Full-text del contenuto originale (FR3.5): search usa CONTAINS~~ → risolto in
+   Iterazione E (WP-E2): search usa indici full-text Neo4j (Entity.label/type,
+   Fact.value/property, Document.title, CanonicalTerm.label_en).
+7. ~~Benchmark 10GB reale (NFR6) e misure formali NFR3/NFR8~~ → benchmark scalato
+   eseguito in Iterazione E (WP-E3, `docs/benchmark-report.md` §10); run reale
+   10GB su stack prod-like ancora da eseguire.
+8. Multi-tenant: isolamento tenant su Document/CanonicalTerm introdotto in
+   WP-E5 (ADR-007); il retrieval RAG non è ancora tenant-aware (punto aperto).
 
 **Raccomandazioni iterazione 1 (da QA/SRE):** indici full-text Neo4j, tuning
 heap/pagecache, caching TTL, hashing async (login storm), verifica NFR1 su stack

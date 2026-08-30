@@ -71,6 +71,7 @@ class RagHit:
     terms: list[dict[str, Any]]
     entities: list[dict[str, Any]]
     provenance: str | None
+    source_ref: dict[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         """JSON-friendly representation for the API."""
@@ -478,8 +479,12 @@ def rag_query(
                 ),
                 canonical_md=canonical_md,
                 canonical_hash=props.get("canonical_hash", ""),
-                source_lang=props.get("source_lang")
-                or props.get("source_language", ""),
+                source_lang=props.get("source_lang") or props.get("source_language", ""),
+                source_ref={
+                    k: props.get(k)
+                    for k in ("source_author", "source_book", "source_page", "source_position")
+                    if props.get(k)
+                } or None,
                 verification_level=props.get("verification_level", "L1"),
                 untranslated=bool(localized.get("untranslated", False)),
                 terms=context["terms"],

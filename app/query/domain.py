@@ -50,11 +50,16 @@ def _node_to_dict(node: Any) -> dict[str, Any]:
 
 
 def _visibility_from_props(props: dict[str, Any]) -> Visibility:
-    """Legge la visibilità concreta da un dict di proprietà (default-deny)."""
+    """Legge la visibilità concreta da un dict di proprietà (default-deny).
+
+    WP-E5: include ``tenant`` per l'isolamento multi-tenant su Document e
+    CanonicalTerm. ``tenant`` assente = condiviso/non tenant-scoped.
+    """
     return Visibility(
         is_public=bool(props.get("is_public", False)),
         roles=tuple(props.get("roles") or ()),
         teams=tuple(props.get("teams") or ()),
+        tenant=props.get("tenant"),
     )
 
 

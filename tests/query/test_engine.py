@@ -358,7 +358,7 @@ class TestSearch:
         )
 
         principal = Principal("user1", ("viewer",), (), "default", "jti1")
-        results = search(client, principal, text="MyFunc")
+        results = search(client, principal, text="MyFunc", await_indexes=True)
 
         assert any(r["id"] == f"{WP5_PREFIX}search_func" for r in results)
 

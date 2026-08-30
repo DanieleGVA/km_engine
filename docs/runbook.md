@@ -3,9 +3,10 @@
 Operazioni operative per lo stack prod-like `deploy/docker-compose.yml`
 (ADR-003: nginx gateway → km-api stateless ×N → neo4j + postgres).
 
-**Scope change 2026-08-29:** TLS e RTO formale sono **fuori MVP** (iterazione
-1/2). nginx serve in plain HTTP; il restore è testato ma senza obiettivo RTO
-formale. RPO = 24h (backup giornaliero, default NFR4).
+**Aggiornamento Iterazione E (2026-08-30):** TLS attivo sul gateway
+(self-signed in dev, redirect 80→443); OIDC, rate limiting condiviso e hashing
+async introdotti (WP-E1). RTO formale resta fuori scope MVP. RPO = 24h
+(backup giornaliero, default NFR4); retention backup NFR8 = 7gg configurabile.
 
 ---
 
@@ -203,14 +204,106 @@ passphrase (documentare la rotazione nel log).
 
 ---
 
-## 7. TLS (fuori MVP)
+## 7. TLS (WP-E1)
 
-Il gateway serve **plain HTTP** (scope change 2026-08-29). La terminazione TLS
-(Let's Encrypt o certificati aziendali) arriva in iterazione 1/2; ADR-003 D2
-resta il riferimento. Quando attivata: nginx su 443 + redirect 80→443, HSTS,
-rinnovo automatico certificati.
+Il gateway serve **HTTPS su 443** con redirect 80→443 e HSTS. In dev il
+certificato è self-signed; in produzione usare certificati aziendali o
+Let's Encrypt (ADR-003 D2).
+
+```bash
+# 1) generare il certificato self-signed di dev (idempotente)
+scripts/gen_certs.sh            # FORCE=1 per rigenerare
+
+# 2) avviare lo stack (nginx ascolta 80+443)
+docker compose -f deploy/docker-compose.yml up -d --build --scale km-api=2
+
+# 3) verifica handshake TLS (self-signed: verify=False)
+curl -k https://localhost/api/v1/healthz
+```
+
+Test automatico: `pytest tests/deploy/test_tls_config.py` (verifica file,
+direttive nginx e, se Docker è disponibile, `nginx -t`). In produzione
+sostituire `deploy/nginx/certs/km-engine.{crt,key}` con i certificati reali.
 
 ---
+
+## 7.1 OIDC (WP-E1)
+
+Il modulo `app/auth/oidc.py` verifica id_token OIDC (iss, aud, exp, nonce) con
+discovery + JWKS fetch/cache. Endpoint: `POST /auth/oidc/login`
+(`{"id_token": "...", "nonce": "..."}`) → coppia access+refresh locale.
+L'utente locale deve già esistere (nessun auto-provisioning).
+
+Configurazione (env prefix `KM_OIDC_`):
+
+```bash
+KM_OIDC_ISSUER=https://idp.example
+KM_OIDC_CLIENT_ID=km-engine
+KM_OIDC_DISCOVERY_URL=https://idp.example/.well-known/openid-configuration
+KM_OIDC_ALGORITHMS='["RS256"]'
+```
+
+In produzione RS256 richiede il pacchetto opzionale `cryptography`. I test
+usano `FakeOIDCProvider` (HS256, offline, deterministico).
+
+## 7.2 Indici full-text (WP-E2)
+
+Il search engine usa indici full-text Neo4j, non più CONTAINS. Applicare
+l'estensione 003 (idempotente) dopo 001/002:
+
+```bash
+docker compose -f deploy/docker-compose.yml exec -T neo4j   cypher-shell -u neo4j -p "$NEO4J_PASSWORD" -f /import/003_e_fulltext.cypher
+```
+
+Indici usati: `entity_label_fulltext`, `entity_type_fulltext`,
+`fact_value_fulltext`, `fact_property_fulltext`, `document_title_fulltext`,
+`canonical_term_label_en_fulltext`.
+
+## 7.3 Backup/restore estesi a corpus md + indice vettoriale (WP-E4)
+
+`scripts/backup.sh` ora include, se presenti, `CORPUS_DIR` (default
+`./corpus`) e `PACK_DIR` (default `./domain-packs`) nello stesso archivio
+cifrato. Il dump Neo4j include già schema, indici full-text e **indice
+vettoriale** `document_embedding_vector`.
+
+```bash
+BACKUP_PASSPHRASE=... CORPUS_DIR=/data/corpus PACK_DIR=/data/domain-packs scripts/backup.sh
+```
+
+`scripts/restore.sh` ripristina corpus/pack e verifica che l'indice vettoriale
+sia ONLINE dopo il load. Dopo il restore eseguire il round-trip su un campione
+(`uv run pytest tests/domain/test_a6_roundtrip.py`).
+
+## 7.4 Ri-canonicalizzazione massiva e rollback pack (WP-E4)
+
+**Ri-canonicalizzazione massiva**: rilanciare canonicalize+extract sul corpus
+con il pack corrente. Il comando dipende dal corpus tradotto:
+
+```bash
+uv run python scripts/rollback_pack.py --old-pack-dir domain-packs/ricette --corpus-dir /data/translated
+```
+
+**Rollback pack vN→vN-1**: usare `scripts/rollback_pack.py` con il pack
+vecchio. La procedura preserva lo storico bitemporale: snapshot dei fatti
+correnti → ri-estrazione col pack vecchio → versionamento dei fatti cambiati
+(`app/ops/rollback.py`). Test: `uv run pytest tests/ops/test_rollback.py`.
+
+## 7.5 Retention audit (NFR8)
+
+Retention backup default **7 giorni**, configurabile con `RETENTION_DAYS`.
+Audit schedulabile dopo il backup:
+
+```bash
+BACKUP_DIR=/mnt/backups RETENTION_DAYS=7 scripts/retention_audit.sh
+```
+
+Exit code 1 se trova backup oltre retention non rimossi.
+
+## 7.6 Web UI adjudication (WP-E6)
+
+Interfaccia minima servita da FastAPI su `/ui/` (ruolo admin/editor):
+code L3, proposte glossario e conflitti con approve/reject via POST.
+Test end-to-end: `uv run pytest tests/api/test_ui.py`.
 
 ## 8. Troubleshooting
 

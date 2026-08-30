@@ -21,13 +21,28 @@ from .errors import (
     TokenReuseError,
     UserNotFoundError,
 )
-from .hashing import HashingError, hash_password, verify_password
+from .hashing import (
+    HashingError,
+    hash_password,
+    hash_password_async,
+    verify_password,
+    verify_password_async,
+)
+from .oidc import (
+    FakeOIDCProvider,
+    OIDCSettings,
+    OIDCVerifier,
+    oidc_issue_tokens,
+    oidc_login,
+)
 from .routes import router
 from .tokens import (
     decode_token,
     issue_access_token,
+    issue_token_pair,
     list_refresh_tokens,
     login,
+    login_async,
     logout,
     refresh,
     revoke_all_user_tokens,
@@ -52,7 +67,8 @@ def principal_visibility_context(principal: Principal) -> dict[str, object]:
     """Bridge ADR-002 Principal -> ADR-001 visibility filter (auth -> storage).
 
     Converts the resolved identity into the keyword arguments accepted by
-    ``app.storage.visibility.is_visible`` (roles, teams, is_admin, is_editor),
+    ``app.storage.visibility.is_visible`` (roles, teams, tenant, is_admin,
+    is_editor),
     so the query engine can feed the storage visibility filter without ever
     seeing the token format (ADR-002 D7). Admin/Editor bypass is a storage-level
     simplification; the authorized-scope check is applied in WP5.
@@ -66,6 +82,7 @@ def principal_visibility_context(principal: Principal) -> dict[str, object]:
         "teams": principal.teams,
         "is_admin": "admin" in principal.roles,
         "is_editor": "editor" in principal.roles,
+        "tenant": principal.tenant,
     }
 
 __all__ = [
@@ -73,9 +90,12 @@ __all__ = [
     "AuthError",
     "AuthSettings",
     "DuplicateUserError",
+    "FakeOIDCProvider",
     "HashingError",
     "InactiveUserError",
     "InvalidCredentialsError",
+    "OIDCSettings",
+    "OIDCVerifier",
     "Principal",
     "TokenError",
     "TokenExpiredError",
@@ -89,14 +109,20 @@ __all__ = [
     "create_user",
     "decode_token",
     "get_auth_settings",
+    "get_oidc_verifier",
     "get_or_create_team",
     "get_user",
     "hash_password",
+    "hash_password_async",
     "issue_access_token",
+    "issue_token_pair",
     "list_refresh_tokens",
     "list_users",
     "login",
+    "login_async",
     "logout",
+    "oidc_issue_tokens",
+    "oidc_login",
     "principal_from_claims",
     "principal_visibility_context",
     "record_audit",
@@ -110,4 +136,5 @@ __all__ = [
     "router",
     "set_user_active",
     "verify_password",
+    "verify_password_async",
 ]

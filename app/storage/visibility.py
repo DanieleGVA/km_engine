@@ -23,12 +23,14 @@ class Visibility:
 
     ``None`` means "not provided": the dimension is omitted in Neo4j and can
     inherit from the parent Entity. An empty tuple/list is an explicit empty
-    value and wins over inheritance.
+    value and wins over inheritance. ``tenant`` is the WP-E5 multi-tenant
+    scope: ``None`` means shared/not tenant-scoped (backward compatible).
     """
 
     is_public: bool | None = None
     roles: tuple[str, ...] | None = None
     teams: tuple[str, ...] | None = None
+    tenant: str | None = None
 
     def to_props(self) -> dict[str, Any]:
         """Return Neo4j properties for the explicitly set dimensions only."""
@@ -39,6 +41,8 @@ class Visibility:
             props["roles"] = list(self.roles)
         if self.teams is not None:
             props["teams"] = list(self.teams)
+        if self.tenant is not None:
+            props["tenant"] = self.tenant
         return props
 
 
@@ -48,6 +52,7 @@ def visibility_from_props(props: dict[str, Any]) -> Visibility:
         is_public=bool(props.get("is_public", False)),
         roles=tuple(props.get("roles") or ()),
         teams=tuple(props.get("teams") or ()),
+        tenant=props.get("tenant"),
     )
 
 
@@ -76,7 +81,12 @@ def effective_visibility(
     else:
         teams = tuple(entity_props.get("teams") or ())
 
-    return Visibility(is_public=is_public, roles=roles, teams=teams)
+    if "tenant" in fact_props:
+        tenant = fact_props.get("tenant")
+    else:
+        tenant = entity_props.get("tenant")
+
+    return Visibility(is_public=is_public, roles=roles, teams=teams, tenant=tenant)
 
 
 def is_visible(
@@ -86,14 +96,21 @@ def is_visible(
     teams: Iterable[str] = (),
     is_admin: bool = False,
     is_editor: bool = False,
+    tenant: str | None = None,
 ) -> bool:
     """Return True when a principal can see content with ``visibility``.
 
     Admin/Editor bypass is a storage-level simplification; the authorized
     scope check is applied by the query engine in WP5.
+
+    WP-E5: when ``visibility.tenant`` is set, the principal tenant must match
+    (tenant isolation). ``visibility.tenant is None`` means shared/not
+    tenant-scoped and keeps the pre-E5 behavior.
     """
     if is_admin or is_editor:
         return True
+    if visibility.tenant is not None and visibility.tenant != tenant:
+        return False
     if visibility.is_public:
         return True
     principal_roles = set(roles)

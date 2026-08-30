@@ -144,6 +144,7 @@ def extract_document(
     doc_id: str,
     canonical_md: str,
     pack: DomainPackBundle,
+    source_ref: dict[str, Any] | None = None,
 ) -> DocumentRecord:
     """Extract a canonical.md into the Neo4j domain graph (idempotent).
 
@@ -249,7 +250,11 @@ def extract_document(
                 d.canonical_version = $canonical_version,
                 d.is_public = false,
                 d.roles = [],
-                d.teams = []
+                d.teams = [],
+                d.source_author = $source_author,
+                d.source_book = $source_book,
+                d.source_page = $source_page,
+                d.source_position = $source_position
             """,
             doc_id=doc_id,
             document_id=document_id,
@@ -263,6 +268,10 @@ def extract_document(
             time_min=time_min,
             difficulty=difficulty,
             canonical_version=canonical_version,
+            source_author=(source_ref or {}).get("author"),
+            source_book=(source_ref or {}).get("book"),
+            source_page=(source_ref or {}).get("page"),
+            source_position=(source_ref or {}).get("position"),
         )
 
         tx.run(

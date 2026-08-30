@@ -272,89 +272,160 @@ def query_relations(
     return _read(client, work)
 
 
+# Full-text indexes used by search (WP-E2). The first four are created in
+# db/neo4j/001 and 003; the last two in db/neo4j/002.
+FULLTEXT_ENTITY_LABEL = "entity_label_fulltext"
+FULLTEXT_ENTITY_TYPE = "entity_type_fulltext"
+FULLTEXT_FACT_VALUE = "fact_value_fulltext"
+FULLTEXT_FACT_PROPERTY = "fact_property_fulltext"
+FULLTEXT_DOCUMENT_TITLE = "document_title_fulltext"
+FULLTEXT_CANONICAL_TERM_LABEL = "canonical_term_label_en_fulltext"
+
+_SEARCH_INDEXES = (
+    FULLTEXT_ENTITY_LABEL,
+    FULLTEXT_ENTITY_TYPE,
+    FULLTEXT_FACT_VALUE,
+    FULLTEXT_FACT_PROPERTY,
+    FULLTEXT_DOCUMENT_TITLE,
+    FULLTEXT_CANONICAL_TERM_LABEL,
+)
+
+
+def _lucene_escape(text: str) -> str:
+    """Escape Lucene special characters so user text is treated literally."""
+    for char in "\\+-&|!(){}[]^\"~*?:/":
+        text = text.replace(char, "\\" + char)
+    return text
+
+
+def _fulltext_query(text: str) -> str:
+    """Build a Lucene wildcard query preserving the old CONTAINS semantics.
+
+    ``*text*`` matches substrings (case-insensitive, analyzer-normalized).
+    Leading wildcards are supported by the Neo4j/Lucene full-text index.
+    """
+    return f"*{_lucene_escape(text)}*"
+
+
+def _visibility_from_props(props: dict[str, Any]) -> Visibility:
+    """Read concrete visibility from a node property dict (default-deny)."""
+    return Visibility(
+        is_public=bool(props.get("is_public", False)),
+        roles=tuple(props.get("roles") or ()),
+        teams=tuple(props.get("teams") or ()),
+        tenant=props.get("tenant"),
+    )
+
+
+def _fulltext_records(
+    tx: ManagedTransaction, index: str, query_text: str
+) -> list[tuple[Any, float]]:
+    """Run a full-text query and return ``(node, score)`` pairs."""
+    result = tx.run(
+        """
+        CALL db.index.fulltext.queryNodes($index, $query_text)
+        YIELD node, score
+        RETURN node, score
+        """,
+        index=index,
+        query_text=query_text,
+    )
+    return [(record["node"], float(record["score"])) for record in result]
+
+
 def search(
     client: Neo4jClient,
     principal: Principal,
     text: str,
     label: str | None = None,
+    *,
+    await_indexes: bool = False,
 ) -> list[dict[str, Any]]:
-    """Ricerca full-text su label e value dei fatti (FR3.5).
+    """Ricerca full-text su Entity, Fact, Document e CanonicalTerm (FR3.5).
 
-    Implementazione: usa CONTAINS (case-sensitive) di Neo4j. Per performance
-    migliori in produzione, configurare indici full-text di Neo4j.
+    WP-E2: sostituisce i CONTAINS con gli indici full-text Neo4j
+    (``entity_label_fulltext``, ``entity_type_fulltext``,
+    ``fact_value_fulltext``, ``fact_property_fulltext``,
+    ``document_title_fulltext``, ``canonical_term_label_en_fulltext``).
+    La query Lucene ``*text*`` conserva la semantica substring del vecchio
+    CONTAINS, ma in modo case-insensitive e indicizzato.
 
     Args:
         client: Neo4j client
         principal: Utente autenticato
         text: Testo da cercare
         label: Filtro opzionale per label dell'entità
+        await_indexes: se True, attende gli indici full-text prima della query
+            (utile nei test subito dopo una scrittura; in produzione gli indici
+            sono eventually-consistent e non si paga l'attesa).
 
     Returns:
-        Lista di entità e fatti che corrispondono alla ricerca
+        Lista di entità, fatti, documenti e termini che corrispondono.
     """
     ctx = principal_visibility_context(principal)
     is_admin = ctx["is_admin"]
-    search_text = text  # CONTAINS non usa wildcard
+    query_text = _fulltext_query(text)
 
     def work(tx: ManagedTransaction) -> list[dict]:
-        results = []
+        if await_indexes:
+            for index in _SEARCH_INDEXES:
+                tx.run("CALL db.awaitIndex($index, 5)", index=index)
 
-        # Cerca nelle entità (label/type)
-        if label:
-            entity_query = """
-            MATCH (e:Entity)
-            WHERE e.label = $label AND (e.label CONTAINS $text OR e.type CONTAINS $text)
-            RETURN e, 'entity' AS match_type
-            """
-        else:
-            entity_query = """
-            MATCH (e:Entity)
-            WHERE e.label CONTAINS $text OR e.type CONTAINS $text
-            RETURN e, 'entity' AS match_type
-            """
+        results: list[dict[str, Any]] = []
 
-        entity_result = tx.run(entity_query, text=search_text)
-        for record in entity_result:
-            node = record["e"]
+        # --- Entity: label + type (full-text) ---
+        seen_entities: set[str] = set()
+        for index in (FULLTEXT_ENTITY_LABEL, FULLTEXT_ENTITY_TYPE):
+            for node, score in _fulltext_records(tx, index, query_text):
+                props = _node_to_dict(node)
+                if label is not None and props.get("label") != label:
+                    continue
+                if props["id"] in seen_entities:
+                    continue
+                if is_admin or _visibility_filter(_visibility_from_props(props), ctx):
+                    seen_entities.add(props["id"])
+                    results.append({**props, "match_type": "entity", "score": score})
+
+        # --- Fact: value + property (full-text) ---
+        seen_facts: set[str] = set()
+        for index in (FULLTEXT_FACT_VALUE, FULLTEXT_FACT_PROPERTY):
+            for node, score in _fulltext_records(tx, index, query_text):
+                props = _node_to_dict(node)
+                if props["id"] in seen_facts:
+                    continue
+                if is_admin:
+                    seen_facts.add(props["id"])
+                    results.append({**props, "match_type": "fact", "score": score})
+                    continue
+                entity_record = tx.run(
+                    """
+                    MATCH (e:Entity)-[:HAS_FACT]->(f:Fact)
+                    WHERE f.id = $fact_id
+                    RETURN e
+                    """,
+                    fact_id=props["id"],
+                ).single()
+                if entity_record is None:
+                    continue
+                entity_props = _node_to_dict(entity_record["e"])
+                visibility = effective_visibility(props, entity_props)
+                if _visibility_filter(visibility, ctx):
+                    seen_facts.add(props["id"])
+                    results.append({**props, "match_type": "fact", "score": score})
+
+        # --- Document: title (full-text, WP-E2) ---
+        for node, score in _fulltext_records(tx, FULLTEXT_DOCUMENT_TITLE, query_text):
             props = _node_to_dict(node)
+            if is_admin or _visibility_filter(_visibility_from_props(props), ctx):
+                results.append({**props, "match_type": "document", "score": score})
 
-            if is_admin or _visibility_filter(
-                Visibility(
-                    is_public=props.get("is_public", False),
-                    roles=tuple(props.get("roles", [])),
-                    teams=tuple(props.get("teams", [])),
-                ),
-                ctx,
-            ):
-                results.append({**props, "match_type": "entity"})
-
-        # Cerca nei fatti (value, property)
-        fact_query = """
-        MATCH (f:Fact)
-        WHERE f.value CONTAINS $text OR f.property CONTAINS $text
-        RETURN f, 'fact' AS match_type
-        """
-        fact_result = tx.run(fact_query, text=search_text)
-        for record in fact_result:
-            node = record["f"]
+        # --- CanonicalTerm: label_en (full-text, WP-E2) ---
+        for node, score in _fulltext_records(
+            tx, FULLTEXT_CANONICAL_TERM_LABEL, query_text
+        ):
             props = _node_to_dict(node)
-
-            if is_admin:
-                results.append({**props, "match_type": "fact"})
-            else:
-                # Controlla visibilità del fatto e dell'entità
-                entity_query = """
-                MATCH (e:Entity)-[:HAS_FACT]->(f:Fact)
-                WHERE f.id = $fact_id
-                RETURN e
-                """
-                entity_record = tx.run(entity_query, fact_id=props["id"]).single()
-
-                if entity_record:
-                    entity_props = _node_to_dict(entity_record["e"])
-                    visibility = effective_visibility(props, entity_props)
-                    if _visibility_filter(visibility, ctx):
-                        results.append({**props, "match_type": "fact"})
+            if is_admin or _visibility_filter(_visibility_from_props(props), ctx):
+                results.append({**props, "match_type": "term", "score": score})
 
         return results
 

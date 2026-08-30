@@ -238,3 +238,61 @@ costo per-query (17-24 ms) è il dato rilevante per NFR1.
 - Load test rieseguibile: `uv run python scripts/loadtest_rag.py --users 100`
   (setup/cleanup automatico dei dati `ib5_load_*`).
 
+
+## 10. Iterazione E — Benchmark scalato 10GB (WP-E3, gate GE3)
+
+- Data: 2026-08-30
+- Comando: `uv run python scripts/benchmark_e3.py --docs 1000 --concurrency 20 --queries 200`
+- Stack: dev reale (container `km-neo4j` + `km-postgres`), app locale, 1 worker.
+- Corpus: 1000 documenti canonici sintetici `ie_bench_*` (~0.37 MB md),
+  bulk-writer diretto sul grafo (15 nodi/documento: 1 Document + 1 Source +
+  5 Entity ingrediente + 5 Fact qty + 3 Entity step). Cleanup automatico
+  verificato: 15000 nodi rimossi, 0 residui.
+
+### 10.1 Risultati misurati (forma scalata)
+
+| Fase | Metrica | Valore |
+|---|---|---|
+| 1 | Generazione corpus | 1000 doc, 0.37 MB, 0.002s |
+| 2 | Ingest bulk | 4.541s, **220.2 doc/s**, 0.081 MB/s md, ~3300 nodi/s |
+| 3 | Search full-text single-user | p50 43.2ms · p95 72.8ms · p99 216.3ms |
+| 4 | Search full-text concorrente (20 worker, 200 query) | p50 1365.8ms · **p95 1707.7ms** · p99 2662.4ms |
+| 5 | RAG vettoriale (1000 embedding popolati) | p50 25.7ms · p95 31.5ms · p99 46.3ms |
+| 6 | Cleanup | 15000 nodi rimossi, residui 0 |
+
+### 10.2 Estrapolazione a 10GB (NFR6)
+
+Il benchmark è **scalato**, non un run reale da 10GB. Estrapolazione con
+assunzioni esplicite:
+
+- **Per documento (dimensione media 100 KB)**: 10GB ≈ 100.000 documenti.
+  A 220 doc/s → **~7.6 ore** (entro NFR6 < 24h).
+- **Per nodo (100 nodi/documento medio su contenuti misti)**: 10GB ≈ 10M
+  nodi. A ~3.300 nodi/s → **~50 minuti** (ottimistico); applicando un
+  fattore di sicurezza 5x per indici full-text/vettoriali, GC e code di
+  ingestione → **~4.2 ore**.
+- **Limite**: il bulk-writer misura il lower-bound dello storage layer, non
+  il path completo `translate→verify→canonicalize→extract` (che include LLM e
+  verifica). Il run reale va eseguito su stack prod-like (nginx + 2 repliche)
+  come da piano §8.
+
+**Verdetto NFR6:** raggiungibile in forma scalata; verifica formale su 10GB
+reali e stack prod-like ancora da eseguire.
+
+### 10.3 NFR1/NFR2/NFR3/NFR8 formalizzati
+
+| NFR | Target | Misura Iterazione E | Esito |
+|---|---|---|---|
+| NFR1 | p95 < 2s | search concorrente p95 1707.7ms; rag p95 31.5ms | ✅ sotto soglia (dev 1 worker) |
+| NFR2 | 100 utenti concorrenti | 20 worker, 200 query, 0 errori | ✅ (proxy scalato; 100 utenti già verificato in §3/§9) |
+| NFR3 | Disponibilità 90% | Definizione formale: `1 - downtime_non_programmato/finestra` su finestra rolling 30gg. Con restart `unless-stopped` + recycle healthcheck, MTTR guasto transitorio < 1 min; budget annuo 90% ≈ 36.5gg. Misura continua da attivare in prod. | ✅ target compatibile; misura formale da prod |
+| NFR8 | Retention backup | Default **7 giorni**, configurabile via `RETENTION_DAYS`; audit con `scripts/retention_audit.sh` (exit 1 se backup scaduti presenti). | ✅ formalizzato e testato |
+
+### 10.4 Note
+
+- Il search full-text (WP-E2) usa query Lucene `*testo*` (substring,
+  case-insensitive). Su 1000 documenti il p95 concorrente resta sotto 2s;
+  su 10GB va rivalutato con tuning heap/pagecache (raccomandazione §7).
+- Il bulk-writer non è il path di produzione: i numeri di ingestione vanno
+  riletti con `extract_document` una volta completato il work package dosi
+  (in corso nel working tree).

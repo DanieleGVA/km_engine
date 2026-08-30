@@ -26,6 +26,8 @@
 #   POSTGRES_USER     utente Postgres (default km)
 #   POSTGRES_DB       database Postgres (default km_engine)
 #   RETENTION_DAYS    retention in giorni (default 7)
+#   CORPUS_DIR        directory corpus md (default ./corpus; inclusa se esiste)
+#   PACK_DIR          directory domain pack (default ./domain-packs; inclusa se esiste)
 # ============================================================================
 set -euo pipefail
 
@@ -37,6 +39,8 @@ NEO4J_DB="${NEO4J_DB:-neo4j}"
 POSTGRES_USER="${POSTGRES_USER:-km}"
 POSTGRES_DB="${POSTGRES_DB:-km_engine}"
 RETENTION_DAYS="${RETENTION_DAYS:-7}"
+CORPUS_DIR="${CORPUS_DIR:-./corpus}"
+PACK_DIR="${PACK_DIR:-./domain-packs}"
 LOG_FILE="${LOG_FILE:-$BACKUP_DIR/backup.log}"
 
 if [[ -z "$BACKUP_PASSPHRASE" ]]; then
@@ -74,14 +78,32 @@ log "Postgres: pg_dump -Fc..."
 docker compose -f "$COMPOSE_FILE" -p "$PROJECT_NAME" exec -T postgres \
     pg_dump -U "$POSTGRES_USER" -d "$POSTGRES_DB" -Fc > "$WORK/km_engine.pg"
 
-# --- 3. Cifratura AES-256 (NFR7) --------------------------------------------
+# --- 3. Corpus md + domain pack (WP-E4) -------------------------------------
+# Il dump Neo4j include già dati, full-text e indice vettoriale. I markdown
+# del corpus e i domain pack sono file: li includiamo nello stesso archivio
+# cifrato per un restore completo (grafo + PG + sorgenti md).
+EXTRA_TAR_ARGS=()
+if [[ -n "$CORPUS_DIR" && -d "$CORPUS_DIR" ]]; then
+    log "Corpus md: includo $CORPUS_DIR"
+    EXTRA_TAR_ARGS+=("-C" "$(pwd)" "${CORPUS_DIR#./}")
+else
+    log "Corpus md: $CORPUS_DIR assente, lo salto (solo grafo+PG)."
+fi
+if [[ -n "$PACK_DIR" && -d "$PACK_DIR" ]]; then
+    log "Domain pack: includo $PACK_DIR"
+    EXTRA_TAR_ARGS+=("-C" "$(pwd)" "${PACK_DIR#./}")
+else
+    log "Domain pack: $PACK_DIR assente, lo salto."
+fi
+
+# --- 4. Cifratura AES-256 (NFR7) --------------------------------------------
 log "Cifratura AES-256 (openssl enc -aes-256-cbc -pbkdf2)..."
-tar -C "$WORK" -cf - "$NEO4J_DB.dump" km_engine.pg | \
+tar -C "$WORK" -cf - "$NEO4J_DB.dump" km_engine.pg "${EXTRA_TAR_ARGS[@]}" | \
     openssl enc -aes-256-cbc -salt -pbkdf2 -iter 100000 \
         -pass env:BACKUP_PASSPHRASE \
         -out "$BACKUP_DIR/km_engine_$TS.enc"
 
-# --- 4. Retention -----------------------------------------------------------
+# --- 5. Retention (NFR8, configurabile via RETENTION_DAYS) ------------------
 log "Retention: rimozione backup piu' vecchi di ${RETENTION_DAYS} giorni..."
 find "$BACKUP_DIR" -maxdepth 1 -name 'km_engine_*.enc' -mtime +"$RETENTION_DAYS" -delete
 

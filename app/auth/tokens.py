@@ -82,6 +82,36 @@ def decode_token(
     return claims
 
 
+def issue_token_pair(
+    conn: psycopg.Connection,
+    user_id: uuid.UUID | str,
+    *,
+    settings: AuthSettings | None = None,
+    ttl: timedelta | None = None,
+) -> dict:
+    """Issue an access+refresh pair for an already-authenticated user.
+
+    Shared by the local login and the OIDC login paths so both emit the same
+    token contract (ADR-002 D7).
+    """
+    s = settings or AuthSettings()
+    uid = user_id if isinstance(user_id, uuid.UUID) else uuid.UUID(str(user_id))
+    roles, teams = resolve_identity(conn, uid)
+    access = issue_access_token(
+        uid, roles=roles, teams=teams, tenant=s.tenant, settings=s
+    )
+    with conn.transaction():
+        refresh = _issue_refresh_token(conn, uid, s, ttl=ttl)
+    return {
+        "access_token": access,
+        "refresh_token": refresh,
+        "token_type": "bearer",
+        "expires_in": int(s.access_token_ttl.total_seconds()),
+        "roles": roles,
+        "teams": teams,
+    }
+
+
 def _issue_refresh_token(
     conn: psycopg.Connection,
     user_id: uuid.UUID,
@@ -141,6 +171,32 @@ def login(
         "roles": roles,
         "teams": teams,
     }
+
+
+async def login_async(
+    conn: psycopg.Connection,
+    username: str,
+    password: str,
+    *,
+    settings: AuthSettings | None = None,
+) -> dict:
+    """Async login: argon2id verification runs off the event loop (WP-E1).
+
+    The DB lookups are quick synchronous psycopg calls; the expensive part
+    (password hashing) is delegated to a worker thread via
+    :func:`app.auth.hashing.verify_password_async`.
+    """
+    from .hashing import verify_password_async
+
+    s = settings or AuthSettings()
+    row = conn.execute(
+        "SELECT id, password_hash, active FROM users WHERE username = %s", (username,)
+    ).fetchone()
+    if row is None or not await verify_password_async(password, row[1]):
+        raise InvalidCredentialsError("Credenziali non valide.")
+    if not row[2]:
+        raise InvalidCredentialsError("Credenziali non valide.")
+    return issue_token_pair(conn, row[0], settings=s)
 
 
 def refresh(

@@ -50,6 +50,21 @@ def cleanup_postgres(conn) -> None:
         conn.execute("DELETE FROM users WHERE username LIKE %s", (f"{WP5_PREFIX}%",))
 
 
+def await_fulltext_indexes(client: Neo4jClient) -> None:
+    """Attende gli indici full-text usati dal search (WP-E2)."""
+    indexes = (
+        "entity_label_fulltext",
+        "entity_type_fulltext",
+        "fact_value_fulltext",
+        "fact_property_fulltext",
+        "document_title_fulltext",
+        "canonical_term_label_en_fulltext",
+    )
+    with client.session() as session:
+        for index in indexes:
+            session.run("CALL db.awaitIndex($index, 5)", index=index)
+
+
 @pytest.fixture
 def app():
     """Applicazione FastAPI per test."""
@@ -349,6 +364,7 @@ class TestSearchEndpoint:
             type="code",
             visibility=Visibility(is_public=True),
         )
+        await_fulltext_indexes(repo.client)
 
         token = login_user(client, test_user["username"], test_user["password"])
         response = client.get(

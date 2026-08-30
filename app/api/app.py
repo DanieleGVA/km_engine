@@ -20,9 +20,6 @@ la capacita' e' ~30-50 req/s (misurato nel load test WP-B5); in produzione
 from __future__ import annotations
 
 import threading
-import time
-from collections import defaultdict
-from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
@@ -32,6 +29,11 @@ from fastapi.responses import JSONResponse
 from neo4j.exceptions import ServiceUnavailable as Neo4jServiceUnavailable
 from pydantic import BaseModel, Field
 
+# ------------------------------------------------------------------ Rate limiting
+# WP-E1: il limiter delega lo stato a uno store condivisibile (in-memory di
+# default, Redis opzionale). La classe vive in app/api/rate_limit.py.
+from app.api.rate_limit import build_rate_limiter
+from app.api.ui import router as ui_router
 from app.auth import (
     Principal,
     auth_required,
@@ -73,56 +75,9 @@ from app.rag.rag import (
 from app.storage.client import Neo4jClient
 from app.storage.repository import GraphRepository
 
-
-# ------------------------------------------------------------------ Rate limiting
-@dataclass
-class TokenBucket:
-    """Token bucket in-memory per rate limiting (prototipo, per-istanza)."""
-
-    tokens: float = field(default=10.0)
-    last_update: float = field(default_factory=time.time)
-
-    def consume(self, tokens: float = 1.0, refill_rate: float = 1.0, max_tokens: float = 10.0) -> bool:
-        """Tenta di consumare token. Restituisce True se successo."""
-        now = time.time()
-        elapsed = now - self.last_update
-        self.tokens = min(max_tokens, self.tokens + elapsed * refill_rate)
-        self.last_update = now
-
-        if self.tokens >= tokens:
-            self.tokens -= tokens
-            return True
-        return False
-
-
-class RateLimiter:
-    """Rate limiter in-memory per IP (limite del prototipo)."""
-
-    def __init__(self, default_limit: float = 10.0, auth_limit: float = 5.0):
-        self._buckets: dict[str, TokenBucket] = defaultdict(TokenBucket)
-        self.default_limit = default_limit
-        self.auth_limit = auth_limit
-
-    def get_bucket(self, ip: str) -> TokenBucket:
-        return self._buckets[ip]
-
-    def is_allowed(self, ip: str, is_auth_endpoint: bool = False) -> bool:
-        bucket = self.get_bucket(ip)
-        limit = self.auth_limit if is_auth_endpoint else self.default_limit
-        return bucket.consume(tokens=1.0, refill_rate=limit, max_tokens=limit * 2)
-
-    def check_rate_limit(self, ip: str, is_auth_endpoint: bool = False) -> None:
-        """Controlla rate limit e solleva HTTPException se superato."""
-        if not self.is_allowed(ip, is_auth_endpoint):
-            raise HTTPException(
-                status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-                detail="Too many requests. Rate limit exceeded.",
-                headers={"Retry-After": "60"},
-            )
-
-
-# Singleton rate limiter (per-istanza, documentato)
-_rate_limiter = RateLimiter(default_limit=10.0, auth_limit=5.0)
+# Singleton rate limiter (per-istanza con store in-memory; Redis se configurato
+# via KM_RATE_LIMIT_REDIS_URL e pacchetto redis installato).
+_rate_limiter = build_rate_limiter(default_limit=10.0, auth_limit=5.0)
 
 
 # ------------------------------------------------------------------ Dipendenze
@@ -275,12 +230,16 @@ def create_app() -> FastAPI:
             {"name": "rag", "description": "Retrieval ibrido RAG (WP-B1)"},
             {"name": "documents", "description": "Documenti canonici (WP-B1/B4)"},
             {"name": "glossary", "description": "Query strutturate dal glossario (WP-B2)"},
+            {"name": "ui", "description": "Web UI minima di adjudication (WP-E6)"},
         ],
     )
 
     # Includiamo il router /auth di app.auth.routes con rate limiting
     # (prototipo: token bucket in-memory per istanza; piu' stretto su /auth/*)
     app.include_router(auth_router, dependencies=[Depends(rate_limit_auth)])
+
+    # Web UI minima di adjudication (WP-E6)
+    app.include_router(ui_router)
 
     # ------------------------------------------------------------------ Health check
     @app.get(

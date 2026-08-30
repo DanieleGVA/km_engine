@@ -37,6 +37,20 @@ def validate_password_policy(password: str) -> None:
         )
 
 
+async def hash_password_async(password: str) -> str:
+    """Hash fuori dall'event loop (anyio.to_thread) per il login storm (WP-E1)."""
+    import anyio
+
+    return await anyio.to_thread.run_sync(hash_password, password)
+
+
+async def verify_password_async(password: str, password_hash: str) -> bool:
+    """Verifica fuori dall'event loop (anyio.to_thread) per il login storm (WP-E1)."""
+    import anyio
+
+    return await anyio.to_thread.run_sync(verify_password, password, password_hash)
+
+
 def hash_password(password: str) -> str:
     """Restituisce l'hash della password (argon2id, o bcrypt se argon2 manca)."""
     validate_password_policy(password)

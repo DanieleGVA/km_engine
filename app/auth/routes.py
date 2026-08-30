@@ -15,7 +15,8 @@ from .config import AuthSettings, get_auth_settings
 from .db import connect
 from .deps import auth_required
 from .errors import AuthError, InvalidCredentialsError, TokenError
-from .tokens import login as login_service
+from .oidc import get_oidc_verifier, oidc_issue_tokens
+from .tokens import login_async
 from .tokens import logout as logout_service
 from .tokens import refresh as refresh_service
 
@@ -33,6 +34,11 @@ class RefreshRequest(BaseModel):
 
 class LogoutRequest(BaseModel):
     refresh_token: str
+
+
+class OIDCLoginRequest(BaseModel):
+    id_token: str
+    nonce: str | None = None
 
 
 class TokenResponse(BaseModel):
@@ -53,11 +59,38 @@ def _map_error(exc: AuthError) -> HTTPException:
 async def login(
     body: LoginRequest, settings: Annotated[AuthSettings | None, Depends(get_auth_settings)] = None
 ) -> TokenResponse:
-    """Public: username+password -> coppia access (15 min) + refresh (14 gg)."""
+    """Public: username+password -> coppia access (15 min) + refresh (14 gg).
+
+    WP-E1: l'hash argon2id viene eseguito fuori dall'event loop
+    (``anyio.to_thread``) per non bloccare le altre richieste durante il
+    login storm.
+    """
     s = settings or get_auth_settings()
     try:
         with connect(s) as conn:
-            result = login_service(conn, body.username, body.password, settings=s)
+            result = await login_async(conn, body.username, body.password, settings=s)
+    except AuthError as exc:
+        raise _map_error(exc) from exc
+    return TokenResponse(**result)
+
+
+@router.post("/oidc/login", response_model=TokenResponse)
+async def oidc_login(
+    body: OIDCLoginRequest,
+    settings: Annotated[AuthSettings | None, Depends(get_auth_settings)] = None,
+) -> TokenResponse:
+    """Public: id_token OIDC -> coppia access+refresh locale (WP-E1).
+
+    L'utente locale deve già esistere (nessun auto-provisioning in questa
+    iterazione). La verifica dell'id_token usa discovery+JWKS con cache.
+    """
+    s = settings or get_auth_settings()
+    verifier = get_oidc_verifier()
+    try:
+        with connect(s) as conn:
+            result = await oidc_issue_tokens(
+                conn, body.id_token, nonce=body.nonce, settings=s, verifier=verifier
+            )
     except AuthError as exc:
         raise _map_error(exc) from exc
     return TokenResponse(**result)
