@@ -11,9 +11,8 @@ dose-log che spiega ogni trasformazione (verificabile come il canon-log).
 """
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass, field
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import ROUND_HALF_UP, Decimal
 
 from app.domain.pack import DomainPackBundle
 from app.domain.verify import parse_translated_md
