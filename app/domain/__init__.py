@@ -11,6 +11,16 @@ Public API:
 """
 from __future__ import annotations
 
+from app.domain.canonical import (
+    CanonicalDocument,
+    CanonicalizationError,
+    CanonLogEntry,
+    CanonLogVerificationError,
+    canonicalize,
+    generate_canon_log,
+    verify_canon_log,
+    write_canon_log,
+)
 from app.domain.config import LLMSettings, get_llm_settings
 from app.domain.errors import (
     AdjudicationAlreadyResolvedError,
@@ -79,6 +89,10 @@ __all__ = [
     "AdjudicationAlreadyResolvedError",
     "AdjudicationError",
     "AdjudicationNotFoundError",
+    "CanonLogEntry",
+    "CanonLogVerificationError",
+    "CanonicalDocument",
+    "CanonicalizationError",
     "DomainError",
     "DomainPack",
     "DomainPackBundle",
@@ -107,12 +121,14 @@ __all__ = [
     "VerificationError",
     "VerificationIssue",
     "build_translation_input",
+    "canonicalize",
     "create_adjudication",
     "create_glossary_proposal",
     "decide_adjudication",
     "decide_glossary_proposal",
     "extract_numbers",
     "format_quantity",
+    "generate_canon_log",
     "get_adjudication",
     "get_llm_settings",
     "list_adjudications",
@@ -128,6 +144,8 @@ __all__ = [
     "translate_document",
     "update_document_verification_level",
     "validate_pack",
+    "verify_canon_log",
     "verify_l1",
     "verify_l2",
+    "write_canon_log",
 ]

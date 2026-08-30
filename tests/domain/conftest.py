@@ -53,8 +53,9 @@ def cleanup_postgres(conn: psycopg.Connection) -> None:
         proposal_ids = [
             row[0]
             for row in conn.execute(
-                "SELECT id FROM glossary_proposals WHERE term LIKE %s",
-                (f"{PREFIX}%",),
+                "SELECT id FROM glossary_proposals "
+                "WHERE term LIKE %s OR context LIKE %s",
+                (f"{PREFIX}%", f"{PREFIX}%"),
             ).fetchall()
         ]
         if adjudication_ids:
@@ -73,7 +74,11 @@ def cleanup_postgres(conn: psycopg.Connection) -> None:
             "DELETE FROM adjudications WHERE document_id LIKE %s", (f"{PREFIX}%",)
         )
         conn.execute(
-            "DELETE FROM glossary_proposals WHERE term LIKE %s", (f"{PREFIX}%",)
+            "DELETE FROM glossary_proposals WHERE term LIKE %s OR context LIKE %s",
+            (f"{PREFIX}%", f"{PREFIX}%"),
+        )
+        conn.execute(
+            "DELETE FROM canon_log WHERE document_id LIKE %s", (f"{PREFIX}%",)
         )
 
         user_ids = [
