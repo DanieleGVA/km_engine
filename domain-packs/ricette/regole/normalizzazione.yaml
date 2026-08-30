@@ -1,0 +1,13 @@
+name: normalizzazione
+version: 1.0.0
+# Ordine fisso di applicazione nello stadio 2 (WP-A5): unità -> termini -> struttura.
+order: [units, terms, structure]
+unit_plural_map:
+  cucchiai: cucchiaio
+  tazze: tazza
+  spicchi: spicchio
+  pizzichi: pizzico
+  bustine: bustina
+  mazzetti: mazzetto
+  foglie: foglia
+  rametti: rametto

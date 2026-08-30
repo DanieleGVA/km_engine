@@ -1,0 +1,88 @@
+# Regole di conversione/rinomina unità (P7: SI + unità culinarie canoniche).
+# - factor: moltiplicatore da from_unit a to_unit.
+# - rounding: null = esatto (nessun arrotondamento); 0 = intero; n>0 = n decimali.
+# Le regole di identità/rinomina hanno factor 1.0 e rounding null (la quantità
+# non viene toccata); la nota documenta l'equivalenza metrica.
+- rule_id: UNIT-G
+  from_unit: g
+  to_unit: g
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-KG
+  from_unit: kg
+  to_unit: kg
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-ML
+  from_unit: ml
+  to_unit: ml
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-L
+  from_unit: l
+  to_unit: l
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-DL
+  from_unit: dl
+  to_unit: ml
+  factor: 100.0
+  rounding: 0
+  note: 1 dl = 100 ml
+- rule_id: UNIT-C
+  from_unit: °C
+  to_unit: °C
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-MIN
+  from_unit: min
+  to_unit: min
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-H
+  from_unit: h
+  to_unit: h
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-TBSP
+  from_unit: cucchiaio
+  to_unit: tablespoon
+  factor: 1.0
+  rounding: null
+  note: 1 tablespoon = 15 ml
+- rule_id: UNIT-CUP
+  from_unit: tazza
+  to_unit: cup
+  factor: 1.0
+  rounding: null
+  note: 1 cup = 250 ml
+- rule_id: UNIT-PINCH
+  from_unit: pizzico
+  to_unit: pinch
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-CLOVE
+  from_unit: spicchio
+  to_unit: clove
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-LEAF
+  from_unit: foglie
+  to_unit: leaf
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-SPRIG
+  from_unit: rametti
+  to_unit: sprig
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-SACHET
+  from_unit: bustina
+  to_unit: sachet
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-BUNCH
+  from_unit: mazzetto
+  to_unit: bunch
+  factor: 1.0
+  rounding: null

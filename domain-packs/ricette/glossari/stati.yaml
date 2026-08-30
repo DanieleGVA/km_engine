@@ -1,19 +1,32 @@
-# STATI (cottura, consistenza): id -> label EN/IT, alias (seed WP-A4)
-STATE-AL-DENTE:
-  label_en: Al dente
-  label_it: Al dente
-  aliases: [al dente]
-  definition: Cottura della pasta ferma al morso.
-  is_public: true
-STATE-CREAMY:
-  label_en: Creamy
-  label_it: Cremoso
-  aliases: [cremoso, mantecato]
-  definition: Consistenza cremosa ottenuta con mantecatura.
-  is_public: true
-STATE-GOLDEN:
-  label_en: Golden brown
-  label_it: Dorato
-  aliases: [dorato]
-  definition: Colorazione dorata da cottura.
-  is_public: true
+name: stati
+entries:
+  - id: STA-AL-DENTE
+    labels_en: al dente
+    labels_it: al dente
+    aliases: [al dente]
+    definition: Cooked so as to be firm when bitten.
+    ontology_uri: http://dbpedia.org/resource/Al_dente
+  - id: STA-ROSOLATO
+    labels_en: browned
+    labels_it: rosolato
+    aliases: [rosolato, rosolata, rosolati, rosolate]
+    definition: Browned on the surface.
+    ontology_uri: null
+  - id: STA-DORATO
+    labels_en: golden
+    labels_it: dorato
+    aliases: [dorato, dorata, dorati, dorate, dorarsi]
+    definition: Golden in colour from cooking.
+    ontology_uri: null
+  - id: STA-SODO
+    labels_en: firm
+    labels_it: sodo
+    aliases: [sodo, soda, sodi, sode]
+    definition: Firm to the bite, not overcooked.
+    ontology_uri: null
+  - id: STA-CREMOSO
+    labels_en: creamy
+    labels_it: cremoso
+    aliases: [cremoso, cremosa, cremosi, cremose]
+    definition: Having a smooth, creamy consistency.
+    ontology_uri: null

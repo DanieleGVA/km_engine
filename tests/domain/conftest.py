@@ -1,149 +1,240 @@
-"""Fixture condivise per i test domain (Iterazione A, WP-A4: T7/T8)."""
+"""Shared fixtures for Iteration A domain tests.
+
+Two workers share this directory:
+- WP-A1/A2/A3 (this worker): ``pack``, ``pg_conn``, ``admin_user``, corpus
+  helpers, clean ``ia_`` Postgres data.
+- WP-A4 (sibling): ``client``, ``principal_no_team``, ``principal_admin``,
+  ``create_document``, ``create_canonical_term``, clean ``ia4_`` Neo4j data.
+"""
 from __future__ import annotations
 
-from typing import Any
+import os
+from pathlib import Path
 
+import psycopg
 import pytest
 
 from app.auth import Principal
+from app.auth.users import create_user
+from app.domain import load_domain_pack
 from app.storage.client import Neo4jClient
 
-TEST_PREFIX = "ia4_"
+TEST_DSN = os.environ.get(
+    "KM_TEST_PG_DSN",
+    os.environ.get(
+        "KM_PG_DSN", "postgresql://km:km_dev_password@localhost:5432/km_engine"
+    ),
+)
+
+PREFIX = "ia_"
+TEST_PASSWORD = "ia-test-password-123"
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+PACK_DIR = REPO_ROOT / "domain-packs" / "ricette"
+CORPUS_DIR = REPO_ROOT / "tests" / "fixtures" / "corpus_ricette"
+
+NEO4J_PREFIX = "ia4_"
 
 
-def clean_test_data(client: Neo4jClient) -> None:
-    """Elimina tutti i nodi domain/MVP creati dai test con prefisso ia4_."""
+# ---------------------------------------------------------------------------
+# WP-A1/A2/A3 — Postgres + pack fixtures
+# ---------------------------------------------------------------------------
+
+def cleanup_postgres(conn: psycopg.Connection) -> None:
+    """Delete only the rows created by domain tests (``ia_`` prefixed)."""
+    with conn.transaction():
+        adjudication_ids = [
+            row[0]
+            for row in conn.execute(
+                "SELECT id FROM adjudications WHERE document_id LIKE %s",
+                (f"{PREFIX}%",),
+            ).fetchall()
+        ]
+        proposal_ids = [
+            row[0]
+            for row in conn.execute(
+                "SELECT id FROM glossary_proposals WHERE term LIKE %s",
+                (f"{PREFIX}%",),
+            ).fetchall()
+        ]
+        if adjudication_ids:
+            conn.execute(
+                "DELETE FROM audit_log WHERE entity_type = 'Adjudication' "
+                "AND entity_id = ANY(%s)",
+                ([str(i) for i in adjudication_ids],),
+            )
+        if proposal_ids:
+            conn.execute(
+                "DELETE FROM audit_log WHERE entity_type = 'GlossaryProposal' "
+                "AND entity_id = ANY(%s)",
+                ([str(i) for i in proposal_ids],),
+            )
+        conn.execute(
+            "DELETE FROM adjudications WHERE document_id LIKE %s", (f"{PREFIX}%",)
+        )
+        conn.execute(
+            "DELETE FROM glossary_proposals WHERE term LIKE %s", (f"{PREFIX}%",)
+        )
+
+        user_ids = [
+            row[0]
+            for row in conn.execute(
+                "SELECT id FROM users WHERE username LIKE %s", (f"{PREFIX}%",)
+            ).fetchall()
+        ]
+        if user_ids:
+            conn.execute(
+                "DELETE FROM audit_log WHERE user_id = ANY(%s) OR entity_id = ANY(%s)",
+                (user_ids, [str(i) for i in user_ids]),
+            )
+            conn.execute("DELETE FROM users WHERE id = ANY(%s)", (user_ids,))
+        conn.execute("DELETE FROM teams WHERE name LIKE %s", (f"{PREFIX}%",))
+
+
+@pytest.fixture(scope="session")
+def pack():
+    return load_domain_pack(PACK_DIR)
+
+
+@pytest.fixture()
+def pg_conn():
+    conn = psycopg.connect(TEST_DSN, autocommit=True)
+    cleanup_postgres(conn)
+    try:
+        yield conn
+    finally:
+        cleanup_postgres(conn)
+        conn.close()
+
+
+@pytest.fixture()
+def admin_user(pg_conn):
+    """A real Postgres admin user used as resolver in L3 tests."""
+    return create_user(
+        pg_conn,
+        f"{PREFIX}admin",
+        f"{PREFIX}admin@example.test",
+        TEST_PASSWORD,
+        roles=("admin",),
+    )
+
+
+def read_corpus() -> dict[str, str]:
+    """Return ``{filename: markdown}`` for the 15-recipe corpus."""
+    return {
+        path.name: path.read_text(encoding="utf-8")
+        for path in sorted(CORPUS_DIR.glob("ric-*.md"))
+    }
+
+
+def real_recipe_names() -> list[str]:
+    return [
+        "ric-101-asparagi-burro.md",
+        "ric-102-fregola-vongole.md",
+        "ric-103-amaretti.md",
+    ]
+
+
+# ---------------------------------------------------------------------------
+# WP-A4 — Neo4j fixtures (sibling worker)
+# ---------------------------------------------------------------------------
+
+def cleanup_neo4j(client: Neo4jClient) -> None:
+    """Delete only the nodes created by WP-A4 domain tests (``ia4_``)."""
     with client.session() as session:
         session.run(
             """
             MATCH (n)
-            WHERE (n:Document OR n:CanonicalTerm OR n:DomainPack
-                   OR n:Entity OR n:Fact OR n:Source OR n:Version)
+            WHERE (n:Document OR n:CanonicalTerm OR n:DomainPack OR n:Entity)
               AND n.id STARTS WITH $prefix
             DETACH DELETE n
             """,
-            prefix=TEST_PREFIX,
+            prefix=NEO4J_PREFIX,
         )
 
 
-@pytest.fixture
+@pytest.fixture()
 def client() -> Neo4jClient:
-    """Neo4j client connesso, con pulizia prima e dopo ogni test."""
     neo4j_client = Neo4jClient.from_env()
     neo4j_client.verify_connectivity()
-    clean_test_data(neo4j_client)
-    yield neo4j_client
-    clean_test_data(neo4j_client)
-    neo4j_client.close()
+    cleanup_neo4j(neo4j_client)
+    try:
+        yield neo4j_client
+    finally:
+        cleanup_neo4j(neo4j_client)
+        neo4j_client.close()
 
 
-@pytest.fixture
-def principal_viewer() -> Principal:
-    """Viewer del team ia4_team_a, nessun ruolo speciale."""
-    return Principal(
-        user_id="ia4_viewer",
-        roles=("viewer",),
-        teams=("ia4_team_a",),
-        tenant="default",
-        jti="ia4_jti_viewer",
-    )
-
-
-@pytest.fixture
-def principal_other_team() -> Principal:
-    """Viewer di un team diverso (ia4_team_b)."""
-    return Principal(
-        user_id="ia4_other",
-        roles=("viewer",),
-        teams=("ia4_team_b",),
-        tenant="default",
-        jti="ia4_jti_other",
-    )
-
-
-@pytest.fixture
+@pytest.fixture()
 def principal_no_team() -> Principal:
-    """Viewer senza team e senza ruoli speciali."""
-    return Principal(
-        user_id="ia4_noteam",
-        roles=("viewer",),
-        teams=(),
-        tenant="default",
-        jti="ia4_jti_noteam",
-    )
+    return Principal("ia4_u_no_team", ("viewer",), (), "default", "ia4_j_no_team")
 
 
-@pytest.fixture
+@pytest.fixture()
 def principal_admin() -> Principal:
-    """Admin con bypass visibilità."""
-    return Principal(
-        user_id="ia4_admin",
-        roles=("admin",),
-        teams=(),
-        tenant="default",
-        jti="ia4_jti_admin",
-    )
+    return Principal("ia4_u_admin", ("admin",), (), "default", "ia4_j_admin")
 
 
 def create_document(
     client: Neo4jClient,
     doc_id: str,
     *,
-    title: str | None = None,
-    is_public: bool | None = None,
-    roles: list[str] | None = None,
+    title: str,
+    is_public: bool = False,
     teams: list[str] | None = None,
-    **extra: Any,
-) -> str:
-    """Crea un :Document di test con visibilità controllata."""
-    props: dict[str, Any] = {
-        "id": doc_id,
-        "title": title or doc_id,
-        "lang": extra.pop("lang", "en"),
-        "source_lang": extra.pop("source_lang", "it"),
-        "canonical_hash": extra.pop("canonical_hash", f"hash-{doc_id}"),
-        "verification_level": extra.pop("verification_level", "L1"),
-        "translation_state": extra.pop("translation_state", "native"),
-        "source_language": extra.pop("source_language", "it"),
-    }
-    if is_public is not None:
-        props["is_public"] = is_public
-    if roles is not None:
-        props["roles"] = list(roles)
-    if teams is not None:
-        props["teams"] = list(teams)
-    props.update(extra)
+    roles: list[str] | None = None,
+) -> None:
+    """Create/refresh a :Document node for visibility tests."""
     with client.session() as session:
-        session.run("CREATE (d:Document $props)", props=props)
-    return doc_id
+        session.run(
+            """
+            MERGE (d:Document {id: $id})
+            SET d.title = $title,
+                d.lang = 'en',
+                d.source_lang = 'it',
+                d.canonical_hash = $hash,
+                d.verification_level = 'L1',
+                d.translation_state = 'native',
+                d.source_language = 'it',
+                d.is_public = $is_public,
+                d.roles = $roles,
+                d.teams = $teams
+            """,
+            id=doc_id,
+            title=title,
+            hash=f"hash-{doc_id}",
+            is_public=is_public,
+            roles=roles or [],
+            teams=teams or [],
+        )
 
 
 def create_canonical_term(
     client: Neo4jClient,
     term_id: str,
     *,
-    namespace: str = "ia4_glossary",
-    label_en: str | None = None,
-    is_public: bool | None = None,
-    roles: list[str] | None = None,
+    label_en: str,
+    is_public: bool = False,
     teams: list[str] | None = None,
-    **extra: Any,
-) -> str:
-    """Crea un :CanonicalTerm di test con visibilità controllata."""
-    props: dict[str, Any] = {
-        "id": term_id,
-        "namespace": namespace,
-        "term_id": extra.pop("term_key", term_id.rsplit(":", 1)[-1]),
-        "label_en": label_en or term_id,
-        "label_it": extra.pop("label_it", label_en or term_id),
-    }
-    if is_public is not None:
-        props["is_public"] = is_public
-    if roles is not None:
-        props["roles"] = list(roles)
-    if teams is not None:
-        props["teams"] = list(teams)
-    props.update(extra)
+    roles: list[str] | None = None,
+) -> None:
+    """Create/refresh a :CanonicalTerm node for visibility tests."""
     with client.session() as session:
-        session.run("CREATE (t:CanonicalTerm $props)", props=props)
-    return term_id
+        session.run(
+            """
+            MERGE (t:CanonicalTerm {id: $id})
+            SET t.namespace = 'ia4_test',
+                t.term_id = $term_id,
+                t.label_en = $label_en,
+                t.label_it = $label_en,
+                t.is_public = $is_public,
+                t.roles = $roles,
+                t.teams = $teams
+            """,
+            id=term_id,
+            term_id=term_id,
+            label_en=label_en,
+            is_public=is_public,
+            roles=roles or [],
+            teams=teams or [],
+        )

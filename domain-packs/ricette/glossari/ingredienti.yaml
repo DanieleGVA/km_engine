@@ -1,29 +1,424 @@
-# INGREDIENTI: id FoodOn -> label EN/IT, alias, unità default (seed WP-A4)
-ING-WHEAT-FLOUR:
-  label_en: Wheat flour
-  label_it: Farina di grano
-  aliases: [farina, farina 00]
-  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001117
-  definition: Farina ottenuta dalla macinazione del grano tenero.
-  is_public: true
-ING-TOMATO:
-  label_en: Tomato
-  label_it: Pomodoro
-  aliases: [pomodoro, pomodori pelati]
-  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001118
-  definition: Frutto della pianta di pomodoro.
-  is_public: true
-ING-RICE:
-  label_en: Rice
-  label_it: Riso
-  aliases: [riso, riso carnaroli]
-  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001119
-  definition: Cereale della specie Oryza sativa.
-  is_public: true
-ING-OLIVE-OIL:
-  label_en: Olive oil
-  label_it: Olio extravergine di oliva
-  aliases: [olio extravergine di oliva, olio]
-  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001120
-  definition: Olio ottenuto dalla spremitura delle olive.
-  is_public: true
+# Glossario ingredienti seed (P4/P7).
+# FoodOn URI: riferimenti seed da validare con l'esperto di dominio (P5).
+# Nota T10: 'mandorle dolci sbucciate' e 'mandorle amare sbucciate' restano
+# volutamente irrisolti (il modificatore 'sbucciate' non è un alias).
+name: ingredienti
+entries:
+- id: ING-SPAGHETTI
+  labels_en: spaghetti
+  labels_it: spaghetti
+  aliases:
+  - spaghetti
+  definition: Long thin pasta.
+  ontology_uri: http://dbpedia.org/resource/Spaghetti
+- id: ING-TOMATO-PEELED
+  labels_en: peeled tomatoes
+  labels_it: pomodori pelati
+  aliases:
+  - pomodori pelati
+  - pomodoro pelato
+  definition: Canned whole tomatoes, peeled.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001057
+- id: ING-OLIVE-OIL
+  labels_en: extra virgin olive oil
+  labels_it: olio extravergine di oliva
+  aliases:
+  - olio extravergine di oliva
+  - olio evo
+  - olio d'oliva
+  definition: Olive oil from first cold pressing.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001103
+- id: ING-GARLIC
+  labels_en: garlic
+  labels_it: aglio
+  aliases:
+  - aglio
+  definition: Garlic bulb/clove.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001273
+- id: ING-BASIL
+  labels_en: basil
+  labels_it: basilico
+  aliases:
+  - basilico
+  definition: Basil herb.
+  ontology_uri: http://dbpedia.org/resource/Basil
+- id: ING-SALT
+  labels_en: salt
+  labels_it: sale
+  aliases:
+  - sale
+  definition: Table salt.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001008
+- id: ING-RICE-CARNAROLI
+  labels_en: carnaroli rice
+  labels_it: riso carnaroli
+  aliases:
+  - riso carnaroli
+  - carnaroli
+  definition: Italian short-grain rice for risotto.
+  ontology_uri: null
+- id: ING-SAFFRON
+  labels_en: saffron
+  labels_it: zafferano
+  aliases:
+  - zafferano
+  definition: Saffron spice.
+  ontology_uri: http://dbpedia.org/resource/Saffron
+- id: ING-VEGETABLE-BROTH
+  labels_en: vegetable broth
+  labels_it: brodo vegetale
+  aliases:
+  - brodo vegetale
+  definition: Vegetable stock.
+  ontology_uri: http://dbpedia.org/resource/Stock_(food)
+- id: ING-BUTTER
+  labels_en: butter
+  labels_it: burro
+  aliases:
+  - burro
+  definition: Dairy butter.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001102
+- id: ING-PARMESAN
+  labels_en: Parmesan cheese
+  labels_it: parmigiano reggiano
+  aliases:
+  - parmigiano reggiano
+  - parmigiano
+  definition: Hard Italian cheese.
+  ontology_uri: http://dbpedia.org/resource/Parmesan
+- id: ING-ONION
+  labels_en: onion
+  labels_it: cipolla
+  aliases:
+  - cipolla
+  - cipolle
+  definition: Onion.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001144
+- id: ING-WHEAT-FLOUR
+  labels_en: wheat flour
+  labels_it: farina 00
+  aliases:
+  - farina 00
+  - farina
+  definition: Fine wheat flour.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001137
+- id: ING-SUGAR
+  labels_en: sugar
+  labels_it: zucchero
+  aliases:
+  - zucchero
+  definition: Granulated sugar.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001009
+- id: ING-EGG
+  labels_en: egg
+  labels_it: uovo
+  aliases:
+  - uova
+  - uovo
+  - tuorli
+  - tuorlo
+  definition: Chicken egg.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001005
+- id: ING-APPLE
+  labels_en: apple
+  labels_it: mela
+  aliases:
+  - mele
+  - mela
+  definition: Apple fruit.
+  ontology_uri: http://dbpedia.org/resource/Apple
+- id: ING-BAKING-POWDER
+  labels_en: baking powder
+  labels_it: lievito per dolci
+  aliases:
+  - lievito per dolci
+  - lievito
+  definition: Chemical leavening agent for cakes.
+  ontology_uri: http://dbpedia.org/resource/Baking_powder
+- id: ING-LEMON
+  labels_en: lemon
+  labels_it: limone
+  aliases:
+  - limone
+  - limoni
+  definition: Lemon fruit.
+  ontology_uri: http://dbpedia.org/resource/Lemon
+- id: ING-DURUM-FLOUR
+  labels_en: durum wheat flour
+  labels_it: farina di grano duro
+  aliases:
+  - farina di grano duro
+  definition: Durum wheat flour.
+  ontology_uri: http://dbpedia.org/resource/Durum
+- id: ING-WATER
+  labels_en: water
+  labels_it: acqua
+  aliases:
+  - acqua
+  definition: Water.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001007
+- id: ING-BREWERS-YEAST
+  labels_en: brewer's yeast
+  labels_it: lievito di birra
+  aliases:
+  - lievito di birra
+  definition: Fresh brewer's yeast.
+  ontology_uri: http://dbpedia.org/resource/Baker%27s_yeast
+- id: ING-CHICKEN
+  labels_en: chicken
+  labels_it: pollo
+  aliases:
+  - pollo
+  definition: Whole chicken.
+  ontology_uri: http://dbpedia.org/resource/Chicken
+- id: ING-ROSEMARY
+  labels_en: rosemary
+  labels_it: rosmarino
+  aliases:
+  - rosmarino
+  definition: Rosemary herb.
+  ontology_uri: http://dbpedia.org/resource/Rosemary
+- id: ING-COARSE-SALT
+  labels_en: coarse salt
+  labels_it: sale grosso
+  aliases:
+  - sale grosso
+  definition: Coarse salt.
+  ontology_uri: http://dbpedia.org/resource/Salt
+- id: ING-BUFFALO-MOZZARELLA
+  labels_en: buffalo mozzarella
+  labels_it: mozzarella di bufala
+  aliases:
+  - mozzarella di bufala
+  - mozzarella
+  definition: Buffalo-milk mozzarella.
+  ontology_uri: http://dbpedia.org/resource/Mozzarella
+- id: ING-TOMATO
+  labels_en: tomato
+  labels_it: pomodoro
+  aliases:
+  - pomodori
+  - pomodoro
+  - pomodori maturi
+  definition: Tomato fruit.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001057
+- id: ING-OREGANO
+  labels_en: oregano
+  labels_it: origano
+  aliases:
+  - origano
+  definition: Oregano herb.
+  ontology_uri: http://dbpedia.org/resource/Oregano
+- id: ING-LENTILS
+  labels_en: lentils
+  labels_it: lenticchie
+  aliases:
+  - lenticchie secche
+  - lenticchie
+  definition: Dried lentils.
+  ontology_uri: http://dbpedia.org/resource/Lentil
+- id: ING-CARROT
+  labels_en: carrot
+  labels_it: carota
+  aliases:
+  - carota
+  - carote
+  definition: Carrot.
+  ontology_uri: http://dbpedia.org/resource/Carrot
+- id: ING-CELERY
+  labels_en: celery
+  labels_it: sedano
+  aliases:
+  - sedano
+  - costa sedano
+  definition: Celery stalk.
+  ontology_uri: http://dbpedia.org/resource/Celery
+- id: ING-ZUCCHINI
+  labels_en: zucchini
+  labels_it: zucchina
+  aliases:
+  - zucchine
+  - zucchina
+  definition: Zucchini/courgette.
+  ontology_uri: http://dbpedia.org/resource/Zucchini
+- id: ING-BLACK-PEPPER
+  labels_en: black pepper
+  labels_it: pepe nero
+  aliases:
+  - pepe nero
+  - pepe
+  definition: Black pepper.
+  ontology_uri: http://dbpedia.org/resource/Black_pepper
+- id: ING-MASCARPONE
+  labels_en: mascarpone
+  labels_it: mascarpone
+  aliases:
+  - mascarpone
+  definition: Italian cream cheese.
+  ontology_uri: http://dbpedia.org/resource/Mascarpone
+- id: ING-LADYFINGERS
+  labels_en: ladyfingers
+  labels_it: savoiardi
+  aliases:
+  - savoiardi
+  definition: Sponge finger biscuits.
+  ontology_uri: http://dbpedia.org/resource/Ladyfinger_(biscuit)
+- id: ING-ESPRESSO
+  labels_en: espresso coffee
+  labels_it: caffè espresso
+  aliases:
+  - caffè espresso
+  - caffè
+  definition: Espresso coffee.
+  ontology_uri: http://dbpedia.org/resource/Espresso
+- id: ING-COCOA-POWDER
+  labels_en: cocoa powder
+  labels_it: cacao amaro in polvere
+  aliases:
+  - cacao amaro in polvere
+  - cacao amaro
+  - cacao
+  definition: Unsweetened cocoa powder.
+  ontology_uri: http://dbpedia.org/resource/Cocoa_solids
+- id: ING-GROUND-BEEF
+  labels_en: ground beef
+  labels_it: carne macinata di manzo
+  aliases:
+  - carne macinata di manzo
+  - macinato di manzo
+  definition: Ground beef.
+  ontology_uri: http://dbpedia.org/resource/Ground_beef
+- id: ING-RED-WINE
+  labels_en: red wine
+  labels_it: vino rosso
+  aliases:
+  - vino rosso
+  definition: Red wine.
+  ontology_uri: http://dbpedia.org/resource/Red_wine
+- id: ING-MILK
+  labels_en: milk
+  labels_it: latte
+  aliases:
+  - latte
+  definition: Milk.
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001006
+- id: ING-HAZELNUT-SPREAD
+  labels_en: hazelnut spread
+  labels_it: crema spalmabile alle nocciole
+  aliases:
+  - crema spalmabile alle nocciole
+  - crema alle nocciole
+  definition: Sweet hazelnut spread.
+  ontology_uri: null
+- id: ING-GROUND-MEAT
+  labels_en: ground meat
+  labels_it: carne macinata mista
+  aliases:
+  - carne macinata mista
+  - macinato misto
+  definition: Mixed ground meat.
+  ontology_uri: http://dbpedia.org/resource/Ground_meat
+- id: ING-BREADCRUMBS
+  labels_en: breadcrumbs
+  labels_it: pangrattato
+  aliases:
+  - pangrattato
+  definition: Dried breadcrumbs.
+  ontology_uri: http://dbpedia.org/resource/Bread_crumbs
+- id: ING-PARSLEY
+  labels_en: parsley
+  labels_it: prezzemolo
+  aliases:
+  - prezzemolo
+  definition: Parsley herb.
+  ontology_uri: http://dbpedia.org/resource/Parsley
+- id: ING-TOMATO-PASSATA
+  labels_en: tomato passata
+  labels_it: passata di pomodoro
+  aliases:
+  - passata di pomodoro
+  - passata
+  definition: Strained tomato purée.
+  ontology_uri: http://dbpedia.org/resource/Tomato_pur%C3%A9e
+- id: ING-ASPARAGUS
+  labels_en: asparagus
+  labels_it: asparago
+  aliases:
+  - asparagi
+  - asparago
+  definition: Asparagus spears.
+  ontology_uri: http://dbpedia.org/resource/Asparagus
+- id: ING-GRANA
+  labels_en: Grana Padano
+  labels_it: grana grattugiato
+  aliases:
+  - grana grattugiato
+  - grana
+  definition: Grated Grana cheese.
+  ontology_uri: http://dbpedia.org/resource/Grana_Padano
+- id: ING-CLAMS
+  labels_en: clams
+  labels_it: vongole
+  aliases:
+  - vongole
+  - vongola
+  definition: Clams.
+  ontology_uri: http://dbpedia.org/resource/Clam
+- id: ING-FREGOLA
+  labels_en: fregola
+  labels_it: fregola
+  aliases:
+  - fregola
+  definition: Sardinian toasted semolina pasta.
+  ontology_uri: null
+- id: ING-TOMATO-SAUCE
+  labels_en: tomato sauce
+  labels_it: salsa di pomodoro
+  aliases:
+  - salsa di pomodoro
+  definition: Tomato sauce.
+  ontology_uri: http://dbpedia.org/resource/Tomato_sauce
+- id: ING-FISH-STOCK
+  labels_en: fish stock
+  labels_it: fumetto di pesce
+  aliases:
+  - fumetto di pesce
+  definition: Concentrated fish stock.
+  ontology_uri: http://dbpedia.org/resource/Fish_stock_(food)
+- id: ING-SHALLOT
+  labels_en: shallot
+  labels_it: scalogno
+  aliases:
+  - scalogno
+  - scalogni
+  definition: Shallot.
+  ontology_uri: http://dbpedia.org/resource/Shallot
+- id: ING-SWEET-ALMONDS
+  labels_en: sweet almonds
+  labels_it: mandorle dolci
+  aliases:
+  - mandorle dolci
+  definition: Sweet almonds.
+  ontology_uri: http://dbpedia.org/resource/Almond
+- id: ING-BITTER-ALMONDS
+  labels_en: bitter almonds
+  labels_it: mandorle amare
+  aliases:
+  - mandorle amare
+  definition: Bitter almonds.
+  ontology_uri: http://dbpedia.org/resource/Almond
+- id: ING-ICING-SUGAR
+  labels_en: icing sugar
+  labels_it: zucchero a velo
+  aliases:
+  - zucchero a velo
+  definition: Powdered/icing sugar.
+  ontology_uri: http://dbpedia.org/resource/Powdered_sugar
+- id: ING-EGG-WHITES
+  labels_en: egg whites
+  labels_it: albumi
+  aliases:
+  - albumi
+  - albume
+  definition: Egg whites.
+  ontology_uri: http://dbpedia.org/resource/Egg_white

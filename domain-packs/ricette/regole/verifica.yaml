@@ -1,0 +1,10 @@
+name: verifica
+version: 1.0.0
+l2:
+  metric: overlap_coefficient
+  thresholds:
+    title: 0.4
+    ingredients: 0.5
+    steps: 0.3
+l3:
+  statuses: [pending, approved, rejected]

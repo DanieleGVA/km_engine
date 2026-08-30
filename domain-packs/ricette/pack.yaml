@@ -3,7 +3,14 @@ language: it
 canonical_language: en
 version: 1.0.0
 ontologies:
-  - { prefix: foodon, uri: http://purl.obolibrary.org/obo/FOODON_ }
-  - { prefix: dbpedia, uri: http://dbpedia.org/resource/ }
+  - prefix: foodon
+    uri: http://purl.obolibrary.org/obo/FOODON_
+  - prefix: dbpedia
+    uri: http://dbpedia.org/resource/
 units_source: units.yaml
 glossaries: [tecnica, ingredienti, stati]
+paths:
+  template: template.md
+  glossaries: glossari
+  units: units.yaml
+  rules: regole
