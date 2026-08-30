@@ -1,0 +1,17 @@
+canonical_language: en
+glossaries:
+- tecnica
+- ingredienti
+- stati
+language: en
+name: code
+ontologies:
+- prefix: python
+  uri: https://docs.python.org/3/library/
+paths:
+  glossaries: glossari
+  rules: regole
+  template: template.md
+  units: units.yaml
+units_source: units.yaml
+version: 1.0.0

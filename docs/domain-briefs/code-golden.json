@@ -1,0 +1,1487 @@
+{
+  "corpus": "tests/fixtures/corpus_code",
+  "generated_by": "code_domain/agents.py",
+  "pairs": [
+    {
+      "document_id": "app/domain/__init__.py",
+      "kind": "module_file",
+      "query": "file __init__"
+    },
+    {
+      "document_id": "app/domain/__init__.py",
+      "kind": "module_name",
+      "query": "module __init__"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_name",
+      "query": "class CanonLogEntry in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_name",
+      "query": "class CanonLogVerificationError in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_name",
+      "query": "class CanonicalDocument in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_name",
+      "query": "class CanonicalizationError in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "module_file",
+      "query": "file canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _apply_unit_rule in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _build_term_map in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _fm_str in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _format_decimal in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _glossary_id_for_label in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _ingredient_line in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _known_units in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _render_canonical_md in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _strip_item_connectors in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function _unit_rule_for_token in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function canonicalize in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function generate_canon_log in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function verify_canon_log in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_name",
+      "query": "function write_canon_log in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "module_name",
+      "query": "module canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _apply_unit_rule defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _build_term_map defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _fm_str defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _format_decimal defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _glossary_id_for_label defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _ingredient_line defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _known_units defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _render_canonical_md defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _strip_item_connectors defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is _unit_rule_for_token defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is canonicalize defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is generate_canon_log defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is verify_canon_log defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "function_where",
+      "query": "where is write_canon_log defined in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_where",
+      "query": "which module contains CanonLogEntry in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_where",
+      "query": "which module contains CanonLogVerificationError in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_where",
+      "query": "which module contains CanonicalDocument in canonical"
+    },
+    {
+      "document_id": "app/domain/canonical.py",
+      "kind": "class_where",
+      "query": "which module contains CanonicalizationError in canonical"
+    },
+    {
+      "document_id": "app/domain/config.py",
+      "kind": "class_name",
+      "query": "class LLMSettings in config"
+    },
+    {
+      "document_id": "app/domain/config.py",
+      "kind": "module_file",
+      "query": "file config"
+    },
+    {
+      "document_id": "app/domain/config.py",
+      "kind": "function_name",
+      "query": "function get_llm_settings in config"
+    },
+    {
+      "document_id": "app/domain/config.py",
+      "kind": "module_name",
+      "query": "module config"
+    },
+    {
+      "document_id": "app/domain/config.py",
+      "kind": "function_where",
+      "query": "where is get_llm_settings defined in config"
+    },
+    {
+      "document_id": "app/domain/config.py",
+      "kind": "class_where",
+      "query": "which module contains LLMSettings in config"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "class_name",
+      "query": "class DeterministicEmbedding in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "class_name",
+      "query": "class EmbeddingService in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "class_name",
+      "query": "class HttpEmbeddingService in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "module_file",
+      "query": "file embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function __init__ in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function _idf in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function _stable_hash in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function _tokenize in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function _weight in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function embed in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function from_pack in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_name",
+      "query": "function from_texts in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "module_name",
+      "query": "module embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is __init__ defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is _idf defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is _stable_hash defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is _tokenize defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is _weight defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is embed defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is from_pack defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "function_where",
+      "query": "where is from_texts defined in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "class_where",
+      "query": "which module contains DeterministicEmbedding in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "class_where",
+      "query": "which module contains EmbeddingService in embedding"
+    },
+    {
+      "document_id": "app/domain/embedding.py",
+      "kind": "class_where",
+      "query": "which module contains HttpEmbeddingService in embedding"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class AdjudicationAlreadyResolvedError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class AdjudicationError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class AdjudicationNotFoundError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class DomainError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class DomainPackValidationError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class GlossaryProposalAlreadyResolvedError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class GlossaryProposalNotFoundError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class NumberInvariantError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class ParseError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class TranslationError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_name",
+      "query": "class VerificationError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "module_file",
+      "query": "file errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "module_name",
+      "query": "module errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains AdjudicationAlreadyResolvedError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains AdjudicationError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains AdjudicationNotFoundError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains DomainError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains DomainPackValidationError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains GlossaryProposalAlreadyResolvedError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains GlossaryProposalNotFoundError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains NumberInvariantError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains ParseError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains TranslationError in errors"
+    },
+    {
+      "document_id": "app/domain/errors.py",
+      "kind": "class_where",
+      "query": "which module contains VerificationError in errors"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "class_name",
+      "query": "class DocumentRecord in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "module_file",
+      "query": "file extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _canonical_hash in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _extract_step_facts in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _find_step_terms in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _glossary_index in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _now in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _pack_id in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _source_id in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _source_uri in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function _term_id in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_name",
+      "query": "function extract_document in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "module_name",
+      "query": "module extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _canonical_hash defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _extract_step_facts defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _find_step_terms defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _glossary_index defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _now defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _pack_id defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _source_id defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _source_uri defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is _term_id defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "function_where",
+      "query": "where is extract_document defined in extract"
+    },
+    {
+      "document_id": "app/domain/extract.py",
+      "kind": "class_where",
+      "query": "which module contains DocumentRecord in extract"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "class_name",
+      "query": "class FakeLLMClient in llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "class_name",
+      "query": "class HttpLLMClient in llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "class_name",
+      "query": "class LLMClient in llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "module_file",
+      "query": "file llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "function_name",
+      "query": "function translate in llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "module_name",
+      "query": "module llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "function_where",
+      "query": "where is translate defined in llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "class_where",
+      "query": "which module contains FakeLLMClient in llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "class_where",
+      "query": "which module contains HttpLLMClient in llm"
+    },
+    {
+      "document_id": "app/domain/llm.py",
+      "kind": "class_where",
+      "query": "which module contains LLMClient in llm"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "module_file",
+      "query": "file numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_name",
+      "query": "function _find_numbers in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_name",
+      "query": "function extract_numbers in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_name",
+      "query": "function mask_numbers in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_name",
+      "query": "function numbers_multiset_equal in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_name",
+      "query": "function reinject_numbers in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_name",
+      "query": "function strip_frontmatter in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "module_name",
+      "query": "module numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_where",
+      "query": "where is _find_numbers defined in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_where",
+      "query": "where is extract_numbers defined in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_where",
+      "query": "where is mask_numbers defined in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_where",
+      "query": "where is numbers_multiset_equal defined in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_where",
+      "query": "where is reinject_numbers defined in numbers"
+    },
+    {
+      "document_id": "app/domain/numbers.py",
+      "kind": "function_where",
+      "query": "where is strip_frontmatter defined in numbers"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class DomainPack in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class DomainPackBundle in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class Glossaries in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class Glossary in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class GlossaryEntry in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class OntologyRef in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class PackPaths in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_name",
+      "query": "class UnitRule in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "module_file",
+      "query": "file pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _check in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _glossary_entries in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _lang in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _load_glossaries in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _load_rules in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _name_non_empty in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _non_empty in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _positive in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _pydantic_errors in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _read_yaml in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _unique_across in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _unique_ids in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function _version in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function apply in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function canonical_language in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function format_quantity in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function glossary_entries in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function it_to_en_terms in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function known_units in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function language in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function load_domain_pack in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function to_dict in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function unit_rules_by_from in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_name",
+      "query": "function validate_pack in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "module_name",
+      "query": "module pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _check defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _glossary_entries defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _lang defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _load_glossaries defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _load_rules defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _name_non_empty defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _non_empty defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _positive defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _pydantic_errors defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _read_yaml defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _unique_across defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _unique_ids defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is _version defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is apply defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is canonical_language defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is format_quantity defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is glossary_entries defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is it_to_en_terms defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is known_units defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is language defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is load_domain_pack defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is to_dict defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is unit_rules_by_from defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "function_where",
+      "query": "where is validate_pack defined in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains DomainPack in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains DomainPackBundle in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains Glossaries in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains Glossary in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains GlossaryEntry in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains OntologyRef in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains PackPaths in pack"
+    },
+    {
+      "document_id": "app/domain/pack.py",
+      "kind": "class_where",
+      "query": "which module contains UnitRule in pack"
+    },
+    {
+      "document_id": "app/domain/recompose.py",
+      "kind": "module_file",
+      "query": "file recompose"
+    },
+    {
+      "document_id": "app/domain/recompose.py",
+      "kind": "function_name",
+      "query": "function recompose_document in recompose"
+    },
+    {
+      "document_id": "app/domain/recompose.py",
+      "kind": "module_name",
+      "query": "module recompose"
+    },
+    {
+      "document_id": "app/domain/recompose.py",
+      "kind": "function_where",
+      "query": "where is recompose_document defined in recompose"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "class_name",
+      "query": "class TranslatedDocument in translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "module_file",
+      "query": "file translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "function_name",
+      "query": "function build_translation_input in translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "function_name",
+      "query": "function render_translated_document in translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "function_name",
+      "query": "function translate_document in translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "module_name",
+      "query": "module translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "function_where",
+      "query": "where is build_translation_input defined in translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "function_where",
+      "query": "where is render_translated_document defined in translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "function_where",
+      "query": "where is translate_document defined in translate"
+    },
+    {
+      "document_id": "app/domain/translate.py",
+      "kind": "class_where",
+      "query": "which module contains TranslatedDocument in translate"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_name",
+      "query": "class IngredientLine in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_name",
+      "query": "class L1Report in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_name",
+      "query": "class L2Report in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_name",
+      "query": "class ParsedDoc in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_name",
+      "query": "class SectionComparison in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_name",
+      "query": "class VerificationIssue in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "module_file",
+      "query": "file verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _as_uuid in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _check_frontmatter_l1 in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _default_l2_thresholds in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _get_adjudication_row in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _get_proposal_row in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _overlap in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _parse_document in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _parse_ingredient in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _parse_sections in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _row_to_adjudication in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _row_to_proposal in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _section_texts in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _section_tokens in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _split_frontmatter in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _tokens in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function _validate_frontmatter in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function create_adjudication in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function create_glossary_proposal in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function decide_adjudication in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function decide_glossary_proposal in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function get_adjudication in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function list_adjudications in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function list_glossary_proposals in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function normalize_terms in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function parse_source_md in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function parse_translated_body in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function parse_translated_md in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function update_document_verification_level in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function verify_l1 in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_name",
+      "query": "function verify_l2 in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "module_name",
+      "query": "module verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _as_uuid defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _check_frontmatter_l1 defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _default_l2_thresholds defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _get_adjudication_row defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _get_proposal_row defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _overlap defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _parse_document defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _parse_ingredient defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _parse_sections defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _row_to_adjudication defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _row_to_proposal defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _section_texts defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _section_tokens defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _split_frontmatter defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _tokens defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is _validate_frontmatter defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is create_adjudication defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is create_glossary_proposal defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is decide_adjudication defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is decide_glossary_proposal defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is get_adjudication defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is list_adjudications defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is list_glossary_proposals defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is normalize_terms defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is parse_source_md defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is parse_translated_body defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is parse_translated_md defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is update_document_verification_level defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is verify_l1 defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "function_where",
+      "query": "where is verify_l2 defined in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_where",
+      "query": "which module contains IngredientLine in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_where",
+      "query": "which module contains L1Report in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_where",
+      "query": "which module contains L2Report in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_where",
+      "query": "which module contains ParsedDoc in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_where",
+      "query": "which module contains SectionComparison in verify"
+    },
+    {
+      "document_id": "app/domain/verify.py",
+      "kind": "class_where",
+      "query": "which module contains VerificationIssue in verify"
+    }
+  ],
+  "version": "1.0"
+}

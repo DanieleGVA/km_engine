@@ -1,0 +1,3576 @@
+{
+  "gate": true,
+  "metrics": {
+    "classes": 38,
+    "dependencies": 27,
+    "embeddings_populated": 12,
+    "functions": 110,
+    "gate": true,
+    "gate_recall_at_5": 0.85,
+    "golden_queries": 296,
+    "hits_at_5": 296,
+    "modules": 12,
+    "recall_at_5": 1.0,
+    "relations": 212
+  },
+  "recall": {
+    "hits_at_5": 296,
+    "recall_at_5": 1.0,
+    "results": [
+      {
+        "expected": "app/domain/__init__.py",
+        "hit": true,
+        "query": "file __init__",
+        "returned": [
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/llm.py"
+        ]
+      },
+      {
+        "expected": "app/domain/__init__.py",
+        "hit": true,
+        "query": "module __init__",
+        "returned": [
+          "app/domain/__init__.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/llm.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "class CanonLogEntry in canonical",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "class CanonLogVerificationError in canonical",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "class CanonicalDocument in canonical",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "class CanonicalizationError in canonical",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/errors.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "file canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _apply_unit_rule in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _build_term_map in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _fm_str in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _format_decimal in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _glossary_id_for_label in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/config.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _ingredient_line in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _known_units in canonical",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _render_canonical_md in canonical",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _strip_item_connectors in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/errors.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function _unit_rule_for_token in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/config.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function canonicalize in canonical",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/canonical.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function generate_canon_log in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function verify_canon_log in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "function write_canon_log in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "module canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _apply_unit_rule defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/pack.py",
+          "app/domain/errors.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _build_term_map defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _fm_str defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py",
+          "app/domain/recompose.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _format_decimal defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _glossary_id_for_label defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/config.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _ingredient_line defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _known_units defined in canonical",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/errors.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _render_canonical_md defined in canonical",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/errors.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _strip_item_connectors defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/errors.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is _unit_rule_for_token defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/pack.py",
+          "app/domain/config.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is canonicalize defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is generate_canon_log defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is verify_canon_log defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "where is write_canon_log defined in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "which module contains CanonLogEntry in canonical",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "which module contains CanonLogVerificationError in canonical",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "which module contains CanonicalDocument in canonical",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/canonical.py",
+        "hit": true,
+        "query": "which module contains CanonicalizationError in canonical",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/config.py",
+        "hit": true,
+        "query": "class LLMSettings in config",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/llm.py",
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/config.py",
+        "hit": true,
+        "query": "file config",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/llm.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/config.py",
+        "hit": true,
+        "query": "function get_llm_settings in config",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/llm.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/config.py",
+        "hit": true,
+        "query": "module config",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/embedding.py",
+          "app/domain/llm.py",
+          "app/domain/__init__.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/config.py",
+        "hit": true,
+        "query": "where is get_llm_settings defined in config",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/llm.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/config.py",
+        "hit": true,
+        "query": "which module contains LLMSettings in config",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/llm.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "class DeterministicEmbedding in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "class EmbeddingService in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/llm.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "class HttpEmbeddingService in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "file embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function __init__ in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function _idf in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/errors.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function _stable_hash in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/config.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function _tokenize in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function _weight in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/recompose.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function embed in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function from_pack in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py",
+          "app/domain/errors.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "function from_texts in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/__init__.py",
+          "app/domain/llm.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "module embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/recompose.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is __init__ defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/verify.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is _idf defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is _stable_hash defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is _tokenize defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is _weight defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is embed defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is from_pack defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/pack.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "where is from_texts defined in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/llm.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "which module contains DeterministicEmbedding in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "which module contains EmbeddingService in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/embedding.py",
+        "hit": true,
+        "query": "which module contains HttpEmbeddingService in embedding",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class AdjudicationAlreadyResolvedError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/pack.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class AdjudicationError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class AdjudicationNotFoundError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/translate.py",
+          "app/domain/pack.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class DomainError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/verify.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class DomainPackValidationError in errors",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class GlossaryProposalAlreadyResolvedError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class GlossaryProposalNotFoundError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class NumberInvariantError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class ParseError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class TranslationError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "class VerificationError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/llm.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "file errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "module errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains AdjudicationAlreadyResolvedError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains AdjudicationError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains AdjudicationNotFoundError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains DomainError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains DomainPackValidationError in errors",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains GlossaryProposalAlreadyResolvedError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains GlossaryProposalNotFoundError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains NumberInvariantError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains ParseError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains TranslationError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/errors.py",
+        "hit": true,
+        "query": "which module contains VerificationError in errors",
+        "returned": [
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/llm.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "class DocumentRecord in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "file extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/llm.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _canonical_hash in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/errors.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _extract_step_facts in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/errors.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _find_step_terms in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/translate.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _glossary_index in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _now in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _pack_id in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _source_id in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _source_uri in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/errors.py",
+          "app/domain/numbers.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function _term_id in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "function extract_document in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "module extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _canonical_hash defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/pack.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _extract_step_facts defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _find_step_terms defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/verify.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _glossary_index defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/numbers.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _now defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _pack_id defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _source_id defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _source_uri defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/errors.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is _term_id defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "where is extract_document defined in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/extract.py",
+        "hit": true,
+        "query": "which module contains DocumentRecord in extract",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "class FakeLLMClient in llm",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/llm.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "class HttpLLMClient in llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/config.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "class LLMClient in llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/config.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "file llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/config.py",
+          "app/domain/__init__.py",
+          "app/domain/verify.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "function translate in llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/config.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "module llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/config.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "where is translate defined in llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/verify.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "which module contains FakeLLMClient in llm",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/llm.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "which module contains HttpLLMClient in llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/config.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/llm.py",
+        "hit": true,
+        "query": "which module contains LLMClient in llm",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/config.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "file numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "function _find_numbers in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "function extract_numbers in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "function mask_numbers in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/config.py",
+          "app/domain/verify.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "function numbers_multiset_equal in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "function reinject_numbers in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "function strip_frontmatter in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "module numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/verify.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "where is _find_numbers defined in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "where is extract_numbers defined in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "where is mask_numbers defined in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/config.py",
+          "app/domain/verify.py",
+          "app/domain/recompose.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "where is numbers_multiset_equal defined in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "where is reinject_numbers defined in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/recompose.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/numbers.py",
+        "hit": true,
+        "query": "where is strip_frontmatter defined in numbers",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class DomainPack in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class DomainPackBundle in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/verify.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class Glossaries in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class Glossary in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/extract.py",
+          "app/domain/llm.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class GlossaryEntry in pack",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class OntologyRef in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class PackPaths in pack",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "class UnitRule in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "file pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _check in pack",
+        "returned": [
+          "app/domain/config.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _glossary_entries in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/verify.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _lang in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/llm.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _load_glossaries in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/llm.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _load_rules in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/config.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _name_non_empty in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _non_empty in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _positive in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _pydantic_errors in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _read_yaml in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _unique_across in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _unique_ids in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function _version in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function apply in pack",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function canonical_language in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/errors.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function format_quantity in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function glossary_entries in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/verify.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function it_to_en_terms in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/verify.py",
+          "app/domain/extract.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function known_units in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function language in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function load_domain_pack in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function to_dict in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/verify.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function unit_rules_by_from in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "function validate_pack in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "module pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/config.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _check defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _glossary_entries defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _lang defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/config.py",
+          "app/domain/llm.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _load_glossaries defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/llm.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _load_rules defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _name_non_empty defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _non_empty defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _positive defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _pydantic_errors defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _read_yaml defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/verify.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _unique_across defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _unique_ids defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is _version defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is apply defined in pack",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/pack.py",
+          "app/domain/config.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is canonical_language defined in pack",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is format_quantity defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is glossary_entries defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is it_to_en_terms defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/verify.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is known_units defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is language defined in pack",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is load_domain_pack defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is to_dict defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is unit_rules_by_from defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "where is validate_pack defined in pack",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains DomainPack in pack",
+        "returned": [
+          "app/domain/extract.py",
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains DomainPackBundle in pack",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains Glossaries in pack",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains Glossary in pack",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains GlossaryEntry in pack",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains OntologyRef in pack",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains PackPaths in pack",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/pack.py",
+        "hit": true,
+        "query": "which module contains UnitRule in pack",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/recompose.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/recompose.py",
+        "hit": true,
+        "query": "file recompose",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/recompose.py",
+        "hit": true,
+        "query": "function recompose_document in recompose",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py"
+        ]
+      },
+      {
+        "expected": "app/domain/recompose.py",
+        "hit": true,
+        "query": "module recompose",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/__init__.py",
+          "app/domain/llm.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/recompose.py",
+        "hit": true,
+        "query": "where is recompose_document defined in recompose",
+        "returned": [
+          "app/domain/recompose.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/verify.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "class TranslatedDocument in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/llm.py",
+          "app/domain/__init__.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "file translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/llm.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "function build_translation_input in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "function render_translated_document in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "function translate_document in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py",
+          "app/domain/embedding.py",
+          "app/domain/llm.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "module translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/llm.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "where is build_translation_input defined in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/verify.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "where is render_translated_document defined in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "where is translate_document defined in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/recompose.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/translate.py",
+        "hit": true,
+        "query": "which module contains TranslatedDocument in translate",
+        "returned": [
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/llm.py",
+          "app/domain/errors.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "class IngredientLine in verify",
+        "returned": [
+          "app/domain/llm.py",
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "class L1Report in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "class L2Report in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "class ParsedDoc in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/config.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "class SectionComparison in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "class VerificationIssue in verify",
+        "returned": [
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "file verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _as_uuid in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _check_frontmatter_l1 in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/translate.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _default_l2_thresholds in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _get_adjudication_row in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/config.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _get_proposal_row in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/config.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _overlap in verify",
+        "returned": [
+          "app/domain/embedding.py",
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _parse_document in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _parse_ingredient in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _parse_sections in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _row_to_adjudication in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py",
+          "app/domain/llm.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _row_to_proposal in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/llm.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _section_texts in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/errors.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _section_tokens in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _split_frontmatter in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _tokens in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function _validate_frontmatter in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function create_adjudication in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function create_glossary_proposal in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function decide_adjudication in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/errors.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function decide_glossary_proposal in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function get_adjudication in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/config.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function list_adjudications in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/translate.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function list_glossary_proposals in verify",
+        "returned": [
+          "app/domain/pack.py",
+          "app/domain/verify.py",
+          "app/domain/extract.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function normalize_terms in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/__init__.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/llm.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function parse_source_md in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function parse_translated_body in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/errors.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function parse_translated_md in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function update_document_verification_level in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function verify_l1 in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "function verify_l2 in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/embedding.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "module verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _as_uuid defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _check_frontmatter_l1 defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _default_l2_thresholds defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/numbers.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _get_adjudication_row defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/numbers.py",
+          "app/domain/canonical.py",
+          "app/domain/config.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _get_proposal_row defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/config.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _overlap defined in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _parse_document defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _parse_ingredient defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _parse_sections defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _row_to_adjudication defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/llm.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _row_to_proposal defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/llm.py",
+          "app/domain/pack.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _section_texts defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _section_tokens defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _split_frontmatter defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/embedding.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _tokens defined in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is _validate_frontmatter defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is create_adjudication defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/extract.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is create_glossary_proposal defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is decide_adjudication defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is decide_glossary_proposal defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is get_adjudication defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/pack.py",
+          "app/domain/config.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is list_adjudications defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/translate.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is list_glossary_proposals defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/extract.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is normalize_terms defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/extract.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is parse_source_md defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/pack.py",
+          "app/domain/extract.py",
+          "app/domain/recompose.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is parse_translated_body defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/errors.py",
+          "app/domain/__init__.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is parse_translated_md defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/pack.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is update_document_verification_level defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/pack.py",
+          "app/domain/canonical.py",
+          "app/domain/__init__.py",
+          "app/domain/translate.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is verify_l1 defined in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/pack.py",
+          "app/domain/embedding.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "where is verify_l2 defined in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/numbers.py",
+          "app/domain/translate.py",
+          "app/domain/pack.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "which module contains IngredientLine in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "which module contains L1Report in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/errors.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "which module contains L2Report in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "which module contains ParsedDoc in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/verify.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "which module contains SectionComparison in verify",
+        "returned": [
+          "app/domain/verify.py",
+          "app/domain/canonical.py",
+          "app/domain/embedding.py",
+          "app/domain/__init__.py",
+          "app/domain/numbers.py"
+        ]
+      },
+      {
+        "expected": "app/domain/verify.py",
+        "hit": true,
+        "query": "which module contains VerificationIssue in verify",
+        "returned": [
+          "app/domain/canonical.py",
+          "app/domain/numbers.py",
+          "app/domain/verify.py",
+          "app/domain/errors.py",
+          "app/domain/translate.py"
+        ]
+      }
+    ],
+    "total": 296
+  },
+  "version": "1.0"
+}

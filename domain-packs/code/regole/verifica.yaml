@@ -1,0 +1,4 @@
+name: verifica
+version: 1.0.0
+levels: [L1]
+note: Code domain verification is structural round-trip only.

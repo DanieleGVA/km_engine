@@ -1,0 +1,11 @@
+entries:
+- aliases:
+  - file
+  - source file
+  - package
+  definition: A source file that groups functions and classes.
+  id: CODE-MODULE
+  labels_en: module
+  labels_it: module
+  ontology_uri: null
+name: ingredienti

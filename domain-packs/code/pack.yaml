@@ -1,0 +1,12 @@
+name: code
+language: en
+canonical_language: en
+version: 1.0.0
+ontologies: []
+units_source: units.yaml
+glossaries: [tecnica, ingredienti, stati]
+paths:
+  template: template.md
+  glossaries: glossari
+  units: units.yaml
+  rules: regole

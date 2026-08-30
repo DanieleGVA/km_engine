@@ -1,0 +1,8 @@
+name: ingredienti
+entries:
+  - id: CODE-MODULE
+    labels_en: module
+    labels_it: module
+    aliases: [file, source file, package]
+    definition: A source file that groups functions and classes.
+    ontology_uri: null

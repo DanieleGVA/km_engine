@@ -6,6 +6,7 @@ are shared, idempotent bootstrap data, exactly like the Iteration-A tests.
 """
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import pytest
@@ -106,3 +107,223 @@ async def pilot_brief():
     llm = build_fake_llm(pack, corpus)
     translated = await translate_corpus(pack, corpus, llm)
     return analyze_corpus(corpus, translated)
+
+
+# ---------------------------------------------------------------------------
+# WP-C5/C6 — Curator + Documenter fixtures (ic5_ prefix)
+# ---------------------------------------------------------------------------
+
+IC5_PREFIX = "ic5_"
+IC5_TEST_PASSWORD = "ic5-test-password-123"
+
+TEST_PG_DSN = os.environ.get(
+    "KM_TEST_PG_DSN",
+    os.environ.get(
+        "KM_PG_DSN", "postgresql://km:km_dev_password@localhost:5432/km_engine"
+    ),
+)
+
+
+def cleanup_ic5_postgres(conn) -> None:
+    """Delete only the rows created by Curator/Documenter tests (ic5_ prefix)."""
+    with conn.transaction():
+        conn.execute(
+            "DELETE FROM canon_log WHERE document_id LIKE %s", (f"{IC5_PREFIX}%",)
+        )
+        conn.execute(
+            "DELETE FROM glossary_proposals WHERE term LIKE %s OR context LIKE %s",
+            (f"{IC5_PREFIX}%", f"{IC5_PREFIX}%"),
+        )
+        conn.execute(
+            "DELETE FROM adjudications WHERE document_id LIKE %s", (f"{IC5_PREFIX}%",)
+        )
+        conn.execute(
+            "DELETE FROM conflicts WHERE entity_id LIKE %s", (f"{IC5_PREFIX}%",)
+        )
+        user_ids = [
+            row[0]
+            for row in conn.execute(
+                "SELECT id FROM users WHERE username LIKE %s", (f"{IC5_PREFIX}%",)
+            ).fetchall()
+        ]
+        if user_ids:
+            conn.execute(
+                "DELETE FROM audit_log WHERE user_id = ANY(%s) OR entity_id = ANY(%s)",
+                (user_ids, [str(i) for i in user_ids]),
+            )
+            conn.execute("DELETE FROM users WHERE id = ANY(%s)", (user_ids,))
+        conn.execute("DELETE FROM teams WHERE name LIKE %s", (f"{IC5_PREFIX}%",))
+
+
+@pytest.fixture()
+def ic5_pg_conn():
+    import psycopg
+
+    conn = psycopg.connect(TEST_PG_DSN, autocommit=True)
+    cleanup_ic5_postgres(conn)
+    try:
+        yield conn
+    finally:
+        cleanup_ic5_postgres(conn)
+        conn.close()
+
+
+@pytest.fixture()
+def ic5_user(ic5_pg_conn):
+    from app.auth.users import create_user
+
+    return create_user(
+        ic5_pg_conn,
+        f"{IC5_PREFIX}resolver",
+        f"{IC5_PREFIX}resolver@example.test",
+        IC5_TEST_PASSWORD,
+        roles=("admin",),
+    )
+
+
+def injected_modifier_corpus() -> dict[str, str]:
+    """A small corpus with five modifier ambiguities injected.
+
+    Each ingredient contains a base glossary term plus a non-alias modifier
+    (``sbucciate``, ``a cubetti``, ``aromatizzato``, ``tritato``, ``fresco``).
+    """
+    return {
+        "ic5-ric-001.md": """---
+title: Mandorle dolci sbucciate
+id: ic5_RIC_001
+lang: it
+servings: 2
+time_min: 10
+difficulty: facile
+---
+## Ingredienti
+- 100 g mandorle dolci sbucciate
+- 1 pizzico sale
+## Procedimento
+1. Tostare le mandorle.
+""",
+        "ic5-ric-002.md": """---
+title: Pomodori a cubetti
+id: ic5_RIC_002
+lang: it
+servings: 2
+time_min: 15
+difficulty: facile
+---
+## Ingredienti
+- 200 g pomodori pelati a cubetti
+- 1 cucchiaio olio extravergine di oliva
+## Procedimento
+1. Rosolare i pomodori.
+""",
+        "ic5-ric-003.md": """---
+title: Olio aromatizzato
+id: ic5_RIC_003
+lang: it
+servings: 1
+time_min: 5
+difficulty: facile
+---
+## Ingredienti
+- 50 ml olio extravergine di oliva aromatizzato
+- 1 spicchio aglio
+## Procedimento
+1. Scaldare l'olio.
+""",
+        "ic5-ric-004.md": """---
+title: Aglio tritato
+id: ic5_RIC_004
+lang: it
+servings: 1
+time_min: 5
+difficulty: facile
+---
+## Ingredienti
+- 1 spicchio aglio tritato
+- 1 pizzico sale
+## Procedimento
+1. Soffriggere l'aglio.
+""",
+        "ic5-ric-005.md": """---
+title: Basilico fresco
+id: ic5_RIC_005
+lang: it
+servings: 1
+time_min: 5
+difficulty: facile
+---
+## Ingredienti
+- 5 foglie basilico fresco
+- 1 pizzico sale
+## Procedimento
+1. Aggiungere il basilico.
+""",
+        "ic5-ric-006.md": """---
+title: Riso semplice
+id: ic5_RIC_006
+lang: it
+servings: 2
+time_min: 20
+difficulty: facile
+---
+## Ingredienti
+- 200 g riso carnaroli
+- 1 pizzico sale
+## Procedimento
+1. Cuocere il riso.
+""",
+        "ic5-ric-007.md": """---
+title: Spaghetti aglio e olio
+id: ic5_RIC_007
+lang: it
+servings: 2
+time_min: 15
+difficulty: facile
+---
+## Ingredienti
+- 200 g spaghetti
+- 2 cucchiai olio extravergine di oliva
+- 1 spicchio aglio
+## Procedimento
+1. Cuocere gli spaghetti.
+""",
+    }
+
+
+def cleanup_ic5_neo4j(client: Neo4jClient) -> None:
+    """Delete ic5_ graph data and restore the committed pack bootstrap."""
+    from scripts.load_domain_pack import load_pack
+
+    manual_ids = _manual_term_ids()
+    with client.session() as session:
+        session.run(
+            """
+            MATCH (n)
+            WHERE (n:Document OR n:Entity OR n:Fact OR n:Source OR n:Version)
+              AND n.id STARTS WITH $prefix
+            DETACH DELETE n
+            """,
+            prefix=IC5_PREFIX,
+        )
+        session.run(
+            """
+            MATCH (t:CanonicalTerm)
+            WHERE t.namespace IN ['tecnica', 'ingredienti', 'stati']
+              AND NOT t.id IN $manual_ids
+            DETACH DELETE t
+            """,
+            manual_ids=list(manual_ids),
+        )
+    load_pack(client, PACK_DIR)
+
+
+@pytest.fixture()
+def ic5_client() -> Neo4jClient:
+    client = Neo4jClient.from_env()
+    client.verify_connectivity()
+    cleanup_ic5_neo4j(client)
+    try:
+        yield client
+    finally:
+        cleanup_ic5_neo4j(client)
+        client.close()

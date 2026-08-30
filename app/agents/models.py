@@ -203,3 +203,183 @@ class AgentReport(BaseModel):
         if value not in {"ok", "failed"}:
             raise ValueError(f"status must be 'ok' or 'failed', got {value!r}")
         return value
+
+
+VALID_ISSUE_KINDS = {
+    "ambiguous_fact",
+    "pending_conflict",
+    "untranslated",
+    "glossary_proposal",
+    "brief_ambiguity",
+}
+
+VALID_PROPOSAL_KINDS = {"add_alias", "add_entry"}
+VALID_PROPOSAL_STATUSES = {"pending", "approved", "rejected"}
+VALID_GLOSSARY_NAMES = {"tecnica", "ingredienti", "stati"}
+
+
+class CuratorIssue(BaseModel):
+    """One mined improvement signal for the Curator loop (WP-C5).
+
+    ``kind`` identifies the source queue: an AMBIGUOUS Fact in Neo4j, a pending
+    Postgres conflict, an untranslated Document flag, a pending glossary
+    proposal, or a modifier ambiguity reported by the Domain Brief.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    issue_id: str
+    kind: str
+    term: str
+    context: str | None = None
+    document_id: str | None = None
+    source_id: str | None = None
+    candidates: list[str] = Field(default_factory=list)
+    note: str = ""
+    status: str = "pending"
+
+    @field_validator("issue_id", "term")
+    @classmethod
+    def _non_empty(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("must not be empty")
+        return value
+
+    @field_validator("kind")
+    @classmethod
+    def _kind_valid(cls, value: str) -> str:
+        value = value.strip().lower()
+        if value not in VALID_ISSUE_KINDS:
+            raise ValueError(
+                f"kind must be one of {sorted(VALID_ISSUE_KINDS)}, got {value!r}"
+            )
+        return value
+
+    @field_validator("status")
+    @classmethod
+    def _status_valid(cls, value: str) -> str:
+        value = value.strip().lower()
+        if value not in VALID_PROPOSAL_STATUSES:
+            raise ValueError(
+                f"status must be one of {sorted(VALID_PROPOSAL_STATUSES)}, got {value!r}"
+            )
+        return value
+
+
+class Proposal(BaseModel):
+    """A Curator extension proposal (WP-C5).
+
+    A proposal is **never** applied by ``propose_extension``: it only carries
+    the intended glossary change. ``apply_approved`` is the only writer and it
+    refuses every proposal whose status is not ``approved`` (and whose backing
+    Postgres row, when present, is not ``approved``).
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    proposal_id: str
+    issue_id: str
+    kind: str
+    term: str
+    target_glossary: str
+    entry_id: str
+    labels_en: str
+    labels_it: str
+    aliases: list[str] = Field(default_factory=list)
+    definition: str = ""
+    ontology_uri: str | None = None
+    status: str = "pending"
+    source_type: str | None = None
+    source_proposal_id: int | None = None
+    affected_documents: list[str] = Field(default_factory=list)
+    translated_documents: dict[str, str] = Field(default_factory=dict)
+    note: str = ""
+
+    @field_validator(
+        "proposal_id", "issue_id", "term", "target_glossary", "entry_id",
+        "labels_en", "labels_it",
+    )
+    @classmethod
+    def _non_empty(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("must not be empty")
+        return value
+
+    @field_validator("kind")
+    @classmethod
+    def _kind_valid(cls, value: str) -> str:
+        value = value.strip().lower()
+        if value not in VALID_PROPOSAL_KINDS:
+            raise ValueError(
+                f"kind must be one of {sorted(VALID_PROPOSAL_KINDS)}, got {value!r}"
+            )
+        return value
+
+    @field_validator("status")
+    @classmethod
+    def _status_valid(cls, value: str) -> str:
+        value = value.strip().lower()
+        if value not in VALID_PROPOSAL_STATUSES:
+            raise ValueError(
+                f"status must be one of {sorted(VALID_PROPOSAL_STATUSES)}, got {value!r}"
+            )
+        return value
+
+    @field_validator("target_glossary")
+    @classmethod
+    def _glossary_valid(cls, value: str) -> str:
+        value = value.strip().lower()
+        if value not in VALID_GLOSSARY_NAMES:
+            raise ValueError(
+                f"target_glossary must be one of {sorted(VALID_GLOSSARY_NAMES)}, got {value!r}"
+            )
+        return value
+
+
+class DecisionRecord(BaseModel):
+    """One adjudicated mapping decision (WP-C6)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    record_id: str
+    document_id: str
+    field: str
+    before_text: str
+    after_text: str
+    rule_id: str
+    resolved_by: str | None = None
+    resolved_at: str | None = None
+    reason: str = ""
+    created_at: str = ""
+
+    @field_validator("record_id", "document_id", "field", "rule_id")
+    @classmethod
+    def _non_empty(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("must not be empty")
+        return value
+
+
+class ApplyResult(BaseModel):
+    """Outcome of one ``apply_approved`` call (WP-C5)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    proposal_id: str
+    applied: bool
+    changed_documents: list[str] = Field(default_factory=list)
+    unchanged_documents: list[str] = Field(default_factory=list)
+    fact_versions_created: int = 0
+    facts_invalidated: int = 0
+    note: str = ""
+
+    @field_validator("proposal_id")
+    @classmethod
+    def _non_empty(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("must not be empty")
+        return value

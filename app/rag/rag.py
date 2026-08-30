@@ -19,6 +19,7 @@ Retrieval contract:
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -38,6 +39,7 @@ VECTOR_INDEX = "document_embedding_vector"
 PACK_DIR = Path(__file__).resolve().parents[2] / "domain-packs" / "ricette"
 
 LANG_BOOST = 0.10
+TITLE_BOOST = 0.15
 VERIFICATION_BOOST = {"L1": 0.0, "L2": 0.05, "L3": 0.10}
 # Candidate heuristic (WP-B5, documented): the vector index returns
 # ``max(limit * _CANDIDATE_FACTOR, _CANDIDATE_FLOOR)`` candidates so the
@@ -298,6 +300,28 @@ def _verification_boost(props: dict[str, Any]) -> float:
     return VERIFICATION_BOOST.get(props.get("verification_level", "L1"), 0.0)
 
 
+def _title_boost(props: dict[str, Any], query: str) -> float:
+    """Hybrid full-text boost: overlap tra i token della query e il titolo
+    (canonico EN o sorgente IT). Deterministico e spiegabile; rende il
+    retrieval ibrido (vettoriale + titolo) come da roadmap WP-B1.
+    """
+    if not query:
+        return 0.0
+    q_tokens = set(re.findall(r"[a-z0-9]+", query.casefold()))
+    if not q_tokens:
+        return 0.0
+    title = " ".join(
+        str(props.get(k) or "") for k in ("title", "source_title")
+    ).casefold()
+    t_tokens = set(re.findall(r"[a-z0-9]+", title))
+    if not t_tokens:
+        return 0.0
+    overlap = len(q_tokens & t_tokens)
+    if overlap == 0:
+        return 0.0
+    return TITLE_BOOST * (overlap / len(q_tokens))
+
+
 
 def _document_context(client: Neo4jClient, doc_id: str) -> dict[str, Any]:
     """Graph expansion for one document (entities, terms, provenance).
@@ -355,6 +379,7 @@ def _match_reason(
     cosine: float,
     lang_boost: float,
     verification_boost: float,
+    title_boost: float,
     final: float,
     context: dict[str, Any],
 ) -> str:
@@ -363,8 +388,8 @@ def _match_reason(
     )
     return (
         f"cosine={cosine:.4f} boost_lang={lang_boost:.2f} "
-        f"boost_verification={verification_boost:.2f} final={final:.4f} "
-        f"terms={term_labels or '-'}"
+        f"boost_verification={verification_boost:.2f} boost_title={title_boost:.2f} "
+        f"final={final:.4f} terms={term_labels or '-'}"
     )
 
 
@@ -415,16 +440,22 @@ def rag_query(
             cosine = float(record["score"])
             lang_boost = _lang_boost(props, lang)
             verification_boost = _verification_boost(props)
-            final = cosine * (1.0 + lang_boost) * (1.0 + verification_boost)
+            title_boost = _title_boost(props, query)
+            final = (
+                cosine
+                * (1.0 + lang_boost)
+                * (1.0 + verification_boost)
+                * (1.0 + title_boost)
+            )
             candidates.append(
-                (props, cosine, lang_boost, verification_boost, final)
+                (props, cosine, lang_boost, verification_boost, title_boost, final)
             )
 
     # Deterministic tie-break: higher score first, then document id ascending.
-    candidates.sort(key=lambda item: (-item[4], item[0].get("id", "")))
+    candidates.sort(key=lambda item: (-item[5], item[0].get("id", "")))
 
     hits: list[RagHit] = []
-    for props, cosine, lang_boost, verification_boost, final in candidates[:limit]:
+    for props, cosine, lang_boost, verification_boost, title_boost, final in candidates[:limit]:
         doc_id = props["id"]
         # L'indice vettoriale puo' contenere entry stantie (nodi eliminati da
         # run/ingest precedenti, lag di indicizzazione): in quel caso il nodo
@@ -443,7 +474,7 @@ def rag_query(
                 score=round(final, 6),
                 cosine=round(cosine, 6),
                 match_reason=_match_reason(
-                    cosine, lang_boost, verification_boost, final, context
+                    cosine, lang_boost, verification_boost, title_boost, final, context
                 ),
                 canonical_md=canonical_md,
                 canonical_hash=props.get("canonical_hash", ""),

@@ -1,0 +1,154 @@
+{
+  "ambiguities": [],
+  "canonical_language": "en",
+  "corpus_size": 12,
+  "domain": "code",
+  "entities": [
+    {
+      "contexts": [
+        "module observed in the code corpus"
+      ],
+      "frequency": 12,
+      "kind": "ingredient",
+      "source_terms": [
+        "file",
+        "source file",
+        "package"
+      ],
+      "term": "module"
+    },
+    {
+      "contexts": [
+        "function observed in the code corpus"
+      ],
+      "frequency": 110,
+      "kind": "technique",
+      "source_terms": [
+        "def",
+        "method",
+        "callable",
+        "routine"
+      ],
+      "term": "function"
+    },
+    {
+      "contexts": [
+        "class observed in the code corpus"
+      ],
+      "frequency": 38,
+      "kind": "technique",
+      "source_terms": [
+        "type",
+        "object",
+        "dataclass"
+      ],
+      "term": "class"
+    },
+    {
+      "contexts": [
+        "dependency observed in the code corpus"
+      ],
+      "frequency": 27,
+      "kind": "state",
+      "source_terms": [
+        "import",
+        "call",
+        "relation",
+        "depends on"
+      ],
+      "term": "dependency"
+    }
+  ],
+  "generated_at": "2026-08-30T20:04:30.293240+00:00",
+  "language": "en",
+  "ontologies": [
+    {
+      "note": "Python language reference (P7: standard before proprietary)",
+      "prefix": "python",
+      "uri": "https://docs.python.org/3/library/"
+    }
+  ],
+  "schema_version": "1.0",
+  "stats": {
+    "ambiguities": 0,
+    "classes": 38,
+    "dependencies": 27,
+    "functions": 110,
+    "source_modules": 12,
+    "symbols": 148,
+    "unit_types": 0
+  },
+  "units": [],
+  "version": "1.0.0",
+  "vocabularies": [
+    {
+      "entries": [
+        {
+          "contexts": [
+            "module observed in the code corpus"
+          ],
+          "frequency": 12,
+          "kind": "ingredient",
+          "source_terms": [
+            "file",
+            "source file",
+            "package"
+          ],
+          "term": "module"
+        }
+      ],
+      "name": "ingredienti"
+    },
+    {
+      "entries": [
+        {
+          "contexts": [
+            "function observed in the code corpus"
+          ],
+          "frequency": 110,
+          "kind": "technique",
+          "source_terms": [
+            "def",
+            "method",
+            "callable",
+            "routine"
+          ],
+          "term": "function"
+        },
+        {
+          "contexts": [
+            "class observed in the code corpus"
+          ],
+          "frequency": 38,
+          "kind": "technique",
+          "source_terms": [
+            "type",
+            "object",
+            "dataclass"
+          ],
+          "term": "class"
+        }
+      ],
+      "name": "tecnica"
+    },
+    {
+      "entries": [
+        {
+          "contexts": [
+            "dependency observed in the code corpus"
+          ],
+          "frequency": 27,
+          "kind": "state",
+          "source_terms": [
+            "import",
+            "call",
+            "relation",
+            "depends on"
+          ],
+          "term": "dependency"
+        }
+      ],
+      "name": "stati"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+name: tecnica
+entries:
+  - id: CODE-FUNCTION
+    labels_en: function
+    labels_it: function
+    aliases: [def, method, callable, routine]
+    definition: A named callable unit of code.
+    ontology_uri: null
+  - id: CODE-CLASS
+    labels_en: class
+    labels_it: class
+    aliases: [type, object, dataclass]
+    definition: A blueprint that groups data and behaviour.
+    ontology_uri: null

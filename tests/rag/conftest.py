@@ -89,12 +89,16 @@ def cleanup_neo4j(client: Neo4jClient) -> None:
             WHERE (n:Document OR n:CanonicalTerm OR n:DomainPack OR n:Entity
                    OR n:Fact OR n:Source)
               AND (n.id STARTS WITH $prefix OR n.id STARTS WITH $b3_prefix
-                   OR n.id STARTS WITH $bench_prefix)
+                   OR n.id STARTS WITH $bench_prefix OR n.id STARTS WITH $book_prefix
+                   OR n.id STARTS WITH $wf_prefix OR n.id STARTS WITH $code_prefix)
             DETACH DELETE n
             """,
             prefix=PREFIX,
             b3_prefix="b3f_",
             bench_prefix="ib_bench_",
+            book_prefix="ibk_",
+            wf_prefix="ibw_",
+            code_prefix="idc_",
         )
 
 

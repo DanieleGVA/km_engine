@@ -1,0 +1,8 @@
+name: stati
+entries:
+  - id: CODE-DEPENDENCY
+    labels_en: dependency
+    labels_it: dependency
+    aliases: [import, call, relation, depends on]
+    definition: A directed relation between code symbols.
+    ontology_uri: null

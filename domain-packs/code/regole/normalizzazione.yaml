@@ -1,0 +1,5 @@
+name: normalizzazione
+version: 1.0.0
+order: [structure]
+identity: true
+note: Code is already canonical EN; normalization is structural only.

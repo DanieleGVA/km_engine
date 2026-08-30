@@ -1,0 +1,12 @@
+entries:
+- aliases:
+  - import
+  - call
+  - relation
+  - depends on
+  definition: A directed relation between code symbols.
+  id: CODE-DEPENDENCY
+  labels_en: dependency
+  labels_it: dependency
+  ontology_uri: null
+name: stati
