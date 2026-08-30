@@ -1,0 +1,727 @@
+{
+  "version": "1.0",
+  "generated_by": "scripts/generate_golden.py",
+  "corpus": "tests/fixtures/corpus_ricette (15 committed recipes)",
+  "pairs": [
+    {
+      "query": "spaghetti al tomato",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe spaghetti al tomato",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Spaghetti al pomodoro",
+      "document_id": "RIC-001",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Spaghetti al pomodoro",
+      "document_id": "RIC-001",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with spaghetti and peeled tomatoes",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with spaghetti and peeled tomatoes",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe spaghetti al tomato using soffritto",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe spaghetti al tomato state golden",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "risotto allo saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe risotto allo saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Risotto allo zafferano",
+      "document_id": "RIC-002",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Risotto allo zafferano",
+      "document_id": "RIC-002",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with carnaroli rice and saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with carnaroli rice and saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe risotto allo saffron using toasting",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe risotto allo saffron state golden",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "torta di apple",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe torta di apple",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Torta di mele",
+      "document_id": "RIC-003",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Torta di mele",
+      "document_id": "RIC-003",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with wheat flour and sugar",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with wheat flour and sugar",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe torta di apple using montare",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe torta di apple state golden",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "country bread",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe country bread",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Pane casereccio",
+      "document_id": "RIC-004",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Pane casereccio",
+      "document_id": "RIC-004",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with durum wheat flour and water",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with durum wheat flour and water",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe country bread using sciogliere",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe country bread state golden",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "chicken arrosto al rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe chicken arrosto al rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Pollo arrosto al rosmarino",
+      "document_id": "RIC-005",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Pollo arrosto al rosmarino",
+      "document_id": "RIC-005",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with chicken (1.2 kg) and rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with chicken (1.2 kg) and rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe chicken arrosto al rosemary using massaggiare",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe chicken arrosto al rosemary state golden",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with buffalo mozzarella and tomato",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with buffalo mozzarella and tomato",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe insalata caprese using tagliare",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe insalata caprese state golden",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "zuppa di lentils",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe zuppa di lentils",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Zuppa di lenticchie",
+      "document_id": "RIC-007",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Zuppa di lenticchie",
+      "document_id": "RIC-007",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with lentils and carrot",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with lentils and carrot",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe zuppa di lentils using soffritto",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe zuppa di lentils state golden",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittata di zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittata di zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittata di zucchine",
+      "document_id": "RIC-008",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittata di zucchine",
+      "document_id": "RIC-008",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with egg and zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with egg and zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittata di zucchini using tagliare",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittata di zucchini state golden",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with mascarpone and egg",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with mascarpone and egg",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe tiramisù classico using montare",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe tiramisù classico state golden",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with ground beef and onion",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with ground beef and onion",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe sugo di carne alla bolognese using soffritto",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe sugo di carne alla bolognese state golden",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with wheat flour and egg",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with wheat flour and egg",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crêpes alla nutella using frullare",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crêpes alla nutella state golden",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with ground meat and breadcrumbs",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with ground meat and breadcrumbs",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe polpette al sugo using mescolare",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe polpette al sugo state golden",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "asparagus al butter",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe asparagus al butter",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Asparagi al burro",
+      "document_id": "RIC-101",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Asparagi al burro",
+      "document_id": "RIC-101",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with asparagus and grana padano",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with asparagus and grana padano",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe asparagus al butter using browning",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe asparagus al butter state firm",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "state"
+    },
+    {
+      "query": "fregola con le clams",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe fregola con le clams",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Fregola con le vongole",
+      "document_id": "RIC-102",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Fregola con le vongole",
+      "document_id": "RIC-102",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with clams and fregola",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with clams and fregola",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe fregola con le clams using purging",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe fregola con le clams state golden",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "amaretti",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe amaretti",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Amaretti",
+      "document_id": "RIC-103",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Amaretti",
+      "document_id": "RIC-103",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with sweet almonds sbucciate and bitter almonds sbucciate",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with sweet almonds sbucciate and bitter almonds sbucciate",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe amaretti using toasting",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe amaretti state golden",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "state_fallback"
+    }
+  ]
+}

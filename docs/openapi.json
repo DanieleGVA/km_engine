@@ -636,10 +636,512 @@
           }
         }
       }
+    },
+    "/api/v1/conflicts": {
+      "get": {
+        "tags": [
+          "conflicts"
+        ],
+        "summary": "Lista conflitti (workflow FR6)",
+        "description": "Elenco dei conflitti, opzionalmente filtrati per stato.",
+        "operationId": "list_conflicts_endpoint_api_v1_conflicts_get",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filtro stato: pending/approved/rejected",
+              "title": "Status"
+            },
+            "description": "Filtro stato: pending/approved/rejected"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response List Conflicts Endpoint Api V1 Conflicts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conflicts/{conflict_id}/approve": {
+      "post": {
+        "tags": [
+          "conflicts"
+        ],
+        "summary": "Approva un conflitto scegliendo a o b",
+        "description": "Applica il valore scelto e invalida l'altro fatto.",
+        "operationId": "approve_conflict_endpoint_api_v1_conflicts__conflict_id__approve_post",
+        "parameters": [
+          {
+            "name": "conflict_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Conflict Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveConflictRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Approve Conflict Endpoint Api V1 Conflicts  Conflict Id  Approve Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conflicts/{conflict_id}/reject": {
+      "post": {
+        "tags": [
+          "conflicts"
+        ],
+        "summary": "Rifiuta un conflitto senza modificare il grafo",
+        "description": "Rifiuta un conflitto pending.",
+        "operationId": "reject_conflict_endpoint_api_v1_conflicts__conflict_id__reject_post",
+        "parameters": [
+          {
+            "name": "conflict_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Conflict Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Reject Conflict Endpoint Api V1 Conflicts  Conflict Id  Reject Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/sources/{source_id}/invalidate": {
+      "post": {
+        "tags": [
+          "invalidation"
+        ],
+        "summary": "Invalida una sorgente e propaga ai fatti dipendenti",
+        "description": "Invalida i fatti DERIVED_FROM la sorgente e propaga ai dipendenti.",
+        "operationId": "invalidate_source_endpoint_api_v1_sources__source_id__invalidate_post",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Source Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvalidateSourceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Invalidate Source Endpoint Api V1 Sources  Source Id  Invalidate Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/rag/query": {
+      "post": {
+        "tags": [
+          "rag"
+        ],
+        "summary": "Retrieval ibrido RAG (vettoriale + grafo)",
+        "description": "Ricerca vettoriale su Document.embedding + ranking deterministico.\n\n- **Filtro visibilit\u00e0**: applicato prima della restituzione (default-deny)\n- **Ranking**: cosine * (1 + boost_lang) * (1 + boost_verification)\n- **Nessun ranking LLM**",
+        "operationId": "rag_query_endpoint_api_v1_rag_query_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RagQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "type": "array",
+                  "title": "Response Rag Query Endpoint Api V1 Rag Query Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{document_id}": {
+      "get": {
+        "tags": [
+          "documents"
+        ],
+        "summary": "Documento canonico + metadati",
+        "description": "Restituisce il canonical.md ricomposto e i metadati del documento.\n\n- **404**: se il documento non esiste o non \u00e8 visibile\n- **lang**: localizzazione FR9.3 (flag ``untranslated`` se applicabile)",
+        "operationId": "get_document_endpoint_api_v1_documents__document_id__get",
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Document Id"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Lingua risposta (override)",
+              "title": "Lang"
+            },
+            "description": "Lingua risposta (override)"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get Document Endpoint Api V1 Documents  Document Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/glossary/query": {
+      "get": {
+        "tags": [
+          "glossary"
+        ],
+        "summary": "Query strutturate dal glossario (tecnica/ingrediente/stato)",
+        "description": "Query domain-aware sui percorsi CanonicalTerm<-Entity->Document.\n\nSpecificare esattamente uno tra ``term_id``, ``technique``,\n``ingredient`` e ``state``.",
+        "operationId": "glossary_query_endpoint_api_v1_glossary_query_get",
+        "parameters": [
+          {
+            "name": "term_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "CanonicalTerm id completo",
+              "title": "Term Id"
+            },
+            "description": "CanonicalTerm id completo"
+          },
+          {
+            "name": "technique",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Termine tecnica (id o label)",
+              "title": "Technique"
+            },
+            "description": "Termine tecnica (id o label)"
+          },
+          {
+            "name": "ingredient",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Termine ingrediente (id o label)",
+              "title": "Ingredient"
+            },
+            "description": "Termine ingrediente (id o label)"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Termine stato (id o label)",
+              "title": "State"
+            },
+            "description": "Termine stato (id o label)"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/AuthSettings"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Settings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "title": "Response Glossary Query Endpoint Api V1 Glossary Query Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "ApproveConflictRequest": {
+        "properties": {
+          "choice": {
+            "type": "string",
+            "enum": [
+              "a",
+              "b"
+            ],
+            "title": "Choice"
+          }
+        },
+        "type": "object",
+        "required": [
+          "choice"
+        ],
+        "title": "ApproveConflictRequest",
+        "description": "Body per POST /api/v1/conflicts/{id}/approve."
+      },
       "AuthSettings": {
         "properties": {
           "pg_dsn": {
@@ -702,6 +1204,34 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "InvalidateSourceRequest": {
+        "properties": {
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Reason"
+          },
+          "max_depth": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Depth"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reason"
+        ],
+        "title": "InvalidateSourceRequest",
+        "description": "Body per POST /api/v1/sources/{source_id}/invalidate."
+      },
       "LoginRequest": {
         "properties": {
           "username": {
@@ -732,6 +1262,47 @@
           "refresh_token"
         ],
         "title": "LogoutRequest"
+      },
+      "RagQueryRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Query"
+          },
+          "lang": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lang",
+            "description": "Lingua utente per boost/localizzazione"
+          },
+          "limit": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 50.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Limit",
+            "default": 5
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "RagQueryRequest",
+        "description": "Body per POST /api/v1/rag/query."
       },
       "RefreshRequest": {
         "properties": {
@@ -832,6 +1403,26 @@
     {
       "name": "health",
       "description": "Health check"
+    },
+    {
+      "name": "conflicts",
+      "description": "Conflict check e workflow (FR6)"
+    },
+    {
+      "name": "invalidation",
+      "description": "Fact invalidation e truth-maintenance (FR7)"
+    },
+    {
+      "name": "rag",
+      "description": "Retrieval ibrido RAG (WP-B1)"
+    },
+    {
+      "name": "documents",
+      "description": "Documenti canonici (WP-B1/B4)"
+    },
+    {
+      "name": "glossary",
+      "description": "Query strutturate dal glossario (WP-B2)"
     }
   ]
 }

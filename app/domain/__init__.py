@@ -22,6 +22,12 @@ from app.domain.canonical import (
     write_canon_log,
 )
 from app.domain.config import LLMSettings, get_llm_settings
+from app.domain.embedding import (
+    DIMENSIONS,
+    DeterministicEmbedding,
+    EmbeddingService,
+    HttpEmbeddingService,
+)
 from app.domain.errors import (
     AdjudicationAlreadyResolvedError,
     AdjudicationError,
@@ -88,6 +94,7 @@ from app.domain.verify import (
 
 __all__ = [
     "DIFFICULTY_MAP",
+    "DIMENSIONS",
     "AdjudicationAlreadyResolvedError",
     "AdjudicationError",
     "AdjudicationNotFoundError",
@@ -95,17 +102,20 @@ __all__ = [
     "CanonLogVerificationError",
     "CanonicalDocument",
     "CanonicalizationError",
+    "DeterministicEmbedding",
     "DocumentRecord",
     "DomainError",
     "DomainPack",
     "DomainPackBundle",
     "DomainPackValidationError",
+    "EmbeddingService",
     "FakeLLMClient",
     "Glossaries",
     "Glossary",
     "GlossaryEntry",
     "GlossaryProposalAlreadyResolvedError",
     "GlossaryProposalNotFoundError",
+    "HttpEmbeddingService",
     "HttpLLMClient",
     "IngredientLine",
     "L1Report",

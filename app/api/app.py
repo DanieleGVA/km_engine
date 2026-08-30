@@ -41,11 +41,14 @@ from app.conflict import (
     list_conflicts,
     reject_conflict,
 )
+from app.domain.embedding import DeterministicEmbedding
+from app.domain.recompose import recompose_document
 from app.invalidation import (
     InvalidationError,
     SourceNotFoundError,
     invalidate_source,
 )
+from app.query.domain import get_document
 from app.query.engine import (
     get_entity_with_history,
     localize_response,
@@ -53,6 +56,12 @@ from app.query.engine import (
     query_facts,
     query_relations,
     search,
+)
+from app.rag.rag import (
+    build_embedding_from_graph,
+    glossary_query,
+    localize_document,
+    rag_query,
 )
 from app.storage.client import Neo4jClient
 from app.storage.repository import GraphRepository
@@ -120,6 +129,13 @@ def get_repo(client: Annotated[Neo4jClient, Depends(get_neo4j_client)]) -> Graph
     return GraphRepository(client)
 
 
+def get_embedding_service(
+    client: Annotated[Neo4jClient, Depends(get_neo4j_client)],
+) -> DeterministicEmbedding:
+    """Dependency: embedding deterministico costruito da pack + grafo."""
+    return build_embedding_from_graph(client)
+
+
 def get_pg_conn():
     """Dependency: connessione Postgres per workflow conflitti/invalidazione."""
     from app.auth.config import get_auth_settings
@@ -131,6 +147,17 @@ def get_pg_conn():
         yield conn
     finally:
         conn.close()
+
+
+async def auth_required_for_body(request: Request) -> Principal:
+    """Body-free auth dependency for POST endpoints with a JSON body.
+
+    ``app.auth.deps.auth_required`` has a non-Annotated ``settings`` parameter;
+    FastAPI 0.141 would treat it as a body field and embed the request body.
+    This wrapper calls it directly and keeps the dependency signature
+    body-free.
+    """
+    return await auth_required(request)
 
 
 def require_roles_for_body(*required: str):
@@ -169,6 +196,16 @@ class InvalidateSourceRequest(BaseModel):
 
     reason: str = Field(min_length=1)
     max_depth: int | None = Field(default=None, ge=0, le=10)
+
+
+class RagQueryRequest(BaseModel):
+    """Body per POST /api/v1/rag/query."""
+
+    query: str = Field(min_length=1)
+    lang: str | None = Field(
+        default=None, description="Lingua utente per boost/localizzazione"
+    )
+    limit: int | None = Field(default=5, ge=1, le=50)
 
 
 def get_response_lang(
@@ -213,6 +250,9 @@ def create_app() -> FastAPI:
             {"name": "health", "description": "Health check"},
             {"name": "conflicts", "description": "Conflict check e workflow (FR6)"},
             {"name": "invalidation", "description": "Fact invalidation e truth-maintenance (FR7)"},
+            {"name": "rag", "description": "Retrieval ibrido RAG (WP-B1)"},
+            {"name": "documents", "description": "Documenti canonici (WP-B1/B4)"},
+            {"name": "glossary", "description": "Query strutturate dal glossario (WP-B2)"},
         ],
     )
 
@@ -503,6 +543,108 @@ def create_app() -> FastAPI:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         except InvalidationError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    # ------------------------------------------------------------------ RAG (WP-B1)
+    @app.post(
+        "/api/v1/rag/query",
+        tags=["rag"],
+        summary="Retrieval ibrido RAG (vettoriale + grafo)",
+        response_model=list[dict],
+    )
+    async def rag_query_endpoint(
+        body: Annotated[RagQueryRequest, Body()],
+        principal: Annotated[Principal, Depends(auth_required_for_body)],
+        client: Annotated[Neo4jClient, Depends(get_neo4j_client)],
+        embedding: Annotated[DeterministicEmbedding, Depends(get_embedding_service)],
+    ) -> list[dict]:
+        """Ricerca vettoriale su Document.embedding + ranking deterministico.
+
+        - **Filtro visibilità**: applicato prima della restituzione (default-deny)
+        - **Ranking**: cosine * (1 + boost_lang) * (1 + boost_verification)
+        - **Nessun ranking LLM**
+        """
+        hits = rag_query(
+            client,
+            principal,
+            body.query,
+            lang=body.lang,
+            limit=body.limit or 5,
+            embedding=embedding,
+        )
+        return [hit.to_dict() for hit in hits]
+
+    # ------------------------------------------------------------------ Documents (WP-B1/B4)
+    @app.get(
+        "/api/v1/documents/{document_id}",
+        tags=["documents"],
+        summary="Documento canonico + metadati",
+        response_model=dict,
+    )
+    async def get_document_endpoint(
+        document_id: str,
+        principal: Annotated[Principal, Depends(auth_required)],
+        client: Annotated[Neo4jClient, Depends(get_neo4j_client)],
+        lang: Annotated[str | None, Depends(get_response_lang)] = None,
+    ) -> dict:
+        """Restituisce il canonical.md ricomposto e i metadati del documento.
+
+        - **404**: se il documento non esiste o non è visibile
+        - **lang**: localizzazione FR9.3 (flag ``untranslated`` se applicabile)
+        """
+        document = get_document(client, principal, document_id)
+        if document is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Document {document_id!r} not found or not visible",
+            )
+        canonical_md = recompose_document(client, document_id)
+        localized = localize_document(document, lang)
+        return {**localized, "canonical_md": canonical_md}
+
+    # ------------------------------------------------------------------ Glossary (WP-B2)
+    @app.get(
+        "/api/v1/glossary/query",
+        tags=["glossary"],
+        summary="Query strutturate dal glossario (tecnica/ingrediente/stato)",
+        response_model=list[dict],
+    )
+    async def glossary_query_endpoint(
+        principal: Annotated[Principal, Depends(auth_required)],
+        client: Annotated[Neo4jClient, Depends(get_neo4j_client)],
+        term_id: Annotated[
+            str | None, Query(description="CanonicalTerm id completo")
+        ] = None,
+        technique: Annotated[
+            str | None, Query(description="Termine tecnica (id o label)")
+        ] = None,
+        ingredient: Annotated[
+            str | None, Query(description="Termine ingrediente (id o label)")
+        ] = None,
+        state: Annotated[
+            str | None, Query(description="Termine stato (id o label)")
+        ] = None,
+    ) -> list[dict]:
+        """Query domain-aware sui percorsi CanonicalTerm<-Entity->Document.
+
+        Specificare esattamente uno tra ``term_id``, ``technique``,
+        ``ingredient`` e ``state``.
+        """
+        selectors = (term_id, technique, ingredient, state)
+        if sum(selector is not None for selector in selectors) != 1:
+            raise HTTPException(
+                status_code=422,
+                detail=(
+                    "Specify exactly one of term_id, technique, ingredient, state"
+                ),
+            )
+        return glossary_query(
+            client,
+            principal,
+            term_id=term_id,
+            technique=technique,
+            ingredient=ingredient,
+            state=state,
+        )
 
     # ------------------------------------------------------------------ Error handling
     @app.exception_handler(HTTPException)

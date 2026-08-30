@@ -1,0 +1,3367 @@
+{
+  "version": "1.0",
+  "generated_by": "scripts/generate_golden.py",
+  "corpus": "tests/fixtures/corpus_ricette (full: 70 recipes)",
+  "pairs": [
+    {
+      "query": "spaghetti al tomato",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe spaghetti al tomato",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Spaghetti al pomodoro",
+      "document_id": "RIC-001",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Spaghetti al pomodoro",
+      "document_id": "RIC-001",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with spaghetti and peeled tomatoes",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with spaghetti and peeled tomatoes",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe spaghetti al tomato using soffritto",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe spaghetti al tomato state golden",
+      "document_id": "RIC-001",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "risotto allo saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe risotto allo saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Risotto allo zafferano",
+      "document_id": "RIC-002",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Risotto allo zafferano",
+      "document_id": "RIC-002",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with carnaroli rice and saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with carnaroli rice and saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe risotto allo saffron using toasting",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe risotto allo saffron state golden",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "torta di apple",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe torta di apple",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Torta di mele",
+      "document_id": "RIC-003",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Torta di mele",
+      "document_id": "RIC-003",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with wheat flour and sugar",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with wheat flour and sugar",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe torta di apple using montare",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe torta di apple state golden",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "country bread",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe country bread",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Pane casereccio",
+      "document_id": "RIC-004",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Pane casereccio",
+      "document_id": "RIC-004",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with durum wheat flour and water",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with durum wheat flour and water",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe country bread using sciogliere",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe country bread state golden",
+      "document_id": "RIC-004",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "chicken arrosto al rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe chicken arrosto al rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Pollo arrosto al rosmarino",
+      "document_id": "RIC-005",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Pollo arrosto al rosmarino",
+      "document_id": "RIC-005",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with chicken (1.2 kg) and rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with chicken (1.2 kg) and rosemary",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe chicken arrosto al rosemary using massaggiare",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe chicken arrosto al rosemary state golden",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Insalata caprese",
+      "document_id": "RIC-006",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with buffalo mozzarella and tomato",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with buffalo mozzarella and tomato",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe insalata caprese using tagliare",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe insalata caprese state golden",
+      "document_id": "RIC-006",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "zuppa di lentils",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe zuppa di lentils",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Zuppa di lenticchie",
+      "document_id": "RIC-007",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Zuppa di lenticchie",
+      "document_id": "RIC-007",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with lentils and carrot",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with lentils and carrot",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe zuppa di lentils using soffritto",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe zuppa di lentils state golden",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittata di zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittata di zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittata di zucchine",
+      "document_id": "RIC-008",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittata di zucchine",
+      "document_id": "RIC-008",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with egg and zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with egg and zucchini",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittata di zucchini using tagliare",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittata di zucchini state golden",
+      "document_id": "RIC-008",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Tiramisù classico",
+      "document_id": "RIC-009",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with mascarpone and egg",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with mascarpone and egg",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe tiramisù classico using montare",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe tiramisù classico state golden",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Sugo di carne alla bolognese",
+      "document_id": "RIC-010",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with ground beef and onion",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with ground beef and onion",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe sugo di carne alla bolognese using soffritto",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe sugo di carne alla bolognese state golden",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crêpes alla nutella",
+      "document_id": "RIC-011",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with wheat flour and egg",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with wheat flour and egg",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crêpes alla nutella using frullare",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crêpes alla nutella state golden",
+      "document_id": "RIC-011",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Polpette al sugo",
+      "document_id": "RIC-012",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with ground meat and breadcrumbs",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with ground meat and breadcrumbs",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe polpette al sugo using mescolare",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe polpette al sugo state golden",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "asparagus al butter",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe asparagus al butter",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Asparagi al burro",
+      "document_id": "RIC-101",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Asparagi al burro",
+      "document_id": "RIC-101",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with asparagus and grana padano",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with asparagus and grana padano",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe asparagus al butter using browning",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe asparagus al butter state firm",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "state"
+    },
+    {
+      "query": "fregola con le clams",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe fregola con le clams",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Fregola con le vongole",
+      "document_id": "RIC-102",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Fregola con le vongole",
+      "document_id": "RIC-102",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with clams and fregola",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with clams and fregola",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe fregola con le clams using purging",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe fregola con le clams state golden",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "amaretti",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe amaretti",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Amaretti",
+      "document_id": "RIC-103",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Amaretti",
+      "document_id": "RIC-103",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with sweet almonds sbucciate and bitter almonds sbucciate",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with sweet almonds sbucciate and bitter almonds sbucciate",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe amaretti using toasting",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe amaretti state golden",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "anchovies al verde",
+      "document_id": "RIC-200",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe anchovies al verde",
+      "document_id": "RIC-200",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Acciughe Al Verde",
+      "document_id": "RIC-200",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Acciughe Al Verde",
+      "document_id": "RIC-200",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with salted anchovies and egg yolk firm",
+      "document_id": "RIC-200",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with salted anchovies and egg yolk firm",
+      "document_id": "RIC-200",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe anchovies al verde using dissalate",
+      "document_id": "RIC-200",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe anchovies al verde state golden",
+      "document_id": "RIC-200",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "anchovies crude",
+      "document_id": "RIC-201",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe anchovies crude",
+      "document_id": "RIC-201",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Acciughe Crude",
+      "document_id": "RIC-201",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Acciughe Crude",
+      "document_id": "RIC-201",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di anchovies and il succo di 2 lemon",
+      "document_id": "RIC-201",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di anchovies and il succo di 2 lemon",
+      "document_id": "RIC-201",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe anchovies crude using pulite",
+      "document_id": "RIC-201",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe anchovies crude state golden",
+      "document_id": "RIC-201",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "anchovies marinate",
+      "document_id": "RIC-202",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe anchovies marinate",
+      "document_id": "RIC-202",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Acciughe Marinate",
+      "document_id": "RIC-202",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Acciughe Marinate",
+      "document_id": "RIC-202",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di anchovies and wheat flour",
+      "document_id": "RIC-202",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di anchovies and wheat flour",
+      "document_id": "RIC-202",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe anchovies marinate using pulite",
+      "document_id": "RIC-202",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe anchovies marinate state golden",
+      "document_id": "RIC-202",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "salted cod marinato",
+      "document_id": "RIC-203",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe salted cod marinato",
+      "document_id": "RIC-203",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Baccalà Marinato",
+      "document_id": "RIC-203",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Baccalà Marinato",
+      "document_id": "RIC-203",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di salted cod and di white wine vinegar",
+      "document_id": "RIC-203",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di salted cod and di white wine vinegar",
+      "document_id": "RIC-203",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe salted cod marinato using asciugate",
+      "document_id": "RIC-203",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe salted cod marinato state golden",
+      "document_id": "RIC-203",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "prawn tails e fava beans",
+      "document_id": "RIC-204",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe prawn tails e fava beans",
+      "document_id": "RIC-204",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Code Di Gamberoni E Fave",
+      "document_id": "RIC-204",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Code Di Gamberoni E Fave",
+      "document_id": "RIC-204",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with prawn tails bollite and cherry tomatoes",
+      "document_id": "RIC-204",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with prawn tails bollite and cherry tomatoes",
+      "document_id": "RIC-204",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe prawn tails e fava beans using sbollentate",
+      "document_id": "RIC-204",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe prawn tails e fava beans state golden",
+      "document_id": "RIC-204",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "cotolettine di sardines",
+      "document_id": "RIC-205",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe cotolettine di sardines",
+      "document_id": "RIC-205",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Cotolettine Di Sardine",
+      "document_id": "RIC-205",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Cotolettine Di Sardine",
+      "document_id": "RIC-205",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di sardines and egg",
+      "document_id": "RIC-205",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di sardines and egg",
+      "document_id": "RIC-205",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe cotolettine di sardines using squamate",
+      "document_id": "RIC-205",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe cotolettine di sardines state golden",
+      "document_id": "RIC-205",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "mussels alla marinara",
+      "document_id": "RIC-206",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe mussels alla marinara",
+      "document_id": "RIC-206",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Cozze Alla Marinara",
+      "document_id": "RIC-206",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Cozze Alla Marinara",
+      "document_id": "RIC-206",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di mussels and di parsley",
+      "document_id": "RIC-206",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di mussels and di parsley",
+      "document_id": "RIC-206",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe mussels alla marinara using lavate",
+      "document_id": "RIC-206",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe mussels alla marinara state golden",
+      "document_id": "RIC-206",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "anchovies",
+      "document_id": "RIC-207",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe anchovies",
+      "document_id": "RIC-207",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Acciuga",
+      "document_id": "RIC-207",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Acciuga",
+      "document_id": "RIC-207",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di sandwich bread and anchovy fillets",
+      "document_id": "RIC-207",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di sandwich bread and anchovy fillets",
+      "document_id": "RIC-207",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe anchovies using tagliate",
+      "document_id": "RIC-207",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe anchovies state golden",
+      "document_id": "RIC-207",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittatine al tonno",
+      "document_id": "RIC-208",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittatine al tonno",
+      "document_id": "RIC-208",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittatine Al Tonno",
+      "document_id": "RIC-208",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittatine Al Tonno",
+      "document_id": "RIC-208",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with egg and di marjoram",
+      "document_id": "RIC-208",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with egg and di marjoram",
+      "document_id": "RIC-208",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittatine al tonno using sgusciate",
+      "document_id": "RIC-208",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittatine al tonno state golden",
+      "document_id": "RIC-208",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "prawn tails in agrodolce",
+      "document_id": "RIC-209",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe prawn tails in agrodolce",
+      "document_id": "RIC-209",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Gamberi In Agrodolce",
+      "document_id": "RIC-209",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Gamberi In Agrodolce",
+      "document_id": "RIC-209",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di prawn tails and la buccia grattugiata di ½ orange",
+      "document_id": "RIC-209",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di prawn tails and la buccia grattugiata di ½ orange",
+      "document_id": "RIC-209",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe prawn tails in agrodolce using sciacquate",
+      "document_id": "RIC-209",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe prawn tails in agrodolce state golden",
+      "document_id": "RIC-209",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "paté di tonno",
+      "document_id": "RIC-210",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe paté di tonno",
+      "document_id": "RIC-210",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Paté Di Tonno",
+      "document_id": "RIC-210",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Paté Di Tonno",
+      "document_id": "RIC-210",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di tuna in oil and di butter",
+      "document_id": "RIC-210",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di tuna in oil and di butter",
+      "document_id": "RIC-210",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe paté di tonno using scolate",
+      "document_id": "RIC-210",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe paté di tonno state creamy",
+      "document_id": "RIC-210",
+      "lang": "en",
+      "kind": "state"
+    },
+    {
+      "query": "sauté di clams veraci",
+      "document_id": "RIC-211",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe sauté di clams veraci",
+      "document_id": "RIC-211",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Sauté Di Vongole Veraci",
+      "document_id": "RIC-211",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Sauté Di Vongole Veraci",
+      "document_id": "RIC-211",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di clams veraci già spurgate and di garlic",
+      "document_id": "RIC-211",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di clams veraci già spurgate and di garlic",
+      "document_id": "RIC-211",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe sauté di clams veraci using versate",
+      "document_id": "RIC-211",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe sauté di clams veraci state golden",
+      "document_id": "RIC-211",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "trote in agro",
+      "document_id": "RIC-212",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe trote in agro",
+      "document_id": "RIC-212",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Trote In Agro",
+      "document_id": "RIC-212",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Trote In Agro",
+      "document_id": "RIC-212",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with trote di circa 300 g l'una and di butter chiarificato",
+      "document_id": "RIC-212",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with trote di circa 300 g l'una and di butter chiarificato",
+      "document_id": "RIC-212",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe trote in agro using eviscerate",
+      "document_id": "RIC-212",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe trote in agro state golden",
+      "document_id": "RIC-212",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "agliata verde monferrina",
+      "document_id": "RIC-213",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe agliata verde monferrina",
+      "document_id": "RIC-213",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Agliata Verde Monferrina",
+      "document_id": "RIC-213",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Agliata Verde Monferrina",
+      "document_id": "RIC-213",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di robiola o crescenza and di ricotta",
+      "document_id": "RIC-213",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di robiola o crescenza and di ricotta",
+      "document_id": "RIC-213",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe agliata verde monferrina using lavate",
+      "document_id": "RIC-213",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe agliata verde monferrina state golden",
+      "document_id": "RIC-213",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "antipasto di peperoni",
+      "document_id": "RIC-214",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe antipasto di peperoni",
+      "document_id": "RIC-214",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Antipasto Di Peperoni",
+      "document_id": "RIC-214",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Antipasto Di Peperoni",
+      "document_id": "RIC-214",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di salted anchovies and peperoni",
+      "document_id": "RIC-214",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di salted anchovies and peperoni",
+      "document_id": "RIC-214",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe antipasto di peperoni using lavate",
+      "document_id": "RIC-214",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe antipasto di peperoni state golden",
+      "document_id": "RIC-214",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "arancine di riso",
+      "document_id": "RIC-215",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe arancine di riso",
+      "document_id": "RIC-215",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Arancine Di Riso",
+      "document_id": "RIC-215",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Arancine Di Riso",
+      "document_id": "RIC-215",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di riso and di piselli sgranati",
+      "document_id": "RIC-215",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di riso and di piselli sgranati",
+      "document_id": "RIC-215",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe arancine di riso using portate",
+      "document_id": "RIC-215",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe arancine di riso state al dente",
+      "document_id": "RIC-215",
+      "lang": "en",
+      "kind": "state"
+    },
+    {
+      "query": "bagna cauda",
+      "document_id": "RIC-216",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe bagna cauda",
+      "document_id": "RIC-216",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Bagna Cauda",
+      "document_id": "RIC-216",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Bagna Cauda",
+      "document_id": "RIC-216",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with salted anchovies and di garlic",
+      "document_id": "RIC-216",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with salted anchovies and di garlic",
+      "document_id": "RIC-216",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe bagna cauda using sbucciate",
+      "document_id": "RIC-216",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe bagna cauda state golden",
+      "document_id": "RIC-216",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "bocconcini di pasta sfoglia",
+      "document_id": "RIC-217",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe bocconcini di pasta sfoglia",
+      "document_id": "RIC-217",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Bocconcini Di Pasta Sfoglia",
+      "document_id": "RIC-217",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Bocconcini Di Pasta Sfoglia",
+      "document_id": "RIC-217",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di pasta sfoglia and di ricotta",
+      "document_id": "RIC-217",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di pasta sfoglia and di ricotta",
+      "document_id": "RIC-217",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe bocconcini di pasta sfoglia using browning",
+      "document_id": "RIC-217",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe bocconcini di pasta sfoglia state golden",
+      "document_id": "RIC-217",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "anchovies",
+      "document_id": "RIC-218",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe anchovies",
+      "document_id": "RIC-218",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Acciuga",
+      "document_id": "RIC-218",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Acciuga",
+      "document_id": "RIC-218",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di wheat flour di mais and di salted anchovies",
+      "document_id": "RIC-218",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di wheat flour di mais and di salted anchovies",
+      "document_id": "RIC-218",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe anchovies using preparate",
+      "document_id": "RIC-218",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe anchovies state golden",
+      "document_id": "RIC-218",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "bruschetta alla romana",
+      "document_id": "RIC-219",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe bruschetta alla romana",
+      "document_id": "RIC-219",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Bruschetta Alla Romana",
+      "document_id": "RIC-219",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Bruschetta Alla Romana",
+      "document_id": "RIC-219",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di country bread and tomato ramati",
+      "document_id": "RIC-219",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di country bread and tomato ramati",
+      "document_id": "RIC-219",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe bruschetta alla romana using toasting",
+      "document_id": "RIC-219",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe bruschetta alla romana state golden",
+      "document_id": "RIC-219",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "calcioni di ricotta rustici",
+      "document_id": "RIC-220",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe calcioni di ricotta rustici",
+      "document_id": "RIC-220",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Calcioni Di Ricotta Rustici",
+      "document_id": "RIC-220",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Calcioni Di Ricotta Rustici",
+      "document_id": "RIC-220",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with per la pasta:",
+      "document_id": "RIC-220",
+      "lang": "en",
+      "kind": "ingredient_single"
+    },
+    {
+      "query": "dish with per la pasta:",
+      "document_id": "RIC-220",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe calcioni di ricotta rustici using 300",
+      "document_id": "RIC-220",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe calcioni di ricotta rustici state golden",
+      "document_id": "RIC-220",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "carrot in agro",
+      "document_id": "RIC-221",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe carrot in agro",
+      "document_id": "RIC-221",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Carote In Agro",
+      "document_id": "RIC-221",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Carote In Agro",
+      "document_id": "RIC-221",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di carrot piccole and di white wine",
+      "document_id": "RIC-221",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di carrot piccole and di white wine",
+      "document_id": "RIC-221",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe carrot in agro using lavate,",
+      "document_id": "RIC-221",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe carrot in agro state golden",
+      "document_id": "RIC-221",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "cestini di tomato",
+      "document_id": "RIC-222",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe cestini di tomato",
+      "document_id": "RIC-222",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Cestini Di Pomodoro",
+      "document_id": "RIC-222",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Cestini Di Pomodoro",
+      "document_id": "RIC-222",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with tomato tondi and salted anchovies",
+      "document_id": "RIC-222",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with tomato tondi and salted anchovies",
+      "document_id": "RIC-222",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe cestini di tomato using tagliate",
+      "document_id": "RIC-222",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe cestini di tomato state golden",
+      "document_id": "RIC-222",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "cipollata rossa monferrina",
+      "document_id": "RIC-223",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe cipollata rossa monferrina",
+      "document_id": "RIC-223",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Cipollata Rossa Monferrina",
+      "document_id": "RIC-223",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Cipollata Rossa Monferrina",
+      "document_id": "RIC-223",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di crescenza o stracchino and ½ peperone rosso",
+      "document_id": "RIC-223",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di crescenza o stracchino and ½ peperone rosso",
+      "document_id": "RIC-223",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe cipollata rossa monferrina using sbucciate",
+      "document_id": "RIC-223",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe cipollata rossa monferrina state golden",
+      "document_id": "RIC-223",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crema di fava beans con pecorino cheese",
+      "document_id": "RIC-224",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crema di fava beans con pecorino cheese",
+      "document_id": "RIC-224",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crema Di Fave Con Pecorino",
+      "document_id": "RIC-224",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crema Di Fave Con Pecorino",
+      "document_id": "RIC-224",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di fava beans secche spezzettate and di pecorino cheese",
+      "document_id": "RIC-224",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di fava beans secche spezzettate and di pecorino cheese",
+      "document_id": "RIC-224",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crema di fava beans con pecorino cheese using sciacquate",
+      "document_id": "RIC-224",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crema di fava beans con pecorino cheese state golden",
+      "document_id": "RIC-224",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crema di formaggio alla paprica dolce",
+      "document_id": "RIC-225",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crema di formaggio alla paprica dolce",
+      "document_id": "RIC-225",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crema Di Formaggio Alla Paprica Dolce",
+      "document_id": "RIC-225",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crema Di Formaggio Alla Paprica Dolce",
+      "document_id": "RIC-225",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di formaggio spalmabile and spring onion rossi",
+      "document_id": "RIC-225",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di formaggio spalmabile and spring onion rossi",
+      "document_id": "RIC-225",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crema di formaggio alla paprica dolce using sbucciate,",
+      "document_id": "RIC-225",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crema di formaggio alla paprica dolce state golden",
+      "document_id": "RIC-225",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crescentine",
+      "document_id": "RIC-226",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crescentine",
+      "document_id": "RIC-226",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crescentine",
+      "document_id": "RIC-226",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crescentine",
+      "document_id": "RIC-226",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di wheat flour and di butter",
+      "document_id": "RIC-226",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di wheat flour and di butter",
+      "document_id": "RIC-226",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crescentine using versate",
+      "document_id": "RIC-226",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crescentine state golden",
+      "document_id": "RIC-226",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crostini ai tartufi",
+      "document_id": "RIC-227",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crostini ai tartufi",
+      "document_id": "RIC-227",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crostini Ai Tartufi",
+      "document_id": "RIC-227",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crostini Ai Tartufi",
+      "document_id": "RIC-227",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di country bread and di tartufi bianchi",
+      "document_id": "RIC-227",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di country bread and di tartufi bianchi",
+      "document_id": "RIC-227",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crostini ai tartufi using fate",
+      "document_id": "RIC-227",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crostini ai tartufi state golden",
+      "document_id": "RIC-227",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crostini alla napoletana",
+      "document_id": "RIC-228",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crostini alla napoletana",
+      "document_id": "RIC-228",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crostini Alla Napoletana",
+      "document_id": "RIC-228",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crostini Alla Napoletana",
+      "document_id": "RIC-228",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di country bread and anchovy fillets",
+      "document_id": "RIC-228",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di country bread and anchovy fillets",
+      "document_id": "RIC-228",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crostini alla napoletana using tagliate",
+      "document_id": "RIC-228",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crostini alla napoletana state golden",
+      "document_id": "RIC-228",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crostini alla provatura e anchovies",
+      "document_id": "RIC-229",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crostini alla provatura e anchovies",
+      "document_id": "RIC-229",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crostini Alla Provatura E Alici",
+      "document_id": "RIC-229",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crostini Alla Provatura E Alici",
+      "document_id": "RIC-229",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di country bread and di provatura",
+      "document_id": "RIC-229",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di country bread and di provatura",
+      "document_id": "RIC-229",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crostini alla provatura e anchovies using tagliate",
+      "document_id": "RIC-229",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crostini alla provatura e anchovies state golden",
+      "document_id": "RIC-229",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crostini con buffalo mozzarella",
+      "document_id": "RIC-230",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crostini con buffalo mozzarella",
+      "document_id": "RIC-230",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crostini Con Mozzarella Di Bufala",
+      "document_id": "RIC-230",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crostini Con Mozzarella Di Bufala",
+      "document_id": "RIC-230",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di buffalo mozzarella and di cherry tomatoes",
+      "document_id": "RIC-230",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di buffalo mozzarella and di cherry tomatoes",
+      "document_id": "RIC-230",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crostini con buffalo mozzarella using dividete",
+      "document_id": "RIC-230",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe crostini con buffalo mozzarella state golden",
+      "document_id": "RIC-230",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "crostini di chicken",
+      "document_id": "RIC-231",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe crostini di chicken",
+      "document_id": "RIC-231",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Crostini Di Pollo",
+      "document_id": "RIC-231",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Crostini Di Pollo",
+      "document_id": "RIC-231",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di country bread and di fegatini di chicken pronti per la cottura",
+      "document_id": "RIC-231",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di country bread and di fegatini di chicken pronti per la cottura",
+      "document_id": "RIC-231",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe crostini di chicken using wilting",
+      "document_id": "RIC-231",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe crostini di chicken state golden",
+      "document_id": "RIC-231",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "fiori di zucca ripieni",
+      "document_id": "RIC-232",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe fiori di zucca ripieni",
+      "document_id": "RIC-232",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Fiori Di Zucca Ripieni",
+      "document_id": "RIC-232",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Fiori Di Zucca Ripieni",
+      "document_id": "RIC-232",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with fiori di zucca and di carne di vitello lessata",
+      "document_id": "RIC-232",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with fiori di zucca and di carne di vitello lessata",
+      "document_id": "RIC-232",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe fiori di zucca ripieni using lavate",
+      "document_id": "RIC-232",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe fiori di zucca ripieni state golden",
+      "document_id": "RIC-232",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "formaggio fritto",
+      "document_id": "RIC-233",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe formaggio fritto",
+      "document_id": "RIC-233",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Formaggio Fritto",
+      "document_id": "RIC-233",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Formaggio Fritto",
+      "document_id": "RIC-233",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di provola dolce and di breadcrumbs",
+      "document_id": "RIC-233",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di provola dolce and di breadcrumbs",
+      "document_id": "RIC-233",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe formaggio fritto using tagliate",
+      "document_id": "RIC-233",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe formaggio fritto state golden",
+      "document_id": "RIC-233",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "egg e formaggio",
+      "document_id": "RIC-234",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe egg e formaggio",
+      "document_id": "RIC-234",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Uovo E Formaggio",
+      "document_id": "RIC-234",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Uovo E Formaggio",
+      "document_id": "RIC-234",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di semolino and di fontina cheese",
+      "document_id": "RIC-234",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di semolino and di fontina cheese",
+      "document_id": "RIC-234",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe egg e formaggio using versate",
+      "document_id": "RIC-234",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe egg e formaggio state golden",
+      "document_id": "RIC-234",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frico",
+      "document_id": "RIC-235",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frico",
+      "document_id": "RIC-235",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frico",
+      "document_id": "RIC-235",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frico",
+      "document_id": "RIC-235",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di formaggio montasio and onion",
+      "document_id": "RIC-235",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di formaggio montasio and onion",
+      "document_id": "RIC-235",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frico using wilting",
+      "document_id": "RIC-235",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe frico state golden",
+      "document_id": "RIC-235",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittata di carne",
+      "document_id": "RIC-236",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittata di carne",
+      "document_id": "RIC-236",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittata Di Carne",
+      "document_id": "RIC-236",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittata Di Carne",
+      "document_id": "RIC-236",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di carne di manzo macinata and egg",
+      "document_id": "RIC-236",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di carne di manzo macinata and egg",
+      "document_id": "RIC-236",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittata di carne using wilting",
+      "document_id": "RIC-236",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe frittata di carne state golden",
+      "document_id": "RIC-236",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittatine al guanciale",
+      "document_id": "RIC-237",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittatine al guanciale",
+      "document_id": "RIC-237",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittatine Al Guanciale",
+      "document_id": "RIC-237",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittatine Al Guanciale",
+      "document_id": "RIC-237",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di guanciale tagliato a dadini and egg",
+      "document_id": "RIC-237",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di guanciale tagliato a dadini and egg",
+      "document_id": "RIC-237",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittatine al guanciale using fate",
+      "document_id": "RIC-237",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittatine al guanciale state golden",
+      "document_id": "RIC-237",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittelle alle erbe aromatiche",
+      "document_id": "RIC-238",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittelle alle erbe aromatiche",
+      "document_id": "RIC-238",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittelle Alle Erbe Aromatiche",
+      "document_id": "RIC-238",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittelle Alle Erbe Aromatiche",
+      "document_id": "RIC-238",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di wheat flour and egg",
+      "document_id": "RIC-238",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di wheat flour and egg",
+      "document_id": "RIC-238",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittelle alle erbe aromatiche using versate",
+      "document_id": "RIC-238",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittelle alle erbe aromatiche state golden",
+      "document_id": "RIC-238",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittelle di melanzane",
+      "document_id": "RIC-239",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittelle di melanzane",
+      "document_id": "RIC-239",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittelle Di Melanzane",
+      "document_id": "RIC-239",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittelle Di Melanzane",
+      "document_id": "RIC-239",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di melanzane and di raisins",
+      "document_id": "RIC-239",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di melanzane and di raisins",
+      "document_id": "RIC-239",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittelle di melanzane using affettate",
+      "document_id": "RIC-239",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittelle di melanzane state golden",
+      "document_id": "RIC-239",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittelle di pancotto",
+      "document_id": "RIC-240",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittelle di pancotto",
+      "document_id": "RIC-240",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittelle Di Pancotto",
+      "document_id": "RIC-240",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittelle Di Pancotto",
+      "document_id": "RIC-240",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di pane raffermo and di wheat flour",
+      "document_id": "RIC-240",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di pane raffermo and di wheat flour",
+      "document_id": "RIC-240",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittelle di pancotto using spezzettate",
+      "document_id": "RIC-240",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittelle di pancotto state golden",
+      "document_id": "RIC-240",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittelle di tagliatelle",
+      "document_id": "RIC-241",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittelle di tagliatelle",
+      "document_id": "RIC-241",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittelle Di Tagliatelle",
+      "document_id": "RIC-241",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittelle Di Tagliatelle",
+      "document_id": "RIC-241",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di tagliatelle all'egg secche and di grana padano",
+      "document_id": "RIC-241",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di tagliatelle all'egg secche and di grana padano",
+      "document_id": "RIC-241",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittelle di tagliatelle using sgusciate",
+      "document_id": "RIC-241",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittelle di tagliatelle state golden",
+      "document_id": "RIC-241",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "frittelle di verdura",
+      "document_id": "RIC-242",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe frittelle di verdura",
+      "document_id": "RIC-242",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Frittelle Di Verdura",
+      "document_id": "RIC-242",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Frittelle Di Verdura",
+      "document_id": "RIC-242",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di wheat flour and egg",
+      "document_id": "RIC-242",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di wheat flour and egg",
+      "document_id": "RIC-242",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe frittelle di verdura using fate",
+      "document_id": "RIC-242",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe frittelle di verdura state golden",
+      "document_id": "RIC-242",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "gelato di grana padano",
+      "document_id": "RIC-243",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe gelato di grana padano",
+      "document_id": "RIC-243",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Gelato Di Grana",
+      "document_id": "RIC-243",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Gelato Di Grana",
+      "document_id": "RIC-243",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with ½ l di panna fresca and di grana padano",
+      "document_id": "RIC-243",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with ½ l di panna fresca and di grana padano",
+      "document_id": "RIC-243",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe gelato di grana padano using versate",
+      "document_id": "RIC-243",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe gelato di grana padano state golden",
+      "document_id": "RIC-243",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "gnocchi di spinaci e ricotta",
+      "document_id": "RIC-244",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe gnocchi di spinaci e ricotta",
+      "document_id": "RIC-244",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Gnocchi Di Spinaci E Ricotta",
+      "document_id": "RIC-244",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Gnocchi Di Spinaci E Ricotta",
+      "document_id": "RIC-244",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di spinaci and di ricotta",
+      "document_id": "RIC-244",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di spinaci and di ricotta",
+      "document_id": "RIC-244",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe gnocchi di spinaci e ricotta using pulite",
+      "document_id": "RIC-244",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe gnocchi di spinaci e ricotta state golden",
+      "document_id": "RIC-244",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "insalata di nervetti",
+      "document_id": "RIC-245",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe insalata di nervetti",
+      "document_id": "RIC-245",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Insalata Di Nervetti",
+      "document_id": "RIC-245",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Insalata Di Nervetti",
+      "document_id": "RIC-245",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with ginocchietti di vitello pronti per la cottura and onion ramata",
+      "document_id": "RIC-245",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with ginocchietti di vitello pronti per la cottura and onion ramata",
+      "document_id": "RIC-245",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe insalata di nervetti using pulite",
+      "document_id": "RIC-245",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe insalata di nervetti state golden",
+      "document_id": "RIC-245",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "insalata di chicken al tartufo",
+      "document_id": "RIC-246",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe insalata di chicken al tartufo",
+      "document_id": "RIC-246",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Insalata Di Pollo Al Tartufo",
+      "document_id": "RIC-246",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Insalata Di Pollo Al Tartufo",
+      "document_id": "RIC-246",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di petti di chicken lessati and anchovy fillets",
+      "document_id": "RIC-246",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di petti di chicken lessati and anchovy fillets",
+      "document_id": "RIC-246",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe insalata di chicken al tartufo using tagliate",
+      "document_id": "RIC-246",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe insalata di chicken al tartufo state golden",
+      "document_id": "RIC-246",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "lampascioni con olive",
+      "document_id": "RIC-247",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe lampascioni con olive",
+      "document_id": "RIC-247",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Lampascioni Con Olive",
+      "document_id": "RIC-247",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Lampascioni Con Olive",
+      "document_id": "RIC-247",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di lampascioni and di olive nere denocciolate",
+      "document_id": "RIC-247",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di lampascioni and di olive nere denocciolate",
+      "document_id": "RIC-247",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe lampascioni con olive using pulite",
+      "document_id": "RIC-247",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe lampascioni con olive state golden",
+      "document_id": "RIC-247",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "lingua in salsa rossa",
+      "document_id": "RIC-248",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe lingua in salsa rossa",
+      "document_id": "RIC-248",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Lingua In Salsa Rossa",
+      "document_id": "RIC-248",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Lingua In Salsa Rossa",
+      "document_id": "RIC-248",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di lingua di manzo and onion",
+      "document_id": "RIC-248",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di lingua di manzo and onion",
+      "document_id": "RIC-248",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe lingua in salsa rossa using wilting",
+      "document_id": "RIC-248",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe lingua in salsa rossa state golden",
+      "document_id": "RIC-248",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "buffalo mozzarella in carrozza",
+      "document_id": "RIC-249",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe buffalo mozzarella in carrozza",
+      "document_id": "RIC-249",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Mozzarella In Carrozza",
+      "document_id": "RIC-249",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Mozzarella In Carrozza",
+      "document_id": "RIC-249",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di sandwich bread and di buffalo mozzarella",
+      "document_id": "RIC-249",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di sandwich bread and di buffalo mozzarella",
+      "document_id": "RIC-249",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe buffalo mozzarella in carrozza using bagnate",
+      "document_id": "RIC-249",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe buffalo mozzarella in carrozza state golden",
+      "document_id": "RIC-249",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "olive ripiene",
+      "document_id": "RIC-250",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe olive ripiene",
+      "document_id": "RIC-250",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Olive Ripiene",
+      "document_id": "RIC-250",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Olive Ripiene",
+      "document_id": "RIC-250",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with ½ kg di olive verdi grosse and di carne trita di manzo",
+      "document_id": "RIC-250",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with ½ kg di olive verdi grosse and di carne trita di manzo",
+      "document_id": "RIC-250",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe olive ripiene using browning",
+      "document_id": "RIC-250",
+      "lang": "en",
+      "kind": "technique"
+    },
+    {
+      "query": "recipe olive ripiene state golden",
+      "document_id": "RIC-250",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "fontina cheese",
+      "document_id": "RIC-251",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe fontina cheese",
+      "document_id": "RIC-251",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Fontina",
+      "document_id": "RIC-251",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Fontina",
+      "document_id": "RIC-251",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with egg and di speck",
+      "document_id": "RIC-251",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with egg and di speck",
+      "document_id": "RIC-251",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe fontina cheese using sgusciate",
+      "document_id": "RIC-251",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe fontina cheese state golden",
+      "document_id": "RIC-251",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "fontina cheese e funghi",
+      "document_id": "RIC-252",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe fontina cheese e funghi",
+      "document_id": "RIC-252",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Fontina E Funghi",
+      "document_id": "RIC-252",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Fontina E Funghi",
+      "document_id": "RIC-252",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di pane di segale and di fontina cheese",
+      "document_id": "RIC-252",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di pane di segale and di fontina cheese",
+      "document_id": "RIC-252",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe fontina cheese e funghi using pulite",
+      "document_id": "RIC-252",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe fontina cheese e funghi state golden",
+      "document_id": "RIC-252",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "panzanella",
+      "document_id": "RIC-253",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe panzanella",
+      "document_id": "RIC-253",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Panzanella",
+      "document_id": "RIC-253",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Panzanella",
+      "document_id": "RIC-253",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di pane toscano raffermo and o 4 tomato",
+      "document_id": "RIC-253",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di pane toscano raffermo and o 4 tomato",
+      "document_id": "RIC-253",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe panzanella using mettete",
+      "document_id": "RIC-253",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe panzanella state golden",
+      "document_id": "RIC-253",
+      "lang": "en",
+      "kind": "state_fallback"
+    },
+    {
+      "query": "panzerotti alla romana",
+      "document_id": "RIC-254",
+      "lang": "en",
+      "kind": "title_en_exact"
+    },
+    {
+      "query": "recipe panzerotti alla romana",
+      "document_id": "RIC-254",
+      "lang": "en",
+      "kind": "title_en_natural"
+    },
+    {
+      "query": "Panzerotti Alla Romana",
+      "document_id": "RIC-254",
+      "lang": "it",
+      "kind": "title_it_exact"
+    },
+    {
+      "query": "ricetta Panzerotti Alla Romana",
+      "document_id": "RIC-254",
+      "lang": "it",
+      "kind": "title_it_natural"
+    },
+    {
+      "query": "recipe with di wheat flour and di butter",
+      "document_id": "RIC-254",
+      "lang": "en",
+      "kind": "ingredient_pair"
+    },
+    {
+      "query": "dish with di wheat flour and di butter",
+      "document_id": "RIC-254",
+      "lang": "en",
+      "kind": "ingredient_dish"
+    },
+    {
+      "query": "recipe panzerotti alla romana using mettete",
+      "document_id": "RIC-254",
+      "lang": "en",
+      "kind": "technique_fallback"
+    },
+    {
+      "query": "recipe panzerotti alla romana state golden",
+      "document_id": "RIC-254",
+      "lang": "en",
+      "kind": "state_fallback"
+    }
+  ]
+}
