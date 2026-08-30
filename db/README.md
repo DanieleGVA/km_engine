@@ -5,6 +5,7 @@ Schemi applicativi di baseline (WP1): Neo4j per il grafo (ADR-001), PostgreSQL 1
 | File | Target | Contenuto |
 |---|---|---|
 | `neo4j/schema.cypher` | Neo4j 5.x (`km-neo4j`) | Uniqueness constraint, indici (nodi, relazioni, full-text) del modello §2.1 del work-plan |
+| `neo4j/002_domain_schema.cypher` | Neo4j 5.x (`km-neo4j`) | Domain layer (Iterazione A, WP-A4): `:Document`, `:CanonicalTerm`, `:DomainPack`, relazioni, full-text e indice vettoriale 384-dim |
 | `postgres/001_init.sql` | PostgreSQL 16 (`km-postgres`) | DDL: users, roles, user_roles, teams, user_teams, permissions, refresh_tokens, audit_log, ingest_jobs, conflicts + seed dei 4 ruoli |
 
 Entrambi gli script sono **idempotenti**: possono essere ri-applicati senza errori.
@@ -46,6 +47,22 @@ docker compose exec -T neo4j cypher-shell -u neo4j -p km_dev_password   "SHOW IN
 ```
 
 Attesi: 4 constraint di unicità (`entity_id_unique`, `fact_id_unique`, `source_id_unique`, `version_id_unique`) e gli indici elencati nello schema.
+
+### Neo4j — applicare `002_domain_schema.cypher` (Iterazione A, WP-A4)
+
+```bash
+# Dal repository root (stessa modalità del 001: mount ./db/neo4j/ in /import)
+docker compose exec -T neo4j cypher-shell -u neo4j -p km_dev_password -f /import/002_domain_schema.cypher
+```
+
+Verifica:
+
+```bash
+docker compose exec -T neo4j cypher-shell -u neo4j -p km_dev_password "SHOW CONSTRAINTS;"
+docker compose exec -T neo4j cypher-shell -u neo4j -p km_dev_password "SHOW INDEXES;"
+```
+
+Attesi: 3 nuovi constraint di unicità (`document_id_unique`, `canonical_term_id_unique`, `domain_pack_id_unique`), 2 indici full-text (`document_title_fulltext`, `canonical_term_label_en_fulltext`) e 1 indice vettoriale (`document_embedding_vector`, 384 dimensioni, cosine). L'indice vettoriale è supportato da Neo4j 5.26.30 Community (verificato empiricamente).
 
 ## PostgreSQL — applicare `001_init.sql`
 

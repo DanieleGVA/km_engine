@@ -1,0 +1,29 @@
+# INGREDIENTI: id FoodOn -> label EN/IT, alias, unità default (seed WP-A4)
+ING-WHEAT-FLOUR:
+  label_en: Wheat flour
+  label_it: Farina di grano
+  aliases: [farina, farina 00]
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001117
+  definition: Farina ottenuta dalla macinazione del grano tenero.
+  is_public: true
+ING-TOMATO:
+  label_en: Tomato
+  label_it: Pomodoro
+  aliases: [pomodoro, pomodori pelati]
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001118
+  definition: Frutto della pianta di pomodoro.
+  is_public: true
+ING-RICE:
+  label_en: Rice
+  label_it: Riso
+  aliases: [riso, riso carnaroli]
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001119
+  definition: Cereale della specie Oryza sativa.
+  is_public: true
+ING-OLIVE-OIL:
+  label_en: Olive oil
+  label_it: Olio extravergine di oliva
+  aliases: [olio extravergine di oliva, olio]
+  ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001120
+  definition: Olio ottenuto dalla spremitura delle olive.
+  is_public: true

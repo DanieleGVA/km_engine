@@ -18,9 +18,20 @@ FR9 (Multilingua):
 - Se lang != "en" e translation_state == "pending", il response include
   untranslated=True per segnalare che la traduzione non è disponibile.
 - La traduzione vera è WP4/LLM; qui solo annotazione.
+
+Iterazione A (WP-A4): estensioni domain per :Document e :CanonicalTerm in
+``app/query/domain.py``, con lo stesso filtro visibilità P4 (default-deny).
 """
 from __future__ import annotations
 
+from .domain import (
+    get_document,
+    get_document_by_entity,
+    list_canonical_terms,
+    list_documents,
+    search_canonical_terms,
+    search_documents,
+)
 from .engine import (
     get_entity_with_history,
     localize_response,
@@ -31,10 +42,16 @@ from .engine import (
 )
 
 __all__ = [
+    "get_document",
+    "get_document_by_entity",
     "get_entity_with_history",
+    "list_canonical_terms",
+    "list_documents",
     "localize_response",
     "query_entities",
     "query_facts",
     "query_relations",
     "search",
+    "search_canonical_terms",
+    "search_documents",
 ]

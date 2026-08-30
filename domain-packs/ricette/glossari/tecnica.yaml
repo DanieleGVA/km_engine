@@ -1,0 +1,25 @@
+# TECNICHE: id -> label EN/IT, alias, definizione (seed WP-A4)
+TECH-BLANCH:
+  label_en: Blanching
+  label_it: Sbollentare
+  aliases: [sbollentare, scottare]
+  definition: Immersione breve in acqua bollente seguita da raffreddamento rapido.
+  is_public: true
+TECH-SAUTE:
+  label_en: Sautéing
+  label_it: Soffriggere
+  aliases: [soffriggere, rosolare]
+  definition: Cottura rapida in poco grasso a fuoco vivo.
+  is_public: true
+TECH-BOIL:
+  label_en: Boiling
+  label_it: Bollire
+  aliases: [bollire, lessare]
+  definition: Cottura in liquido a temperatura di ebollizione.
+  is_public: true
+TECH-BAKE:
+  label_en: Baking
+  label_it: Cuocere al forno
+  aliases: [cuocere al forno, infornare]
+  definition: Cottura a calore secco in forno.
+  is_public: true
