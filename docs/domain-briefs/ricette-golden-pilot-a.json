@@ -1,0 +1,661 @@
+{
+  "corpus_size": 15,
+  "coverage": 0.9677,
+  "decisions": [
+    {
+      "canonical_item": "spaghetti",
+      "doc": "ric-001-pomodoro.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-SPAGHETTI"
+    },
+    {
+      "canonical_item": "peeled tomatoes",
+      "doc": "ric-001-pomodoro.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-TOMATO-PEELED"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-001-pomodoro.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "garlic",
+      "doc": "ric-001-pomodoro.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-GARLIC"
+    },
+    {
+      "canonical_item": "basil",
+      "doc": "ric-001-pomodoro.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-BASIL"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-001-pomodoro.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "carnaroli rice",
+      "doc": "ric-002-risotto.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-RICE-CARNAROLI"
+    },
+    {
+      "canonical_item": "saffron",
+      "doc": "ric-002-risotto.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-SAFFRON"
+    },
+    {
+      "canonical_item": "vegetable broth",
+      "doc": "ric-002-risotto.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-VEGETABLE-BROTH"
+    },
+    {
+      "canonical_item": "butter",
+      "doc": "ric-002-risotto.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-BUTTER"
+    },
+    {
+      "canonical_item": "Parmesan cheese",
+      "doc": "ric-002-risotto.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-PARMESAN"
+    },
+    {
+      "canonical_item": "onion",
+      "doc": "ric-002-risotto.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-ONION"
+    },
+    {
+      "canonical_item": "wheat flour",
+      "doc": "ric-003-torta.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-WHEAT-FLOUR"
+    },
+    {
+      "canonical_item": "sugar",
+      "doc": "ric-003-torta.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-SUGAR"
+    },
+    {
+      "canonical_item": "egg",
+      "doc": "ric-003-torta.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-EGG"
+    },
+    {
+      "canonical_item": "butter",
+      "doc": "ric-003-torta.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-BUTTER"
+    },
+    {
+      "canonical_item": "apple",
+      "doc": "ric-003-torta.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-APPLE"
+    },
+    {
+      "canonical_item": "baking powder",
+      "doc": "ric-003-torta.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-BAKING-POWDER"
+    },
+    {
+      "canonical_item": "lemon",
+      "doc": "ric-003-torta.md",
+      "index": 6,
+      "resolved": true,
+      "term_id": "ING-LEMON"
+    },
+    {
+      "canonical_item": "durum wheat flour",
+      "doc": "ric-004-pane.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-DURUM-FLOUR"
+    },
+    {
+      "canonical_item": "water",
+      "doc": "ric-004-pane.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-WATER"
+    },
+    {
+      "canonical_item": "brewer's yeast",
+      "doc": "ric-004-pane.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-BREWERS-YEAST"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-004-pane.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-004-pane.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "chicken (1.2 kg)",
+      "doc": "ric-005-pollo.md",
+      "index": 0,
+      "resolved": false,
+      "term_id": null
+    },
+    {
+      "canonical_item": "rosemary",
+      "doc": "ric-005-pollo.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-ROSEMARY"
+    },
+    {
+      "canonical_item": "garlic",
+      "doc": "ric-005-pollo.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-GARLIC"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-005-pollo.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "lemon",
+      "doc": "ric-005-pollo.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-LEMON"
+    },
+    {
+      "canonical_item": "coarse salt",
+      "doc": "ric-005-pollo.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-COARSE-SALT"
+    },
+    {
+      "canonical_item": "buffalo mozzarella",
+      "doc": "ric-006-insalata.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-BUFFALO-MOZZARELLA"
+    },
+    {
+      "canonical_item": "tomato",
+      "doc": "ric-006-insalata.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-TOMATO"
+    },
+    {
+      "canonical_item": "basil",
+      "doc": "ric-006-insalata.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-BASIL"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-006-insalata.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "oregano",
+      "doc": "ric-006-insalata.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-OREGANO"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-006-insalata.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "lentils",
+      "doc": "ric-007-zuppa.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-LENTILS"
+    },
+    {
+      "canonical_item": "carrot",
+      "doc": "ric-007-zuppa.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-CARROT"
+    },
+    {
+      "canonical_item": "celery",
+      "doc": "ric-007-zuppa.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-CELERY"
+    },
+    {
+      "canonical_item": "onion",
+      "doc": "ric-007-zuppa.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-ONION"
+    },
+    {
+      "canonical_item": "vegetable broth",
+      "doc": "ric-007-zuppa.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-VEGETABLE-BROTH"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-007-zuppa.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-007-zuppa.md",
+      "index": 6,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "egg",
+      "doc": "ric-008-frittata.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-EGG"
+    },
+    {
+      "canonical_item": "zucchini",
+      "doc": "ric-008-frittata.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-ZUCCHINI"
+    },
+    {
+      "canonical_item": "Parmesan cheese",
+      "doc": "ric-008-frittata.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-PARMESAN"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-008-frittata.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "black pepper",
+      "doc": "ric-008-frittata.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-BLACK-PEPPER"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-008-frittata.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "mascarpone",
+      "doc": "ric-009-tiramisu.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-MASCARPONE"
+    },
+    {
+      "canonical_item": "egg",
+      "doc": "ric-009-tiramisu.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-EGG"
+    },
+    {
+      "canonical_item": "sugar",
+      "doc": "ric-009-tiramisu.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-SUGAR"
+    },
+    {
+      "canonical_item": "ladyfingers",
+      "doc": "ric-009-tiramisu.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-LADYFINGERS"
+    },
+    {
+      "canonical_item": "espresso coffee",
+      "doc": "ric-009-tiramisu.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-ESPRESSO"
+    },
+    {
+      "canonical_item": "cocoa powder",
+      "doc": "ric-009-tiramisu.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-COCOA-POWDER"
+    },
+    {
+      "canonical_item": "ground beef",
+      "doc": "ric-010-sugo.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-GROUND-BEEF"
+    },
+    {
+      "canonical_item": "onion",
+      "doc": "ric-010-sugo.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-ONION"
+    },
+    {
+      "canonical_item": "carrot",
+      "doc": "ric-010-sugo.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-CARROT"
+    },
+    {
+      "canonical_item": "celery",
+      "doc": "ric-010-sugo.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-CELERY"
+    },
+    {
+      "canonical_item": "peeled tomatoes",
+      "doc": "ric-010-sugo.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-TOMATO-PEELED"
+    },
+    {
+      "canonical_item": "red wine",
+      "doc": "ric-010-sugo.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-RED-WINE"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-010-sugo.md",
+      "index": 6,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-010-sugo.md",
+      "index": 7,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "wheat flour",
+      "doc": "ric-011-crepes.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-WHEAT-FLOUR"
+    },
+    {
+      "canonical_item": "egg",
+      "doc": "ric-011-crepes.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-EGG"
+    },
+    {
+      "canonical_item": "milk",
+      "doc": "ric-011-crepes.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-MILK"
+    },
+    {
+      "canonical_item": "butter",
+      "doc": "ric-011-crepes.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-BUTTER"
+    },
+    {
+      "canonical_item": "sugar",
+      "doc": "ric-011-crepes.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-SUGAR"
+    },
+    {
+      "canonical_item": "hazelnut spread",
+      "doc": "ric-011-crepes.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-HAZELNUT-SPREAD"
+    },
+    {
+      "canonical_item": "ground meat",
+      "doc": "ric-012-polpette.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-GROUND-MEAT"
+    },
+    {
+      "canonical_item": "breadcrumbs",
+      "doc": "ric-012-polpette.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-BREADCRUMBS"
+    },
+    {
+      "canonical_item": "egg",
+      "doc": "ric-012-polpette.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-EGG"
+    },
+    {
+      "canonical_item": "Parmesan cheese",
+      "doc": "ric-012-polpette.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-PARMESAN"
+    },
+    {
+      "canonical_item": "garlic",
+      "doc": "ric-012-polpette.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-GARLIC"
+    },
+    {
+      "canonical_item": "parsley",
+      "doc": "ric-012-polpette.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-PARSLEY"
+    },
+    {
+      "canonical_item": "tomato passata",
+      "doc": "ric-012-polpette.md",
+      "index": 6,
+      "resolved": true,
+      "term_id": "ING-TOMATO-PASSATA"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-012-polpette.md",
+      "index": 7,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-012-polpette.md",
+      "index": 8,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "asparagus",
+      "doc": "ric-101-asparagi-burro.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-ASPARAGUS"
+    },
+    {
+      "canonical_item": "Grana Padano",
+      "doc": "ric-101-asparagi-burro.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-GRANA"
+    },
+    {
+      "canonical_item": "butter",
+      "doc": "ric-101-asparagi-burro.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-BUTTER"
+    },
+    {
+      "canonical_item": "salt",
+      "doc": "ric-101-asparagi-burro.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-SALT"
+    },
+    {
+      "canonical_item": "clams",
+      "doc": "ric-102-fregola-vongole.md",
+      "index": 0,
+      "resolved": true,
+      "term_id": "ING-CLAMS"
+    },
+    {
+      "canonical_item": "fregola",
+      "doc": "ric-102-fregola-vongole.md",
+      "index": 1,
+      "resolved": true,
+      "term_id": "ING-FREGOLA"
+    },
+    {
+      "canonical_item": "tomato sauce",
+      "doc": "ric-102-fregola-vongole.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-TOMATO-SAUCE"
+    },
+    {
+      "canonical_item": "extra virgin olive oil",
+      "doc": "ric-102-fregola-vongole.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-OLIVE-OIL"
+    },
+    {
+      "canonical_item": "fish stock",
+      "doc": "ric-102-fregola-vongole.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-FISH-STOCK"
+    },
+    {
+      "canonical_item": "garlic",
+      "doc": "ric-102-fregola-vongole.md",
+      "index": 5,
+      "resolved": true,
+      "term_id": "ING-GARLIC"
+    },
+    {
+      "canonical_item": "sweet almonds sbucciate",
+      "doc": "ric-103-amaretti.md",
+      "index": 0,
+      "resolved": false,
+      "term_id": null
+    },
+    {
+      "canonical_item": "bitter almonds sbucciate",
+      "doc": "ric-103-amaretti.md",
+      "index": 1,
+      "resolved": false,
+      "term_id": null
+    },
+    {
+      "canonical_item": "sugar",
+      "doc": "ric-103-amaretti.md",
+      "index": 2,
+      "resolved": true,
+      "term_id": "ING-SUGAR"
+    },
+    {
+      "canonical_item": "icing sugar",
+      "doc": "ric-103-amaretti.md",
+      "index": 3,
+      "resolved": true,
+      "term_id": "ING-ICING-SUGAR"
+    },
+    {
+      "canonical_item": "egg whites",
+      "doc": "ric-103-amaretti.md",
+      "index": 4,
+      "resolved": true,
+      "term_id": "ING-EGG-WHITES"
+    }
+  ],
+  "generated_by": "app/agents/evaluator.py",
+  "resolved_mentions": 90,
+  "total_mentions": 93,
+  "version": "1.0"
+}

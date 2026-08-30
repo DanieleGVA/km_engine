@@ -1,0 +1,44 @@
+entries:
+- aliases:
+  - soffriggere
+  definition: ''
+  id: TEC-SOFFRITTO
+  labels_en: soffritto
+  labels_it: soffritto
+  ontology_uri: null
+- aliases:
+  - rosolare
+  definition: ''
+  id: TEC-BROWNING
+  labels_en: browning
+  labels_it: rosolatura
+  ontology_uri: null
+- aliases:
+  - mantecare
+  definition: ''
+  id: TEC-MANTECATURA
+  labels_en: mantecatura
+  labels_it: mantecatura
+  ontology_uri: null
+- aliases:
+  - tostare
+  definition: ''
+  id: TEC-TOASTING
+  labels_en: toasting
+  labels_it: tostatura
+  ontology_uri: null
+- aliases:
+  - depurare
+  definition: ''
+  id: TEC-PURGING
+  labels_en: purging
+  labels_it: depurazione
+  ontology_uri: null
+- aliases:
+  - appassire
+  definition: ''
+  id: TEC-WILTING
+  labels_en: wilting
+  labels_it: appassimento
+  ontology_uri: null
+name: tecnica

@@ -1,0 +1,327 @@
+entries:
+- aliases: []
+  definition: ''
+  id: ING-EXTRA-VIRGIN-OLIVE-OIL
+  labels_en: extra virgin olive oil
+  labels_it: olio extravergine oliva
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-SALT
+  labels_en: salt
+  labels_it: sale
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-EGG
+  labels_en: egg
+  labels_it: uova
+  ontology_uri: null
+- aliases:
+  - burro fuso
+  definition: ''
+  id: ING-BUTTER
+  labels_en: butter
+  labels_it: burro
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-GARLIC
+  labels_en: garlic
+  labels_it: aglio
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-SUGAR
+  labels_en: sugar
+  labels_it: zucchero
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-ONION
+  labels_en: onion
+  labels_it: cipolla
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-PARMESAN-CHEESE
+  labels_en: parmesan cheese
+  labels_it: parmigiano reggiano
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-BASIL
+  labels_en: basil
+  labels_it: basilico
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-CARROT
+  labels_en: carrot
+  labels_it: carota
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-CELERY
+  labels_en: celery
+  labels_it: costa sedano
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-LEMON
+  labels_en: lemon
+  labels_it: limone
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-PEELED-TOMATOES
+  labels_en: peeled tomatoes
+  labels_it: pomodori pelati
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-VEGETABLE-BROTH
+  labels_en: vegetable broth
+  labels_it: brodo vegetale
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-WHEAT-FLOUR
+  labels_en: wheat flour
+  labels_it: farina 00
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-APPLE
+  labels_en: apple
+  labels_it: mele
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-ASPARAGUS
+  labels_en: asparagus
+  labels_it: asparagi
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-BAKING-POWDER
+  labels_en: baking powder
+  labels_it: lievito per dolci
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-BITTER-ALMONDS-SBUCCIATE
+  labels_en: bitter almonds sbucciate
+  labels_it: mandorle amare sbucciate
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-BLACK-PEPPER
+  labels_en: black pepper
+  labels_it: pepe nero
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-BREADCRUMBS
+  labels_en: breadcrumbs
+  labels_it: pangrattato
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-BREWER-S-YEAST
+  labels_en: brewer's yeast
+  labels_it: lievito birra
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-BUFFALO-MOZZARELLA
+  labels_en: buffalo mozzarella
+  labels_it: mozzarella bufala
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-CARNAROLI-RICE
+  labels_en: carnaroli rice
+  labels_it: riso carnaroli
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-CHICKEN
+  labels_en: chicken
+  labels_it: pollo intero
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-CLAMS
+  labels_en: clams
+  labels_it: vongole
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-COARSE-SALT
+  labels_en: coarse salt
+  labels_it: sale grosso
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-COCOA-POWDER
+  labels_en: cocoa powder
+  labels_it: cacao amaro in polvere
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-DURUM-WHEAT-FLOUR
+  labels_en: durum wheat flour
+  labels_it: farina grano duro
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-EGG-WHITES
+  labels_en: egg whites
+  labels_it: albumi
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-ESPRESSO-COFFEE
+  labels_en: espresso coffee
+  labels_it: caffè espresso
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-FISH-STOCK
+  labels_en: fish stock
+  labels_it: fumetto pesce
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-FREGOLA
+  labels_en: fregola
+  labels_it: fregola
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-GRANA-PADANO
+  labels_en: grana padano
+  labels_it: grana grattugiato
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-GROUND-BEEF
+  labels_en: ground beef
+  labels_it: carne macinata manzo
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-GROUND-MEAT
+  labels_en: ground meat
+  labels_it: carne macinata mista
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-HAZELNUT-SPREAD
+  labels_en: hazelnut spread
+  labels_it: crema spalmabile alle nocciole
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-ICING-SUGAR
+  labels_en: icing sugar
+  labels_it: zucchero a velo
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-LADYFINGERS
+  labels_en: ladyfingers
+  labels_it: savoiardi
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-LENTILS
+  labels_en: lentils
+  labels_it: lenticchie secche
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-MASCARPONE
+  labels_en: mascarpone
+  labels_it: mascarpone
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-MILK
+  labels_en: milk
+  labels_it: latte
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-OREGANO
+  labels_en: oregano
+  labels_it: origano
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-PARSLEY
+  labels_en: parsley
+  labels_it: prezzemolo
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-RED-WINE
+  labels_en: red wine
+  labels_it: vino rosso
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-ROSEMARY
+  labels_en: rosemary
+  labels_it: rosmarino
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-SAFFRON
+  labels_en: saffron
+  labels_it: zafferano
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-SPAGHETTI
+  labels_en: spaghetti
+  labels_it: spaghetti
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-SWEET-ALMONDS-SBUCCIATE
+  labels_en: sweet almonds sbucciate
+  labels_it: mandorle dolci sbucciate
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-TOMATO
+  labels_en: tomato
+  labels_it: pomodori maturi
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-TOMATO-PASSATA
+  labels_en: tomato passata
+  labels_it: passata pomodoro
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-TOMATO-SAUCE
+  labels_en: tomato sauce
+  labels_it: salsa pomodoro
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-WATER
+  labels_en: water
+  labels_it: acqua
+  ontology_uri: null
+- aliases: []
+  definition: ''
+  id: ING-ZUCCHINI
+  labels_en: zucchini
+  labels_it: zucchine medie
+  ontology_uri: null
+name: ingredienti

@@ -1,0 +1,28 @@
+{
+  "draft_dir": "/Users/daniele.buonaiuto/km_engine/domain-packs/ricette-agents-draft",
+  "generated_by": "app/agents/evaluator.py",
+  "manual_dir": "/Users/daniele.buonaiuto/km_engine/domain-packs/ricette",
+  "metrics": {
+    "draft_coverage": 0.9892,
+    "draft_resolved": 92,
+    "draft_total": 93,
+    "gate": true,
+    "gate_coverage": true,
+    "gate_roundtrip": true,
+    "manual_coverage": 0.9677,
+    "manual_resolved": 90,
+    "manual_total": 93,
+    "normalization": {
+      "draft_resolved": 92,
+      "golden_resolved": 90,
+      "matches": 90,
+      "precision": 0.9783,
+      "recall": 1.0
+    },
+    "relative_coverage": 1.0222,
+    "roundtrip_ok": 15,
+    "roundtrip_ratio": 1.0,
+    "roundtrip_total": 15
+  },
+  "version": "1.0"
+}

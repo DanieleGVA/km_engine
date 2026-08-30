@@ -1,0 +1,15 @@
+name: normalizzazione
+order:
+- units
+- terms
+- structure
+unit_plural_map:
+  bustine: bustina
+  cucchiai: cucchiaio
+  foglie: foglia
+  mazzetti: mazzetto
+  pizzichi: pizzico
+  rametti: rametto
+  spicchi: spicchio
+  tazze: tazza
+version: 1.0.0

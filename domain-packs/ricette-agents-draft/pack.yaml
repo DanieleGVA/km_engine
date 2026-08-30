@@ -1,0 +1,19 @@
+canonical_language: en
+glossaries:
+- tecnica
+- ingredienti
+- stati
+language: it
+name: ricette
+ontologies:
+- prefix: foodon
+  uri: http://purl.obolibrary.org/obo/FOODON_
+- prefix: dbpedia
+  uri: http://dbpedia.org/resource/
+paths:
+  glossaries: glossari
+  rules: regole
+  template: template.md
+  units: units.yaml
+units_source: units.yaml
+version: 1.0.0

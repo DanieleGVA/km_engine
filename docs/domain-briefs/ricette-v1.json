@@ -1,0 +1,1662 @@
+{
+  "ambiguities": [
+    {
+      "candidates": [
+        "zucchero"
+      ],
+      "note": "surface form 'zucchero a velo' contains 'zucchero'; the modifier is not an alias (P5 human gate)",
+      "term": "zucchero a velo"
+    },
+    {
+      "candidates": [
+        "sale"
+      ],
+      "note": "surface form 'sale grosso' contains 'sale'; the modifier is not an alias (P5 human gate)",
+      "term": "sale grosso"
+    },
+    {
+      "candidates": [
+        "burro"
+      ],
+      "note": "surface form 'burro fuso' contains 'burro'; the modifier is not an alias (P5 human gate)",
+      "term": "burro fuso"
+    }
+  ],
+  "canonical_language": "en",
+  "corpus_size": 15,
+  "domain": "ricette",
+  "entities": [
+    {
+      "contexts": [
+        "2 cucchiai olio extravergine di oliva",
+        "1 cucchiaio olio extravergine di oliva",
+        "3 cucchiai olio extravergine di oliva"
+      ],
+      "frequency": 9,
+      "kind": "ingredient",
+      "source_terms": [
+        "olio extravergine oliva"
+      ],
+      "term": "extra virgin olive oil"
+    },
+    {
+      "contexts": [
+        "1 pizzico sale",
+        "10 g sale",
+        "3 g sale",
+        "5 g sale"
+      ],
+      "frequency": 8,
+      "kind": "ingredient",
+      "source_terms": [
+        "sale"
+      ],
+      "term": "salt"
+    },
+    {
+      "contexts": [
+        "3 uova",
+        "6 uova",
+        "4 uova",
+        "2 uova"
+      ],
+      "frequency": 5,
+      "kind": "ingredient",
+      "source_terms": [
+        "uova"
+      ],
+      "term": "egg"
+    },
+    {
+      "contexts": [
+        "80 g burro",
+        "100 g burro",
+        "40 g burro fuso",
+        "40 g burro"
+      ],
+      "frequency": 4,
+      "kind": "ingredient",
+      "source_terms": [
+        "burro",
+        "burro fuso"
+      ],
+      "term": "butter"
+    },
+    {
+      "contexts": [
+        "1 spicchio aglio",
+        "2 spicchi aglio"
+      ],
+      "frequency": 4,
+      "kind": "ingredient",
+      "source_terms": [
+        "aglio"
+      ],
+      "term": "garlic"
+    },
+    {
+      "contexts": [
+        "150 g zucchero",
+        "100 g zucchero",
+        "2 cucchiai zucchero",
+        "160 g zucchero"
+      ],
+      "frequency": 4,
+      "kind": "ingredient",
+      "source_terms": [
+        "zucchero"
+      ],
+      "term": "sugar"
+    },
+    {
+      "contexts": [
+        "1 cipolla"
+      ],
+      "frequency": 3,
+      "kind": "ingredient",
+      "source_terms": [
+        "cipolla"
+      ],
+      "term": "onion"
+    },
+    {
+      "contexts": [
+        "60 g parmigiano reggiano",
+        "30 g parmigiano reggiano",
+        "50 g parmigiano reggiano"
+      ],
+      "frequency": 3,
+      "kind": "ingredient",
+      "source_terms": [
+        "parmigiano reggiano"
+      ],
+      "term": "parmesan cheese"
+    },
+    {
+      "contexts": [
+        "5 foglie basilico",
+        "8 foglie basilico"
+      ],
+      "frequency": 2,
+      "kind": "ingredient",
+      "source_terms": [
+        "basilico"
+      ],
+      "term": "basil"
+    },
+    {
+      "contexts": [
+        "1 carota"
+      ],
+      "frequency": 2,
+      "kind": "ingredient",
+      "source_terms": [
+        "carota"
+      ],
+      "term": "carrot"
+    },
+    {
+      "contexts": [
+        "1 costa sedano"
+      ],
+      "frequency": 2,
+      "kind": "ingredient",
+      "source_terms": [
+        "costa sedano"
+      ],
+      "term": "celery"
+    },
+    {
+      "contexts": [
+        "1 limone"
+      ],
+      "frequency": 2,
+      "kind": "ingredient",
+      "source_terms": [
+        "limone"
+      ],
+      "term": "lemon"
+    },
+    {
+      "contexts": [
+        "400 g pomodori pelati",
+        "700 g pomodori pelati"
+      ],
+      "frequency": 2,
+      "kind": "ingredient",
+      "source_terms": [
+        "pomodori pelati"
+      ],
+      "term": "peeled tomatoes"
+    },
+    {
+      "contexts": [
+        "1.5 l brodo vegetale",
+        "1 l brodo vegetale"
+      ],
+      "frequency": 2,
+      "kind": "ingredient",
+      "source_terms": [
+        "brodo vegetale"
+      ],
+      "term": "vegetable broth"
+    },
+    {
+      "contexts": [
+        "300 g farina 00",
+        "250 g farina 00"
+      ],
+      "frequency": 2,
+      "kind": "ingredient",
+      "source_terms": [
+        "farina 00"
+      ],
+      "term": "wheat flour"
+    },
+    {
+      "contexts": [
+        "2 mele"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "mele"
+      ],
+      "term": "apple"
+    },
+    {
+      "contexts": [
+        "1.5 kg asparagi"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "asparagi"
+      ],
+      "term": "asparagus"
+    },
+    {
+      "contexts": [
+        "1 bustina lievito per dolci"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "lievito per dolci"
+      ],
+      "term": "baking powder"
+    },
+    {
+      "contexts": [
+        "80 g mandorle amare sbucciate"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "mandorle amare sbucciate"
+      ],
+      "term": "bitter almonds sbucciate"
+    },
+    {
+      "contexts": [
+        "1 pizzico pepe nero"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "pepe nero"
+      ],
+      "term": "black pepper"
+    },
+    {
+      "contexts": [
+        "80 g pangrattato"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "pangrattato"
+      ],
+      "term": "breadcrumbs"
+    },
+    {
+      "contexts": [
+        "10 g lievito di birra"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "lievito birra"
+      ],
+      "term": "brewer's yeast"
+    },
+    {
+      "contexts": [
+        "300 g mozzarella di bufala"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "mozzarella bufala"
+      ],
+      "term": "buffalo mozzarella"
+    },
+    {
+      "contexts": [
+        "320 g riso carnaroli"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "riso carnaroli"
+      ],
+      "term": "carnaroli rice"
+    },
+    {
+      "contexts": [
+        "1 pollo intero (1.2 kg)"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "pollo intero"
+      ],
+      "term": "chicken"
+    },
+    {
+      "contexts": [
+        "1 kg vongole"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "vongole"
+      ],
+      "term": "clams"
+    },
+    {
+      "contexts": [
+        "5 g sale grosso"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "sale grosso"
+      ],
+      "term": "coarse salt"
+    },
+    {
+      "contexts": [
+        "30 g cacao amaro in polvere"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "cacao amaro in polvere"
+      ],
+      "term": "cocoa powder"
+    },
+    {
+      "contexts": [
+        "500 g farina di grano duro"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "farina grano duro"
+      ],
+      "term": "durum wheat flour"
+    },
+    {
+      "contexts": [
+        "4 albumi"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "albumi"
+      ],
+      "term": "egg whites"
+    },
+    {
+      "contexts": [
+        "3 tazze caffè espresso"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "caffè espresso"
+      ],
+      "term": "espresso coffee"
+    },
+    {
+      "contexts": [
+        "1 l fumetto di pesce"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "fumetto pesce"
+      ],
+      "term": "fish stock"
+    },
+    {
+      "contexts": [
+        "280 g fregola"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "fregola"
+      ],
+      "term": "fregola"
+    },
+    {
+      "contexts": [
+        "50 g grana grattugiato"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "grana grattugiato"
+      ],
+      "term": "grana padano"
+    },
+    {
+      "contexts": [
+        "500 g carne macinata di manzo"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "carne macinata manzo"
+      ],
+      "term": "ground beef"
+    },
+    {
+      "contexts": [
+        "400 g carne macinata mista"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "carne macinata mista"
+      ],
+      "term": "ground meat"
+    },
+    {
+      "contexts": [
+        "200 g crema spalmabile alle nocciole"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "crema spalmabile alle nocciole"
+      ],
+      "term": "hazelnut spread"
+    },
+    {
+      "contexts": [
+        "80 g zucchero a velo"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "zucchero a velo"
+      ],
+      "term": "icing sugar"
+    },
+    {
+      "contexts": [
+        "300 g savoiardi"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "savoiardi"
+      ],
+      "term": "ladyfingers"
+    },
+    {
+      "contexts": [
+        "250 g lenticchie secche"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "lenticchie secche"
+      ],
+      "term": "lentils"
+    },
+    {
+      "contexts": [
+        "500 g mascarpone"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "mascarpone"
+      ],
+      "term": "mascarpone"
+    },
+    {
+      "contexts": [
+        "500 ml latte"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "latte"
+      ],
+      "term": "milk"
+    },
+    {
+      "contexts": [
+        "1 pizzico origano"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "origano"
+      ],
+      "term": "oregano"
+    },
+    {
+      "contexts": [
+        "1 mazzetto prezzemolo"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "prezzemolo"
+      ],
+      "term": "parsley"
+    },
+    {
+      "contexts": [
+        "150 ml vino rosso"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "vino rosso"
+      ],
+      "term": "red wine"
+    },
+    {
+      "contexts": [
+        "4 rametti rosmarino"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "rosmarino"
+      ],
+      "term": "rosemary"
+    },
+    {
+      "contexts": [
+        "1 g zafferano"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "zafferano"
+      ],
+      "term": "saffron"
+    },
+    {
+      "contexts": [
+        "320 g spaghetti"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "spaghetti"
+      ],
+      "term": "spaghetti"
+    },
+    {
+      "contexts": [
+        "120 g mandorle dolci sbucciate"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "mandorle dolci sbucciate"
+      ],
+      "term": "sweet almonds sbucciate"
+    },
+    {
+      "contexts": [
+        "4 pomodori maturi"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "pomodori maturi"
+      ],
+      "term": "tomato"
+    },
+    {
+      "contexts": [
+        "600 g passata di pomodoro"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "passata pomodoro"
+      ],
+      "term": "tomato passata"
+    },
+    {
+      "contexts": [
+        "200 g salsa di pomodoro"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "salsa pomodoro"
+      ],
+      "term": "tomato sauce"
+    },
+    {
+      "contexts": [
+        "300 ml acqua"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "acqua"
+      ],
+      "term": "water"
+    },
+    {
+      "contexts": [
+        "2 zucchine medie"
+      ],
+      "frequency": 1,
+      "kind": "ingredient",
+      "source_terms": [
+        "zucchine medie"
+      ],
+      "term": "zucchini"
+    },
+    {
+      "contexts": [
+        "Soffriggere l'aglio nell'olio per 2 minuti.",
+        "Soffriggere il trito nell'olio per 5 minuti."
+      ],
+      "frequency": 3,
+      "kind": "technique",
+      "source_terms": [
+        "soffritto",
+        "soffriggere"
+      ],
+      "term": "soffritto"
+    },
+    {
+      "contexts": [
+        "Aggiungere la carne e rosolare per 10 minuti.",
+        "Scolarli e farli rosolare in padella con il burro per 4 minuti."
+      ],
+      "frequency": 2,
+      "kind": "technique",
+      "source_terms": [
+        "rosolatura",
+        "rosolare"
+      ],
+      "term": "browning"
+    },
+    {
+      "contexts": [
+        "Mantecare con il basilico e servire.",
+        "Mantecare con parmigiano e burro, riposare 2 minuti."
+      ],
+      "frequency": 2,
+      "kind": "technique",
+      "source_terms": [
+        "mantecatura",
+        "mantecare"
+      ],
+      "term": "mantecatura"
+    },
+    {
+      "contexts": [
+        "Tostare il riso per 2 minuti.",
+        "Tostare le mandorle in forno a 200 °C per qualche minuto."
+      ],
+      "frequency": 2,
+      "kind": "technique",
+      "source_terms": [
+        "tostatura",
+        "tostare"
+      ],
+      "term": "toasting"
+    },
+    {
+      "contexts": [
+        "Lavare le vongole e farle depurare dalla sabbia in acqua fredda per 2 ore."
+      ],
+      "frequency": 1,
+      "kind": "technique",
+      "source_terms": [
+        "depurazione",
+        "depurare"
+      ],
+      "term": "purging"
+    },
+    {
+      "contexts": [
+        "Far appassire l'aglio nell'olio per 4 minuti ed eliminarlo."
+      ],
+      "frequency": 1,
+      "kind": "technique",
+      "source_terms": [
+        "appassimento",
+        "appassire"
+      ],
+      "term": "wilting"
+    },
+    {
+      "contexts": [
+        "Cuocerli in acqua bollente salata per 5 minuti, mantenendoli sodi."
+      ],
+      "frequency": 1,
+      "kind": "state",
+      "source_terms": [
+        "sodo",
+        "soda",
+        "sodi",
+        "sode"
+      ],
+      "term": "firm"
+    },
+    {
+      "contexts": [
+        "Cospargere con il grana e proseguire la cottura finché iniziano a dorarsi."
+      ],
+      "frequency": 1,
+      "kind": "state",
+      "source_terms": [
+        "dorato",
+        "dorata",
+        "dorati",
+        "dorate",
+        "dorarsi"
+      ],
+      "term": "golden"
+    }
+  ],
+  "generated_at": "2026-08-30T19:11:33.497575+00:00",
+  "language": "it",
+  "ontologies": [
+    {
+      "note": "FoodOn food ontology (P7)",
+      "prefix": "foodon",
+      "uri": "http://purl.obolibrary.org/obo/FOODON_"
+    },
+    {
+      "note": "DBpedia resources (P7)",
+      "prefix": "dbpedia",
+      "uri": "http://dbpedia.org/resource/"
+    }
+  ],
+  "schema_version": "1.0",
+  "stats": {
+    "ambiguities": 3,
+    "ingredient_entities": 54,
+    "pairing_mismatches": 0,
+    "source_documents": 15,
+    "state_entities": 2,
+    "technique_entities": 6,
+    "unit_types": 14
+  },
+  "units": [
+    {
+      "examples": [
+        "320 g spaghetti",
+        "400 g pomodori pelati",
+        "320 g riso carnaroli",
+        "1 g zafferano",
+        "80 g burro",
+        "60 g parmigiano reggiano",
+        "300 g farina 00",
+        "150 g zucchero",
+        "100 g burro",
+        "500 g farina di grano duro",
+        "10 g lievito di birra",
+        "10 g sale",
+        "5 g sale grosso",
+        "300 g mozzarella di bufala",
+        "3 g sale",
+        "250 g lenticchie secche",
+        "5 g sale",
+        "30 g parmigiano reggiano",
+        "500 g mascarpone",
+        "100 g zucchero",
+        "300 g savoiardi",
+        "30 g cacao amaro in polvere",
+        "500 g carne macinata di manzo",
+        "700 g pomodori pelati",
+        "250 g farina 00",
+        "40 g burro fuso",
+        "200 g crema spalmabile alle nocciole",
+        "400 g carne macinata mista",
+        "80 g pangrattato",
+        "50 g parmigiano reggiano",
+        "600 g passata di pomodoro",
+        "50 g grana grattugiato",
+        "40 g burro",
+        "280 g fregola",
+        "200 g salsa di pomodoro",
+        "120 g mandorle dolci sbucciate",
+        "80 g mandorle amare sbucciate",
+        "160 g zucchero",
+        "80 g zucchero a velo"
+      ],
+      "frequency": 84,
+      "unit": "g"
+    },
+    {
+      "examples": [
+        "2 cucchiai olio extravergine di oliva",
+        "3 cucchiai olio extravergine di oliva",
+        "2 cucchiai zucchero"
+      ],
+      "frequency": 18,
+      "unit": "cucchiai"
+    },
+    {
+      "examples": [
+        "1 pizzico sale",
+        "1 pizzico origano",
+        "1 pizzico pepe nero"
+      ],
+      "frequency": 8,
+      "unit": "pizzico"
+    },
+    {
+      "examples": [
+        "1.5 l brodo vegetale",
+        "1 l brodo vegetale",
+        "1 l fumetto di pesce"
+      ],
+      "frequency": 6,
+      "unit": "l"
+    },
+    {
+      "examples": [
+        "300 ml acqua",
+        "150 ml vino rosso",
+        "500 ml latte"
+      ],
+      "frequency": 6,
+      "unit": "ml"
+    },
+    {
+      "examples": [
+        "1 spicchio aglio"
+      ],
+      "frequency": 6,
+      "unit": "spicchio"
+    },
+    {
+      "examples": [
+        "5 foglie basilico",
+        "8 foglie basilico"
+      ],
+      "frequency": 4,
+      "unit": "foglie"
+    },
+    {
+      "examples": [
+        "1.5 kg asparagi",
+        "1 kg vongole"
+      ],
+      "frequency": 4,
+      "unit": "kg"
+    },
+    {
+      "examples": [
+        "1 bustina lievito per dolci"
+      ],
+      "frequency": 2,
+      "unit": "bustina"
+    },
+    {
+      "examples": [
+        "1 cucchiaio olio extravergine di oliva"
+      ],
+      "frequency": 2,
+      "unit": "cucchiaio"
+    },
+    {
+      "examples": [
+        "1 mazzetto prezzemolo"
+      ],
+      "frequency": 2,
+      "unit": "mazzetto"
+    },
+    {
+      "examples": [
+        "4 rametti rosmarino"
+      ],
+      "frequency": 2,
+      "unit": "rametti"
+    },
+    {
+      "examples": [
+        "2 spicchi aglio"
+      ],
+      "frequency": 2,
+      "unit": "spicchi"
+    },
+    {
+      "examples": [
+        "3 tazze caffè espresso"
+      ],
+      "frequency": 2,
+      "unit": "tazze"
+    }
+  ],
+  "version": "1.0.0",
+  "vocabularies": [
+    {
+      "entries": [
+        {
+          "contexts": [
+            "2 cucchiai olio extravergine di oliva",
+            "1 cucchiaio olio extravergine di oliva",
+            "3 cucchiai olio extravergine di oliva"
+          ],
+          "frequency": 9,
+          "kind": "ingredient",
+          "source_terms": [
+            "olio extravergine oliva"
+          ],
+          "term": "extra virgin olive oil"
+        },
+        {
+          "contexts": [
+            "1 pizzico sale",
+            "10 g sale",
+            "3 g sale",
+            "5 g sale"
+          ],
+          "frequency": 8,
+          "kind": "ingredient",
+          "source_terms": [
+            "sale"
+          ],
+          "term": "salt"
+        },
+        {
+          "contexts": [
+            "3 uova",
+            "6 uova",
+            "4 uova",
+            "2 uova"
+          ],
+          "frequency": 5,
+          "kind": "ingredient",
+          "source_terms": [
+            "uova"
+          ],
+          "term": "egg"
+        },
+        {
+          "contexts": [
+            "80 g burro",
+            "100 g burro",
+            "40 g burro fuso",
+            "40 g burro"
+          ],
+          "frequency": 4,
+          "kind": "ingredient",
+          "source_terms": [
+            "burro",
+            "burro fuso"
+          ],
+          "term": "butter"
+        },
+        {
+          "contexts": [
+            "1 spicchio aglio",
+            "2 spicchi aglio"
+          ],
+          "frequency": 4,
+          "kind": "ingredient",
+          "source_terms": [
+            "aglio"
+          ],
+          "term": "garlic"
+        },
+        {
+          "contexts": [
+            "150 g zucchero",
+            "100 g zucchero",
+            "2 cucchiai zucchero",
+            "160 g zucchero"
+          ],
+          "frequency": 4,
+          "kind": "ingredient",
+          "source_terms": [
+            "zucchero"
+          ],
+          "term": "sugar"
+        },
+        {
+          "contexts": [
+            "1 cipolla"
+          ],
+          "frequency": 3,
+          "kind": "ingredient",
+          "source_terms": [
+            "cipolla"
+          ],
+          "term": "onion"
+        },
+        {
+          "contexts": [
+            "60 g parmigiano reggiano",
+            "30 g parmigiano reggiano",
+            "50 g parmigiano reggiano"
+          ],
+          "frequency": 3,
+          "kind": "ingredient",
+          "source_terms": [
+            "parmigiano reggiano"
+          ],
+          "term": "parmesan cheese"
+        },
+        {
+          "contexts": [
+            "5 foglie basilico",
+            "8 foglie basilico"
+          ],
+          "frequency": 2,
+          "kind": "ingredient",
+          "source_terms": [
+            "basilico"
+          ],
+          "term": "basil"
+        },
+        {
+          "contexts": [
+            "1 carota"
+          ],
+          "frequency": 2,
+          "kind": "ingredient",
+          "source_terms": [
+            "carota"
+          ],
+          "term": "carrot"
+        },
+        {
+          "contexts": [
+            "1 costa sedano"
+          ],
+          "frequency": 2,
+          "kind": "ingredient",
+          "source_terms": [
+            "costa sedano"
+          ],
+          "term": "celery"
+        },
+        {
+          "contexts": [
+            "1 limone"
+          ],
+          "frequency": 2,
+          "kind": "ingredient",
+          "source_terms": [
+            "limone"
+          ],
+          "term": "lemon"
+        },
+        {
+          "contexts": [
+            "400 g pomodori pelati",
+            "700 g pomodori pelati"
+          ],
+          "frequency": 2,
+          "kind": "ingredient",
+          "source_terms": [
+            "pomodori pelati"
+          ],
+          "term": "peeled tomatoes"
+        },
+        {
+          "contexts": [
+            "1.5 l brodo vegetale",
+            "1 l brodo vegetale"
+          ],
+          "frequency": 2,
+          "kind": "ingredient",
+          "source_terms": [
+            "brodo vegetale"
+          ],
+          "term": "vegetable broth"
+        },
+        {
+          "contexts": [
+            "300 g farina 00",
+            "250 g farina 00"
+          ],
+          "frequency": 2,
+          "kind": "ingredient",
+          "source_terms": [
+            "farina 00"
+          ],
+          "term": "wheat flour"
+        },
+        {
+          "contexts": [
+            "2 mele"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "mele"
+          ],
+          "term": "apple"
+        },
+        {
+          "contexts": [
+            "1.5 kg asparagi"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "asparagi"
+          ],
+          "term": "asparagus"
+        },
+        {
+          "contexts": [
+            "1 bustina lievito per dolci"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "lievito per dolci"
+          ],
+          "term": "baking powder"
+        },
+        {
+          "contexts": [
+            "80 g mandorle amare sbucciate"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "mandorle amare sbucciate"
+          ],
+          "term": "bitter almonds sbucciate"
+        },
+        {
+          "contexts": [
+            "1 pizzico pepe nero"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "pepe nero"
+          ],
+          "term": "black pepper"
+        },
+        {
+          "contexts": [
+            "80 g pangrattato"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "pangrattato"
+          ],
+          "term": "breadcrumbs"
+        },
+        {
+          "contexts": [
+            "10 g lievito di birra"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "lievito birra"
+          ],
+          "term": "brewer's yeast"
+        },
+        {
+          "contexts": [
+            "300 g mozzarella di bufala"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "mozzarella bufala"
+          ],
+          "term": "buffalo mozzarella"
+        },
+        {
+          "contexts": [
+            "320 g riso carnaroli"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "riso carnaroli"
+          ],
+          "term": "carnaroli rice"
+        },
+        {
+          "contexts": [
+            "1 pollo intero (1.2 kg)"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "pollo intero"
+          ],
+          "term": "chicken"
+        },
+        {
+          "contexts": [
+            "1 kg vongole"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "vongole"
+          ],
+          "term": "clams"
+        },
+        {
+          "contexts": [
+            "5 g sale grosso"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "sale grosso"
+          ],
+          "term": "coarse salt"
+        },
+        {
+          "contexts": [
+            "30 g cacao amaro in polvere"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "cacao amaro in polvere"
+          ],
+          "term": "cocoa powder"
+        },
+        {
+          "contexts": [
+            "500 g farina di grano duro"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "farina grano duro"
+          ],
+          "term": "durum wheat flour"
+        },
+        {
+          "contexts": [
+            "4 albumi"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "albumi"
+          ],
+          "term": "egg whites"
+        },
+        {
+          "contexts": [
+            "3 tazze caffè espresso"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "caffè espresso"
+          ],
+          "term": "espresso coffee"
+        },
+        {
+          "contexts": [
+            "1 l fumetto di pesce"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "fumetto pesce"
+          ],
+          "term": "fish stock"
+        },
+        {
+          "contexts": [
+            "280 g fregola"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "fregola"
+          ],
+          "term": "fregola"
+        },
+        {
+          "contexts": [
+            "50 g grana grattugiato"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "grana grattugiato"
+          ],
+          "term": "grana padano"
+        },
+        {
+          "contexts": [
+            "500 g carne macinata di manzo"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "carne macinata manzo"
+          ],
+          "term": "ground beef"
+        },
+        {
+          "contexts": [
+            "400 g carne macinata mista"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "carne macinata mista"
+          ],
+          "term": "ground meat"
+        },
+        {
+          "contexts": [
+            "200 g crema spalmabile alle nocciole"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "crema spalmabile alle nocciole"
+          ],
+          "term": "hazelnut spread"
+        },
+        {
+          "contexts": [
+            "80 g zucchero a velo"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "zucchero a velo"
+          ],
+          "term": "icing sugar"
+        },
+        {
+          "contexts": [
+            "300 g savoiardi"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "savoiardi"
+          ],
+          "term": "ladyfingers"
+        },
+        {
+          "contexts": [
+            "250 g lenticchie secche"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "lenticchie secche"
+          ],
+          "term": "lentils"
+        },
+        {
+          "contexts": [
+            "500 g mascarpone"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "mascarpone"
+          ],
+          "term": "mascarpone"
+        },
+        {
+          "contexts": [
+            "500 ml latte"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "latte"
+          ],
+          "term": "milk"
+        },
+        {
+          "contexts": [
+            "1 pizzico origano"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "origano"
+          ],
+          "term": "oregano"
+        },
+        {
+          "contexts": [
+            "1 mazzetto prezzemolo"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "prezzemolo"
+          ],
+          "term": "parsley"
+        },
+        {
+          "contexts": [
+            "150 ml vino rosso"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "vino rosso"
+          ],
+          "term": "red wine"
+        },
+        {
+          "contexts": [
+            "4 rametti rosmarino"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "rosmarino"
+          ],
+          "term": "rosemary"
+        },
+        {
+          "contexts": [
+            "1 g zafferano"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "zafferano"
+          ],
+          "term": "saffron"
+        },
+        {
+          "contexts": [
+            "320 g spaghetti"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "spaghetti"
+          ],
+          "term": "spaghetti"
+        },
+        {
+          "contexts": [
+            "120 g mandorle dolci sbucciate"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "mandorle dolci sbucciate"
+          ],
+          "term": "sweet almonds sbucciate"
+        },
+        {
+          "contexts": [
+            "4 pomodori maturi"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "pomodori maturi"
+          ],
+          "term": "tomato"
+        },
+        {
+          "contexts": [
+            "600 g passata di pomodoro"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "passata pomodoro"
+          ],
+          "term": "tomato passata"
+        },
+        {
+          "contexts": [
+            "200 g salsa di pomodoro"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "salsa pomodoro"
+          ],
+          "term": "tomato sauce"
+        },
+        {
+          "contexts": [
+            "300 ml acqua"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "acqua"
+          ],
+          "term": "water"
+        },
+        {
+          "contexts": [
+            "2 zucchine medie"
+          ],
+          "frequency": 1,
+          "kind": "ingredient",
+          "source_terms": [
+            "zucchine medie"
+          ],
+          "term": "zucchini"
+        }
+      ],
+      "name": "ingredienti"
+    },
+    {
+      "entries": [
+        {
+          "contexts": [
+            "Soffriggere l'aglio nell'olio per 2 minuti.",
+            "Soffriggere il trito nell'olio per 5 minuti."
+          ],
+          "frequency": 3,
+          "kind": "technique",
+          "source_terms": [
+            "soffritto",
+            "soffriggere"
+          ],
+          "term": "soffritto"
+        },
+        {
+          "contexts": [
+            "Aggiungere la carne e rosolare per 10 minuti.",
+            "Scolarli e farli rosolare in padella con il burro per 4 minuti."
+          ],
+          "frequency": 2,
+          "kind": "technique",
+          "source_terms": [
+            "rosolatura",
+            "rosolare"
+          ],
+          "term": "browning"
+        },
+        {
+          "contexts": [
+            "Mantecare con il basilico e servire.",
+            "Mantecare con parmigiano e burro, riposare 2 minuti."
+          ],
+          "frequency": 2,
+          "kind": "technique",
+          "source_terms": [
+            "mantecatura",
+            "mantecare"
+          ],
+          "term": "mantecatura"
+        },
+        {
+          "contexts": [
+            "Tostare il riso per 2 minuti.",
+            "Tostare le mandorle in forno a 200 °C per qualche minuto."
+          ],
+          "frequency": 2,
+          "kind": "technique",
+          "source_terms": [
+            "tostatura",
+            "tostare"
+          ],
+          "term": "toasting"
+        },
+        {
+          "contexts": [
+            "Lavare le vongole e farle depurare dalla sabbia in acqua fredda per 2 ore."
+          ],
+          "frequency": 1,
+          "kind": "technique",
+          "source_terms": [
+            "depurazione",
+            "depurare"
+          ],
+          "term": "purging"
+        },
+        {
+          "contexts": [
+            "Far appassire l'aglio nell'olio per 4 minuti ed eliminarlo."
+          ],
+          "frequency": 1,
+          "kind": "technique",
+          "source_terms": [
+            "appassimento",
+            "appassire"
+          ],
+          "term": "wilting"
+        }
+      ],
+      "name": "tecnica"
+    },
+    {
+      "entries": [
+        {
+          "contexts": [
+            "Cuocerli in acqua bollente salata per 5 minuti, mantenendoli sodi."
+          ],
+          "frequency": 1,
+          "kind": "state",
+          "source_terms": [
+            "sodo",
+            "soda",
+            "sodi",
+            "sode"
+          ],
+          "term": "firm"
+        },
+        {
+          "contexts": [
+            "Cospargere con il grana e proseguire la cottura finché iniziano a dorarsi."
+          ],
+          "frequency": 1,
+          "kind": "state",
+          "source_terms": [
+            "dorato",
+            "dorata",
+            "dorati",
+            "dorate",
+            "dorarsi"
+          ],
+          "term": "golden"
+        }
+      ],
+      "name": "stati"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+entries:
+- aliases:
+  - soda
+  - sodi
+  - sode
+  definition: ''
+  id: STA-FIRM
+  labels_en: firm
+  labels_it: sodo
+  ontology_uri: null
+- aliases:
+  - dorata
+  - dorati
+  - dorate
+  - dorarsi
+  definition: ''
+  id: STA-GOLDEN
+  labels_en: golden
+  labels_it: dorato
+  ontology_uri: null
+name: stati
