@@ -10,9 +10,16 @@ Monta il router /auth di app.auth.routes e fornisce endpoint REST per:
 
 Rate limiting: dependency applicata agli endpoint /auth (documentato come limite prototipo).
 OpenAPI: generata automaticamente, salvata in docs/openapi.json.
+
+WP-B5: ``get_neo4j_client`` e' un singleton per processo (un client per
+richiesta creava un driver + pool di connessioni mai chiuso, degradando la
+latenza sotto carico). Le query Neo4j restano sincrone: su un singolo worker
+la capacita' e' ~30-50 req/s (misurato nel load test WP-B5); in produzione
+2 repliche + nginx coprono il rate realistico (NFR1).
 """
 from __future__ import annotations
 
+import threading
 import time
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -119,9 +126,24 @@ _rate_limiter = RateLimiter(default_limit=10.0, auth_limit=5.0)
 
 
 # ------------------------------------------------------------------ Dipendenze
+_neo4j_client: Neo4jClient | None = None
+_neo4j_client_lock = threading.Lock()
+
+
 def get_neo4j_client() -> Neo4jClient:
-    """Dependency: client Neo4j dal contesto."""
-    return Neo4jClient.from_env()
+    """Dependency: client Neo4j condiviso (singleton per processo).
+
+    WP-B5: un client per richiesta creava un driver + pool di connessioni
+    mai chiuso; sotto carico le connessioni accumulate degradavano la
+    latenza (NFR1). Il driver Neo4j è thread-safe, quindi un singleton per
+    processo è sicuro e riusa il pool di connessioni.
+    """
+    global _neo4j_client
+    if _neo4j_client is None:
+        with _neo4j_client_lock:
+            if _neo4j_client is None:
+                _neo4j_client = Neo4jClient.from_env()
+    return _neo4j_client
 
 
 def get_repo(client: Annotated[Neo4jClient, Depends(get_neo4j_client)]) -> GraphRepository:

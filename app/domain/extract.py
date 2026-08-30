@@ -33,6 +33,11 @@ import psycopg
 
 from app.domain.pack import DomainPackBundle
 from app.domain.verify import parse_translated_md
+
+# WP-B5: ingest changes the graph corpus, so the RAG caches (embedding
+# vocabulary, canonical_md, document context) must be invalidated. The cache
+# module is stdlib-only, so this import cannot create a cycle.
+from app.rag.cache import invalidate_rag_caches
 from app.storage.client import Neo4jClient
 
 # Content numbers followed by a time unit (Italian corpus + canonical EN).
@@ -443,6 +448,10 @@ def extract_document(
 
     with client.session() as session:
         session.execute_write(work)
+
+    # WP-B5: the graph corpus changed -> drop the RAG caches so the next
+    # build_embedding_from_graph / rag_query sees the new document.
+    invalidate_rag_caches()
 
     return DocumentRecord(
         document_id=doc_id,

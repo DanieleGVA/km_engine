@@ -12,6 +12,7 @@ from __future__ import annotations
 from typing import Any
 
 from app.domain.canonical import CANONICAL_FRONTMATTER_ORDER
+from app.rag.cache import recompose_cache
 from app.storage.client import Neo4jClient
 from app.storage.errors import NotFoundError
 
@@ -44,7 +45,17 @@ def recompose_document(client: Neo4jClient, doc_id: str) -> str:
 
     Raises :class:`app.storage.errors.NotFoundError` when the :Document does
     not exist.
+
+    WP-B5: the rendered markdown is cached in-process with a TTL
+    (``KM_RAG_CACHE_TTL``, default 300s) keyed by ``(neo4j uri, doc_id)`` and
+    invalidated on ingest (``extract_document``). Documents are immutable
+    once extracted, so the cache is safe; the TTL bounds staleness for any
+    other graph mutation (e.g. fact invalidation).
     """
+    key = (client.config.uri, doc_id)
+    cached = recompose_cache.get(key)
+    if cached is not None:
+        return cached
     with client.session() as session:
         document_record = session.run(
             "MATCH (d:Document {id: $doc_id}) RETURN d",
@@ -94,4 +105,6 @@ def recompose_document(client: Neo4jClient, doc_id: str) -> str:
         "verification_level": document.get("verification_level", "L1"),
         "canonical_version": document.get("canonical_version", 1),
     }
-    return _render_canonical_md(frontmatter, ingredients, steps)
+    rendered = _render_canonical_md(frontmatter, ingredients, steps)
+    recompose_cache.set(key, rendered)
+    return rendered

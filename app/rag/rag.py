@@ -29,7 +29,9 @@ from app.auth import Principal, principal_visibility_context
 from app.domain.embedding import DeterministicEmbedding, EmbeddingService
 from app.domain.pack import DomainPackBundle, load_domain_pack
 from app.domain.recompose import recompose_document
+from app.rag.cache import context_cache, invalidate_rag_caches, vocab_cache
 from app.storage.client import Neo4jClient
+from app.storage.errors import NotFoundError
 from app.storage.visibility import Visibility, is_visible
 
 VECTOR_INDEX = "document_embedding_vector"
@@ -37,6 +39,14 @@ PACK_DIR = Path(__file__).resolve().parents[2] / "domain-packs" / "ricette"
 
 LANG_BOOST = 0.10
 VERIFICATION_BOOST = {"L1": 0.0, "L2": 0.05, "L3": 0.10}
+# Candidate heuristic (WP-B5, documented): the vector index returns
+# ``max(limit * _CANDIDATE_FACTOR, _CANDIDATE_FLOOR)`` candidates so the
+# visibility filter (default-deny) cannot silently drop the only visible
+# matches. The factor/floor are a deliberate trade-off: a larger candidate
+# set costs vector-index work per query, a smaller one can hurt recall when
+# many candidates are filtered out. The values are part of the MVP ranking
+# contract (GB1) and are NOT tuned here: changing them would alter which
+# documents are eligible for the top-k, i.e. the retrieval semantics.
 _CANDIDATE_FACTOR = 4
 _CANDIDATE_FLOOR = 50
 
@@ -125,7 +135,21 @@ def build_embedding_from_graph(
     content and is not subject to the visibility filter. It reads every
     ``:Document`` title/entity/term label so query and document embeddings
     share the same IDF weights.
+
+    WP-B5: the result is cached in-process with a TTL (``KM_RAG_CACHE_TTL``,
+    default 300s) keyed by ``(neo4j uri, pack id)``. The cache is invalidated
+    by :func:`populate_embeddings` and by ``extract_document`` (ingest), so a
+    changed corpus is picked up immediately; the TTL bounds staleness for any
+    other graph mutation.
     """
+    # Cache lookup happens BEFORE the pack load: loading the pack YAML is
+    # itself expensive (~tens of ms), so a cached vocabulary must not pay it.
+    pack_id = f"{pack.pack.name}:{pack.pack.version}" if pack is not None else None
+    key = (client.config.uri, pack_id)
+    cached = vocab_cache.get(key)
+    if cached is not None:
+        return cached
+
     if pack is None:
         try:
             pack = load_domain_pack(PACK_DIR)
@@ -160,7 +184,9 @@ def build_embedding_from_graph(
             parts.extend(record["term_labels"] or [])
             texts.append(" ".join(parts))
 
-    return DeterministicEmbedding.from_texts(texts)
+    embedding = DeterministicEmbedding.from_texts(texts)
+    vocab_cache.set(key, embedding)
+    return embedding
 
 
 # ---------------------------------------------------------------------------
@@ -192,6 +218,10 @@ def populate_embeddings(
     principal are embedded (the same default-deny policy used by reads).
 
     Returns the number of documents populated.
+
+    WP-B5: invalidates the RAG caches (embedding vocabulary, canonical_md,
+    document context) so a subsequent ``build_embedding_from_graph`` /
+    ``rag_query`` sees the freshly embedded corpus.
     """
     ctx = principal_visibility_context(principal) if principal is not None else None
     is_admin = bool(ctx["is_admin"]) if ctx is not None else True
@@ -234,6 +264,15 @@ def populate_embeddings(
 
     with client.session() as session:
         session.execute_write(write)
+        # L'indice vettoriale e' eventually-consistent: attendiamo che le nuove
+        # entrate siano indicizzate prima di restituire, altrimenti le query
+        # subito successive vedono un set di candidati incompleto (recall
+        # non deterministico). db.awaitIndex e' sincrono e con timeout.
+        try:
+            session.run("CALL db.awaitIndex($index, 30)", index=VECTOR_INDEX)
+        except Exception:  # noqa: BLE001, S110 - indice assente/vecchia versione
+            pass
+    invalidate_rag_caches()
     return len(rows)
 
 
@@ -259,8 +298,17 @@ def _verification_boost(props: dict[str, Any]) -> float:
     return VERIFICATION_BOOST.get(props.get("verification_level", "L1"), 0.0)
 
 
+
 def _document_context(client: Neo4jClient, doc_id: str) -> dict[str, Any]:
-    """Graph expansion for one document (entities, terms, provenance)."""
+    """Graph expansion for one document (entities, terms, provenance).
+
+    WP-B5: cached in-process with TTL keyed by ``(neo4j uri, doc_id)`` and
+    invalidated on ingest (``extract_document``) / ``populate_embeddings``.
+    """
+    key = (client.config.uri, doc_id)
+    cached = context_cache.get(key)
+    if cached is not None:
+        return cached
     with client.session() as session:
         entity_records = session.run(
             """
@@ -294,11 +342,13 @@ def _document_context(client: Neo4jClient, doc_id: str) -> dict[str, Any]:
             source_id=f"{doc_id}:source",
         ).single()
 
-    return {
+    context = {
         "entities": list(entities.values()),
         "terms": list(terms.values()),
         "provenance": source_record["uri"] if source_record else None,
     }
+    context_cache.set(key, context)
+    return context
 
 
 def _match_reason(
@@ -376,8 +426,14 @@ def rag_query(
     hits: list[RagHit] = []
     for props, cosine, lang_boost, verification_boost, final in candidates[:limit]:
         doc_id = props["id"]
-        context = _document_context(client, doc_id)
-        canonical_md = recompose_document(client, doc_id)
+        # L'indice vettoriale puo' contenere entry stantie (nodi eliminati da
+        # run/ingest precedenti, lag di indicizzazione): in quel caso il nodo
+        # non esiste piu' e l'hit va saltato, non fatto fallire.
+        try:
+            context = _document_context(client, doc_id)
+            canonical_md = recompose_document(client, doc_id)
+        except NotFoundError:
+            continue
         localized = localize_document(props, lang)
         hits.append(
             RagHit(

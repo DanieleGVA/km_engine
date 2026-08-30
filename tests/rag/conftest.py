@@ -88,10 +88,13 @@ def cleanup_neo4j(client: Neo4jClient) -> None:
             MATCH (n)
             WHERE (n:Document OR n:CanonicalTerm OR n:DomainPack OR n:Entity
                    OR n:Fact OR n:Source)
-              AND n.id STARTS WITH $prefix
+              AND (n.id STARTS WITH $prefix OR n.id STARTS WITH $b3_prefix
+                   OR n.id STARTS WITH $bench_prefix)
             DETACH DELETE n
             """,
             prefix=PREFIX,
+            b3_prefix="b3f_",
+            bench_prefix="ib_bench_",
         )
 
 
@@ -111,6 +114,23 @@ def cleanup_postgres(conn: psycopg.Connection) -> None:
             )
             conn.execute("DELETE FROM users WHERE id = ANY(%s)", (ids,))
         conn.execute("DELETE FROM teams WHERE name LIKE %s", (f"{PREFIX}%",))
+
+
+@pytest.fixture(autouse=True)
+def _clear_rag_caches():
+    """WP-B5: RAG caches are process-global; clear them around every test so
+    a cached vocabulary/canonical_md/context from another test cannot leak
+    into this one (test isolation). Also resets the TTL to the default (the
+    ``-m perf`` micro-benchmark disables the caches temporarily)."""
+    from app.rag.cache import DEFAULT_TTL, invalidate_rag_caches, set_cache_ttl
+
+    set_cache_ttl(DEFAULT_TTL)
+    invalidate_rag_caches()
+    try:
+        yield
+    finally:
+        set_cache_ttl(DEFAULT_TTL)
+        invalidate_rag_caches()
 
 
 @pytest.fixture()

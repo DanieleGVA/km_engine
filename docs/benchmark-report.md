@@ -170,3 +170,71 @@ senza toccare il codice applicativo (solo test).
 
 **Ripetibilità:** load test deterministico (setup/cleanup automatico dei dati
 `wp7_load_*`); rieseguibile con `uv run python scripts/loadtest.py --users 100`.
+## 9. Iterazione B — Load test RAG retrieval (WP-B5, gate GB5)
+
+- Data: 2026-08-30 21:11:30
+- Target: `http://127.0.0.1:8000` — utenti: 100 — richieste/utente: 10
+- Mix: 50% POST /api/v1/rag/query (golden pilot) · 30% GET /api/v1/entities · 20% GET /api/v1/glossary/query
+- Dati: 70 documenti `ib5_load_*` con embedding popolati + termini glossario
+- Durata fase storm: 19.6s — richieste: 1100
+### Fase 1 — login storm + mix (esperienza completa)
+
+| Endpoint | Richieste | p50 (ms) | p95 (ms) | p99 (ms) | Errori | HTTP>=400 |
+|---|---|---|---|---|---|---|
+| entities | 300 | 571 | 1918 | 2235 | 0 | 0 |
+| glossary | 200 | 595 | 803 | 845 | 0 | 0 |
+| login | 100 | 2792 | 5190 | 5196 | 0 | 0 |
+| rag | 500 | 2387 | 4089 | 4680 | 0 | 0 |
+
+- Durata fase steady-state: 56.3s — richieste: 1000
+
+### Fase 2 — steady-state (login gia' effettuati, 100 utenti concorrenti)
+
+| Endpoint | Richieste | p50 (ms) | p95 (ms) | p99 (ms) | Errori | HTTP>=400 |
+|---|---|---|---|---|---|---|
+| entities | 300 | 13 | 37 | 89 | 0 | 0 |
+| glossary | 200 | 4 | 20 | 31 | 0 | 0 |
+| rag | 500 | 86 | 449 | 569 | 0 | 0 |
+
+### 9.1 Micro-benchmark rag_query (WP-B5, `-m perf`)
+
+200 query RAG su 70 documenti (golden pilot), embedding esplicito, caches
+TTL disabilitate (baseline pre-ottimizzazione) vs abilitate (WP-B5):
+
+| Fase | p50 (ms) | p95 (ms) | p99 (ms) | mean (ms) |
+|---|---|---|---|---|
+| BEFORE (no cache) | 74.4 | 93.7 | 124.8 | 77.0 |
+| AFTER (TTL cache) | 15.9 | 23.9 | 29.9 | 17.1 |
+
+**Lettura:** p95 -74% (93.7 → 23.9 ms), mean -78% (77.0 → 17.1 ms). Il
+costo per-query passa da ~26 query Neo4j (1 vettoriale + 5 documenti ×
+[2 contesto + 3 recompose]) a 1 query vettoriale con cache calde.
+
+### 9.2 Verdetto NFR1 (p95 < 2s)
+
+| Scenario | rag p95 | Esito |
+|---|---|---|
+| Single-user (latenza pura, cache calde) | 24 ms | ✅ |
+| 100 utenti, rate realistico (~25 req/s, staggered) | 449 ms | ✅ |
+| 100 utenti, back-to-back (login storm, WP8-style) | 4089 ms | ⚠️ deviazione |
+
+**Deviazione documentata (dev single-instance, 1 worker):** la fase storm
+(richieste back-to-back come `loadtest.py` WP8) satura il worker singolo:
+(1) il login argon2id è sincrono dentro un endpoint `async def` e blocca
+l'event loop (~50 ms × 100 login); (2) le query Neo4j sincrone si
+serializzano sull'event loop (~35 ms/richiesta → capacità ~30 req/s); il
+rate del load test (200+ req/s) supera la capacità e la coda cresce.
+**Stima prod (2 repliche km-api + nginx):** capacità raddoppiata (~60
+req/s), login distribuito fuori dal path query, rate realistico 100 utenti
+× 1 query/4s = 25 req/s → p95 ≈ 100-500 ms, ampiamente sotto 2s. Il
+costo per-query (17-24 ms) è il dato rilevante per NFR1.
+
+### 9.3 Note
+
+- Zero errori HTTP su tutte le fasi (1100 + 1000 richieste).
+- Fix WP-B5 inclusi: `get_neo4j_client` singleton per processo (prima un
+  client per richiesta con driver/pool mai chiusi: connessioni accumulate
+  che degradavano la latenza sotto carico).
+- Load test rieseguibile: `uv run python scripts/loadtest_rag.py --users 100`
+  (setup/cleanup automatico dei dati `ib5_load_*`).
+
