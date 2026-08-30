@@ -68,6 +68,10 @@ docker compose -f deploy/docker-compose.yml exec -T neo4j \
   -f /import/schema.cypher
 ```
 
+Flusso Iterazione A (domain layer): bootstrap pack → translate → verify →
+canonicalize → extract → query → recompose; test E2E
+`uv run pytest tests/e2e/test_iteration_a_flow.py` (dati `ia6_`, pulizia automatica).
+
 ### 2.2 Scaling
 
 ```bash

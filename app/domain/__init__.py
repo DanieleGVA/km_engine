@@ -35,6 +35,7 @@ from app.domain.errors import (
     TranslationError,
     VerificationError,
 )
+from app.domain.extract import DocumentRecord, extract_document
 from app.domain.llm import FakeLLMClient, HttpLLMClient, LLMClient
 from app.domain.numbers import (
     extract_numbers,
@@ -55,6 +56,7 @@ from app.domain.pack import (
     load_domain_pack,
     validate_pack,
 )
+from app.domain.recompose import recompose_document
 from app.domain.translate import (
     TranslatedDocument,
     build_translation_input,
@@ -93,6 +95,7 @@ __all__ = [
     "CanonLogVerificationError",
     "CanonicalDocument",
     "CanonicalizationError",
+    "DocumentRecord",
     "DomainError",
     "DomainPack",
     "DomainPackBundle",
@@ -126,6 +129,7 @@ __all__ = [
     "create_glossary_proposal",
     "decide_adjudication",
     "decide_glossary_proposal",
+    "extract_document",
     "extract_numbers",
     "format_quantity",
     "generate_canon_log",
@@ -139,6 +143,7 @@ __all__ = [
     "numbers_multiset_equal",
     "parse_source_md",
     "parse_translated_md",
+    "recompose_document",
     "reinject_numbers",
     "render_translated_document",
     "translate_document",

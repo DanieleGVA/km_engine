@@ -374,6 +374,30 @@ heap/pagecache, caching TTL, hashing async (login storm), verifica NFR1 su stack
 prod (nginx+2 repliche), benchmark 10GB in 6 fasi (report §8), Web UI, multi-tenant,
 OIDC, retention policy.
 
+## 13. Iterazione A — Domain Knowledge Layer
+
+Aggiunta al prototipo MVP (gate GA1–GA6). Pipeline a due stadi IR markdown:
+`translated.md` (traduzione EN P2-safe) → `canonical.md` (normalizzazione
+deterministica) → sotto-grafo canonico Neo4j con round-trip garantito.
+
+- **Domain Pack** (`domain-packs/ricette/`): `pack.yaml`, `template.md`,
+  glossari seed (`tecnica`, `ingredienti`, `stati`), `units.yaml`, regole.
+  Validazione pydantic in `app/domain/pack.py`; bootstrap idempotente in
+  `scripts/load_domain_pack.py` (`:DomainPack`, `:CanonicalTerm`).
+- **Stadi**: `translate_document` (P2: numeri mascherati, mai alterati),
+  `canonicalize` (unità Decimal esatte + termini glossario, mai id inventati),
+  `extract_document` (md→grafo) e `recompose_document` (grafo→md).
+- **Verifica a 3 livelli** (`app/domain/verify.py`): L1 struttura/numeri
+  deterministico, L2 sezioni semantiche, L3 coda adjudication Postgres.
+  Canon-log (`canon_log`) spiega il 100% del diff translated→canonical.
+- **Schema domain** (`db/neo4j/002_domain_schema.cypher`): `:Document`,
+  `:CanonicalTerm`, `:DomainPack`, `PART_OF_PACK`, `PART_OF_DOC`,
+  `NORMALIZED_TO`, fulltext e indice vettoriale 384d. Visibilità default-deny
+  estesa a Document/CanonicalTerm in `app/query/domain.py`.
+- **Round-trip**: `recompose(extract(canonical.md)) == canonical.md`
+  byte-identico sul corpus pilota (15 ricette). Estrattore idempotente su
+  `canonical_hash` (MERGE deterministici, zero duplicati).
+
 ---
 
 *Documento generato a chiusura del prototipo. Tutti i dettagli operativi sono in

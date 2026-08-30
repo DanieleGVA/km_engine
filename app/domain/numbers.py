@@ -64,7 +64,13 @@ def mask_numbers(text: str) -> tuple[str, list[str]]:
     out: list[str] = []
 
     def repl(match: re.Match[str]) -> str:
-        numbers.append(match.group(0))
+        token = match.group(0)
+        # Allineato a _find_numbers: i token all-zero (es. "00" di "farina 00")
+        # non sono quantità e non vanno mascherati (P2: nessun numero alterato,
+        # ma solo numeri di contenuto reali).
+        if re.fullmatch(r"0+", token):
+            return token
+        numbers.append(token)
         return f"{{N{len(numbers)}}}"
 
     for line in text.splitlines():
