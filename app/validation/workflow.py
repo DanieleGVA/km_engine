@@ -118,6 +118,12 @@ async def run_validation_workflow(
     """Esegue il workflow completo di ricerca e validazione."""
     out_dir.mkdir(parents=True, exist_ok=True)
     raw_recipes = read_recipes(input_path, limit=limit)
+    # indice impronte del knowledge costruito UNA volta (6k doc, non per ricetta)
+    from app.validation.search import DocumentIndex
+    index = DocumentIndex(client, pack)
+    # normalizzatore ingredienti CalcMenu (deterministico + LLM nei casi dubbi)
+    from app.validation.calcmenu import CalcMenuNormalizer, load_canonical_vocab
+    normalizer = _build_normalizer(out_dir)
     results: list[RecipeValidationResult] = []
     n_subs = 0
 
@@ -126,8 +132,19 @@ async def run_validation_workflow(
         main, subs = split_subrecipes(raw)
         n_subs += len(subs)
 
-        # 2) standardizzazione
-        std = await standardize_recipe(main, pack, servings_target=servings_target)
+        # 2) standardizzazione (con gestione errori: una ricetta malformata
+        #    non deve interrompere l'intera validazione)
+        try:
+            std = await standardize_recipe(main, pack, servings_target=servings_target,
+                                           normalizer=normalizer)
+        except Exception as e:
+            results.append(RecipeValidationResult(
+                recipe=StandardizedRecipe(raw=main, canonical_md="", servings_target=servings_target,
+                                          scale_factor=0.0, notes=[f"ERRORE standardizzazione: {e}"]),
+                match=RecipeMatch(found=False),
+                corrections=[], notes=[f"ERRORE standardizzazione: {e}"],
+            ))
+            continue
         std.notes.append(f"formato: {raw.format}, lingua: {raw.language}")
         if subs:
             std.notes.append(f"{len(subs)} sub-recipe separate: {', '.join(s.name for s in subs)}")
@@ -138,29 +155,42 @@ async def run_validation_workflow(
         out_file.write_text(std.canonical_md, encoding="utf-8")
 
         # 4) ricerca nel knowledge (impronta + procedura + nome)
-        match = search_recipe(client, pack, principal, std.canonical_md, std.raw.name)
+        try:
+            match = search_recipe(client, pack, principal, std.canonical_md, std.raw.name, index=index)
+        except Exception as e:
+            results.append(RecipeValidationResult(
+                recipe=std, match=RecipeMatch(found=False),
+                corrections=[], notes=std.notes + [f"ERRORE ricerca: {e}"],
+            ))
+            continue
 
         # 5) validazione/correzioni
         corrections: list[str] = []
-        if match.found and match.document_id:
-            from app.validation.search import _recompose, ingredient_fingerprint
-            doc_md = _recompose(client, match.document_id)
-            if doc_md:
-                corrections = _compare_ingredients(
-                    ingredient_fingerprint(std.canonical_md, pack.known_units()),
-                    ingredient_fingerprint(doc_md, pack.known_units()),
-                )
-            std.notes.append(f"trovata nel knowledge: {match.document_id} ({match.title})")
-        else:
-            std.notes.append("NON PRESENTE nel knowledge")
+        try:
+            if match.found and match.document_id:
+                from app.validation.search import _recompose, ingredient_fingerprint
+                doc_md = _recompose(client, match.document_id)
+                if doc_md:
+                    corrections = _compare_ingredients(
+                        ingredient_fingerprint(std.canonical_md, pack.known_units()),
+                        ingredient_fingerprint(doc_md, pack.known_units()),
+                    )
+                std.notes.append(f"trovata nel knowledge: {match.document_id} ({match.title})")
+            else:
+                std.notes.append("NON PRESENTE nel knowledge")
+        except Exception as e:
+            std.notes.append(f"ERRORE confronto: {e}")
 
         # 6) salvataggio con note
-        note_file = out_dir / f"{safe}.notes.json"
-        note_file.write_text(json.dumps({
-            "recipe": std.raw.name, "code": std.raw.code, "status": "VALIDATA" if match.found else "NON PRESENTE",
-            "match": match.document_id, "score": round(match.score, 3),
-            "corrections": corrections, "notes": std.notes,
-        }, ensure_ascii=False, indent=1), encoding="utf-8")
+        try:
+            note_file = out_dir / f"{safe}.notes.json"
+            note_file.write_text(json.dumps({
+                "recipe": std.raw.name, "code": std.raw.code, "status": "VALIDATA" if match.found else "NON PRESENTE",
+                "match": match.document_id, "score": round(match.score, 3),
+                "corrections": corrections, "notes": std.notes,
+            }, ensure_ascii=False, indent=1), encoding="utf-8")
+        except Exception as e:
+            std.notes.append(f"ERRORE salvataggio note: {e}")
 
         results.append(RecipeValidationResult(
             recipe=std, match=match, corrections=corrections,
@@ -179,6 +209,24 @@ async def run_validation_workflow(
         json.dumps(report.to_dict(), ensure_ascii=False, indent=1), encoding="utf-8"
     )
     return report
+
+
+def _build_normalizer(out_dir: pathlib.Path):
+    """Normalizzatore CalcMenu: deterministico + LLM (se configurato) + cache."""
+    from app.validation.calcmenu import CalcMenuNormalizer, load_canonical_vocab
+    llm = None
+    try:
+        from app.domain.config import get_llm_settings
+        from app.domain.llm import HttpLLMClient
+        settings = get_llm_settings()
+        if settings.llm_endpoint and settings.llm_model:
+            llm = HttpLLMClient(settings)
+    except Exception:
+        llm = None
+    return CalcMenuNormalizer(
+        load_canonical_vocab(), llm=llm,
+        cache_path=out_dir / "calcmenu_normalizer_cache.json",
+    )
 
 
 import re  # noqa: E402

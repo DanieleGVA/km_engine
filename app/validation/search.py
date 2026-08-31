@@ -72,6 +72,53 @@ def _procedure_overlap(query_steps: list[str], doc_steps: list[str]) -> float:
     return len(q & d) / len(q)
 
 
+class DocumentIndex:
+    """Indice precalcolato dei documenti del knowledge (impronte + procedura).
+
+    Costruito UNA volta per run di validazione: evita di ricomporre tutti i
+    documenti per ogni ricetta (6.046 doc x 1.653 ricette = ~10M query).
+    """
+
+    def __init__(self, client: Neo4jClient, pack: DomainPackBundle) -> None:
+        self.pack = pack
+        self.docs: list[dict] = []
+        with client.session() as session:
+            records = session.run(
+                """
+                MATCH (d:Document)
+                RETURN d.id AS id, d.title AS title
+                ORDER BY d.id
+                """
+            ).data()
+        for rec in records:
+            md = _recompose(client, rec["id"])
+            if md is None:
+                continue
+            try:
+                fp = ingredient_fingerprint(md, pack.known_units())
+                parsed = parse_translated_md(md, known_units=pack.known_units())
+                steps = list(parsed.steps)
+            except Exception:
+                continue
+            self.docs.append({
+                "id": rec["id"], "title": rec["title"],
+                "fingerprint": fp, "steps": steps,
+            })
+
+    def best_ingredient_match(self, query_fp: list[tuple[str, float]]
+                               ) -> tuple[float, dict | None, list[str], list[str]]:
+        best_ing, best_doc, best_matched, best_missing = 0.0, None, [], []
+        for doc in self.docs:
+            ing_score, matched, missing = _ingredient_overlap(query_fp, doc["fingerprint"])
+            if ing_score > best_ing:
+                best_ing, best_doc = ing_score, doc
+                best_matched, best_missing = matched, missing
+        return best_ing, best_doc, best_matched, best_missing
+
+    def procedure_score(self, doc: dict, query_steps: list[str]) -> float:
+        return _procedure_overlap(query_steps, doc["steps"])
+
+
 def _all_documents(client: Neo4jClient) -> list[dict]:
     """Tutti i :Document del grafo (per il confronto impronte)."""
     with client.session() as session:
@@ -92,35 +139,26 @@ def search_recipe(
     canonical_md: str,
     name: str,
     limit: int = 5,
+    index: DocumentIndex | None = None,
 ) -> RecipeMatch:
-    """Cerca una ricetta nel knowledge: impronta ingredienti + procedura + nome."""
+    """Cerca una ricetta nel knowledge: impronta ingredienti + procedura + nome.
+
+    ``index``: DocumentIndex precalcolato (consigliato per run su molti
+    documenti); se assente, l'indice viene costruito al volo.
+    """
     parsed = parse_translated_md(canonical_md, known_units=pack.known_units())
     query_fp = ingredient_fingerprint(canonical_md, pack.known_units())
     query_steps = list(parsed.steps)
 
     # 1) impronta ingredienti: confronto con tutti i documenti del grafo
-    best_ing = 0.0
-    best_doc = None
-    best_matched: list[str] = []
-    best_missing: list[str] = []
-    for doc in _all_documents(client):
-        doc_md = _recompose(client, doc["id"])
-        if doc_md is None:
-            continue
-        doc_fp = ingredient_fingerprint(doc_md, pack.known_units())
-        ing_score, matched, missing = _ingredient_overlap(query_fp, doc_fp)
-        if ing_score > best_ing:
-            best_ing = ing_score
-            best_doc = doc
-            best_matched, best_missing = matched, missing
+    if index is None:
+        index = DocumentIndex(client, pack)
+    best_ing, best_doc, best_matched, best_missing = index.best_ingredient_match(query_fp)
 
     # 2) procedura: overlap con il miglior candidato
     proc_score = 0.0
     if best_doc is not None:
-        doc_md = _recompose(client, best_doc["id"])
-        if doc_md:
-            doc_parsed = parse_translated_md(doc_md, known_units=pack.known_units())
-            proc_score = _procedure_overlap(query_steps, list(doc_parsed.steps))
+        proc_score = index.procedure_score(best_doc, query_steps)
 
     # 3) nome: RAG vettoriale
     embedding = build_embedding_from_graph(client)

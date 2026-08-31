@@ -31,7 +31,9 @@ RUN uv sync --frozen --no-dev --no-install-project
 
 # --- runtime ---
 FROM base AS runtime
-RUN groupadd --system km && useradd --system --gid km --create-home km
+RUN apt-get update && apt-get install -y --no-install-recommends poppler-utils \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --system km && useradd --system --gid km --create-home km
 WORKDIR /app
 COPY --from=builder /app/.venv /app/.venv
 COPY app/ ./app/

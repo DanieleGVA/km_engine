@@ -258,13 +258,26 @@ def split_subrecipes(recipe: RawRecipe) -> tuple[RawRecipe, list[RawRecipe]]:
 # Standardizzazione (traduzione se IT + canonicalizzazione + dosi MKS x10)
 # ---------------------------------------------------------------------------
 
-def _raw_to_md(recipe: RawRecipe) -> str:
-    """Ricetta grezza -> md nel formato appropriato (source IT o translated EN)."""
+def _raw_to_md(recipe: RawRecipe, normalizer=None) -> str:
+    """Ricetta grezza -> md nel formato appropriato (source IT o translated EN).
+
+    ``normalizer``: CalcMenuNormalizer opzionale — normalizza i nomi ingredienti
+    industriali verso i termini canonici del knowledge (deterministico + LLM
+    nei casi dubbi).
+    """
     name = re.sub(r"\(.*?\)", "", recipe.name).strip().replace(":", "-")
-    ing = "\n".join(
-        f"- {i['qty']:g} {i['unit']} {i['name'].lower()}" if i.get("unit") else f"- {i['qty']:g} {i['name'].lower()}"
-        for i in recipe.ingredients if i.get("qty") is not None
-    )
+    ing_lines = []
+    for i in recipe.ingredients:
+        if i.get("qty") is None:
+            continue
+        iname = i["name"].lower()
+        if normalizer is not None:
+            iname, _ = normalizer.normalize(iname)
+        if i.get("unit"):
+            ing_lines.append(f"- {i['qty']:g} {i['unit']} {iname}")
+        else:
+            ing_lines.append(f"- {i['qty']:g} {iname}")
+    ing = "\n".join(ing_lines)
     steps = "\n".join(f"{j}. {s}" for j, s in enumerate(recipe.procedure[:12], 1))
     if recipe.language == "it":
         return (f"---\ntitle: {name}\nid: {recipe.code or 'X'}\nlang: it\nservings: {recipe.servings}\n"
@@ -277,9 +290,10 @@ async def standardize_recipe(
     recipe: RawRecipe,
     pack: DomainPackBundle,
     servings_target: int = 10,
+    normalizer=None,
 ) -> StandardizedRecipe:
     """Standardizza una ricetta: traduzione (se IT) + canonicalizzazione + dosi MKS x10."""
-    md = _raw_to_md(recipe)
+    md = _raw_to_md(recipe, normalizer=normalizer)
     notes: list[str] = []
     if recipe.language == "it":
         llm = build_fake_llm(pack, {recipe.source: md})

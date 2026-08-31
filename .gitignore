@@ -34,3 +34,4 @@ backups-test/
 .km_ingest_cache/
 .coverage
 htmlcov/
+deploy/validation_out/
