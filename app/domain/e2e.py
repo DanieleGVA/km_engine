@@ -110,8 +110,10 @@ async def run_e2e_batch(
                 result.log_entries += 1
             elif k3.route == "canon_gap":
                 result.canon_gap += 1
+                _enqueue_human(conn, card["id"], comp_name, k3, "canon_gap")
             else:
                 result.human += 1
+                _enqueue_human(conn, card["id"], comp_name, k3, "divergent")
     result.report = {
         "processed": result.processed,
         "batch_approved": result.batch_approved,
@@ -120,6 +122,35 @@ async def run_e2e_batch(
         "log_entries": result.log_entries,
     }
     return result
+
+
+def _enqueue_human(
+    conn: psycopg.Connection,
+    document_id: str,
+    component: str,
+    k3: K3Result,
+    reason: str,
+) -> None:
+    """Accoda il verdetto non approvato alla coda umana (kind='canon')."""
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO adjudications
+                (document_id, section, reason, suggestion, kind, verdict_json,
+                 llm_model, llm_confidence, candidate_ids)
+            VALUES (%s, %s, %s, %s, 'canon', %s, %s, %s, %s)
+            """,
+            (
+                document_id,
+                f"component:{component}",
+                f"verdetto {reason} (k=3)",
+                k3.runs[0].motivation if k3.runs else None,
+                json.dumps(k3.runs[0].model_dump()) if k3.runs else None,
+                "judge",
+                k3.runs[0].confidence if k3.runs else None,
+                k3.permutations[0] if k3.permutations else [],
+            ),
+        )
 
 
 def _write_log(

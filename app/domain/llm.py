@@ -104,7 +104,7 @@ class HttpLLMClient:
             ],
             "temperature": 0,
         }
-        async with httpx.AsyncClient(timeout=180.0) as client:
+        async with httpx.AsyncClient(timeout=self.settings.llm_timeout) as client:
             response = await client.post(
                 endpoint, json=payload, headers=self._headers(api_key)
             )

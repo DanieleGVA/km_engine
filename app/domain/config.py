@@ -19,6 +19,7 @@ class LLMSettings(BaseSettings):
     llm_api_key: str | None = None
     llm_endpoint: str | None = None
     llm_model: str | None = None
+    llm_timeout: float = 180.0
 
 
 class JudgeSettings(BaseSettings):

@@ -130,7 +130,7 @@
       "source_terms": [
         "parmigiano reggiano"
       ],
-      "term": "parmesan cheese"
+      "term": "parmigiano reggiano"
     },
     {
       "contexts": [
@@ -748,7 +748,7 @@
       "term": "golden"
     }
   ],
-  "generated_at": "2026-08-30T20:28:20.877529+00:00",
+  "generated_at": "2026-08-31T22:10:03.089486+00:00",
   "language": "it",
   "ontologies": [
     {
@@ -1028,7 +1028,7 @@
           "source_terms": [
             "parmigiano reggiano"
           ],
-          "term": "parmesan cheese"
+          "term": "parmigiano reggiano"
         },
         {
           "contexts": [
