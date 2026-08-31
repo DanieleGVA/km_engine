@@ -45,6 +45,7 @@ entries:
 - id: ING-SALT
   labels_en: salt
   labels_it: sale
+  class: condimento
   aliases:
   - sale
   definition: Table salt.
@@ -74,6 +75,7 @@ entries:
 - id: ING-BUTTER
   labels_en: butter
   labels_it: burro
+  class: latticino
   aliases:
   - burro
   - burro fuso
@@ -119,6 +121,10 @@ entries:
 - id: ING-EGG
   labels_en: egg
   labels_it: uovo
+  class: uovo
+  countable_unit: egg
+  count_policy: integer
+  unit_weight_g: 50
   aliases:
   - uova
   - uovo intero
@@ -705,6 +711,7 @@ entries:
 - id: ING-THYME
   labels_en: thyme
   labels_it: timo
+  class: erba
   aliases:
   - timo fresco
   - fresh thyme

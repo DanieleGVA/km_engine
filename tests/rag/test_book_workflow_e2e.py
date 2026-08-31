@@ -254,8 +254,8 @@ async def test_ibw_full_workflow_book_to_rag(client, pack, pack_dir) -> None:
             assert abs(doses.scale_factor - expected_factor) < 1e-9, (
                 f"[{key}] fattore {doses.scale_factor} != atteso {expected_factor}"
             )
-            # unita' MKS: nessuna unita' culinaria residua (conteggi ammessi: egg/eggs)
-            _COUNT_UNITS = {"egg", "eggs"}
+            # passo 8: unita' naturali intoccabili (conteggi ammessi), il resto MKS
+            from app.domain.doses import COUNT_UNITS as _COUNT_UNITS
             for line in doses.canonical_md.splitlines():
                 m = re.match(r"^- (\S+) (\S+) (.+)$", line)
                 if m:
@@ -284,16 +284,25 @@ async def test_ibw_full_workflow_book_to_rag(client, pack, pack_dir) -> None:
             assert len(dose_lines) == len(book_ings), (
                 f"[{key}] n. ingredienti dose ({len(dose_lines)}) != libro ({len(book_ings)})"
             )
+            from app.domain.doses import COUNT_UNITS as _DOSE_COUNT
+            unit_rules = pack.unit_rules_by_from()
             for i, (bi_qty, bi_unit, bi_item) in enumerate(book_ings):
                 if bi_qty is None:
                     continue
-                # fattore MKS dell'unita' del LIBRO (es. cucchiai -> 15 ml)
-                mks_factor = _BOOK_MKS.get((bi_unit or "").lower(), 1.0)
-                expected_scaled = bi_qty * expected_factor * mks_factor
+                # passo 8: unita' naturali (conteggio) scalate sulla quantita'
+                # naturale; unita' di misura vere convertite in MKS. L'unita'
+                # del libro viene risolta tramite le regole del pack.
+                bu = (bi_unit or "").lower()
+                canonical_unit = unit_rules.get(bu).to_unit if bu in unit_rules else bu
+                if canonical_unit in _DOSE_COUNT:
+                    expected_scaled = bi_qty * expected_factor
+                else:
+                    mks_factor = _BOOK_MKS.get(bu, 1.0)
+                    expected_scaled = bi_qty * expected_factor * mks_factor
                 got = float(dose_lines[i].group(1))
                 assert abs(got - expected_scaled) / max(expected_scaled, 1e-9) < 0.05, (
                     f"[{key}] dose[{i}] {bi_item}: attesa {expected_scaled:.2f} "
-                    f"(libro {bi_qty} x {expected_factor:.2f} x MKS {mks_factor}), trovata {got}"
+                    f"(libro {bi_qty} x {expected_factor:.2f}), trovata {got}"
                 )
             # (d) P2 esatto source<->translated
             assert extract_numbers(source_md) == extract_numbers(translated.translated_md), f"[{key}] P2 violato"
