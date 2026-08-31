@@ -66,6 +66,8 @@ def generate_decision_records(
     del pack  # reserved for future pack-aware rule resolution
     records: list[DecisionRecord] = []
     for adjudication in list_adjudications(conn, status="approved"):
+        if adjudication.get("kind") == "dictionary":
+            continue  # coda dizionario (passo 6): non e' una decisione canon
         adjudication_id = int(adjudication["id"])
         document_id = str(adjudication["document_id"])
         section = str(adjudication["section"])

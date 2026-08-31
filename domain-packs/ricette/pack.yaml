@@ -1,17 +1,20 @@
 name: ricette
 language: it
 canonical_language: en
-version: 1.0.0
-# Le card MSC (EN-native) non hanno time_min/difficulty: opzionali quando
-# lang == source_lang (mai placeholder inventati, P3).
-frontmatter_optional_when_native: [time_min, difficulty]
+version: 1.0.1
+frontmatter_optional_when_native:
+- time_min
+- difficulty
 ontologies:
-  - prefix: foodon
-    uri: http://purl.obolibrary.org/obo/FOODON_
-  - prefix: dbpedia
-    uri: http://dbpedia.org/resource/
+- prefix: foodon
+  uri: http://purl.obolibrary.org/obo/FOODON_
+- prefix: dbpedia
+  uri: http://dbpedia.org/resource/
 units_source: units.yaml
-glossaries: [tecnica, ingredienti, stati]
+glossaries:
+- tecnica
+- ingredienti
+- stati
 paths:
   template: template.md
   glossaries: glossari

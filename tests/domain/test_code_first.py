@@ -70,7 +70,13 @@ def test_unknown_code_falls_back_to_literal() -> None:
 
 def test_without_mapping_backward_compatible() -> None:
     """Senza msc_mapping.yaml il comportamento torna identico a prima."""
-    pack = load_domain_pack(str(PACK_DIR))  # pack reale senza mapping
+    import shutil
+    import tempfile
+
+    tmp = pathlib.Path(tempfile.mkdtemp())
+    shutil.copytree(PACK_DIR, tmp / "ricette", dirs_exist_ok=True)
+    (tmp / "ricette" / "msc_mapping.yaml").unlink()  # rimuovi il mapping
+    pack = load_domain_pack(str(tmp / "ricette"))
     assert pack.msc_mapping() == {}
     doc = canonicalize(pack, MD)
     # nessuna riscrittura per code: la stringa resta (irrisolta)

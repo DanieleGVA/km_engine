@@ -186,7 +186,7 @@ async def test_iteration_a_e2e_flow(ia6_client: Neo4jClient, ia6_pg_conn) -> Non
 
     # 1. Bootstrap pack (idempotente, nodi condivisi non ``ia6_``).
     bootstrap = load_pack(ia6_client, PACK_DIR)
-    assert bootstrap["pack_id"] == "ricette:1.0.0"
+    assert bootstrap["pack_id"].startswith("ricette:1.0.")
     assert bootstrap["terms"] > 0
 
     # 2. Carica corpus con id test-prefissati.

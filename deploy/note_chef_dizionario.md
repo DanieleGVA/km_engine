@@ -1,0 +1,174 @@
+# Note del chef sulla validazione del dizionario
+
+Totale note: 159 su 1000 righe (859 OK, 141 NOK)
+
+## Categorie
+- allergene mancante: 81
+- escludere (non ingrediente): 35
+- classe da uniformare: 19
+- ok con nota: 12
+- item fusi (da separare): 5
+- riga composta (ri-segmentare): 5
+- polish singolare: 1
+- altra nota: 1
+
+## Dettaglio
+- **CM00226** (OK): OK. Polish: regola del singolare -> 'fresh tomato'; vale per tutti i plurali regolari (leeks, eggs, almonds...). Da uniformare a valle senza scartare: identita', classe e allergeni corretti.
+- **SF00745** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **CM01621** (OK): OK. Polish singolare: 'pasteurized whole egg'.
+- **CM01914** (OK): OK. Canonical generico onesto per un item d'acquisto generico: corretto non inventare la varieta'.
+- **SF00742** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **SF00715** (NOK): Alias 'tomato passata' errato: la passata (cruda) e' prodotto distinto dalla salsa (cfr. riga 564). Rimuovere alias, poi ripubblicare.
+- **CM01706** (OK): OK. Classe 'liquido' accettabile per panna vegetale UHT; corretto NON dichiarare 'milk'.
+- **CM00879** (OK): OK. Alias 'black pepper' ambiguo (grani vs macinato, cfr. riga 2): valutare rimozione.
+- **CM01277** (NOK): Fonde item distinto: 'lettuce boston' collassa su 'lettuce' generico. Canonical corretto: 'Boston lettuce'.
+- **CM00564** (NOK): Mancano 'nuts' e 'milk': il pesto contiene pinoli e formaggio (cfr. riga 986 corretta).
+- **SF00225** (NOK): Manca 'gluten': la demi-glace classica parte da espagnole legata a roux; verificare anche 'celery' dal fondo.
+- **CM01099** (NOK): Fonde item d'acquisto distinti: la Dijon (CM01099) collassa su 'mustard' come CM01100/CM01101. Canonical corretto: 'Dijon mustard'.
+- **CM01818** (NOK): Manca 'soy': le coperture industriali (Barry/Callebaut) contengono lecitina di soia, dichiarabile EU-FIC (non esente).
+- **CM01156** (NOK): Fonde item distinti: il parzialmente scremato collassa su 'milk' generico mentre CM01150 ha 'whole milk'. Canonical corretto: 'semi-skimmed milk'.
+- **CM02238** (OK): OK. Allineare a 'fresh basil' (riga 32) in fase di consolidamento.
+- **SF00042** (NOK): Manca 'gluten': la besciamella e' legata con roux di farina (cfr. riga 850 corretta: milk, gluten).
+- **SF00106** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **SF00427** (NOK): Mirepoix = carota + cipolla + SEDANO per definizione: manca 'celery'.
+- **CM00135** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **CM01653** (OK): OK. Se la sfoglia e' al burro dichiarare 'milk': l'industriale surgelata e' spesso a margarina, verificare scheda.
+- **CM02331** (OK): OK. Coerenza fresco/surgelato con riga 75 ('green asparagus') da uniformare a valle.
+- **CM02057** (NOK): Classe: 'cereale' (e' pane), non 'altro' - allineare a pita, baguette, pancarre'.
+- **CM01377** (NOK): Conflitto di classe sullo stesso prodotto: 'altro' qui, 'latticino' in riga 417. Corretto: latticino.
+- **RF414803** (NOK): Conflitto di classe ('altro' vs 'verdura' in riga 393) e manca 'milk': il pure' classico contiene latte/burro.
+- **CM00770** (OK): OK ma rimuovere l'alias 'yam': specie diversa (Dioscorea). Sinonimo colloquiale USA, nel dizionario fonde specie distinte.
+- **CM06316** (NOK): Manca 'soy': le coperture industriali (Barry/Callebaut) contengono lecitina di soia, dichiarabile EU-FIC (non esente).
+- **RF310169** (NOK): Manca 'milk': la ganache e' cioccolato + panna per definizione.
+- **CM01067** (OK): OK. Nota: il pinolo non e' tra la frutta a guscio EU-FIC (Allegato II); 'nuts' e' sovra-dichiarazione prudenziale, accettata.
+- **SF00737** (NOK): Mancano 'milk' ed 'eggs': la salsa vaniglia e' una crema inglese.
+- **CM01027** (NOK): Conflitto di classe: olive in 'frutta' qui, 'verdura' nelle righe MSC gia' validate (88, 183). Uniformare su 'verdura'.
+- **SF00008** (NOK): Mancano 'milk' ed 'eggs': la crema di mandorle (frangipane) e' burro + uova + mandorle.
+- **SF00046** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **CM01710** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **CM01798** (OK): OK. Verificare lecitina di soia nel surrogato (scheda prodotto).
+- **SF00741** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **CM00128** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **CM01650** (NOK): Mancano 'eggs', 'fish' e 'milk': la Caesar contiene uovo, acciughe e parmigiano.
+- **CM06597** (NOK): Mancano 'gluten' ed 'eggs' sul biscuit (cfr. righe 323/437 corrette).
+- **SF00467** (NOK): Classe: 'cereale' come le altre righe breadcrumbs (288, 511, 572), non 'altro'.
+- **CM02058** (NOK): Classe: 'cereale' (e' pane), non 'altro' - allineare a pita, baguette, pancarre'.
+- **CM02270** (OK): OK. Verificare allergeni della base industriale: spesso contiene sedano e/o soia.
+- **SF00151** (NOK): Manca 'milk': la pasta choux si fa con burro (gluten ed eggs gia' presenti).
+- **CM00566** (NOK): Manca 'gluten': la salsa di ostriche standard (Lee Kum Kee) contiene farina di frumento.
+- **SF00102** (NOK): Gravy classica legata a roux: manca 'gluten'; verificare anche 'celery' dal fondo di partenza.
+- **CM00575** (NOK): Manca 'gluten': la salsa hoisin standard contiene frumento.
+- **CM01817** (NOK): Manca 'soy': le coperture industriali (Barry/Callebaut) contengono lecitina di soia, dichiarabile EU-FIC (non esente).
+- **CM06259** (NOK): Mancano 'nuts' e 'milk': il pesto contiene pinoli e formaggio (cfr. riga 986 corretta).
+- **CM2742** (NOK): Manca 'soy': le coperture industriali (Barry/Callebaut) contengono lecitina di soia, dichiarabile EU-FIC (non esente).
+- **RF07828** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **SF00045** (NOK): Gravy classica legata a roux: manca 'gluten'; verificare anche 'celery' dal fondo di partenza.
+- **SF00199** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **SF00279** (NOK): Manca 'milk': pure' classico con latte/burro; classe in conflitto con riga 200.
+- **CM01032** (NOK): Conflitto di classe: olive in 'frutta' qui, 'verdura' nelle righe MSC gia' validate (88, 183). Uniformare su 'verdura'.
+- **CM01170** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **CM01815** (NOK): Manca 'soy': le coperture industriali (Barry/Callebaut) contengono lecitina di soia, dichiarabile EU-FIC (non esente).
+- **CM06317** (NOK): Manca 'soy': le coperture industriali (Barry/Callebaut) contengono lecitina di soia, dichiarabile EU-FIC (non esente).
+- **CM2741** (NOK): Manca 'soy': le coperture industriali (Barry/Callebaut) contengono lecitina di soia, dichiarabile EU-FIC (non esente).
+- **SF00031** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **SF00740** (NOK): Gravy classica legata a roux: manca 'gluten'; verificare anche 'celery' dal fondo di partenza.
+- **CM01137** (NOK): Manca 'gluten': il pancake mix e' a base di farina di frumento (spesso anche milk/eggs - verificare).
+- **CM01797** (NOK): Il surrogato non e' cioccolato: canonical corretto 'white chocolate substitute' (cfr. riga 267 per il fondente). Cosi' fonde item distinti.
+- **CM01964** (NOK): Manca 'gluten': i rice crispies commerciali contengono malto d'orzo.
+- **ingrediente** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **to 6 servings** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **wheat flour** (OK): OK. Nota classe: le farine altrove sono 'amido' (15, 847) - uniformare a valle.
+- **white wine** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **di brodo di carne (vedi preparazioni di base)** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **costa di celery** (NOK): Manca l'allergene 'celery' sul sedano stesso (EU-FIC): errore bloccante (cfr. riga 21 corretta).
+- **white wine vinegar** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **di butter chiarificato (vedi preparazioni di base)** (NOK): Conflitto di classe: burro chiarificato 'latticino' qui, 'grasso' in 353/957. Uniformare su 'grasso'.
+- **di concentrato di tomato** (NOK): Conflitto di classe: tomato paste 'verdura' qui, 'condimento' in 95/762. Uniformare su 'condimento'.
+- **red wine** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **dry white wine** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **di brodo** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **litres (3; pt or 9 u.s. cups) chicken con-** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **di olive nere denocciolate** (NOK): Conflitto di classe: olive in 'frutta' qui, 'verdura' nelle righe MSC gia' validate (88, 183). Uniformare su 'verdura'.
+- **litres (34 pt or 9 u.s. cups) chicken con-** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **teaspoon ground asafoetida** (NOK): Manca 'gluten': l'asafoetida in polvere e' quasi sempre su carrier di farina di frumento. Verificare la scheda prodotto.
+- **di vegetable broth (vedi preparazioni di base)** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **to 30 minutes** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **di aceto di red wine** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **to 6 serving** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **to 8 servings** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **u.s.** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **ib (0.454 kg)** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **litres** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **pieces** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **servings** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **quarts white or classic bouillon [no. 323 or 324]** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **carrot, 1⁄2 costa di celery** (NOK): Riga composta (carota + 1/2 costa di sedano): il canonical 'carrot' perde il sedano, allergene EU-FIC. Ri-segmentare in due componenti.
+- **peperoni** (OK): OK. Ottima disambiguazione: 'peperoni' (IT) = bell pepper, non il salume.
+- **seconds** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **flour** (NOK): Manca 'gluten' su 'flour' generica: il default e' frumento (cfr. riga 15).
+- **litre** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **tomato paste (purée)** (NOK): Conflitto di classe: tomato paste 'verdura' qui, 'condimento' in 95/762. Uniformare su 'condimento'.
+- **di extra virgin olive oil, salt and black pepper** (NOK): Riga composta (olio evo + sale + pepe): canonical multiplo non ammesso. Ri-segmentare.
+- **to 16 breads** (NOK): Riga di resa ('to N breads'), non un ingrediente. Escludere.
+- **di wheat flour di mais** (NOK): Testo corrotto (farina di grano / di mais): canonical composto ambiguo. Ri-segmentare.
+- **litres (34 pt or 9 u.s. cups) ordinary con-** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **recipe vanilla tuile decorating paste** (NOK): Mancano 'gluten', 'eggs' e 'milk': la pasta per tuiles e' farina + albume + burro.
+- **di butter, salt** (NOK): Riga composta (burro + sale): canonical 'butter, salt' non valido. Ri-segmentare.
+- **di marsala** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **di marsala vergine** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **di pasta sfoglia** (OK): OK. Se sfoglia al burro dichiarare 'milk' (vedi riga 158).
+- **hours** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **minutes** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **oz** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **ribbon-pattern decorated sponge sheet** (NOK): Mancano 'gluten' ed 'eggs' sul biscuit (cfr. righe 323/437 corrette).
+- **superfine (caster) or granulated sugar** (OK): OK. Collasso su 'sugar' accettabile: la fonte offre un'alternativa (caster o granulated).
+- **% oz** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **crépes [see no. 2017]** (NOK): Mancano 'gluten', 'eggs' e 'milk': la crepe li contiene per definizione.
+- **hour 30 minutes to 2 hours at 80°f (27°c)** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **hours.** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **oz (0.085 kg)** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **quarts chicken consommé [no. 361]** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **recipe vanilla soufflé [no. 2040]** (NOK): Mancano 'milk' e 'gluten': il souffle' alla vaniglia parte da base crema (latte + farina).
+- **small piece muslin or 4 layers cheesecloth (sufficient to cover the mouth of the jar)** (NOK): Attrezzatura (garza/cheesecloth), non un ingrediente. Escludere.
+- **coste di celery** (NOK): Manca l'allergene 'celery' sul sedano stesso (EU-FIC): errore bloccante (cfr. riga 21 corretta).
+- **egg intere + 1 egg yolk** (OK): OK. Forma composta uovo+tuorlo mappata su 'egg': stesso allergene, accettabile per il matching.
+- **hour 30 minutes at 80°f (27°c) at 65% rh** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **quarts court bouillon [no. 763]** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **small** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **teaspoons (6 g) unflavored gelatin powder** (NOK): Conflitto di classe: gelatina 'proteina' qui, 'altro' in 90/756/793/925. Uniformare su 'altro'.
+- **(33 oz)** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **brown stock [no. 4]** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **celery, trimmed, cooked, and drained as** (NOK): Manca l'allergene 'celery' sul sedano stesso (EU-FIC): errore bloccante (cfr. riga 21 corretta).
+- **demi-glaze sauce [no. 20]** (NOK): Manca 'gluten': la demi-glace classica parte da espagnole legata a roux; verificare anche 'celery' dal fondo.
+- **di besciamella (vedi preparazioni di base)** (NOK): Manca 'gluten': la besciamella e' legata con roux di farina (cfr. riga 850 corretta: milk, gluten).
+- **di pesce di manzo** (NOK): Testo corrotto ('beef fish' non esiste): riga non interpretabile. Escludere.
+- **di ragù (vedi preparazioni di base)** (NOK): Manca 'celery': il soffritto del ragu' contiene sedano per definizione.
+- **di vegetable broth o di carne (vedi preparazioni di base)** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **duchesse potato base [no. 1770]** (NOK): Mancano 'milk' ed 'eggs': la duchesse e' patate + burro + tuorli.
+- **hour at 80°f (27°c) at 65% rh** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **litres (34 pt or 9 u.s. cups) petite marmite** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **litres (3; pt or 9 u.s. cups) petite marmite** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **minutes.** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **olive nere denocciolate** (NOK): Conflitto di classe: olive in 'frutta' qui, 'verdura' nelle righe MSC gia' validate (88, 183). Uniformare su 'verdura'.
+- **onion, 1⁄2 costa di celery** (NOK): Riga composta (cipolla + 1/2 costa di sedano): perde il sedano (allergene). Ri-segmentare.
+- **quarts court bouillon [no. 764]** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **red wine vinegar** (NOK): Manca allergene 'sulphites' (EU-FIC): vino, marsala, aceti di vino e balsamico lo contengono e va dichiarato (cfr. righe 23/99 corrette).
+- **sauce mornay [no. 56]** (NOK): Manca 'gluten': la Mornay e' su base besciamella (roux).
+- **sifted flour** (NOK): Manca 'gluten' e classe in conflitto ('cereale' vs 'amido' usato per le farine).
+- **skewers** (NOK): Attrezzatura (spiedini), non un ingrediente. Escludere.
+- **stalks celery, sliced** (NOK): Manca l'allergene 'celery' sul sedano stesso (EU-FIC): errore bloccante (cfr. riga 21 corretta).
+- **to 10 breads** (NOK): Riga di resa ('to N breads'), non un ingrediente. Escludere.
+- **to 20 pieces** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **to 25 pieces** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **(34 oz)** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **@ oz)** (NOK): Non e' un ingrediente (artefatto di parsing: unita'/tempo/porzioni). Escludere dal dizionario.
+- **baked flan crust [no. 605], prepared with rich** (NOK): Mancano 'milk' ed 'eggs': la pasta 'rich' per flan e' farina + burro + uova.
+- **capperi sotto salt** (NOK): Conflitto di classe: capperi 'condimento' qui, 'verdura' in 97/191/566/695/861. Uniformare su 'verdura'.
+- **celery stalks, chopped** (NOK): Manca l'allergene 'celery' sul sedano stesso (EU-FIC): errore bloccante (cfr. riga 21 corretta).
+- **di capperi dissalati** (NOK): Conflitto di classe: capperi 'condimento' qui, 'verdura' in 97/191/566/695/861. Uniformare su 'verdura'.
+- **di court-bouillon (vedi preparazioni di base)** (NOK): Manca 'celery': fondi, brodi e court-bouillon classici contengono sedano nel mazzetto/mirepoix. Dichiarare o verificare la ricetta base.
+- **di olive nere snocciolate** (NOK): Conflitto di classe: olive in 'frutta' qui, 'verdura' nelle righe MSC gia' validate (88, 183). Uniformare su 'verdura'.
+- **di parsley, salt** (NOK): Riga composta (prezzemolo, sale): 'parsley salt' inventa un prodotto assente nella fonte.
+- **di pasta frolla (vedi preparazioni di base)** (NOK): Manca 'milk': la pasta frolla classica e' a base burro.
+- **di ragù di carne (vedi preparazioni di base)** (NOK): Manca 'celery': il soffritto del ragu' contiene sedano per definizione.
+- **di wheat flour di grano saraceno** (OK): OK. Canonical corretto (grano saraceno, senza glutine); classe da uniformare ad 'amido' a valle.

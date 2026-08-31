@@ -1,7 +1,3 @@
-# Glossario ingredienti seed (P4/P7).
-# FoodOn URI: riferimenti seed da validare con l'esperto di dominio (P5).
-# Nota T10: 'mandorle dolci sbucciate' e 'mandorle amare sbucciate' restano
-# volutamente irrisolti (il modificatore 'sbucciate' non è un alias).
 name: ingredienti
 entries:
 - id: ING-SPAGHETTI
@@ -444,7 +440,6 @@ entries:
   - albume
   definition: Egg whites.
   ontology_uri: http://dbpedia.org/resource/Egg_white
-
 - id: ING-WHITE-WINE
   labels_en: white wine
   labels_it: vino bianco
@@ -541,7 +536,6 @@ entries:
   - olio da frittura
   definition: Neutral oil suitable for deep frying.
   ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001103
-
 - id: ING-FONTINA
   labels_en: fontina cheese
   labels_it: fontina
@@ -628,7 +622,6 @@ entries:
   - sliced white bread
   definition: Soft square bread for toasts.
   ontology_uri: http://dbpedia.org/resource/Bread
-
 - id: ING-SARDINES
   labels_en: sardines
   labels_it: sardine
@@ -750,3 +743,6031 @@ entries:
   - orange zest
   definition: Citrus fruit.
   ontology_uri: http://purl.obolibrary.org/obo/FOODON_00001024
+- id: ING-DICT-0092
+  labels_en: table salt
+  labels_it: table salt
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00591).
+  class: condimento
+- id: ING-DICT-0093
+  labels_en: ground black peppercorn
+  labels_it: ground black peppercorn
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00878).
+  class: spezia
+- id: ING-DICT-0094
+  labels_en: fresh garlic
+  labels_it: fresh garlic
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01537).
+  class: verdura
+- id: ING-DICT-0095
+  labels_en: olive oil
+  labels_it: olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01050).
+  class: grasso
+- id: ING-DICT-0096
+  labels_en: fresh parsley
+  labels_it: fresh parsley
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00996).
+  class: erba
+- id: ING-DICT-0097
+  labels_en: fresh yellow onion
+  labels_it: fresh yellow onion
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01017).
+  class: verdura
+- id: ING-DICT-0098
+  labels_en: sunflower seed oil
+  labels_it: sunflower seed oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01040).
+  class: grasso
+- id: ING-DICT-0099
+  labels_en: ground white peppercorn
+  labels_it: ground white peppercorn
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00873).
+  class: spezia
+- id: ING-DICT-0100
+  labels_en: unsalted butter
+  labels_it: unsalted butter
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02021).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0101
+  labels_en: fresh carrot
+  labels_it: fresh carrot
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01978).
+  class: verdura
+- id: ING-DICT-0102
+  labels_en: white granulated sugar
+  labels_it: white granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00290).
+  class: dolcificante
+- id: ING-DICT-0103
+  labels_en: unsalted butter for pastry
+  labels_it: unsalted butter for pastry
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3467).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0104
+  labels_en: fresh thyme
+  labels_it: fresh thyme
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01441).
+  class: erba
+- id: ING-DICT-0105
+  labels_en: fresh lemon
+  labels_it: fresh lemon
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01285).
+  class: frutta
+- id: ING-DICT-0106
+  labels_en: all-purpose flour
+  labels_it: all-purpose flour
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01577).
+  class: amido
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0107
+  labels_en: extra virgin olive oil
+  labels_it: extra virgin olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01049).
+  class: grasso
+- id: ING-DICT-0108
+  labels_en: fresh potato
+  labels_it: fresh potato
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00779).
+  class: verdura
+- id: ING-DICT-0109
+  labels_en: water
+  labels_it: water
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00085).
+  class: liquido
+- id: ING-DICT-0110
+  labels_en: fresh tomatoes
+  labels_it: fresh tomatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00226).
+  class: verdura
+- id: ING-DICT-0111
+  labels_en: fresh coriander
+  labels_it: fresh coriander
+  aliases:
+  - cilantro
+  definition: Standardizzato da dizionario (msc, key=CM01744).
+  class: erba
+- id: ING-DICT-0112
+  labels_en: fresh celery
+  labels_it: fresh celery
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01971).
+  class: verdura
+  allergen_tags:
+  - celery
+- id: ING-DICT-0113
+  labels_en: lemon juice
+  labels_it: lemon juice
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01335).
+  class: liquido
+- id: ING-DICT-0114
+  labels_en: white wine
+  labels_it: white wine
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00035).
+  class: bevanda
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0115
+  labels_en: fresh red bell pepper
+  labels_it: fresh red bell pepper
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00871).
+  class: verdura
+- id: ING-DICT-0116
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01718).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0117
+  labels_en: fresh rosemary
+  labels_it: fresh rosemary
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01447).
+  class: erba
+- id: ING-DICT-0118
+  labels_en: fresh ginger
+  labels_it: fresh ginger
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01519).
+  class: verdura
+- id: ING-DICT-0119
+  labels_en: fresh zucchini
+  labels_it: fresh zucchini
+  aliases:
+  - courgette
+  definition: Standardizzato da dizionario (msc, key=CM00002).
+  class: verdura
+- id: ING-DICT-0120
+  labels_en: fresh shallot
+  labels_it: fresh shallot
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00483).
+  class: verdura
+- id: ING-DICT-0121
+  labels_en: fresh mint
+  labels_it: fresh mint
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01451).
+  class: erba
+- id: ING-DICT-0122
+  labels_en: fresh basil
+  labels_it: fresh basil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02237).
+  class: erba
+- id: ING-DICT-0123
+  labels_en: fresh spring onion
+  labels_it: fresh spring onion
+  aliases:
+  - scallion
+  definition: Standardizzato da dizionario (msc, key=CM01019).
+  class: verdura
+- id: ING-DICT-0124
+  labels_en: pasteurized whole eggs
+  labels_it: pasteurized whole eggs
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01621).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0125
+  labels_en: fresh chives
+  labels_it: fresh chives
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01459).
+  class: erba
+- id: ING-DICT-0126
+  labels_en: fresh red onion
+  labels_it: fresh red onion
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01023).
+  class: verdura
+- id: ING-DICT-0127
+  labels_en: dried bay leaves
+  labels_it: dried bay leaves
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01464).
+  class: erba
+- id: ING-DICT-0128
+  labels_en: whole milk
+  labels_it: whole milk
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01150).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0129
+  labels_en: fresh eggs
+  labels_it: fresh eggs
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01628).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0130
+  labels_en: kosher salt
+  labels_it: kosher salt
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM05085).
+  class: condimento
+- id: ING-DICT-0131
+  labels_en: cornstarch
+  labels_it: cornstarch
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01567).
+  class: amido
+- id: ING-DICT-0132
+  labels_en: whipping cream
+  labels_it: whipping cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01708).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0133
+  labels_en: fresh cherry tomatoes
+  labels_it: fresh cherry tomatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00223).
+  class: verdura
+- id: ING-DICT-0134
+  labels_en: fresh leeks
+  labels_it: fresh leeks
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01286).
+  class: verdura
+- id: ING-DICT-0135
+  labels_en: honey
+  labels_it: honey
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01436).
+  class: dolcificante
+- id: ING-DICT-0136
+  labels_en: vanilla extract
+  labels_it: vanilla extract
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01597).
+  class: condimento
+- id: ING-DICT-0137
+  labels_en: ground cinnamon
+  labels_it: ground cinnamon
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00360).
+  class: spezia
+- id: ING-DICT-0138
+  labels_en: ground cumin
+  labels_it: ground cumin
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00354).
+  class: spezia
+- id: ING-DICT-0139
+  labels_en: fresh roma tomatoes
+  labels_it: fresh roma tomatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00214).
+  class: verdura
+- id: ING-DICT-0140
+  labels_en: frozen green peas
+  labels_it: frozen green peas
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00885).
+  class: legume
+- id: ING-DICT-0141
+  labels_en: yellow bell pepper
+  labels_it: yellow bell pepper
+  aliases:
+  - yellow pepper
+  - sweet yellow pepper
+  definition: Standardizzato da dizionario (msc, key=CM00870).
+  class: verdura
+- id: ING-DICT-0142
+  labels_en: fresh sage
+  labels_it: fresh sage
+  aliases:
+  - sage herb
+  definition: Standardizzato da dizionario (msc, key=CM01445).
+  class: erba
+- id: ING-DICT-0143
+  labels_en: grated cheese
+  labels_it: grated cheese
+  aliases:
+  - shredded cheese
+  definition: Standardizzato da dizionario (msc, key=CM01914).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0144
+  labels_en: Grana Padano cheese
+  labels_it: Grana Padano cheese
+  aliases:
+  - Grana Padano
+  definition: Standardizzato da dizionario (msc, key=CM01916).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0145
+  labels_en: sugar substitute
+  labels_it: sugar substitute
+  aliases:
+  - 1:1 sugar substitute
+  definition: Standardizzato da dizionario (msc, key=CM00292).
+  class: dolcificante
+- id: ING-DICT-0146
+  labels_en: iceberg lettuce
+  labels_it: iceberg lettuce
+  aliases:
+  - crisphead lettuce
+  definition: Standardizzato da dizionario (msc, key=CM01273).
+  class: verdura
+- id: ING-DICT-0147
+  labels_en: sweet paprika
+  labels_it: sweet paprika
+  aliases:
+  - paprika powder
+  definition: Standardizzato da dizionario (msc, key=CM00335).
+  class: spezia
+- id: ING-DICT-0148
+  labels_en: fresh cucumber
+  labels_it: fresh cucumber
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01700).
+  class: verdura
+- id: ING-DICT-0149
+  labels_en: romaine lettuce
+  labels_it: romaine lettuce
+  aliases:
+  - cos lettuce
+  definition: Standardizzato da dizionario (msc, key=CM01265).
+  class: verdura
+- id: ING-DICT-0150
+  labels_en: dried oregano
+  labels_it: dried oregano
+  aliases:
+  - oregano
+  definition: Standardizzato da dizionario (msc, key=CM01450).
+  class: erba
+- id: ING-DICT-0151
+  labels_en: mayonnaise
+  labels_it: mayonnaise
+  aliases:
+  - Heinz mayonnaise
+  definition: Standardizzato da dizionario (msc, key=CM07141).
+  class: condimento
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0152
+  labels_en: soy sauce
+  labels_it: soy sauce
+  aliases:
+  - soya sauce
+  definition: Standardizzato da dizionario (msc, key=CM00556).
+  class: condimento
+  allergen_tags:
+  - soy
+  - gluten
+- id: ING-DICT-0153
+  labels_en: pasteurized liquid egg yolk
+  labels_it: pasteurized liquid egg yolk
+  aliases:
+  - egg yolk liquid
+  definition: Standardizzato da dizionario (msc, key=CM01620).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0154
+  labels_en: smoked sliced bacon
+  labels_it: smoked sliced bacon
+  aliases:
+  - smoked bacon
+  definition: Standardizzato da dizionario (msc, key=CM02322).
+  class: proteina
+- id: ING-DICT-0155
+  labels_en: white vinegar
+  labels_it: white vinegar
+  aliases:
+  - distilled vinegar
+  definition: Standardizzato da dizionario (msc, key=CM00124).
+  class: condimento
+- id: ING-DICT-0156
+  labels_en: green bell pepper
+  labels_it: green bell pepper
+  aliases:
+  - green pepper
+  definition: Standardizzato da dizionario (msc, key=CM00872).
+  class: verdura
+- id: ING-DICT-0157
+  labels_en: fresh dill
+  labels_it: fresh dill
+  aliases:
+  - dill weed
+  definition: Standardizzato da dizionario (msc, key=CM01456).
+  class: erba
+- id: ING-DICT-0158
+  labels_en: orange
+  labels_it: orange
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01016).
+  class: frutta
+- id: ING-DICT-0159
+  labels_en: seedless dried raisins
+  labels_it: seedless dried raisins
+  aliases:
+  - sultanas
+  definition: Standardizzato da dizionario (msc, key=CM00709).
+  class: frutta_secca
+- id: ING-DICT-0160
+  labels_en: wild arugula
+  labels_it: wild arugula
+  aliases:
+  - rocket
+  - wild rocket
+  definition: Standardizzato da dizionario (msc, key=CM3496).
+  class: verdura
+- id: ING-DICT-0161
+  labels_en: fish stock
+  labels_it: fish stock
+  aliases:
+  - fish broth
+  definition: Standardizzato da dizionario (msc, key=SF00257).
+  class: liquido
+  allergen_tags:
+  - fish
+- id: ING-DICT-0162
+  labels_en: fresh fennel
+  labels_it: fresh fennel
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01594).
+  class: verdura
+- id: ING-DICT-0163
+  labels_en: shredded mozzarella cheese
+  labels_it: shredded mozzarella cheese
+  aliases:
+  - pizza mozzarella
+  definition: Standardizzato da dizionario (msc, key=CM01895).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0164
+  labels_en: green asparagus
+  labels_it: green asparagus
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02332).
+  class: verdura
+- id: ING-DICT-0165
+  labels_en: icing sugar
+  labels_it: icing sugar
+  aliases:
+  - confectioner's sugar
+  - powdered sugar
+  definition: Standardizzato da dizionario (msc, key=CM00294).
+  class: dolcificante
+- id: ING-DICT-0166
+  labels_en: brown sugar
+  labels_it: brown sugar
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00302).
+  class: dolcificante
+- id: ING-DICT-0167
+  labels_en: crushed chili pepper
+  labels_it: crushed chili pepper
+  aliases:
+  - red pepper flakes
+  definition: Standardizzato da dizionario (msc, key=CM00364).
+  class: spezia
+- id: ING-DICT-0168
+  labels_en: peeled tomatoes
+  labels_it: peeled tomatoes
+  aliases:
+  - canned peeled tomatoes
+  definition: Standardizzato da dizionario (msc, key=CM00217).
+  class: verdura
+- id: ING-DICT-0169
+  labels_en: coconut milk
+  labels_it: coconut milk
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01769).
+  class: liquido
+- id: ING-DICT-0170
+  labels_en: boneless skinless chicken breast
+  labels_it: boneless skinless chicken breast
+  aliases:
+  - chicken breast fillet
+  definition: Standardizzato da dizionario (msc, key=CM01850).
+  class: proteina
+- id: ING-DICT-0171
+  labels_en: baking powder
+  labels_it: baking powder
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02318).
+  class: altro
+- id: ING-DICT-0172
+  labels_en: peeled garlic
+  labels_it: peeled garlic
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2856).
+  class: verdura
+- id: ING-DICT-0173
+  labels_en: plain yogurt
+  labels_it: plain yogurt
+  aliases:
+  - natural yogurt
+  definition: Standardizzato da dizionario (msc, key=CM00007).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0174
+  labels_en: frozen green beans
+  labels_it: frozen green beans
+  aliases:
+  - string beans
+  - French beans
+  definition: Standardizzato da dizionario (msc, key=CM02220).
+  class: verdura
+- id: ING-DICT-0175
+  labels_en: sliced almonds
+  labels_it: sliced almonds
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02379).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0176
+  labels_en: pitted black olives
+  labels_it: pitted black olives
+  aliases:
+  - black olives
+  definition: Standardizzato da dizionario (msc, key=CM01036).
+  class: verdura
+- id: ING-DICT-0177
+  labels_en: lime
+  labels_it: lime
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01263).
+  class: frutta
+- id: ING-DICT-0178
+  labels_en: gelatin sheets
+  labels_it: gelatin sheets
+  aliases:
+  - leaf gelatin
+  definition: Standardizzato da dizionario (msc, key=CM01532).
+  class: altro
+- id: ING-DICT-0179
+  labels_en: fresh long eggplant
+  labels_it: fresh long eggplant
+  aliases:
+  - aubergine
+  definition: Standardizzato da dizionario (msc, key=CM01631).
+  class: verdura
+- id: ING-DICT-0180
+  labels_en: vegan whipping cream
+  labels_it: vegan whipping cream
+  aliases:
+  - plant-based whipping cream
+  definition: Standardizzato da dizionario (msc, key=CM01706).
+  class: liquido
+- id: ING-DICT-0181
+  labels_en: sour cream
+  labels_it: sour cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01714).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0182
+  labels_en: Granny Smith apple
+  labels_it: Granny Smith apple
+  aliases:
+  - green apple
+  definition: Standardizzato da dizionario (msc, key=CM02354).
+  class: frutta
+- id: ING-DICT-0183
+  labels_en: tomato paste
+  labels_it: tomato paste
+  aliases:
+  - tomato concentrate
+  definition: Standardizzato da dizionario (msc, key=CM00218).
+  class: condimento
+- id: ING-DICT-0184
+  labels_en: black peppercorns
+  labels_it: black peppercorns
+  aliases:
+  - black pepper
+  definition: Standardizzato da dizionario (msc, key=CM00879).
+  class: spezia
+- id: ING-DICT-0185
+  labels_en: salted capers
+  labels_it: salted capers
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01985).
+  class: verdura
+- id: ING-DICT-0186
+  labels_en: fresh broccoli florets
+  labels_it: fresh broccoli florets
+  aliases:
+  - broccoli spears
+  definition: Standardizzato da dizionario (msc, key=CM02036).
+  class: verdura
+- id: ING-DICT-0187
+  labels_en: red wine
+  labels_it: red wine
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00046).
+  class: bevanda
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0188
+  labels_en: frozen French fries
+  labels_it: frozen French fries
+  aliases:
+  - frozen chips
+  definition: Standardizzato da dizionario (msc, key=CM00783).
+  class: verdura
+- id: ING-DICT-0189
+  labels_en: marjoram
+  labels_it: marjoram
+  aliases:
+  - herb marjoram fresh
+  definition: Standardizzato da dizionario (msc, key=CM01453).
+  class: erba
+- id: ING-DICT-0190
+  labels_en: cocoa powder
+  labels_it: cocoa powder
+  aliases:
+  - cocoa powder bitter
+  definition: Standardizzato da dizionario (msc, key=CM01777).
+  class: altro
+- id: ING-DICT-0191
+  labels_en: saffron
+  labels_it: saffron
+  aliases:
+  - saffron powder
+  definition: Standardizzato da dizionario (msc, key=CM00648).
+  class: spezia
+- id: ING-DICT-0192
+  labels_en: cauliflower
+  labels_it: cauliflower
+  aliases:
+  - cauliflower fresh
+  definition: Standardizzato da dizionario (msc, key=CM01973).
+  class: verdura
+- id: ING-DICT-0193
+  labels_en: sesame oil
+  labels_it: sesame oil
+  aliases:
+  - toasted sesame oil
+  definition: Standardizzato da dizionario (msc, key=CM3064).
+  class: grasso
+  allergen_tags:
+  - sesame
+- id: ING-DICT-0194
+  labels_en: nutmeg
+  labels_it: nutmeg
+  aliases:
+  - ground nutmeg
+  definition: Standardizzato da dizionario (msc, key=CM00340).
+  class: spezia
+- id: ING-DICT-0195
+  labels_en: cinnamon
+  labels_it: cinnamon
+  aliases:
+  - cinnamon stick
+  definition: Standardizzato da dizionario (msc, key=CM00359).
+  class: spezia
+- id: ING-DICT-0196
+  labels_en: lime juice
+  labels_it: lime juice
+  aliases:
+  - lime juice
+  definition: Standardizzato da dizionario (msc, key=CM01331).
+  class: liquido
+- id: ING-DICT-0197
+  labels_en: strawberry
+  labels_it: strawberry
+  aliases:
+  - strawberries
+  definition: Standardizzato da dizionario (msc, key=CM00307).
+  class: frutta
+- id: ING-DICT-0198
+  labels_en: spinach
+  labels_it: spinach
+  aliases:
+  - frozen spinach leaves
+  definition: Standardizzato da dizionario (msc, key=CM00330).
+  class: verdura
+- id: ING-DICT-0199
+  labels_en: jalapeno pepper
+  labels_it: jalapeno pepper
+  aliases:
+  - fresh jalapeno
+  definition: Standardizzato da dizionario (msc, key=CM00864).
+  class: verdura
+- id: ING-DICT-0200
+  labels_en: champignon mushroom
+  labels_it: champignon mushroom
+  aliases:
+  - white champignon mushroom
+  definition: Standardizzato da dizionario (msc, key=CM01122).
+  class: fungo
+- id: ING-DICT-0201
+  labels_en: egg white
+  labels_it: egg white
+  aliases:
+  - liquid egg white
+  - pasteurized egg white
+  definition: Standardizzato da dizionario (msc, key=CM01624).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0202
+  labels_en: egg
+  labels_it: egg
+  aliases:
+  - liquid whole egg
+  - pasteurized whole egg
+  definition: Standardizzato da dizionario (msc, key=CM2833).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0203
+  labels_en: turmeric
+  labels_it: turmeric
+  aliases:
+  - turmeric spice
+  definition: Standardizzato da dizionario (msc, key=CM00332).
+  class: spezia
+- id: ING-DICT-0204
+  labels_en: curry powder
+  labels_it: curry powder
+  aliases:
+  - curry powder spice
+  definition: Standardizzato da dizionario (msc, key=CM00351).
+  class: spezia
+- id: ING-DICT-0205
+  labels_en: chickpea
+  labels_it: chickpea
+  aliases:
+  - dried chickpeas
+  definition: Standardizzato da dizionario (msc, key=CM00731).
+  class: legume
+- id: ING-DICT-0206
+  labels_en: coconut
+  labels_it: coconut
+  aliases:
+  - dried grated coconut
+  definition: Standardizzato da dizionario (msc, key=CM01770).
+  class: frutta_secca
+- id: ING-DICT-0207
+  labels_en: pumpkin
+  labels_it: pumpkin
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00720).
+  class: verdura
+- id: ING-DICT-0208
+  labels_en: pistachio
+  labels_it: pistachio
+  aliases:
+  - shelled pistachio
+  definition: Standardizzato da dizionario (msc, key=CM00836).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0209
+  labels_en: mustard
+  labels_it: mustard
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01101).
+  class: condimento
+  allergen_tags:
+  - mustard
+- id: ING-DICT-0210
+  labels_en: champignon mushroom
+  labels_it: champignon mushroom
+  aliases:
+  - sliced white champignon mushroom
+  definition: Standardizzato da dizionario (msc, key=CM01121).
+  class: fungo
+- id: ING-DICT-0211
+  labels_en: bread crumbs
+  labels_it: bread crumbs
+  aliases:
+  - japanese panko bread crumbs
+  definition: Standardizzato da dizionario (msc, key=CM02051).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0212
+  labels_en: basil
+  labels_it: basil
+  aliases:
+  - fresh basil bunch
+  definition: Standardizzato da dizionario (msc, key=CM02238).
+  class: erba
+- id: ING-DICT-0213
+  labels_en: almond
+  labels_it: almond
+  aliases:
+  - peeled almond powder
+  definition: Standardizzato da dizionario (msc, key=CM02381).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0214
+  labels_en: onion
+  labels_it: onion
+  aliases:
+  - white onion
+  definition: Standardizzato da dizionario (msc, key=CM04120).
+  class: verdura
+- id: ING-DICT-0215
+  labels_en: pineapple
+  labels_it: pineapple
+  aliases:
+  - pineapple from Central America
+  definition: Standardizzato da dizionario (msc, key=CM00841).
+  class: frutta
+- id: ING-DICT-0216
+  labels_en: tarragon
+  labels_it: tarragon
+  aliases:
+  - fresh tarragon
+  definition: Standardizzato da dizionario (msc, key=CM01443).
+  class: erba
+- id: ING-DICT-0217
+  labels_en: butter
+  labels_it: butter
+  aliases:
+  - unsalted butter
+  definition: Standardizzato da dizionario (msc, key=CM2656).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0218
+  labels_en: shrimp
+  labels_it: shrimp
+  aliases:
+  - shrimp tail 41-50
+  definition: Standardizzato da dizionario (msc, key=CM3260).
+  class: proteina
+  allergen_tags:
+  - crustaceans
+- id: ING-DICT-0219
+  labels_en: walnut
+  labels_it: walnut
+  aliases:
+  - walnut halves
+  definition: Standardizzato da dizionario (msc, key=CM00089).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0220
+  labels_en: garam masala
+  labels_it: garam masala
+  aliases:
+  - garam masala spice
+  definition: Standardizzato da dizionario (msc, key=CM00347).
+  class: spezia
+- id: ING-DICT-0221
+  labels_en: cumin seed
+  labels_it: cumin seed
+  aliases:
+  - cumin seeds
+  definition: Standardizzato da dizionario (msc, key=CM00496).
+  class: spezia
+- id: ING-DICT-0222
+  labels_en: soya milk
+  labels_it: soya milk
+  aliases:
+  - soy milk
+  definition: Standardizzato da dizionario (msc, key=CM01152).
+  class: bevanda
+  allergen_tags:
+  - soy
+- id: ING-DICT-0223
+  labels_en: ham
+  labels_it: ham
+  aliases:
+  - cooked ham
+  definition: Standardizzato da dizionario (msc, key=CM01481).
+  class: proteina
+- id: ING-DICT-0224
+  labels_en: Grana Padano cheese
+  labels_it: Grana Padano cheese
+  aliases:
+  - Grana Padano
+  definition: Standardizzato da dizionario (msc, key=CM04579).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0225
+  labels_en: parsley oil
+  labels_it: parsley oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00466).
+  class: grasso
+- id: ING-DICT-0226
+  labels_en: corn kernel
+  labels_it: corn kernel
+  aliases:
+  - frozen corn kernels
+  definition: Standardizzato da dizionario (msc, key=CM01741).
+  class: verdura
+- id: ING-DICT-0227
+  labels_en: anchovy fillet
+  labels_it: anchovy fillet
+  aliases:
+  - anchovy fillets in oil
+  definition: Standardizzato da dizionario (msc, key=CM02370).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0228
+  labels_en: tomato ketchup
+  labels_it: tomato ketchup
+  aliases:
+  - ketchup
+  definition: Standardizzato da dizionario (msc, key=CM3379).
+  class: condimento
+- id: ING-DICT-0229
+  labels_en: rice
+  labels_it: rice
+  aliases:
+  - Roma rice
+  definition: Standardizzato da dizionario (msc, key=CM00685).
+  class: cereale
+- id: ING-DICT-0230
+  labels_en: mussels meat without shell
+  labels_it: mussels meat without shell
+  aliases:
+  - mussel meat
+  definition: Standardizzato da dizionario (msc, key=CM01104).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0231
+  labels_en: radicchio
+  labels_it: radicchio
+  aliases:
+  - red chioggia radicchio
+  definition: Standardizzato da dizionario (msc, key=CM01269).
+  class: verdura
+- id: ING-DICT-0232
+  labels_en: pumpkin seeds
+  labels_it: pumpkin seeds
+  aliases:
+  - pumpkin seeds without shell
+  definition: Standardizzato da dizionario (msc, key=CM3244).
+  class: frutta_secca
+- id: ING-DICT-0233
+  labels_en: carnaroli rice
+  labels_it: carnaroli rice
+  aliases:
+  - carnaroli rice
+  definition: Standardizzato da dizionario (msc, key=CM00694).
+  class: cereale
+- id: ING-DICT-0234
+  labels_en: hazelnuts
+  labels_it: hazelnuts
+  aliases:
+  - crushed hazelnuts
+  definition: Standardizzato da dizionario (msc, key=CM01469).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0235
+  labels_en: gherkins
+  labels_it: gherkins
+  aliases:
+  - pickled gherkins
+  definition: Standardizzato da dizionario (msc, key=CM01531).
+  class: verdura
+- id: ING-DICT-0236
+  labels_en: puff pastry dough
+  labels_it: puff pastry dough
+  aliases:
+  - puff pastry dough
+  definition: Standardizzato da dizionario (msc, key=CM01653).
+  class: altro
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0237
+  labels_en: ricotta cheese
+  labels_it: ricotta cheese
+  aliases:
+  - ricotta
+  definition: Standardizzato da dizionario (msc, key=CM01868).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0238
+  labels_en: sesame seeds
+  labels_it: sesame seeds
+  aliases:
+  - white sesame seeds
+  definition: Standardizzato da dizionario (msc, key=CM3759).
+  class: frutta_secca
+  allergen_tags:
+  - sesame
+- id: ING-DICT-0239
+  labels_en: cherry tomatoes
+  labels_it: cherry tomatoes
+  aliases:
+  - confit cherry tomatoes
+  definition: Standardizzato da dizionario (msc, key=RF423573).
+  class: verdura
+- id: ING-DICT-0240
+  labels_en: chocolate sauce
+  labels_it: chocolate sauce
+  aliases:
+  - chocolate sauce (vegan)
+  definition: Standardizzato da dizionario (msc, key=SF00142).
+  class: condimento
+- id: ING-DICT-0241
+  labels_en: pizza dough
+  labels_it: pizza dough
+  aliases:
+  - pizza dough
+  definition: Standardizzato da dizionario (msc, key=SF00505).
+  class: altro
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0242
+  labels_en: tofu
+  labels_it: tofu
+  aliases:
+  - hard tofu
+  - drained tofu
+  definition: Standardizzato da dizionario (msc, key=CM00234).
+  class: proteina
+  allergen_tags:
+  - soy
+- id: ING-DICT-0243
+  labels_en: radish
+  labels_it: radish
+  aliases:
+  - red radish
+  definition: Standardizzato da dizionario (msc, key=CM00710).
+  class: verdura
+- id: ING-DICT-0244
+  labels_en: olive oil
+  labels_it: olive oil
+  aliases:
+  - white truffle olive oil
+  definition: Standardizzato da dizionario (msc, key=CM01044).
+  class: grasso
+- id: ING-DICT-0245
+  labels_en: whole chicken
+  labels_it: whole chicken
+  aliases:
+  - grade a whole chicken
+  definition: Standardizzato da dizionario (msc, key=CM01837).
+  class: proteina
+- id: ING-DICT-0246
+  labels_en: cream cheese
+  labels_it: cream cheese
+  aliases:
+  - cream cheese no salt
+  definition: Standardizzato da dizionario (msc, key=CM01934).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0247
+  labels_en: beef patties
+  labels_it: beef patties
+  aliases:
+  - beef burger patties
+  definition: Standardizzato da dizionario (msc, key=CM02174).
+  class: proteina
+- id: ING-DICT-0248
+  labels_en: banana
+  labels_it: banana
+  aliases:
+  - 'ripe banana #5'
+  definition: Standardizzato da dizionario (msc, key=CM02313).
+  class: frutta
+- id: ING-DICT-0249
+  labels_en: baking soda
+  labels_it: baking soda
+  aliases:
+  - bicarbonate of soda
+  definition: Standardizzato da dizionario (msc, key=CM02316).
+  class: altro
+- id: ING-DICT-0250
+  labels_en: asparagus
+  labels_it: asparagus
+  aliases:
+  - frozen green asparagus
+  definition: Standardizzato da dizionario (msc, key=CM02331).
+  class: verdura
+- id: ING-DICT-0251
+  labels_en: mayonnaise
+  labels_it: mayonnaise
+  aliases:
+  - mayonnaise
+  definition: Standardizzato da dizionario (msc, key=CM3009).
+  class: condimento
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0252
+  labels_en: pastry cream
+  labels_it: pastry cream
+  aliases:
+  - crème pâtissière
+  definition: Standardizzato da dizionario (msc, key=SF00477).
+  class: altro
+  allergen_tags:
+  - milk
+  - eggs
+- id: ING-DICT-0253
+  labels_en: cloves
+  labels_it: cloves
+  aliases:
+  - whole cloves
+  definition: Standardizzato da dizionario (msc, key=CM00356).
+  class: spezia
+- id: ING-DICT-0254
+  labels_en: coriander seeds
+  labels_it: coriander seeds
+  aliases:
+  - cilantro seeds
+  definition: Standardizzato da dizionario (msc, key=CM00497).
+  class: spezia
+- id: ING-DICT-0255
+  labels_en: chili peppers
+  labels_it: chili peppers
+  aliases:
+  - red chili
+  definition: Standardizzato da dizionario (msc, key=CM00867).
+  class: verdura
+- id: ING-DICT-0256
+  labels_en: porcini mushrooms
+  labels_it: porcini mushrooms
+  aliases:
+  - porcini cubes
+  definition: Standardizzato da dizionario (msc, key=CM01113).
+  class: fungo
+- id: ING-DICT-0257
+  labels_en: margarine
+  labels_it: margarine
+  aliases:
+  - margarine
+  definition: Standardizzato da dizionario (msc, key=CM01177).
+  class: grasso
+- id: ING-DICT-0258
+  labels_en: orange juice
+  labels_it: orange juice
+  aliases:
+  - orange juice
+  definition: Standardizzato da dizionario (msc, key=CM01327).
+  class: bevanda
+- id: ING-DICT-0259
+  labels_en: cuttlefish
+  labels_it: cuttlefish
+  aliases:
+  - cleaned cuttlefish
+  definition: Standardizzato da dizionario (msc, key=CM01691).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0260
+  labels_en: Worcestershire sauce
+  labels_it: Worcestershire sauce
+  aliases:
+  - Worcestershire sauce
+  definition: Standardizzato da dizionario (msc, key=CM00546).
+  class: condimento
+  allergen_tags:
+  - fish
+  - gluten
+- id: ING-DICT-0261
+  labels_en: Kalamata olives
+  labels_it: Kalamata olives
+  aliases:
+  - Kalamata olives pitted
+  definition: Standardizzato da dizionario (msc, key=CM01031).
+  class: verdura
+- id: ING-DICT-0262
+  labels_en: mussels
+  labels_it: mussels
+  aliases:
+  - frozen whole mussels
+  definition: Standardizzato da dizionario (msc, key=CM01103).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0263
+  labels_en: mesclun lettuce
+  labels_it: mesclun lettuce
+  aliases:
+  - mesclun
+  definition: Standardizzato da dizionario (msc, key=CM01271).
+  class: verdura
+- id: ING-DICT-0264
+  labels_en: beets
+  labels_it: beets
+  aliases:
+  - red beets
+  definition: Standardizzato da dizionario (msc, key=CM05363).
+  class: verdura
+- id: ING-DICT-0265
+  labels_en: raspberry coulis
+  labels_it: raspberry coulis
+  aliases:
+  - raspberry sauce
+  definition: Standardizzato da dizionario (msc, key=SF00523).
+  class: condimento
+- id: ING-DICT-0266
+  labels_en: spinach
+  labels_it: spinach
+  aliases:
+  - spinach
+  definition: Standardizzato da dizionario (msc, key=CM00331).
+  class: verdura
+- id: ING-DICT-0267
+  labels_en: capers
+  labels_it: capers
+  aliases:
+  - capers in brine
+  definition: Standardizzato da dizionario (msc, key=CM01987).
+  class: verdura
+- id: ING-DICT-0268
+  labels_en: cabbage
+  labels_it: cabbage
+  aliases:
+  - white cabbage
+  definition: Standardizzato da dizionario (msc, key=CM02008).
+  class: verdura
+- id: ING-DICT-0269
+  labels_en: apple
+  labels_it: apple
+  aliases:
+  - golden delicious apple
+  definition: Standardizzato da dizionario (msc, key=CM02355).
+  class: frutta
+- id: ING-DICT-0270
+  labels_en: extra virgin olive oil
+  labels_it: extra virgin olive oil
+  aliases:
+  - extra virgin olive oil
+  definition: Standardizzato da dizionario (msc, key=CM05091).
+  class: grasso
+- id: ING-DICT-0271
+  labels_en: fish velouté
+  labels_it: fish velouté
+  aliases:
+  - fish velouté sauce
+  definition: Standardizzato da dizionario (msc, key=SF00258).
+  class: condimento
+  allergen_tags:
+  - fish
+- id: ING-DICT-0272
+  labels_en: walnuts
+  labels_it: walnuts
+  aliases:
+  - chopped walnuts
+  definition: Standardizzato da dizionario (msc, key=CM00090).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0273
+  labels_en: tomato pulp
+  labels_it: tomato pulp
+  aliases:
+  - tomato pulp
+  definition: Standardizzato da dizionario (msc, key=CM00216).
+  class: verdura
+- id: ING-DICT-0274
+  labels_en: serrano chili peppers
+  labels_it: serrano chili peppers
+  aliases:
+  - serrano chili
+  definition: Standardizzato da dizionario (msc, key=CM00868).
+  class: verdura
+- id: ING-DICT-0275
+  labels_en: celery root
+  labels_it: celery root
+  aliases:
+  - celeriac
+  definition: Standardizzato da dizionario (msc, key=CM01970).
+  class: verdura
+  allergen_tags:
+  - celery
+- id: ING-DICT-0276
+  labels_en: coriander powder
+  labels_it: coriander powder
+  aliases:
+  - ground coriander
+  - coriander spice
+  definition: Standardizzato da dizionario (msc, key=CM00355).
+  class: spezia
+- id: ING-DICT-0277
+  labels_en: cardamom seeds
+  labels_it: cardamom seeds
+  aliases:
+  - cardamom
+  definition: Standardizzato da dizionario (msc, key=CM00498).
+  class: spezia
+- id: ING-DICT-0278
+  labels_en: Tabasco sauce
+  labels_it: Tabasco sauce
+  aliases:
+  - Tabasco
+  definition: Standardizzato da dizionario (msc, key=CM00548).
+  class: condimento
+- id: ING-DICT-0279
+  labels_en: sweet potato
+  labels_it: sweet potato
+  aliases:
+  - yam
+  definition: Standardizzato da dizionario (msc, key=CM00770).
+  class: verdura
+- id: ING-DICT-0280
+  labels_en: frying oil
+  labels_it: frying oil
+  aliases:
+  - vegetable oil
+  - frying oil
+  definition: Standardizzato da dizionario (msc, key=CM01052).
+  class: grasso
+- id: ING-DICT-0281
+  labels_en: rolled oats
+  labels_it: rolled oats
+  aliases:
+  - oatmeal
+  definition: Standardizzato da dizionario (msc, key=CM01066).
+  class: cereale
+- id: ING-DICT-0282
+  labels_en: lemongrass
+  labels_it: lemongrass
+  aliases:
+  - citronella
+  definition: Standardizzato da dizionario (msc, key=CM01279).
+  class: erba
+- id: ING-DICT-0283
+  labels_en: chervil
+  labels_it: chervil
+  aliases:
+  - garden chervil
+  definition: Standardizzato da dizionario (msc, key=CM01461).
+  class: erba
+- id: ING-DICT-0284
+  labels_en: clam meat
+  labels_it: clam meat
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01787).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0285
+  labels_en: baby carrot
+  labels_it: baby carrot
+  aliases:
+  - baby carrots
+  definition: Standardizzato da dizionario (msc, key=CM01981).
+  class: verdura
+- id: ING-DICT-0286
+  labels_en: mascarpone
+  labels_it: mascarpone
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM08102).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0287
+  labels_en: star anise
+  labels_it: star anise
+  aliases:
+  - star aniseed
+  definition: Standardizzato da dizionario (msc, key=CM3451).
+  class: spezia
+- id: ING-DICT-0288
+  labels_en: fresh fruit mix
+  labels_it: fresh fruit mix
+  aliases:
+  - fruit salad
+  - fruit medley
+  definition: Standardizzato da dizionario (msc, key=SF00266).
+  class: frutta
+- id: ING-DICT-0289
+  labels_en: wafer stick
+  labels_it: wafer stick
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00094).
+  class: altro
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0290
+  labels_en: garlic powder
+  labels_it: garlic powder
+  aliases:
+  - dried garlic powder
+  definition: Standardizzato da dizionario (msc, key=CM00346).
+  class: spezia
+- id: ING-DICT-0291
+  labels_en: salmon fillet
+  labels_it: salmon fillet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00610).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0292
+  labels_en: pine nuts
+  labels_it: pine nuts
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01067).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0293
+  labels_en: apricot glaze
+  labels_it: apricot glaze
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01510).
+  class: condimento
+- id: ING-DICT-0294
+  labels_en: clams in shell
+  labels_it: clams in shell
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01788).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0295
+  labels_en: Pecorino Romano
+  labels_it: Pecorino Romano
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01881).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0296
+  labels_en: cheddar cheese
+  labels_it: cheddar cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01940).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0297
+  labels_en: whipped cream
+  labels_it: whipped cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF09781).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0298
+  labels_en: mixed wild berries compote
+  labels_it: mixed wild berries compote
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00432).
+  class: frutta
+- id: ING-DICT-0299
+  labels_en: sugar syrup
+  labels_it: sugar syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00655).
+  class: dolcificante
+- id: ING-DICT-0300
+  labels_en: turkey breast
+  labels_it: turkey breast
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00178).
+  class: proteina
+- id: ING-DICT-0301
+  labels_en: chili powder
+  labels_it: chili powder
+  aliases:
+  - ground chili
+  - chili pepper ground
+  definition: Standardizzato da dizionario (msc, key=CM00363).
+  class: spezia
+- id: ING-DICT-0302
+  labels_en: Cajun seasoning
+  labels_it: Cajun seasoning
+  aliases:
+  - Cajun spice
+  definition: Standardizzato da dizionario (msc, key=CM00367).
+  class: spezia
+- id: ING-DICT-0303
+  labels_en: basmati rice
+  labels_it: basmati rice
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00695).
+  class: cereale
+- id: ING-DICT-0304
+  labels_en: bay leaves
+  labels_it: bay leaves
+  aliases:
+  - laurel
+  definition: Standardizzato da dizionario (msc, key=CM01463).
+  class: erba
+- id: ING-DICT-0305
+  labels_en: mixed berries
+  labels_it: mixed berries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02090).
+  class: frutta
+- id: ING-DICT-0306
+  labels_en: artichoke quarters
+  labels_it: artichoke quarters
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02335).
+  class: verdura
+- id: ING-DICT-0307
+  labels_en: Pernod
+  labels_it: Pernod
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02358).
+  class: bevanda
+- id: ING-DICT-0308
+  labels_en: sweet dough
+  labels_it: sweet dough
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00667).
+  class: altro
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0309
+  labels_en: truffle slices in olive oil
+  labels_it: truffle slices in olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00190).
+  class: fungo
+- id: ING-DICT-0310
+  labels_en: squid
+  labels_it: squid
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00316).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0311
+  labels_en: paprika
+  labels_it: paprika
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00336).
+  class: spezia
+- id: ING-DICT-0312
+  labels_en: cayenne pepper
+  labels_it: cayenne pepper
+  aliases:
+  - red cayenne
+  definition: Standardizzato da dizionario (msc, key=CM00362).
+  class: spezia
+- id: ING-DICT-0313
+  labels_en: brown lentils
+  labels_it: brown lentils
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00729).
+  class: legume
+- id: ING-DICT-0314
+  labels_en: navy beans
+  labels_it: navy beans
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00732).
+  class: legume
+- id: ING-DICT-0315
+  labels_en: green chili pepper
+  labels_it: green chili pepper
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00869).
+  class: verdura
+- id: ING-DICT-0316
+  labels_en: snow peas
+  labels_it: snow peas
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00882).
+  class: verdura
+- id: ING-DICT-0317
+  labels_en: lasagne
+  labels_it: lasagne
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00964).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0318
+  labels_en: cantaloupe
+  labels_it: cantaloupe
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01163).
+  class: frutta
+- id: ING-DICT-0319
+  labels_en: orange juice concentrate
+  labels_it: orange juice concentrate
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01325).
+  class: bevanda
+- id: ING-DICT-0320
+  labels_en: raw ham
+  labels_it: raw ham
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01475).
+  class: proteina
+- id: ING-DICT-0321
+  labels_en: eggplant
+  labels_it: eggplant
+  aliases:
+  - aubergine
+  definition: Standardizzato da dizionario (msc, key=CM01629).
+  class: verdura
+- id: ING-DICT-0322
+  labels_en: graham cracker crumbs
+  labels_it: graham cracker crumbs
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01727).
+  class: altro
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0323
+  labels_en: feta cheese
+  labels_it: feta cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01926).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0324
+  labels_en: broccoli spears
+  labels_it: broccoli spears
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02035).
+  class: verdura
+- id: ING-DICT-0325
+  labels_en: Japanese white vinegar
+  labels_it: Japanese white vinegar
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM07359).
+  class: condimento
+- id: ING-DICT-0326
+  labels_en: iodized table salt
+  labels_it: iodized table salt
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3205).
+  class: condimento
+- id: ING-DICT-0327
+  labels_en: egg wash
+  labels_it: egg wash
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00249).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0328
+  labels_en: Greek yogurt
+  labels_it: Greek yogurt
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00012).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0329
+  labels_en: boneless veal leg
+  labels_it: boneless veal leg
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00157).
+  class: proteina
+- id: ING-DICT-0330
+  labels_en: pear halves in syrup
+  labels_it: pear halves in syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00890).
+  class: frutta
+- id: ING-DICT-0331
+  labels_en: peach halves in syrup
+  labels_it: peach halves in syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00898).
+  class: frutta
+- id: ING-DICT-0332
+  labels_en: cashew nuts
+  labels_it: cashew nuts
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01070).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0333
+  labels_en: unsweetened lemon juice
+  labels_it: unsweetened lemon juice
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01333).
+  class: bevanda
+- id: ING-DICT-0334
+  labels_en: dried thyme
+  labels_it: dried thyme
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01442).
+  class: erba
+- id: ING-DICT-0335
+  labels_en: dark chocolate substitute
+  labels_it: dark chocolate substitute
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01798).
+  class: altro
+- id: ING-DICT-0336
+  labels_en: unsalted cream cheese
+  labels_it: unsalted cream cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01935).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0337
+  labels_en: red cabbage
+  labels_it: red cabbage
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02009).
+  class: verdura
+- id: ING-DICT-0338
+  labels_en: frozen presliced white sandwich bread
+  labels_it: frozen presliced white sandwich bread
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02046).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0339
+  labels_en: white turnip
+  labels_it: white turnip
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00170).
+  class: verdura
+- id: ING-DICT-0340
+  labels_en: dried tomatoes
+  labels_it: dried tomatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00221).
+  class: verdura
+- id: ING-DICT-0341
+  labels_en: maple syrup
+  labels_it: maple syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00273).
+  class: dolcificante
+- id: ING-DICT-0342
+  labels_en: butternut squash
+  labels_it: butternut squash
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00319).
+  class: verdura
+- id: ING-DICT-0343
+  labels_en: precooked peeled shrimp
+  labels_it: precooked peeled shrimp
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00464).
+  class: proteina
+  allergen_tags:
+  - crustaceans
+- id: ING-DICT-0344
+  labels_en: sunflower seeds
+  labels_it: sunflower seeds
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00485).
+  class: frutta_secca
+- id: ING-DICT-0345
+  labels_en: fennel seeds
+  labels_it: fennel seeds
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00495).
+  class: spezia
+- id: ING-DICT-0346
+  labels_en: pineapple in syrup
+  labels_it: pineapple in syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00839).
+  class: frutta
+- id: ING-DICT-0347
+  labels_en: mango
+  labels_it: mango
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01182).
+  class: frutta
+- id: ING-DICT-0348
+  labels_en: orange juice
+  labels_it: orange juice
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01326).
+  class: bevanda
+- id: ING-DICT-0349
+  labels_en: bay leaves
+  labels_it: bay leaves
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01465).
+  class: erba
+- id: ING-DICT-0350
+  labels_en: shelled hazelnuts
+  labels_it: shelled hazelnuts
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01468).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0351
+  labels_en: mozzarella bocconcini
+  labels_it: mozzarella bocconcini
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01903).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0352
+  labels_en: Emmental cheese
+  labels_it: Emmental cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01929).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0353
+  labels_en: bread crumbs
+  labels_it: bread crumbs
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02053).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0354
+  labels_en: boneless beef striploin
+  labels_it: boneless beef striploin
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02162).
+  class: proteina
+- id: ING-DICT-0355
+  labels_en: frozen diced avocado
+  labels_it: frozen diced avocado
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02328).
+  class: frutta
+- id: ING-DICT-0356
+  labels_en: frozen sliced apple
+  labels_it: frozen sliced apple
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02351).
+  class: frutta
+- id: ING-DICT-0357
+  labels_en: whole beef tenderloin
+  labels_it: whole beef tenderloin
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06996).
+  class: proteina
+- id: ING-DICT-0358
+  labels_en: sweet Gorgonzola
+  labels_it: sweet Gorgonzola
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM07205).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0359
+  labels_en: chili powder
+  labels_it: chili powder
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3286).
+  class: spezia
+- id: ING-DICT-0360
+  labels_en: turmeric powder
+  labels_it: turmeric powder
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3771).
+  class: spezia
+- id: ING-DICT-0361
+  labels_en: kiwifruit
+  labels_it: kiwifruit
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3850).
+  class: frutta
+- id: ING-DICT-0362
+  labels_en: roasted new potatoes
+  labels_it: roasted new potatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF10259).
+  class: verdura
+- id: ING-DICT-0363
+  labels_en: fresh tomato sauce
+  labels_it: fresh tomato sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00267).
+  class: condimento
+- id: ING-DICT-0364
+  labels_en: fresh cherry tomato sauce
+  labels_it: fresh cherry tomato sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00268).
+  class: condimento
+- id: ING-DICT-0365
+  labels_en: Baby spinach
+  labels_it: Baby spinach
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00329).
+  class: verdura
+- id: ING-DICT-0366
+  labels_en: Onion powder
+  labels_it: Onion powder
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00337).
+  class: spezia
+- id: ING-DICT-0367
+  labels_en: Sea scallops
+  labels_it: Sea scallops
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00508).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0368
+  labels_en: Diced mango
+  labels_it: Diced mango
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01181).
+  class: frutta
+- id: ING-DICT-0369
+  labels_en: Red Treviso radicchio
+  labels_it: Red Treviso radicchio
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01268).
+  class: verdura
+- id: ING-DICT-0370
+  labels_en: Fresh oregano
+  labels_it: Fresh oregano
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01449).
+  class: erba
+- id: ING-DICT-0371
+  labels_en: Fresh daikon
+  labels_it: Fresh daikon
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01690).
+  class: verdura
+- id: ING-DICT-0372
+  labels_en: Sweet provolone cheese
+  labels_it: Sweet provolone cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01870).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0373
+  labels_en: Gruyère cheese
+  labels_it: Gruyère cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01912).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0374
+  labels_en: Oat flakes
+  labels_it: Oat flakes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01965).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0375
+  labels_en: Chinese cabbage
+  labels_it: Chinese cabbage
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02013).
+  class: verdura
+- id: ING-DICT-0376
+  labels_en: Chicken base paste
+  labels_it: Chicken base paste
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02270).
+  class: condimento
+- id: ING-DICT-0377
+  labels_en: Sushi-grade tuna
+  labels_it: Sushi-grade tuna
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM05297).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0378
+  labels_en: Micro greens mix
+  labels_it: Micro greens mix
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM05298).
+  class: verdura
+- id: ING-DICT-0379
+  labels_en: Chicken leg quarter
+  labels_it: Chicken leg quarter
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2732).
+  class: proteina
+- id: ING-DICT-0380
+  labels_en: Spaghetti
+  labels_it: Spaghetti
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3108).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0381
+  labels_en: French fries
+  labels_it: French fries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3156).
+  class: verdura
+- id: ING-DICT-0382
+  labels_en: Roasted rosemary potatoes
+  labels_it: Roasted rosemary potatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF10104).
+  class: verdura
+- id: ING-DICT-0383
+  labels_en: Salt and pepper
+  labels_it: Salt and pepper
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF424338).
+  class: spezia
+- id: ING-DICT-0384
+  labels_en: White sponge sheet
+  labels_it: White sponge sheet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00776).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+- id: ING-DICT-0385
+  labels_en: Plain low-fat yogurt
+  labels_it: Plain low-fat yogurt
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00006).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0386
+  labels_en: Apple cider vinegar
+  labels_it: Apple cider vinegar
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00131).
+  class: condimento
+- id: ING-DICT-0387
+  labels_en: Raw whole shrimp
+  labels_it: Raw whole shrimp
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00455).
+  class: proteina
+  allergen_tags:
+  - crustaceans
+- id: ING-DICT-0388
+  labels_en: Mustard seeds
+  labels_it: Mustard seeds
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00491).
+  class: spezia
+  allergen_tags:
+  - mustard
+- id: ING-DICT-0389
+  labels_en: Smoked salmon
+  labels_it: Smoked salmon
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00604).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0390
+  labels_en: Salmon fillet
+  labels_it: Salmon fillet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00609).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0391
+  labels_en: Dried red beans
+  labels_it: Dried red beans
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00734).
+  class: legume
+- id: ING-DICT-0392
+  labels_en: Boneless pork neck
+  labels_it: Boneless pork neck
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00814).
+  class: proteina
+- id: ING-DICT-0393
+  labels_en: Pita bread
+  labels_it: Pita bread
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00835).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0394
+  labels_en: Natural muffin mix
+  labels_it: Natural muffin mix
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01138).
+  class: altro
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0395
+  labels_en: Curly chicory
+  labels_it: Curly chicory
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01275).
+  class: verdura
+- id: ING-DICT-0396
+  labels_en: Squid rings
+  labels_it: Squid rings
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01552).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0397
+  labels_en: Fresh currants
+  labels_it: Fresh currants
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01699).
+  class: frutta
+- id: ING-DICT-0398
+  labels_en: Corn kernels in water
+  labels_it: Corn kernels in water
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01742).
+  class: verdura
+- id: ING-DICT-0399
+  labels_en: Red food coloring
+  labels_it: Red food coloring
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01749).
+  class: altro
+- id: ING-DICT-0400
+  labels_en: Parmesan cheese
+  labels_it: Parmesan cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01891).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0401
+  labels_en: Brandy
+  labels_it: Brandy
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02065).
+  class: bevanda
+- id: ING-DICT-0402
+  labels_en: Brandy
+  labels_it: Brandy
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02066).
+  class: bevanda
+- id: ING-DICT-0403
+  labels_en: Fresh blueberries
+  labels_it: Fresh blueberries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02078).
+  class: frutta
+- id: ING-DICT-0404
+  labels_en: Beef chuck roll
+  labels_it: Beef chuck roll
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02204).
+  class: proteina
+- id: ING-DICT-0405
+  labels_en: Parmigiano Reggiano cheese
+  labels_it: Parmigiano Reggiano cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM05233).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0406
+  labels_en: Carrot
+  labels_it: Carrot
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2684).
+  class: verdura
+- id: ING-DICT-0407
+  labels_en: Boneless chicken leg quarter
+  labels_it: Boneless chicken leg quarter
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2731).
+  class: proteina
+- id: ING-DICT-0408
+  labels_en: Hash browns
+  labels_it: Hash browns
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3158).
+  class: verdura
+- id: ING-DICT-0409
+  labels_en: Whipped cream
+  labels_it: Whipped cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF415703).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0410
+  labels_en: Basil oil
+  labels_it: Basil oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF420852).
+  class: grasso
+- id: ING-DICT-0411
+  labels_en: mini baguette
+  labels_it: mini baguette
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF425340).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0412
+  labels_en: clarified butter
+  labels_it: clarified butter
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00163).
+  class: grasso
+  allergen_tags:
+  - milk
+- id: ING-DICT-0413
+  labels_en: croutons
+  labels_it: croutons
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00208).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0414
+  labels_en: steamed basmati rice
+  labels_it: steamed basmati rice
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00633).
+  class: cereale
+- id: ING-DICT-0415
+  labels_en: strawberry sauce
+  labels_it: strawberry sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00646).
+  class: condimento
+- id: ING-DICT-0416
+  labels_en: fresh yeast
+  labels_it: fresh yeast
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00014).
+  class: altro
+- id: ING-DICT-0417
+  labels_en: watermelon
+  labels_it: watermelon
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00075).
+  class: frutta
+- id: ING-DICT-0418
+  labels_en: tuna in seed oil
+  labels_it: tuna in seed oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00183).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0419
+  labels_en: truffle perlage
+  labels_it: truffle perlage
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00191).
+  class: fungo
+- id: ING-DICT-0420
+  labels_en: frozen sugar snap peas
+  labels_it: frozen sugar snap peas
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00293).
+  class: verdura
+- id: ING-DICT-0421
+  labels_en: frozen strawberries
+  labels_it: frozen strawberries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00305).
+  class: frutta
+- id: ING-DICT-0422
+  labels_en: smoky barbecue sauce
+  labels_it: smoky barbecue sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00557).
+  class: condimento
+- id: ING-DICT-0423
+  labels_en: barbecue sauce
+  labels_it: barbecue sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00585).
+  class: condimento
+- id: ING-DICT-0424
+  labels_en: Myers rum
+  labels_it: Myers rum
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00656).
+  class: bevanda
+- id: ING-DICT-0425
+  labels_en: fresh raspberries
+  labels_it: fresh raspberries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00707).
+  class: frutta
+- id: ING-DICT-0426
+  labels_en: frozen new potatoes
+  labels_it: frozen new potatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00776).
+  class: verdura
+- id: ING-DICT-0427
+  labels_en: red plums
+  labels_it: red plums
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00830).
+  class: frutta
+- id: ING-DICT-0428
+  labels_en: frozen pangasius fillet
+  labels_it: frozen pangasius fillet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01007).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0429
+  labels_en: extra virgin olive oil
+  labels_it: extra virgin olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01045).
+  class: grasso
+- id: ING-DICT-0430
+  labels_en: frozen octopus
+  labels_it: frozen octopus
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01062).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0431
+  labels_en: mustard
+  labels_it: mustard
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01100).
+  class: condimento
+  allergen_tags:
+  - mustard
+- id: ING-DICT-0432
+  labels_en: curry leaves
+  labels_it: curry leaves
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01457).
+  class: erba
+- id: ING-DICT-0433
+  labels_en: frozen hake fillet with skin
+  labels_it: frozen hake fillet with skin
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01484).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0434
+  labels_en: semolina flour
+  labels_it: semolina flour
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01559).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0435
+  labels_en: couscous
+  labels_it: couscous
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01697).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0436
+  labels_en: cocoa powder
+  labels_it: cocoa powder
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01778).
+  class: altro
+- id: ING-DICT-0437
+  labels_en: chicken and turkey patties
+  labels_it: chicken and turkey patties
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01830).
+  class: proteina
+- id: ING-DICT-0438
+  labels_en: apricot halves in syrup
+  labels_it: apricot halves in syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02346).
+  class: frutta
+- id: ING-DICT-0439
+  labels_en: yellow honeydew melon
+  labels_it: yellow honeydew melon
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM03976).
+  class: frutta
+- id: ING-DICT-0440
+  labels_en: frozen burrata
+  labels_it: frozen burrata
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM04499).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0441
+  labels_en: clam base
+  labels_it: clam base
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM05675).
+  class: condimento
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0442
+  labels_en: frozen raw shell-on shrimp tails
+  labels_it: frozen raw shell-on shrimp tails
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM05770).
+  class: proteina
+  allergen_tags:
+  - crustaceans
+- id: ING-DICT-0443
+  labels_en: classic butter crumble
+  labels_it: classic butter crumble
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06637).
+  class: altro
+  allergen_tags:
+  - gluten
+  - milk
+- id: ING-DICT-0444
+  labels_en: soy sauce
+  labels_it: soy sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3222).
+  class: condimento
+  allergen_tags:
+  - soy
+  - gluten
+- id: ING-DICT-0445
+  labels_en: grilled tomato half
+  labels_it: grilled tomato half
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00304).
+  class: verdura
+- id: ING-DICT-0446
+  labels_en: hummus
+  labels_it: hummus
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00330).
+  class: condimento
+  allergen_tags:
+  - sesame
+- id: ING-DICT-0447
+  labels_en: shellfish bisque sauce
+  labels_it: shellfish bisque sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00379).
+  class: condimento
+  allergen_tags:
+  - crustaceans
+  - molluscs
+- id: ING-DICT-0448
+  labels_en: tartare sauce
+  labels_it: tartare sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00699).
+  class: condimento
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0449
+  labels_en: vanilla diplomat cream
+  labels_it: vanilla diplomat cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00733).
+  class: altro
+  allergen_tags:
+  - milk
+  - eggs
+- id: ING-DICT-0450
+  labels_en: apple vinegar
+  labels_it: apple vinegar
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00136).
+  class: condimento
+- id: ING-DICT-0451
+  labels_en: vegetable patties
+  labels_it: vegetable patties
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00149).
+  class: verdura
+- id: ING-DICT-0452
+  labels_en: sausage link
+  labels_it: sausage link
+  aliases:
+  - sausage links
+  definition: Standardizzato da dizionario (msc, key=CM00526).
+  class: proteina
+- id: ING-DICT-0453
+  labels_en: Tabasco sauce
+  labels_it: Tabasco sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00551).
+  class: condimento
+- id: ING-DICT-0454
+  labels_en: apple sauce
+  labels_it: apple sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00586).
+  class: condimento
+- id: ING-DICT-0455
+  labels_en: parboiled rice
+  labels_it: parboiled rice
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00686).
+  class: cereale
+- id: ING-DICT-0456
+  labels_en: sweetened raspberry pulp
+  labels_it: sweetened raspberry pulp
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00743).
+  class: frutta
+- id: ING-DICT-0457
+  labels_en: pork loin, bone-in, center cut
+  labels_it: pork loin, bone-in, center cut
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00816).
+  class: proteina
+- id: ING-DICT-0458
+  labels_en: pink peppercorn
+  labels_it: pink peppercorn
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00876).
+  class: spezia
+- id: ING-DICT-0459
+  labels_en: mezze penne rigate
+  labels_it: mezze penne rigate
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00956).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0460
+  labels_en: linguine
+  labels_it: linguine
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00962).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0461
+  labels_en: mahi-mahi fillet
+  labels_it: mahi-mahi fillet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01187).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0462
+  labels_en: lollo lettuce
+  labels_it: lollo lettuce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01272).
+  class: verdura
+- id: ING-DICT-0463
+  labels_en: lamb leg
+  labels_it: lamb leg
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01298).
+  class: proteina
+- id: ING-DICT-0464
+  labels_en: lamb hindshank
+  labels_it: lamb hindshank
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01300).
+  class: proteina
+- id: ING-DICT-0465
+  labels_en: lemon juice
+  labels_it: lemon juice
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01334).
+  class: liquido
+- id: ING-DICT-0466
+  labels_en: low-calorie vanilla ice cream
+  labels_it: low-calorie vanilla ice cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01417).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0467
+  labels_en: rice flour
+  labels_it: rice flour
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01561).
+  class: amido
+- id: ING-DICT-0468
+  labels_en: gluten-free all-purpose flour
+  labels_it: gluten-free all-purpose flour
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01576).
+  class: amido
+- id: ING-DICT-0469
+  labels_en: dried cranberry
+  labels_it: dried cranberry
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01722).
+  class: frutta_secca
+- id: ING-DICT-0470
+  labels_en: cod fillet
+  labels_it: cod fillet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01764).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0471
+  labels_en: mango chutney
+  labels_it: mango chutney
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01792).
+  class: condimento
+- id: ING-DICT-0472
+  labels_en: American cheese
+  labels_it: American cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01858).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0473
+  labels_en: Parmigiano Reggiano
+  labels_it: Parmigiano Reggiano
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01890).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0474
+  labels_en: avocado
+  labels_it: avocado
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02329).
+  class: frutta
+- id: ING-DICT-0475
+  labels_en: dried apricot
+  labels_it: dried apricot
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02349).
+  class: frutta_secca
+- id: ING-DICT-0476
+  labels_en: crushed almond
+  labels_it: crushed almond
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02382).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0477
+  labels_en: pumpkin seed
+  labels_it: pumpkin seed
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM04127).
+  class: frutta_secca
+- id: ING-DICT-0478
+  labels_en: sweet chili sauce
+  labels_it: sweet chili sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM04446).
+  class: condimento
+- id: ING-DICT-0479
+  labels_en: smoked paprika
+  labels_it: smoked paprika
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM04965).
+  class: spezia
+- id: ING-DICT-0480
+  labels_en: chocolate transfer sheet
+  labels_it: chocolate transfer sheet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06072).
+  class: altro
+- id: ING-DICT-0481
+  labels_en: apricot spray glaze
+  labels_it: apricot spray glaze
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06277).
+  class: condimento
+- id: ING-DICT-0482
+  labels_en: sun-dried tomato
+  labels_it: sun-dried tomato
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06290).
+  class: verdura
+- id: ING-DICT-0483
+  labels_en: string bean
+  labels_it: string bean
+  aliases:
+  - green bean
+  definition: Standardizzato da dizionario (msc, key=CM06481).
+  class: verdura
+- id: ING-DICT-0484
+  labels_en: cocoa sponge sheet
+  labels_it: cocoa sponge sheet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06598).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+- id: ING-DICT-0485
+  labels_en: vanilla extract
+  labels_it: vanilla extract
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2449).
+  class: altro
+- id: ING-DICT-0486
+  labels_en: hazelnut praline paste
+  labels_it: hazelnut praline paste
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2593).
+  class: altro
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0487
+  labels_en: English muffin
+  labels_it: English muffin
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2638).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0488
+  labels_en: Prosciutto di Parma
+  labels_it: Prosciutto di Parma
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM2868).
+  class: proteina
+- id: ING-DICT-0489
+  labels_en: Idaho Russet potato
+  labels_it: Idaho Russet potato
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3160).
+  class: verdura
+- id: ING-DICT-0490
+  labels_en: pancake syrup
+  labels_it: pancake syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM3308).
+  class: dolcificante
+- id: ING-DICT-0491
+  labels_en: steamed vegetables
+  labels_it: steamed vegetables
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF07446).
+  class: verdura
+- id: ING-DICT-0492
+  labels_en: shellfish stock
+  labels_it: shellfish stock
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF12604).
+  class: liquido
+  allergen_tags:
+  - crustaceans
+  - molluscs
+- id: ING-DICT-0493
+  labels_en: pickled red onion
+  labels_it: pickled red onion
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF427087).
+  class: verdura
+- id: ING-DICT-0494
+  labels_en: soybean sprout
+  labels_it: soybean sprout
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF427146713).
+  class: verdura
+  allergen_tags:
+  - soy
+- id: ING-DICT-0495
+  labels_en: cucumber raita
+  labels_it: cucumber raita
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00211).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0496
+  labels_en: hollandaise sauce
+  labels_it: hollandaise sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00320).
+  class: condimento
+  allergen_tags:
+  - eggs
+  - milk
+- id: ING-DICT-0497
+  labels_en: red wine sauce
+  labels_it: red wine sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00541).
+  class: condimento
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0498
+  labels_en: strawberry coulis
+  labels_it: strawberry coulis
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00639).
+  class: condimento
+- id: ING-DICT-0499
+  labels_en: tomato concassè
+  labels_it: tomato concassè
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00713).
+  class: verdura
+- id: ING-DICT-0500
+  labels_en: french meringue
+  labels_it: french meringue
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00794).
+  class: altro
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0501
+  labels_en: baby zucchini
+  labels_it: baby zucchini
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00004).
+  class: verdura
+- id: ING-DICT-0502
+  labels_en: swordfish center cut
+  labels_it: swordfish center cut
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00282).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0503
+  labels_en: swiss chard
+  labels_it: swiss chard
+  aliases:
+  - silverbeet
+  definition: Standardizzato da dizionario (msc, key=CM00285).
+  class: verdura
+- id: ING-DICT-0504
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00300).
+  class: dolcificante
+- id: ING-DICT-0505
+  labels_en: sugar fondant
+  labels_it: sugar fondant
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00301).
+  class: dolcificante
+- id: ING-DICT-0506
+  labels_en: sumac
+  labels_it: sumac
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00334).
+  class: spezia
+- id: ING-DICT-0507
+  labels_en: ground ginger
+  labels_it: ground ginger
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00345).
+  class: spezia
+- id: ING-DICT-0508
+  labels_en: black sesame seeds
+  labels_it: black sesame seeds
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00486).
+  class: frutta_secca
+  allergen_tags:
+  - sesame
+- id: ING-DICT-0509
+  labels_en: sea scallops
+  labels_it: sea scallops
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00509).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0510
+  labels_en: luganega sausage
+  labels_it: luganega sausage
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00525).
+  class: proteina
+- id: ING-DICT-0511
+  labels_en: salmon gravlax
+  labels_it: salmon gravlax
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00611).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0512
+  labels_en: frozen raspberries
+  labels_it: frozen raspberries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00705).
+  class: frutta
+- id: ING-DICT-0513
+  labels_en: quinoa
+  labels_it: quinoa
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00713).
+  class: cereale
+- id: ING-DICT-0514
+  labels_en: pork loin center cut bone-in
+  labels_it: pork loin center cut bone-in
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00817).
+  class: proteina
+- id: ING-DICT-0515
+  labels_en: physalis
+  labels_it: physalis
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00852).
+  class: frutta
+- id: ING-DICT-0516
+  labels_en: sliced jalapeno peppers
+  labels_it: sliced jalapeno peppers
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00863).
+  class: verdura
+- id: ING-DICT-0517
+  labels_en: egg noodles
+  labels_it: egg noodles
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01076).
+  class: cereale
+  allergen_tags:
+  - eggs
+  - gluten
+- id: ING-DICT-0518
+  labels_en: rice vermicelli
+  labels_it: rice vermicelli
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01080).
+  class: cereale
+- id: ING-DICT-0519
+  labels_en: portobello mushroom
+  labels_it: portobello mushroom
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01110).
+  class: fungo
+- id: ING-DICT-0520
+  labels_en: dried porcini mushrooms
+  labels_it: dried porcini mushrooms
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01112).
+  class: fungo
+- id: ING-DICT-0521
+  labels_en: condensed milk
+  labels_it: condensed milk
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01159).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0522
+  labels_en: pink grapefruit
+  labels_it: pink grapefruit
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01501).
+  class: frutta
+- id: ING-DICT-0523
+  labels_en: xanthan gum
+  labels_it: xanthan gum
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01508).
+  class: altro
+- id: ING-DICT-0524
+  labels_en: dried figs
+  labels_it: dried figs
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01591).
+  class: frutta_secca
+- id: ING-DICT-0525
+  labels_en: frozen egg whites
+  labels_it: frozen egg whites
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01625).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0526
+  labels_en: ranch dressing
+  labels_it: ranch dressing
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01649).
+  class: condimento
+  allergen_tags:
+  - eggs
+  - milk
+- id: ING-DICT-0527
+  labels_en: blue cheese dressing
+  labels_it: blue cheese dressing
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01651).
+  class: condimento
+  allergen_tags:
+  - milk
+- id: ING-DICT-0528
+  labels_en: instant coffee
+  labels_it: instant coffee
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01752).
+  class: bevanda
+- id: ING-DICT-0529
+  labels_en: cod fillet skin on
+  labels_it: cod fillet skin on
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01763).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0530
+  labels_en: pitted cherries
+  labels_it: pitted cherries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01852).
+  class: frutta
+- id: ING-DICT-0531
+  labels_en: amarena cherries in syrup
+  labels_it: amarena cherries in syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01856).
+  class: frutta
+- id: ING-DICT-0532
+  labels_en: salted ricotta
+  labels_it: salted ricotta
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01867).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0533
+  labels_en: parmesan cheese
+  labels_it: parmesan cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01888).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0534
+  labels_en: soft goat cheese
+  labels_it: soft goat cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01920).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0535
+  labels_en: fresh goat cheese
+  labels_it: fresh goat cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01921).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0536
+  labels_en: asiago cheese
+  labels_it: asiago cheese
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01955).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0537
+  labels_en: chaat masala
+  labels_it: chaat masala
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01961).
+  class: spezia
+- id: ING-DICT-0538
+  labels_en: cauliflower florets
+  labels_it: cauliflower florets
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01974).
+  class: verdura
+- id: ING-DICT-0539
+  labels_en: truffle butter
+  labels_it: truffle butter
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02018).
+  class: grasso
+  allergen_tags:
+  - milk
+- id: ING-DICT-0540
+  labels_en: fresh blackberries
+  labels_it: fresh blackberries
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02084).
+  class: frutta
+- id: ING-DICT-0541
+  labels_en: red kidney beans
+  labels_it: red kidney beans
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02221).
+  class: legume
+- id: ING-DICT-0542
+  labels_en: extra virgin olive oil
+  labels_it: extra virgin olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=extra virgin olive oil).
+  class: grasso
+- id: ING-DICT-0543
+  labels_en: butter
+  labels_it: butter
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=butter).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0544
+  labels_en: parsley
+  labels_it: parsley
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=parsley).
+  class: erba
+- id: ING-DICT-0545
+  labels_en: onion
+  labels_it: onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=onion).
+  class: verdura
+- id: ING-DICT-0546
+  labels_en: egg
+  labels_it: egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=egg).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0547
+  labels_en: garlic
+  labels_it: garlic
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=d'garlic).
+  class: verdura
+- id: ING-DICT-0548
+  labels_en: grana padano
+  labels_it: grana padano
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=grana padano).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0549
+  labels_en: wheat flour
+  labels_it: wheat flour
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=wheat flour).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0550
+  labels_en: breadcrumbs
+  labels_it: breadcrumbs
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=breadcrumbs).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0551
+  labels_en: garlic
+  labels_it: garlic
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic).
+  class: verdura
+- id: ING-DICT-0552
+  labels_en: sugar
+  labels_it: sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=sugar).
+  class: dolcificante
+- id: ING-DICT-0553
+  labels_en: tomato pulp
+  labels_it: tomato pulp
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di polpa di tomato).
+  class: verdura
+- id: ING-DICT-0554
+  labels_en: olive oil
+  labels_it: olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=olive oil).
+  class: grasso
+- id: ING-DICT-0555
+  labels_en: pecorino cheese
+  labels_it: pecorino cheese
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=pecorino cheese).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0556
+  labels_en: carrot
+  labels_it: carrot
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=carrot).
+  class: verdura
+- id: ING-DICT-0557
+  labels_en: egg yolk
+  labels_it: egg yolk
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=egg yolk).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0558
+  labels_en: oil
+  labels_it: oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=oil).
+  class: grasso
+- id: ING-DICT-0559
+  labels_en: tomato
+  labels_it: tomato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tomato).
+  class: verdura
+- id: ING-DICT-0560
+  labels_en: milk
+  labels_it: milk
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=milk).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0561
+  labels_en: rosemary sprig
+  labels_it: rosemary sprig
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=rametto di rosemary).
+  class: erba
+- id: ING-DICT-0562
+  labels_en: bay leaf
+  labels_it: bay leaf
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=bay leaf).
+  class: erba
+- id: ING-DICT-0563
+  labels_en: anchovy fillets
+  labels_it: anchovy fillets
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=anchovy fillets).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0564
+  labels_en: country bread
+  labels_it: country bread
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=country bread).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0565
+  labels_en: shallot
+  labels_it: shallot
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=shallot).
+  class: verdura
+- id: ING-DICT-0566
+  labels_en: garlic
+  labels_it: garlic
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic, crushed in the garlic-press).
+  class: verdura
+- id: ING-DICT-0567
+  labels_en: garlic cloves
+  labels_it: garlic cloves
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic cloves, crushed).
+  class: verdura
+- id: ING-DICT-0568
+  labels_en: potato
+  labels_it: potato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=patate).
+  class: verdura
+- id: ING-DICT-0569
+  labels_en: salt
+  labels_it: salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon salt, or to taste).
+  class: condimento
+- id: ING-DICT-0570
+  labels_en: lard
+  labels_it: lard
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di lardo).
+  class: grasso
+- id: ING-DICT-0571
+  labels_en: basil
+  labels_it: basil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=basil).
+  class: erba
+- id: ING-DICT-0572
+  labels_en: rice
+  labels_it: rice
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di riso).
+  class: cereale
+- id: ING-DICT-0573
+  labels_en: butter
+  labels_it: butter
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=butter, softened).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0574
+  labels_en: egg pasta
+  labels_it: egg pasta
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pasta all'egg (vedi preparazioni
+    di base)).
+  class: cereale
+  allergen_tags:
+  - eggs
+  - gluten
+- id: ING-DICT-0575
+  labels_en: sage
+  labels_it: sage
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di salvia).
+  class: erba
+- id: ING-DICT-0576
+  labels_en: sage sprig
+  labels_it: sage sprig
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=rametto di salvia).
+  class: erba
+- id: ING-DICT-0577
+  labels_en: parsley
+  labels_it: parsley
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=chopped parsley).
+  class: erba
+- id: ING-DICT-0578
+  labels_en: salted anchovies
+  labels_it: salted anchovies
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=salted anchovies).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0579
+  labels_en: pine nuts
+  labels_it: pine nuts
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pinoli).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0580
+  labels_en: raisins
+  labels_it: raisins
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=raisins).
+  class: frutta_secca
+- id: ING-DICT-0581
+  labels_en: olive oil
+  labels_it: olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tbsp olive oil).
+  class: grasso
+- id: ING-DICT-0582
+  labels_en: potato
+  labels_it: potato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di patate).
+  class: verdura
+- id: ING-DICT-0583
+  labels_en: ricotta
+  labels_it: ricotta
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ricotta).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0584
+  labels_en: bread dough
+  labels_it: bread dough
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pasta da pane).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0585
+  labels_en: tomato sauce
+  labels_it: tomato sauce
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di tomato sauce (vedi preparazioni
+    di base)).
+  class: condimento
+- id: ING-DICT-0586
+  labels_en: mussel
+  labels_it: mussel
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=mussels).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0587
+  labels_en: sausage
+  labels_it: sausage
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di salsiccia).
+  class: proteina
+- id: ING-DICT-0588
+  labels_en: spinach
+  labels_it: spinach
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di spinaci).
+  class: verdura
+- id: ING-DICT-0589
+  labels_en: tomato passata
+  labels_it: tomato passata
+  aliases:
+  - passata
+  definition: Standardizzato da dizionario (book, key=tomato passata).
+  class: condimento
+- id: ING-DICT-0590
+  labels_en: artichoke
+  labels_it: artichoke
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=carciofi).
+  class: verdura
+- id: ING-DICT-0591
+  labels_en: capers in salt
+  labels_it: capers in salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di capperi sotto salt).
+  class: verdura
+- id: ING-DICT-0592
+  labels_en: spaghetti
+  labels_it: spaghetti
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=spaghetti).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0593
+  labels_en: zucchini
+  labels_it: zucchini
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=zucchini).
+  class: verdura
+- id: ING-DICT-0594
+  labels_en: porcini mushroom
+  labels_it: porcini mushroom
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di funghi porcini).
+  class: fungo
+- id: ING-DICT-0595
+  labels_en: cream
+  labels_it: cream
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di panna).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0596
+  labels_en: breadcrumbs
+  labels_it: breadcrumbs
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=fresh breadcrumbs).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0597
+  labels_en: garlic clove
+  labels_it: garlic clove
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic cloves).
+  class: verdura
+- id: ING-DICT-0598
+  labels_en: lemon juice
+  labels_it: lemon juice
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=lemon juice).
+  class: liquido
+- id: ING-DICT-0599
+  labels_en: turmeric
+  labels_it: turmeric
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon ground turmeric).
+  class: spezia
+- id: ING-DICT-0600
+  labels_en: water
+  labels_it: water
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=water).
+  class: liquido
+- id: ING-DICT-0601
+  labels_en: butter
+  labels_it: butter
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=butter, melted).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0602
+  labels_en: dried red chili
+  labels_it: dried red chili
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=dried red chili).
+  class: spezia
+- id: ING-DICT-0603
+  labels_en: lemon
+  labels_it: lemon
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=lemons, quartered).
+  class: frutta
+- id: ING-DICT-0604
+  labels_en: spring onion
+  labels_it: spring onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=spring onion).
+  class: verdura
+- id: ING-DICT-0605
+  labels_en: sour butter
+  labels_it: sour butter
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di butter acido (vedi preparazioni
+    di base)).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0606
+  labels_en: prosciutto crudo
+  labels_it: prosciutto crudo
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di prosciutto crudo).
+  class: proteina
+- id: ING-DICT-0607
+  labels_en: egg
+  labels_it: egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=eggs, beaten).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0608
+  labels_en: dried mushroom
+  labels_it: dried mushroom
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di funghi secchi).
+  class: fungo
+- id: ING-DICT-0609
+  labels_en: lemon
+  labels_it: lemon
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=lemon).
+  class: frutta
+- id: ING-DICT-0610
+  labels_en: onion
+  labels_it: onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=onion, chopped).
+  class: verdura
+- id: ING-DICT-0611
+  labels_en: sole fillet
+  labels_it: sole fillet
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=sole fillets).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0612
+  labels_en: mortadella
+  labels_it: mortadella
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di mortadella).
+  class: proteina
+- id: ING-DICT-0613
+  labels_en: egg white
+  labels_it: egg white
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=egg whites).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0614
+  labels_en: parmesan cheese
+  labels_it: parmesan cheese
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=grated parmesan cheese).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0615
+  labels_en: pancetta
+  labels_it: pancetta
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pancetta).
+  class: proteina
+- id: ING-DICT-0616
+  labels_en: garlic
+  labels_it: garlic
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic, crushed).
+  class: verdura
+- id: ING-DICT-0617
+  labels_en: peanut oil
+  labels_it: peanut oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=peanut oil).
+  class: grasso
+  allergen_tags:
+  - peanuts
+- id: ING-DICT-0618
+  labels_en: buffalo mozzarella
+  labels_it: buffalo mozzarella
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=buffalo mozzarella).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0619
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=heavy cream).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0620
+  labels_en: cod
+  labels_it: cod
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=salted cod).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0621
+  labels_en: onion
+  labels_it: onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=chopped onion).
+  class: verdura
+- id: ING-DICT-0622
+  labels_en: cumin seed
+  labels_it: cumin seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=cumin seeds).
+  class: spezia
+- id: ING-DICT-0623
+  labels_en: stale bread
+  labels_it: stale bread
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pane raffermo).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0624
+  labels_en: originario rice
+  labels_it: originario rice
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di riso originario).
+  class: cereale
+- id: ING-DICT-0625
+  labels_en: icing sugar
+  labels_it: icing sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=icing sugar).
+  class: dolcificante
+- id: ING-DICT-0626
+  labels_en: salt
+  labels_it: salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=salt).
+  class: condimento
+- id: ING-DICT-0627
+  labels_en: tahini
+  labels_it: tahini
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tahini).
+  class: condimento
+  allergen_tags:
+  - sesame
+- id: ING-DICT-0628
+  labels_en: coriander seed
+  labels_it: coriander seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=coriander seeds).
+  class: spezia
+- id: ING-DICT-0629
+  labels_en: cilantro
+  labels_it: cilantro
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=crudely chopped fresh cilantro,
+    including soft stems).
+  class: erba
+- id: ING-DICT-0630
+  labels_en: green olive
+  labels_it: green olive
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di olive verdi denocciolate).
+  class: verdura
+- id: ING-DICT-0631
+  labels_en: fenugreek seed
+  labels_it: fenugreek seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=fenugreek seeds).
+  class: spezia
+- id: ING-DICT-0632
+  labels_en: egg
+  labels_it: egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=fresh eggs).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0633
+  labels_en: salt
+  labels_it: salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=g oz) salt).
+  class: condimento
+- id: ING-DICT-0634
+  labels_en: onion
+  labels_it: onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=onions, chopped).
+  class: verdura
+- id: ING-DICT-0635
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ounces (170 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0636
+  labels_en: bell pepper
+  labels_it: bell pepper
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=peperoni).
+  class: verdura
+- id: ING-DICT-0637
+  labels_en: lemon juice
+  labels_it: lemon juice
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tbsp freshly squeezed lemon
+    juice).
+  class: liquido
+- id: ING-DICT-0638
+  labels_en: tomato
+  labels_it: tomato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tomatoes, peeled, seeded, drained,
+    and chopped).
+  class: verdura
+- id: ING-DICT-0639
+  labels_en: ground cumin
+  labels_it: ground cumin
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tsp ground cumin).
+  class: spezia
+- id: ING-DICT-0640
+  labels_en: vegetable oil
+  labels_it: vegetable oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=vegetable oil).
+  class: grasso
+- id: ING-DICT-0641
+  labels_en: lobster
+  labels_it: lobster
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=2-pound live lobsters).
+  class: proteina
+  allergen_tags:
+  - crustaceans
+- id: ING-DICT-0642
+  labels_en: anchovy fillet
+  labels_it: anchovy fillet
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=anchovy fillets, washed free
+    of salt [see no. 220]).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0643
+  labels_en: clove
+  labels_it: clove
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=chiodi di garofano).
+  class: spezia
+- id: ING-DICT-0644
+  labels_en: rabbit
+  labels_it: rabbit
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=coniglio pronto per la cottura
+    tagliato a pezzi).
+  class: proteina
+- id: ING-DICT-0645
+  labels_en: fresh cream
+  labels_it: fresh cream
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di panna fresca).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0646
+  labels_en: pumpkin pulp
+  labels_it: pumpkin pulp
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di polpa di zucca).
+  class: verdura
+- id: ING-DICT-0647
+  labels_en: marjoram
+  labels_it: marjoram
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=marjoram).
+  class: erba
+- id: ING-DICT-0648
+  labels_en: eggplant
+  labels_it: eggplant
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=melanzane).
+  class: verdura
+- id: ING-DICT-0649
+  labels_en: sandwich bread
+  labels_it: sandwich bread
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=sandwich bread).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0650
+  labels_en: sardine
+  labels_it: sardine
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=sardines).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0651
+  labels_en: cayenne pepper
+  labels_it: cayenne pepper
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon cayenne pepper, or
+    to taste).
+  class: spezia
+- id: ING-DICT-0652
+  labels_en: eel
+  labels_it: eel
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=anguilla di circa 1 kg spellata
+    e pronta per la cottura).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0653
+  labels_en: guanciale
+  labels_it: guanciale
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di guanciale).
+  class: proteina
+- id: ING-DICT-0654
+  labels_en: pancetta
+  labels_it: pancetta
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pancetta tagliata a dadini).
+  class: proteina
+- id: ING-DICT-0655
+  labels_en: pea
+  labels_it: pea
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di piselli sgranati).
+  class: legume
+- id: ING-DICT-0656
+  labels_en: cooked ham
+  labels_it: cooked ham
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di prosciutto cotto).
+  class: proteina
+- id: ING-DICT-0657
+  labels_en: stockfish
+  labels_it: stockfish
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di stoccafisso già ammollato).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0658
+  labels_en: ramati tomato
+  labels_it: ramati tomato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di tomato ramati).
+  class: verdura
+- id: ING-DICT-0659
+  labels_en: egg
+  labels_it: egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=egg + 1 egg yolk).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0660
+  labels_en: fennel seed
+  labels_it: fennel seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=fennel seeds).
+  class: spezia
+- id: ING-DICT-0661
+  labels_en: mint
+  labels_it: mint
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=fresh mint).
+  class: erba
+- id: ING-DICT-0662
+  labels_en: mayonnaise
+  labels_it: mayonnaise
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=mayonnaise [no. 77]).
+  class: condimento
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0663
+  labels_en: cherry tomato
+  labels_it: cherry tomato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=cherry tomatoes).
+  class: verdura
+- id: ING-DICT-0664
+  labels_en: savoy cabbage
+  labels_it: savoy cabbage
+  aliases:
+  - verza
+  definition: Standardizzato da dizionario (book, key=di verza).
+  class: verdura
+- id: ING-DICT-0665
+  labels_en: egg
+  labels_it: egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=eggs, separated).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0666
+  labels_en: veal cutlet
+  labels_it: veal cutlet
+  aliases:
+  - veal slices
+  - fettine di vitello
+  definition: Standardizzato da dizionario (book, key=fettine di vitello).
+  class: proteina
+- id: ING-DICT-0667
+  labels_en: cilantro
+  labels_it: cilantro
+  aliases:
+  - coriander
+  definition: Standardizzato da dizionario (book, key=finely chopped fresh cilantro,
+    including soft stems).
+  class: erba
+- id: ING-DICT-0668
+  labels_en: garlic clove
+  labels_it: garlic clove
+  aliases:
+  - garlic
+  definition: Standardizzato da dizionario (book, key=garlic cloves, sliced).
+  class: verdura
+- id: ING-DICT-0669
+  labels_en: Italian rice
+  labels_it: Italian rice
+  aliases:
+  - risotto rice
+  definition: Standardizzato da dizionario (book, key=italian rice).
+  class: cereale
+- id: ING-DICT-0670
+  labels_en: garlic clove
+  labels_it: garlic clove
+  aliases:
+  - garlic
+  definition: Standardizzato da dizionario (book, key=large cloves fresh garlic, peeled).
+  class: verdura
+- id: ING-DICT-0671
+  labels_en: onion
+  labels_it: onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=onions, sliced).
+  class: verdura
+- id: ING-DICT-0672
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases:
+  - white sugar
+  definition: Standardizzato da dizionario (book, key=ounces (55 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0673
+  labels_en: salt
+  labels_it: salt
+  aliases:
+  - table salt
+  definition: Standardizzato da dizionario (book, key=teaspoon salt).
+  class: condimento
+- id: ING-DICT-0674
+  labels_en: baking powder
+  labels_it: baking powder
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=baking powder).
+  class: altro
+- id: ING-DICT-0675
+  labels_en: black peppercorn
+  labels_it: black peppercorn
+  aliases:
+  - peppercorns
+  definition: Standardizzato da dizionario (book, key=black peppercorns).
+  class: spezia
+- id: ING-DICT-0676
+  labels_en: parsley
+  labels_it: parsley
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=chopped fresh parsley).
+  class: erba
+- id: ING-DICT-0677
+  labels_en: vinegar
+  labels_it: vinegar
+  aliases:
+  - aceto
+  definition: Standardizzato da dizionario (book, key=di aceto).
+  class: condimento
+- id: ING-DICT-0678
+  labels_en: fish stock
+  labels_it: fish stock
+  aliases:
+  - fish broth
+  - brodo di pesce
+  definition: Standardizzato da dizionario (book, key=di brodo di pesce (vedi preparazioni
+    di base)).
+  class: liquido
+  allergen_tags:
+  - fish
+- id: ING-DICT-0679
+  labels_en: cardoon
+  labels_it: cardoon
+  aliases:
+  - cardoni
+  definition: Standardizzato da dizionario (book, key=di cardi).
+  class: verdura
+- id: ING-DICT-0680
+  labels_en: almond
+  labels_it: almond
+  aliases:
+  - chopped almonds
+  definition: Standardizzato da dizionario (book, key=di mandorle tritate).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0681
+  labels_en: fontina cheese
+  labels_it: fontina cheese
+  aliases:
+  - fontina
+  definition: Standardizzato da dizionario (book, key=fontina cheese).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0682
+  labels_en: garlic clove
+  labels_it: garlic clove
+  aliases:
+  - garlic
+  definition: Standardizzato da dizionario (book, key=garlic cloves, peeled).
+  class: verdura
+- id: ING-DICT-0683
+  labels_en: onion
+  labels_it: onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=onion, sliced).
+  class: verdura
+- id: ING-DICT-0684
+  labels_en: spaghetti
+  labels_it: spaghetti
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=pound spaghetti).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0685
+  labels_en: asparagus
+  labels_it: asparagus
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=pounds asparagus, peeled).
+  class: verdura
+- id: ING-DICT-0686
+  labels_en: frying chicken
+  labels_it: frying chicken
+  aliases:
+  - broiler chicken
+  definition: Standardizzato da dizionario (book, key=pounds cut-up frying chicken).
+  class: proteina
+- id: ING-DICT-0687
+  labels_en: dried cod
+  labels_it: dried cod
+  aliases:
+  - salt cod
+  - baccalà
+  definition: Standardizzato da dizionario (book, key=pounds dried cod, soaked for
+    12 hours in several).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0688
+  labels_en: salt
+  labels_it: salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=salt, or to taste).
+  class: condimento
+- id: ING-DICT-0689
+  labels_en: superfine sugar
+  labels_it: superfine sugar
+  aliases:
+  - caster sugar
+  - fine sugar
+  definition: Standardizzato da dizionario (book, key=superfine sugar).
+  class: dolcificante
+- id: ING-DICT-0690
+  labels_en: vanilla extract
+  labels_it: vanilla extract
+  aliases:
+  - vanilla essence
+  definition: Standardizzato da dizionario (book, key=teaspoon (5 ml) vanilla extract).
+  class: condimento
+- id: ING-DICT-0691
+  labels_en: salt
+  labels_it: salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoons salt).
+  class: condimento
+- id: ING-DICT-0692
+  labels_en: tuna in oil
+  labels_it: tuna in oil
+  aliases:
+  - canned tuna in oil
+  definition: Standardizzato da dizionario (book, key=tuna in oil).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0693
+  labels_en: clove
+  labels_it: clove
+  aliases:
+  - cloves
+  definition: Standardizzato da dizionario (book, key=whole cloves).
+  class: spezia
+- id: ING-DICT-0694
+  labels_en: mullet
+  labels_it: mullet
+  aliases: []
+  definition: Standardizzato da dizionario (book, key='4-pound mullet, cleaned).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0695
+  labels_en: anchovy
+  labels_it: anchovy
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=anchovies).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0696
+  labels_en: anchovy fillet
+  labels_it: anchovy fillet
+  aliases:
+  - anchovy fillets in oil
+  definition: Standardizzato da dizionario (book, key=anchovy fillets sott'olio).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0697
+  labels_en: apple
+  labels_it: apple
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=apple).
+  class: frutta
+- id: ING-DICT-0698
+  labels_en: bay leaf
+  labels_it: bay leaf
+  aliases:
+  - laurel leaves
+  definition: Standardizzato da dizionario (book, key=bay leaves).
+  class: erba
+- id: ING-DICT-0699
+  labels_en: chicken
+  labels_it: chicken
+  aliases:
+  - chicken pieces
+  definition: Standardizzato da dizionario (book, key=chicken pronto per la cottura
+    tagliato a pezzi).
+  class: proteina
+- id: ING-DICT-0700
+  labels_en: cilantro
+  labels_it: cilantro
+  aliases:
+  - coriander
+  definition: Standardizzato da dizionario (book, key=chopped fresh cilantro (coriander)).
+  class: erba
+- id: ING-DICT-0701
+  labels_en: Swiss chard
+  labels_it: Swiss chard
+  aliases:
+  - bietole
+  - silverbeet
+  definition: Standardizzato da dizionario (book, key=di bietole).
+  class: verdura
+- id: ING-DICT-0702
+  labels_en: ground cinnamon
+  labels_it: ground cinnamon
+  aliases:
+  - cinnamon powder
+  definition: Standardizzato da dizionario (book, key=di cannella in polvere).
+  class: spezia
+- id: ING-DICT-0703
+  labels_en: caper
+  labels_it: caper
+  aliases:
+  - capers in vinegar
+  definition: Standardizzato da dizionario (book, key=di capperi sott'aceto).
+  class: verdura
+- id: ING-DICT-0704
+  labels_en: mixed mushrooms
+  labels_it: mixed mushrooms
+  aliases:
+  - funghi misti
+  definition: Standardizzato da dizionario (book, key=di funghi misti).
+  class: fungo
+- id: ING-DICT-0705
+  labels_en: beef shank
+  labels_it: beef shank
+  aliases:
+  - beef muscle
+  - muscolo di manzo
+  definition: Standardizzato da dizionario (book, key=di muscolo di manzo).
+  class: proteina
+- id: ING-DICT-0706
+  labels_en: pea
+  labels_it: pea
+  aliases:
+  - piselli
+  definition: Standardizzato da dizionario (book, key=di piselli).
+  class: legume
+- id: ING-DICT-0707
+  labels_en: distilled white vinegar
+  labels_it: distilled white vinegar
+  aliases:
+  - white vinegar
+  definition: Standardizzato da dizionario (book, key=distilled white vinegar).
+  class: condimento
+- id: ING-DICT-0708
+  labels_en: hard-boiled egg
+  labels_it: hard-boiled egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=hard-boiled eggs).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0709
+  labels_en: kneaded butter
+  labels_it: kneaded butter
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=kneaded butter [no. 107]).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0710
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ounces (225 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0711
+  labels_en: black mustard seed
+  labels_it: black mustard seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon black mustard seeds).
+  class: spezia
+  allergen_tags:
+  - mustard
+- id: ING-DICT-0712
+  labels_en: ground paprika
+  labels_it: ground paprika
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon ground paprika).
+  class: spezia
+- id: ING-DICT-0713
+  labels_en: whole egg
+  labels_it: whole egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=whole eggs).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0714
+  labels_en: asparagus
+  labels_it: asparagus
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=asparagus).
+  class: verdura
+- id: ING-DICT-0715
+  labels_en: juniper berry
+  labels_it: juniper berry
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=bacche di ginepro).
+  class: spezia
+- id: ING-DICT-0716
+  labels_en: boned chicken breast
+  labels_it: boned chicken breast
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=boned breasts of chicken).
+  class: proteina
+- id: ING-DICT-0717
+  labels_en: brown sugar
+  labels_it: brown sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=brown sugar).
+  class: dolcificante
+- id: ING-DICT-0718
+  labels_en: dried oregano
+  labels_it: dried oregano
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=cucchiaino di oregano secco).
+  class: erba
+- id: ING-DICT-0719
+  labels_en: ground beef
+  labels_it: ground beef
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di carne di manzo macinata).
+  class: proteina
+- id: ING-DICT-0720
+  labels_en: dried borlotti bean
+  labels_it: dried borlotti bean
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di fagioli borlotti secchi).
+  class: legume
+- id: ING-DICT-0721
+  labels_en: chicken liver
+  labels_it: chicken liver
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di fegatini di chicken).
+  class: proteina
+- id: ING-DICT-0722
+  labels_en: veal cut
+  labels_it: veal cut
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di girello o di noce di vitello).
+  class: proteina
+- id: ING-DICT-0723
+  labels_en: orecchiette
+  labels_it: orecchiette
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di orecchiette).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0724
+  labels_en: short pasta
+  labels_it: short pasta
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pasta corta).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0725
+  labels_en: puff pastry
+  labels_it: puff pastry
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pasta sfoglia).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0726
+  labels_en: ricotta romana
+  labels_it: ricotta romana
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di ricotta romana).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0727
+  labels_en: riso fino rice
+  labels_it: riso fino rice
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di riso fino).
+  class: cereale
+- id: ING-DICT-0728
+  labels_en: rum
+  labels_it: rum
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di rum).
+  class: bevanda
+- id: ING-DICT-0729
+  labels_en: vanillin
+  labels_it: vanillin
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di vanillina).
+  class: altro
+- id: ING-DICT-0730
+  labels_en: black peppercorn
+  labels_it: black peppercorn
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=grani di black pepper).
+  class: spezia
+- id: ING-DICT-0731
+  labels_en: ground coriander
+  labels_it: ground coriander
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ground coriander).
+  class: spezia
+- id: ING-DICT-0732
+  labels_en: ground ginger
+  labels_it: ground ginger
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ground ginger).
+  class: spezia
+- id: ING-DICT-0733
+  labels_en: whipped heavy cream
+  labels_it: whipped heavy cream
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=heavy cream, whipped).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0734
+  labels_en: lentil
+  labels_it: lentil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=lentils).
+  class: legume
+- id: ING-DICT-0735
+  labels_en: olive oil
+  labels_it: olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=olive oil, plus extra for brushing).
+  class: grasso
+- id: ING-DICT-0736
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ounces (115 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0737
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ounces (340 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0738
+  labels_en: potato
+  labels_it: potato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=patata).
+  class: verdura
+- id: ING-DICT-0739
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=pound (455 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0740
+  labels_en: thyme sprig
+  labels_it: thyme sprig
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=rametto di thyme).
+  class: erba
+- id: ING-DICT-0741
+  labels_en: rosemary
+  labels_it: rosemary
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=rosemary).
+  class: erba
+- id: ING-DICT-0742
+  labels_en: sugar
+  labels_it: sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=superfine (caster) or granulated
+    sugar).
+  class: dolcificante
+- id: ING-DICT-0743
+  labels_en: ground nutmeg
+  labels_it: ground nutmeg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon ground nutmeg).
+  class: spezia
+- id: ING-DICT-0744
+  labels_en: sugar
+  labels_it: sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon sugar).
+  class: dolcificante
+- id: ING-DICT-0745
+  labels_en: vanilla extract
+  labels_it: vanilla extract
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoons (10 ml) vanilla extract).
+  class: altro
+- id: ING-DICT-0746
+  labels_en: ground cumin
+  labels_it: ground cumin
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoons ground cumin).
+  class: spezia
+- id: ING-DICT-0747
+  labels_en: thyme sprig
+  labels_it: thyme sprig
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=thyme sprigs).
+  class: erba
+- id: ING-DICT-0748
+  labels_en: tomato sauce
+  labels_it: tomato sauce
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tomato sauce).
+  class: condimento
+- id: ING-DICT-0749
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(480 ml) heavy cream).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0750
+  labels_en: water
+  labels_it: water
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(60 ml) cold water).
+  class: liquido
+- id: ING-DICT-0751
+  labels_en: honey
+  labels_it: honey
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(60 ml) or 3 ounces (85 g) honey).
+  class: dolcificante
+- id: ING-DICT-0752
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(720 ml) heavy cream).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0753
+  labels_en: unflavored gelatin powder
+  labels_it: unflavored gelatin powder
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(9 g) unflavored gelatin powder).
+  class: altro
+- id: ING-DICT-0754
+  labels_en: partridge
+  labels_it: partridge
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=1-pound partridges, cleaned).
+  class: proteina
+- id: ING-DICT-0755
+  labels_en: carrot
+  labels_it: carrot
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=carrots, sliced).
+  class: verdura
+- id: ING-DICT-0756
+  labels_en: club steak
+  labels_it: club steak
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=club steaks, cut from the rib
+    end of the short loin).
+  class: proteina
+- id: ING-DICT-0757
+  labels_en: veal chop
+  labels_it: veal chop
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=costolette di vitello).
+  class: proteina
+- id: ING-DICT-0758
+  labels_en: tomato paste
+  labels_it: tomato paste
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di conserva di tomato).
+  class: condimento
+- id: ING-DICT-0759
+  labels_en: herbs
+  labels_it: herbs
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di erbette).
+  class: erba
+- id: ING-DICT-0760
+  labels_en: borlotti bean
+  labels_it: borlotti bean
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di fagioli borlotti sgranati).
+  class: legume
+- id: ING-DICT-0761
+  labels_en: green bean
+  labels_it: green bean
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di fagiolini).
+  class: verdura
+- id: ING-DICT-0762
+  labels_en: fish stock
+  labels_it: fish stock
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di fish stock (vedi preparazioni
+    di base)).
+  class: liquido
+  allergen_tags:
+  - fish
+- id: ING-DICT-0763
+  labels_en: oregano
+  labels_it: oregano
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di oregano fresco).
+  class: erba
+- id: ING-DICT-0764
+  labels_en: pasta
+  labels_it: pasta
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di pasta).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0765
+  labels_en: tuna
+  labels_it: tuna
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di tonno).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0766
+  labels_en: tripe
+  labels_it: tripe
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di trippa precotta).
+  class: proteina
+- id: ING-DICT-0767
+  labels_en: vermicelli
+  labels_it: vermicelli
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di vermicelli).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0768
+  labels_en: mint leaf
+  labels_it: mint leaf
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=fresh mint leaves).
+  class: erba
+- id: ING-DICT-0769
+  labels_en: cinnamon
+  labels_it: cinnamon
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ground cinnamon).
+  class: spezia
+- id: ING-DICT-0770
+  labels_en: clove
+  labels_it: clove
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ground cloves).
+  class: spezia
+- id: ING-DICT-0771
+  labels_en: veal chop
+  labels_it: veal chop
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=loin or rib veal chops, cut
+    1 inch thick).
+  class: proteina
+- id: ING-DICT-0772
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ounces (85 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0773
+  labels_en: ginger
+  labels_it: ginger
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=peeled and minced fresh ginger).
+  class: spezia
+- id: ING-DICT-0774
+  labels_en: basil sprig
+  labels_it: basil sprig
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=rametto di basil).
+  class: erba
+- id: ING-DICT-0775
+  labels_en: french meringue
+  labels_it: french meringue
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=recipe french meringue (page
+    780)).
+  class: altro
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0776
+  labels_en: vinaigrette
+  labels_it: vinaigrette
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=sauce vinaigrette [no. 99]).
+  class: condimento
+- id: ING-DICT-0777
+  labels_en: tamarind paste
+  labels_it: tamarind paste
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tamarind paste).
+  class: condimento
+- id: ING-DICT-0778
+  labels_en: cumin seed
+  labels_it: cumin seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon cumin seeds).
+  class: spezia
+- id: ING-DICT-0779
+  labels_en: salt
+  labels_it: salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoons salt, or to taste).
+  class: condimento
+- id: ING-DICT-0780
+  labels_en: tomato sauce
+  labels_it: tomato sauce
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tomato sauce [no. 19]).
+  class: condimento
+- id: ING-DICT-0781
+  labels_en: allspice
+  labels_it: allspice
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tsp ground allspice).
+  class: spezia
+- id: ING-DICT-0782
+  labels_en: cinnamon
+  labels_it: cinnamon
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tsp ground cinnamon).
+  class: spezia
+- id: ING-DICT-0783
+  labels_en: unflavored gelatin
+  labels_it: unflavored gelatin
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(18 g) unflavored gelatin).
+  class: altro
+- id: ING-DICT-0784
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(240 ml) heavy cream).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0785
+  labels_en: simple syrup
+  labels_it: simple syrup
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(60 ml) simple syrup).
+  class: dolcificante
+- id: ING-DICT-0786
+  labels_en: quail
+  labels_it: quail
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=1-pound quails, cleaned).
+  class: proteina
+- id: ING-DICT-0787
+  labels_en: artichoke heart
+  labels_it: artichoke heart
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=artichoke hearts, cooked until
+    tender in white).
+  class: verdura
+- id: ING-DICT-0788
+  labels_en: black mustard seed
+  labels_it: black mustard seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=black mustard seeds).
+  class: spezia
+  allergen_tags:
+  - mustard
+- id: ING-DICT-0789
+  labels_en: pork chop
+  labels_it: pork chop
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=braciole di maiale).
+  class: proteina
+- id: ING-DICT-0790
+  labels_en: cauliflower
+  labels_it: cauliflower
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=cavolfiore).
+  class: verdura
+- id: ING-DICT-0791
+  labels_en: basil
+  labels_it: basil
+  aliases:
+  - basil
+  definition: Standardizzato da dizionario (book, key=chopped basil).
+  class: erba
+- id: ING-DICT-0792
+  labels_en: sugar
+  labels_it: sugar
+  aliases:
+  - sugar
+  definition: Standardizzato da dizionario (book, key=cucchiaino di sugar).
+  class: dolcificante
+- id: ING-DICT-0793
+  labels_en: brandy
+  labels_it: brandy
+  aliases:
+  - brandy
+  definition: Standardizzato da dizionario (book, key=di brandy).
+  class: bevanda
+- id: ING-DICT-0794
+  labels_en: beef
+  labels_it: beef
+  aliases:
+  - cappello del prete
+  - beef shoulder clod
+  definition: Standardizzato da dizionario (book, key=di cappello del prete di manzo).
+  class: proteina
+- id: ING-DICT-0795
+  labels_en: chickpea
+  labels_it: chickpea
+  aliases:
+  - chickpeas
+  - garbanzo beans
+  definition: Standardizzato da dizionario (book, key=di ceci).
+  class: legume
+- id: ING-DICT-0796
+  labels_en: extra virgin olive oil
+  labels_it: extra virgin olive oil
+  aliases:
+  - olive oil
+  - extra virgin
+  definition: Standardizzato da dizionario (book, key=di extra virgin olive oil, salt).
+  class: grasso
+- id: ING-DICT-0797
+  labels_en: savoy cabbage leaf
+  labels_it: savoy cabbage leaf
+  aliases:
+  - cabbage leaves
+  - verza leaves
+  definition: Standardizzato da dizionario (book, key=di foglie di verza).
+  class: verdura
+- id: ING-DICT-0798
+  labels_en: lampascioni
+  labels_it: lampascioni
+  aliases:
+  - grape hyacinth bulbs
+  - wild onion bulbs
+  definition: Standardizzato da dizionario (book, key=di lampascioni).
+  class: verdura
+- id: ING-DICT-0799
+  labels_en: pork loin
+  labels_it: pork loin
+  aliases:
+  - lonza di maiale
+  definition: Standardizzato da dizionario (book, key=di lonza di maiale).
+  class: proteina
+- id: ING-DICT-0800
+  labels_en: extra virgin olive oil
+  labels_it: extra virgin olive oil
+  aliases:
+  - olio extravergine d'oliva
+  definition: Standardizzato da dizionario (book, key=di olio extravergine d'oliva).
+  class: grasso
+- id: ING-DICT-0801
+  labels_en: semifino rice
+  labels_it: semifino rice
+  aliases:
+  - riso semifino
+  definition: Standardizzato da dizionario (book, key=di riso semifino).
+  class: cereale
+- id: ING-DICT-0802
+  labels_en: egg
+  labels_it: egg
+  aliases:
+  - whole egg
+  - egg yolk
+  definition: Standardizzato da dizionario (book, key=egg intere + 1 egg yolk).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0803
+  labels_en: egg white
+  labels_it: egg white
+  aliases:
+  - egg whites
+  definition: Standardizzato da dizionario (book, key=egg whites (1⁄2 cup/120 ml)).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0804
+  labels_en: egg yolk
+  labels_it: egg yolk
+  aliases:
+  - egg yolks
+  definition: Standardizzato da dizionario (book, key=egg yolks (1⁄2 cup/120 ml)).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0805
+  labels_en: egg yolk
+  labels_it: egg yolk
+  aliases:
+  - egg yolks
+  definition: Standardizzato da dizionario (book, key=egg yolks (2⁄3 cup/160 ml)).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0806
+  labels_en: fava bean
+  labels_it: fava bean
+  aliases:
+  - broad beans
+  definition: Standardizzato da dizionario (book, key=fava beans).
+  class: legume
+- id: ING-DICT-0807
+  labels_en: fennel
+  labels_it: fennel
+  aliases:
+  - finocchio
+  definition: Standardizzato da dizionario (book, key=finocchio).
+  class: verdura
+- id: ING-DICT-0808
+  labels_en: fish fumet
+  labels_it: fish fumet
+  aliases:
+  - fish stock
+  definition: Standardizzato da dizionario (book, key=fish fumet [no. 2]).
+  class: liquido
+  allergen_tags:
+  - fish
+- id: ING-DICT-0809
+  labels_en: sardine
+  labels_it: sardine
+  aliases:
+  - sardines
+  definition: Standardizzato da dizionario (book, key=fresh sardines, cleaned).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0810
+  labels_en: veal kidney
+  labels_it: veal kidney
+  aliases:
+  - veal kidneys
+  definition: Standardizzato da dizionario (book, key=large veal kidneys, trimmed
+    of fat and membrane).
+  class: proteina
+- id: ING-DICT-0811
+  labels_en: lamb loin chop
+  labels_it: lamb loin chop
+  aliases:
+  - lamb chops
+  definition: Standardizzato da dizionario (book, key=loin lamb chops, cut 1 inch
+    thick).
+  class: proteina
+- id: ING-DICT-0812
+  labels_en: granulated sugar
+  labels_it: granulated sugar
+  aliases:
+  - sugar
+  definition: Standardizzato da dizionario (book, key=ounces (285 g) granulated sugar).
+  class: dolcificante
+- id: ING-DICT-0813
+  labels_en: leek
+  labels_it: leek
+  aliases:
+  - porri
+  - leeks
+  definition: Standardizzato da dizionario (book, key=porri).
+  class: verdura
+- id: ING-DICT-0814
+  labels_en: ginger
+  labels_it: ginger
+  aliases:
+  - fresh ginger
+  definition: Standardizzato da dizionario (book, key=quarter-size slices peeled fresh
+    ginger).
+  class: spezia
+- id: ING-DICT-0815
+  labels_en: water
+  labels_it: water
+  aliases:
+  - water
+  definition: Standardizzato da dizionario (book, key=quarts water).
+  class: liquido
+- id: ING-DICT-0816
+  labels_en: salt
+  labels_it: salt
+  aliases:
+  - table salt
+  definition: Standardizzato da dizionario (book, key=teaspoon (5 g) salt).
+  class: condimento
+- id: ING-DICT-0817
+  labels_en: chaat masala
+  labels_it: chaat masala
+  aliases:
+  - chaat masala
+  definition: Standardizzato da dizionario (book, key=teaspoon chaat masala).
+  class: spezia
+- id: ING-DICT-0818
+  labels_en: garam masala
+  labels_it: garam masala
+  aliases:
+  - garam masala
+  definition: Standardizzato da dizionario (book, key=teaspoon garam masala).
+  class: spezia
+- id: ING-DICT-0819
+  labels_en: ginger
+  labels_it: ginger
+  aliases:
+  - ground ginger
+  definition: Standardizzato da dizionario (book, key=teaspoon ground ginger).
+  class: spezia
+- id: ING-DICT-0820
+  labels_en: thyme
+  labels_it: thyme
+  aliases:
+  - thyme
+  definition: Standardizzato da dizionario (book, key=thyme).
+  class: erba
+- id: ING-DICT-0821
+  labels_en: green chile pepper
+  labels_it: green chile pepper
+  aliases:
+  - serrano pepper
+  definition: Standardizzato da dizionario (book, key=to 3 fresh green chile peppers,
+    such as serrano, stemmed).
+  class: verdura
+- id: ING-DICT-0822
+  labels_en: tomato
+  labels_it: tomato
+  aliases:
+  - ramati tomato
+  definition: Standardizzato da dizionario (book, key=tomato ramati).
+  class: verdura
+- id: ING-DICT-0823
+  labels_en: chile flakes
+  labels_it: chile flakes
+  aliases:
+  - red pepper flakes
+  definition: Standardizzato da dizionario (book, key=tsp chile flakes).
+  class: spezia
+- id: ING-DICT-0824
+  labels_en: za'atar
+  labels_it: za'atar
+  aliases:
+  - zaatar
+  definition: Standardizzato da dizionario (book, key=za'atar).
+  class: spezia
+- id: ING-DICT-0825
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases:
+  - heavy cream
+  definition: Standardizzato da dizionario (book, key=(120 ml) heavy cream).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0826
+  labels_en: water
+  labels_it: water
+  aliases:
+  - water
+  definition: Standardizzato da dizionario (book, key=(120 ml) water).
+  class: liquido
+- id: ING-DICT-0827
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases:
+  - heavy cream
+  definition: Standardizzato da dizionario (book, key=(360 ml) heavy cream).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0828
+  labels_en: heavy cream
+  labels_it: heavy cream
+  aliases:
+  - heavy cream
+  definition: Standardizzato da dizionario (book, key=(600 ml) heavy cream).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0829
+  labels_en: lamb
+  labels_it: lamb
+  aliases:
+  - minced lamb
+  definition: Standardizzato da dizionario (book, key=02/250 g ground (minced) lamb).
+  class: proteina
+- id: ING-DICT-0830
+  labels_en: salmon trout
+  labels_it: salmon trout
+  aliases:
+  - salmon trout
+  definition: Standardizzato da dizionario (book, key=4-pound salmon trout, cleaned).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0831
+  labels_en: all-purpose flour
+  labels_it: all-purpose flour
+  aliases:
+  - plain flour
+  definition: Standardizzato da dizionario (book, key=all-purpose (plain) flour).
+  class: amido
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0832
+  labels_en: brewer's yeast
+  labels_it: brewer's yeast
+  aliases:
+  - brewer's yeast
+  definition: Standardizzato da dizionario (book, key=brewer's yeast).
+  class: altro
+- id: ING-DICT-0833
+  labels_en: béchamel sauce
+  labels_it: béchamel sauce
+  aliases:
+  - béchamel
+  definition: Standardizzato da dizionario (book, key=béchamel sauce [no. 18]).
+  class: condimento
+  allergen_tags:
+  - milk
+  - gluten
+- id: ING-DICT-0834
+  labels_en: carrot
+  labels_it: carrot
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=carrot, sliced).
+  class: verdura
+- id: ING-DICT-0835
+  labels_en: carrot
+  labels_it: carrot
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=carrots, chopped).
+  class: verdura
+- id: ING-DICT-0836
+  labels_en: mint
+  labels_it: mint
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=chopped fresh mint).
+  class: erba
+- id: ING-DICT-0837
+  labels_en: cocoa powder
+  labels_it: cocoa powder
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=cocoa powder).
+  class: altro
+- id: ING-DICT-0838
+  labels_en: chicken thigh
+  labels_it: chicken thigh
+  aliases:
+  - chicken thighs
+  definition: Standardizzato da dizionario (book, key=cosce di chicken).
+  class: proteina
+- id: ING-DICT-0839
+  labels_en: garlic
+  labels_it: garlic
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=d'garlic (facoltativo)).
+  class: verdura
+- id: ING-DICT-0840
+  labels_en: caciocavallo cheese
+  labels_it: caciocavallo cheese
+  aliases:
+  - caciocavallo
+  definition: Standardizzato da dizionario (book, key=di caciocavallo).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0841
+  labels_en: caper
+  labels_it: caper
+  aliases:
+  - capers
+  definition: Standardizzato da dizionario (book, key=di capperi).
+  class: verdura
+- id: ING-DICT-0842
+  labels_en: cognac
+  labels_it: cognac
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di cognac).
+  class: bevanda
+- id: ING-DICT-0843
+  labels_en: fava bean
+  labels_it: fava bean
+  aliases:
+  - broad bean
+  definition: Standardizzato da dizionario (book, key=di fava beans sgranate).
+  class: legume
+- id: ING-DICT-0844
+  labels_en: veal liver
+  labels_it: veal liver
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di fettine di fegato di vitello).
+  class: proteina
+- id: ING-DICT-0845
+  labels_en: stale bread crumbs
+  labels_it: stale bread crumbs
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di mollica di pane raffermo).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0846
+  labels_en: walnut
+  labels_it: walnut
+  aliases:
+  - walnuts
+  definition: Standardizzato da dizionario (book, key=di noci tritate).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0847
+  labels_en: ground beef
+  labels_it: ground beef
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di polpa di manzo macinata).
+  class: proteina
+- id: ING-DICT-0848
+  labels_en: ground veal
+  labels_it: ground veal
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di polpa di vitello macinata).
+  class: proteina
+- id: ING-DICT-0849
+  labels_en: rice
+  labels_it: rice
+  aliases:
+  - superfine rice
+  definition: Standardizzato da dizionario (book, key=di riso superfino).
+  class: cereale
+- id: ING-DICT-0850
+  labels_en: veal kidney
+  labels_it: veal kidney
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di rognone di vitello pronto
+    per la cottura).
+  class: proteina
+- id: ING-DICT-0851
+  labels_en: cuttlefish
+  labels_it: cuttlefish
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di seppie pronte per la cottura).
+  class: proteina
+- id: ING-DICT-0852
+  labels_en: channa dal
+  labels_it: channa dal
+  aliases:
+  - yellow split chickpeas
+  definition: Standardizzato da dizionario (book, key=dried yellow split chickpeas
+    (channa dal), sorted).
+  class: legume
+- id: ING-DICT-0853
+  labels_en: egg white
+  labels_it: egg white
+  aliases:
+  - egg whites
+  definition: Standardizzato da dizionario (book, key=egg whites (3⁄4 cup/180 ml)).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0854
+  labels_en: egg yolk
+  labels_it: egg yolk
+  aliases:
+  - egg yolks
+  definition: Standardizzato da dizionario (book, key=egg yolks (1⁄3 cup/80 ml)).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0855
+  labels_en: eggplant
+  labels_it: eggplant
+  aliases:
+  - aubergine
+  definition: Standardizzato da dizionario (book, key=eggplants (aubergines)).
+  class: verdura
+- id: ING-DICT-0856
+  labels_en: egg
+  labels_it: egg
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=eggs, lightly beaten).
+  class: uovo
+  allergen_tags:
+  - eggs
+- id: ING-DICT-0857
+  labels_en: chicken liver
+  labels_it: chicken liver
+  aliases:
+  - chicken livers
+  definition: Standardizzato da dizionario (book, key=fegatini di chicken).
+  class: proteina
+- id: ING-DICT-0858
+  labels_en: onion
+  labels_it: onion
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=finely chopped onion).
+  class: verdura
+- id: ING-DICT-0859
+  labels_en: fennel
+  labels_it: fennel
+  aliases:
+  - finocchio
+  definition: Standardizzato da dizionario (book, key=finocchi).
+  class: verdura
+- id: ING-DICT-0860
+  labels_en: garlic clove
+  labels_it: garlic clove
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic cloves, chopped).
+  class: verdura
+- id: ING-DICT-0861
+  labels_en: garlic clove
+  labels_it: garlic clove
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic cloves, finely chopped).
+  class: verdura
+- id: ING-DICT-0862
+  labels_en: garlic clove
+  labels_it: garlic clove
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=garlic cloves, grated).
+  class: verdura
+- id: ING-DICT-0863
+  labels_en: red mullet
+  labels_it: red mullet
+  aliases:
+  - large red mullets
+  definition: Standardizzato da dizionario (book, key=grosse triglie).
+  class: proteina
+- id: ING-DICT-0864
+  labels_en: black cardamom
+  labels_it: black cardamom
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ground black cardamom seeds).
+  class: spezia
+- id: ING-DICT-0865
+  labels_en: cumin
+  labels_it: cumin
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ground cumin).
+  class: spezia
+- id: ING-DICT-0866
+  labels_en: green cardamom
+  labels_it: green cardamom
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ground green cardamom seeds).
+  class: spezia
+- id: ING-DICT-0867
+  labels_en: lettuce leaf
+  labels_it: lettuce leaf
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=large lettuce leaves).
+  class: verdura
+- id: ING-DICT-0868
+  labels_en: scampi
+  labels_it: scampi
+  aliases:
+  - langoustine
+  definition: Standardizzato da dizionario (book, key=large scampi, shelled).
+  class: proteina
+  allergen_tags:
+  - crustaceans
+- id: ING-DICT-0869
+  labels_en: green mango
+  labels_it: green mango
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=large unripe green mangoes (about
+    3⁄4 pound each), washed and wiped dry).
+  class: frutta
+- id: ING-DICT-0870
+  labels_en: mascarpone
+  labels_it: mascarpone
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=mascarpone).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0871
+  labels_en: eggplant
+  labels_it: eggplant
+  aliases:
+  - round eggplant
+  definition: Standardizzato da dizionario (book, key=melanzane tonde).
+  class: verdura
+- id: ING-DICT-0872
+  labels_en: yogurt
+  labels_it: yogurt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=non-fat plain yogurt).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0873
+  labels_en: non-fat plain yogurt
+  labels_it: non-fat plain yogurt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=non-fat plain yogurt, whisked
+    until the desired smoothness is achieved).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0874
+  labels_en: olive oil
+  labels_it: olive oil
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=olive oil, plus extra for drizzling).
+  class: grasso
+- id: ING-DICT-0875
+  labels_en: parsley
+  labels_it: parsley
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=parsley, fried in deep fat [see
+    no. 276]).
+  class: erba
+- id: ING-DICT-0876
+  labels_en: potato
+  labels_it: potato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=patata bollita).
+  class: verdura
+- id: ING-DICT-0877
+  labels_en: eel
+  labels_it: eel
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=pounds eels).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0878
+  labels_en: sardine
+  labels_it: sardine
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=pounds fresh sardines, cleaned).
+  class: proteina
+  allergen_tags:
+  - fish
+- id: ING-DICT-0879
+  labels_en: veal
+  labels_it: veal
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=pounds veal (breast, shoulder,
+    or neck), cut into).
+  class: proteina
+- id: ING-DICT-0880
+  labels_en: prawn tail
+  labels_it: prawn tail
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=prawn tails).
+  class: proteina
+  allergen_tags:
+  - crustaceans
+- id: ING-DICT-0881
+  labels_en: quick-cooking tapioca
+  labels_it: quick-cooking tapioca
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=quick-cooking tapioca).
+  class: amido
+- id: ING-DICT-0882
+  labels_en: rosemary sprig
+  labels_it: rosemary sprig
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=rosemary sprigs).
+  class: erba
+- id: ING-DICT-0883
+  labels_en: beef fillet
+  labels_it: beef fillet
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=slices fillet of beef, cut 3/,
+    to 1 inch thick).
+  class: proteina
+- id: ING-DICT-0884
+  labels_en: ground cloves
+  labels_it: ground cloves
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon (1 g) ground cloves).
+  class: spezia
+- id: ING-DICT-0885
+  labels_en: fennel seed
+  labels_it: fennel seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon fennel seeds).
+  class: spezia
+- id: ING-DICT-0886
+  labels_en: ground cinnamon
+  labels_it: ground cinnamon
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon ground cinnamon).
+  class: spezia
+- id: ING-DICT-0887
+  labels_en: ground cloves
+  labels_it: ground cloves
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon ground cloves).
+  class: spezia
+- id: ING-DICT-0888
+  labels_en: ground cumin
+  labels_it: ground cumin
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon ground cumin).
+  class: spezia
+- id: ING-DICT-0889
+  labels_en: unflavored gelatin powder
+  labels_it: unflavored gelatin powder
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoons (12 g) unflavored
+    gelatin powder).
+  class: altro
+- id: ING-DICT-0890
+  labels_en: cumin seed
+  labels_it: cumin seed
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoons cumin seeds).
+  class: spezia
+- id: ING-DICT-0891
+  labels_en: tomato
+  labels_it: tomato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tomatoes, chopped).
+  class: verdura
+- id: ING-DICT-0892
+  labels_en: saffron thread
+  labels_it: saffron thread
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tsp saffron threads).
+  class: spezia
+- id: ING-DICT-0893
+  labels_en: salt
+  labels_it: salt
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tsp salt).
+  class: condimento
+- id: ING-DICT-0894
+  labels_en: sweet paprika
+  labels_it: sweet paprika
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=tsp sweet paprika).
+  class: spezia
+- id: ING-DICT-0895
+  labels_en: vinegar
+  labels_it: vinegar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=vinegar).
+  class: condimento
+- id: ING-DICT-0896
+  labels_en: butter
+  labels_it: butter
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(1 02/25 g) butter).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0897
+  labels_en: water
+  labels_it: water
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(120 ml) cold water).
+  class: liquido
+- id: ING-DICT-0898
+  labels_en: simple syrup
+  labels_it: simple syrup
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(120 ml) simple syrup).
+  class: dolcificante
+- id: ING-DICT-0899
+  labels_en: butter
+  labels_it: butter
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(2 0z/50 g) butter).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0900
+  labels_en: water
+  labels_it: water
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(240 ml) water).
+  class: liquido
+- id: ING-DICT-0901
+  labels_en: water
+  labels_it: water
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=(80 ml) cold water).
+  class: liquido
+- id: ING-DICT-0902
+  labels_en: phyllo pastry
+  labels_it: phyllo pastry
+  aliases:
+  - filo pastry
+  definition: Standardizzato da dizionario (book, key=02/250 g phyllo (filo) pastry).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0903
+  labels_en: chickpea
+  labels_it: chickpea
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=0z/400 g canned chickpeas, drained
+    and rinsed).
+  class: legume
+- id: ING-DICT-0904
+  labels_en: tomato
+  labels_it: tomato
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=0z/400 g canned chopped tomatoes).
+  class: verdura
+- id: ING-DICT-0905
+  labels_en: octopus
+  labels_it: octopus
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=1-pound octopuses).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0906
+  labels_en: duck
+  labels_it: duck
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=anatra pronta per la cottura).
+  class: proteina
+- id: ING-DICT-0907
+  labels_en: black cardamom pod
+  labels_it: black cardamom pod
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=black cardamom pods, crushed
+    lightly to break the skin).
+  class: spezia
+- id: ING-DICT-0908
+  labels_en: cardamom pod
+  labels_it: cardamom pod
+  aliases:
+  - cardamom pods
+  definition: Standardizzato da dizionario (book, key=cardamom pods, lightly crushed).
+  class: spezia
+- id: ING-DICT-0909
+  labels_en: cardoon
+  labels_it: cardoon
+  aliases:
+  - cardoons
+  definition: Standardizzato da dizionario (book, key=cardoons, trimmed, cooked as
+    described).
+  class: verdura
+- id: ING-DICT-0910
+  labels_en: carnaroli rice
+  labels_it: carnaroli rice
+  aliases:
+  - carnaroli
+  definition: Standardizzato da dizionario (book, key=carnaroli rice).
+  class: cereale
+- id: ING-DICT-0911
+  labels_en: chickpea flour
+  labels_it: chickpea flour
+  aliases:
+  - gram flour
+  - besan
+  definition: Standardizzato da dizionario (book, key=chickpea (gram) flour).
+  class: amido
+- id: ING-DICT-0912
+  labels_en: chive
+  labels_it: chive
+  aliases:
+  - chives
+  definition: Standardizzato da dizionario (book, key=chives).
+  class: erba
+- id: ING-DICT-0913
+  labels_en: butter
+  labels_it: butter
+  aliases:
+  - clarified butter
+  definition: Standardizzato da dizionario (book, key=clarified butter [no. 102]).
+  class: grasso
+  allergen_tags:
+  - milk
+- id: ING-DICT-0914
+  labels_en: lamb chop
+  labels_it: lamb chop
+  aliases:
+  - costolette di agnello
+  definition: Standardizzato da dizionario (book, key=costolette di agnello).
+  class: proteina
+- id: ING-DICT-0915
+  labels_en: cinnamon powder
+  labels_it: cinnamon powder
+  aliases:
+  - cannella in polvere
+  definition: Standardizzato da dizionario (book, key=cucchiaino di cannella in polvere).
+  class: spezia
+- id: ING-DICT-0916
+  labels_en: fennel seed
+  labels_it: fennel seed
+  aliases:
+  - semi di finocchio
+  definition: Standardizzato da dizionario (book, key=cucchiaino di semi di finocchio).
+  class: spezia
+- id: ING-DICT-0917
+  labels_en: baking powder
+  labels_it: baking powder
+  aliases:
+  - baking powder
+  definition: Standardizzato da dizionario (book, key=di baking powder in polvere).
+  class: altro
+- id: ING-DICT-0918
+  labels_en: lemon zest
+  labels_it: lemon zest
+  aliases:
+  - lemon peel
+  - buccia di limone
+  definition: Standardizzato da dizionario (book, key=di buccia di lemon grattugiata).
+  class: frutta
+- id: ING-DICT-0919
+  labels_en: squid
+  labels_it: squid
+  aliases:
+  - calamari
+  definition: Standardizzato da dizionario (book, key=di calamari).
+  class: proteina
+  allergen_tags:
+  - molluscs
+- id: ING-DICT-0920
+  labels_en: minced beef
+  labels_it: minced beef
+  aliases:
+  - ground beef
+  - carne di manzo tritata
+  definition: Standardizzato da dizionario (book, key=di carne di manzo tritata).
+  class: proteina
+- id: ING-DICT-0921
+  labels_en: minced veal
+  labels_it: minced veal
+  aliases:
+  - ground veal
+  - carne di vitello tritata
+  definition: Standardizzato da dizionario (book, key=di carne di vitello tritata).
+  class: proteina
+- id: ING-DICT-0922
+  labels_en: minced beef
+  labels_it: minced beef
+  aliases:
+  - ground beef
+  - carne trita di manzo
+  definition: Standardizzato da dizionario (book, key=di carne trita di manzo).
+  class: proteina
+- id: ING-DICT-0923
+  labels_en: minced veal
+  labels_it: minced veal
+  aliases:
+  - ground veal
+  - carne trita di vitello
+  definition: Standardizzato da dizionario (book, key=di carne trita di vitello).
+  class: proteina
+- id: ING-DICT-0924
+  labels_en: broccoli rabe
+  labels_it: broccoli rabe
+  aliases:
+  - rapini
+  - cime di rapa
+  definition: Standardizzato da dizionario (book, key=di cime di rapa).
+  class: verdura
+- id: ING-DICT-0925
+  labels_en: fresh shelled beans
+  labels_it: fresh shelled beans
+  aliases:
+  - fagioli freschi sgranati
+  definition: Standardizzato da dizionario (book, key=di fagioli freschi sgranati).
+  class: legume
+- id: ING-DICT-0926
+  labels_en: dried fava bean
+  labels_it: dried fava bean
+  aliases:
+  - fava beans
+  - broad beans
+  definition: Standardizzato da dizionario (book, key=di fava beans secche).
+  class: legume
+- id: ING-DICT-0927
+  labels_en: potato starch
+  labels_it: potato starch
+  aliases:
+  - potato flour
+  - fecola di patate
+  definition: Standardizzato da dizionario (book, key=di fecola di patate).
+  class: amido
+- id: ING-DICT-0928
+  labels_en: veal liver
+  labels_it: veal liver
+  aliases:
+  - calf liver
+  - fegato di vitello
+  definition: Standardizzato da dizionario (book, key=di fegato di vitello).
+  class: proteina
+- id: ING-DICT-0929
+  labels_en: veal round
+  labels_it: veal round
+  aliases:
+  - fesa di vitello
+  definition: Standardizzato da dizionario (book, key=di fesa di vitello).
+  class: proteina
+- id: ING-DICT-0930
+  labels_en: fresh mushroom
+  labels_it: fresh mushroom
+  aliases:
+  - funghi freschi
+  definition: Standardizzato da dizionario (book, key=di funghi freschi).
+  class: fungo
+- id: ING-DICT-0931
+  labels_en: walnut kernel
+  labels_it: walnut kernel
+  aliases:
+  - walnut halves
+  - gherigli di noce
+  definition: Standardizzato da dizionario (book, key=di gherigli di noce).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0932
+  labels_en: luganega sausage
+  labels_it: luganega sausage
+  aliases:
+  - luganega
+  definition: Standardizzato da dizionario (book, key=di luganega).
+  class: proteina
+- id: ING-DICT-0933
+  labels_en: blanched almond
+  labels_it: blanched almond
+  aliases:
+  - mandorle sgusciate e sbucciate
+  definition: Standardizzato da dizionario (book, key=di mandorle sgusciate e sbucciate).
+  class: frutta_secca
+  allergen_tags:
+  - nuts
+- id: ING-DICT-0934
+  labels_en: sliced pancetta
+  labels_it: sliced pancetta
+  aliases:
+  - pancetta affettata
+  definition: Standardizzato da dizionario (book, key=di pancetta affettata).
+  class: proteina
+- id: ING-DICT-0935
+  labels_en: bread
+  labels_it: bread
+  aliases:
+  - pane
+  definition: Standardizzato da dizionario (book, key=di pane).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0936
+  labels_en: egg pasta
+  labels_it: egg pasta
+  aliases:
+  - pasta all'uovo
+  definition: Standardizzato da dizionario (book, key=di pasta all'egg).
+  class: cereale
+  allergen_tags:
+  - eggs
+  - gluten
+- id: ING-DICT-0937
+  labels_en: pesto
+  labels_it: pesto
+  aliases:
+  - pesto sauce
+  definition: Standardizzato da dizionario (book, key=di pesto (vedi preparazioni
+    di base)).
+  class: condimento
+  allergen_tags:
+  - nuts
+  - milk
+- id: ING-DICT-0938
+  labels_en: chicken breast
+  labels_it: chicken breast
+  aliases:
+  - petto di pollo
+  definition: Standardizzato da dizionario (book, key=di petto di chicken).
+  class: proteina
+- id: ING-DICT-0939
+  labels_en: boiled chicken breast
+  labels_it: boiled chicken breast
+  aliases:
+  - petto di pollo lessato
+  definition: Standardizzato da dizionario (book, key=di petto di chicken lessato).
+  class: proteina
+- id: ING-DICT-0940
+  labels_en: lamb pieces
+  labels_it: lamb pieces
+  aliases:
+  - polpa di agnello a pezzi
+  definition: Standardizzato da dizionario (book, key=di polpa di agnello tagliata
+    a pezzi).
+  class: proteina
+- id: ING-DICT-0941
+  labels_en: beef cubes
+  labels_it: beef cubes
+  aliases:
+  - polpa di manzo a dadini
+  definition: Standardizzato da dizionario (book, key=di polpa di manzo tagliata a
+    dadi).
+  class: proteina
+- id: ING-DICT-0942
+  labels_en: cured ham
+  labels_it: cured ham
+  aliases:
+  - prosciutto crudo misto
+  definition: Standardizzato da dizionario (book, key=di prosciutto crudo misto).
+  class: proteina
+- id: ING-DICT-0943
+  labels_en: asparagus tips
+  labels_it: asparagus tips
+  aliases:
+  - punte di asparagi
+  definition: Standardizzato da dizionario (book, key=di punte di asparagus).
+  class: verdura
+- id: ING-DICT-0944
+  labels_en: salami
+  labels_it: salami
+  aliases:
+  - salame
+  definition: Standardizzato da dizionario (book, key=di salame).
+  class: proteina
+- id: ING-DICT-0945
+  labels_en: sausage
+  labels_it: sausage
+  aliases:
+  - salsicce
+  definition: Standardizzato da dizionario (book, key=di salsicce).
+  class: proteina
+- id: ING-DICT-0946
+  labels_en: semolina
+  labels_it: semolina
+  aliases:
+  - semolino
+  definition: Standardizzato da dizionario (book, key=di semolino).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0947
+  labels_en: speck
+  labels_it: speck
+  aliases:
+  - speck ham
+  definition: Standardizzato da dizionario (book, key=di speck).
+  class: proteina
+- id: ING-DICT-0948
+  labels_en: vanilla sugar
+  labels_it: vanilla sugar
+  aliases:
+  - vanillated sugar
+  - zucchero vanigliato
+  definition: Standardizzato da dizionario (book, key=di sugar vanigliato).
+  class: dolcificante
+- id: ING-DICT-0949
+  labels_en: buckwheat flour
+  labels_it: buckwheat flour
+  aliases:
+  - grano saraceno flour
+  definition: Standardizzato da dizionario (book, key=di wheat flour di grano saraceno).
+  class: cereale
+- id: ING-DICT-0950
+  labels_en: ziti
+  labels_it: ziti
+  aliases:
+  - zite
+  definition: Standardizzato da dizionario (book, key=di zite).
+  class: cereale
+  allergen_tags:
+  - gluten

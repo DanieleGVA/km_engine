@@ -14,7 +14,7 @@ def test_ricette_pack_loads(pack) -> None:
     assert pack.pack.name == "ricette"
     assert pack.pack.language == "it"
     assert pack.pack.canonical_language == "en"
-    assert pack.pack.version == "1.0.0"
+    assert pack.pack.version.startswith("1.0.")  # bump a ogni publish dizionario
     assert pack.template
     assert len(pack.glossary_entries()) >= 15
     assert len(pack.units) >= 10
