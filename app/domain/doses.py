@@ -14,6 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from decimal import ROUND_HALF_UP, Decimal
 
+from app.domain.errors import ParseError
 from app.domain.pack import DomainPackBundle
 from app.domain.verify import parse_translated_md
 
@@ -90,7 +91,12 @@ def standardize_doses(
     ``## Ingredients`` / ``## Method``, righe ``- qty unit item``).
     """
     parsed = parse_translated_md(canonical_md, known_units=pack.known_units())
-    servings = int(parsed.frontmatter.get("servings", 4) or 4)
+    servings = parsed.frontmatter.get("servings")
+    if not isinstance(servings, int) or servings <= 0:
+        raise ParseError(
+            "frontmatter 'servings' must be a positive integer for dose scaling "
+            f"(got {servings!r}); the yield is never invented"
+        )
     factor = Decimal(servings_target) / Decimal(servings)
     log: list[DoseLogEntry] = []
 

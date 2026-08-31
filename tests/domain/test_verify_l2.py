@@ -69,3 +69,34 @@ def test_l2_rewritten_steps_are_localized_and_escalated(pack) -> None:
     escalations = [issue for issue in report.escalations if issue.code == "ESCALATE_L3"]
     assert escalations
     assert all(issue.section == "steps" for issue in escalations)
+
+
+def test_overlap_bidirectional_penalizes_additions() -> None:
+    """Fix: il denominatore min() era cieco alle aggiunte (overlap 1.0 con
+    contenuto aggiunto). Il contenimento bidirezionale penalizza sia le
+    omissioni sia le aggiunte."""
+    from app.domain.verify import _overlap
+
+    # aggiunta pura: tutto il sorgente e' presente, ma la traduzione aggiunge
+    assert _overlap(["a", "b"], ["a", "b", "c"]) < 1.0
+    # omissione: la traduzione perde contenuto
+    assert _overlap(["a", "b", "c"], ["a", "b"]) < 1.0
+    # identico
+    assert _overlap(["a", "b"], ["a", "b"]) == 1.0
+    # insiemi disgiunti
+    assert _overlap(["a"], ["b"]) == 0.0
+
+
+def test_l2_pure_addition_is_penalized(pack) -> None:
+    """Una traduzione che AGGIUNGE un passo non puo' passare con overlap 1.0."""
+    corpus = read_corpus()
+    source = parse_source_md(
+        corpus["ric-101-asparagi-burro.md"], known_units=pack.known_units()
+    )
+    added_steps = list(source.steps) + [
+        "Aggiungere un passo completamente nuovo non presente nel sorgente."
+    ]
+    translated = build_translated_parsed(pack, source, steps=added_steps)
+    report = verify_l2(source, translated, pack=pack)
+    steps = {s.section: s for s in report.sections}
+    assert steps["steps"].overlap < 1.0

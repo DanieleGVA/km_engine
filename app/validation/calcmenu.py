@@ -117,19 +117,50 @@ def load_canonical_vocab() -> set[str]:
     return set()
 
 
+def _run_llm_coro(coro):
+    """Esegue una coroutine LLM in modo sicuro da contesto sync E async.
+
+    ``asyncio.run`` fallisce con RuntimeError se c'e' gia' un event loop
+    attivo (es. il workflow di validazione e' async): l'LLM non rispondeva
+    mai. Con un loop attivo la coroutine viene eseguita in un thread
+    separato con il proprio loop.
+    """
+    import asyncio
+    import threading
+
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        return asyncio.run(coro)
+    box: dict[str, object] = {}
+
+    def _runner() -> None:
+        box["result"] = asyncio.run(coro)
+
+    t = threading.Thread(target=_runner, daemon=True)
+    t.start()
+    t.join()
+    return box.get("result")
+
+
 class CalcMenuNormalizer:
     """Normalizza nomi ingredienti CalcMenu verso il vocabolario canonico.
 
     Deterministico prima; LLM nei casi dubbi (nessun match confidente).
     Cache su file JSON: ogni nome unico chiesto all'LLM una sola volta.
+
+    Regola (I3-b): non si forza MAI una mappatura quando il vocabolario non
+    contiene il termine giusto. Un nome non risolto resta identity e viene
+    raccolto in ``proposals`` (coda proposte glossario), mai mappato a un
+    termine sbagliato ("trout white fillet" -> "sole fillets" e' vietato).
     """
 
     def __init__(self, canonical_labels: set[str] | None = None, llm=None, cache_path: pathlib.Path | None = None):
         self.canonical_labels = canonical_labels if canonical_labels is not None else load_canonical_vocab()
-        self.canonical_labels = canonical_labels
         self.llm = llm
         self.cache_path = cache_path
-        self.cache: dict[str, str] = {}
+        self.cache: dict[str, str | None] = {}
+        self.proposals: set[str] = set()
         if cache_path and cache_path.exists():
             try:
                 self.cache = json.loads(cache_path.read_text())
@@ -137,22 +168,34 @@ class CalcMenuNormalizer:
                 self.cache = {}
 
     def normalize(self, name: str) -> tuple[str, str]:
-        """Ritorna (termine canonico, metodo: 'deterministic'|'llm'|'identity')."""
+        """Ritorna (termine canonico, metodo: 'deterministic'|'llm'|'identity').
+
+        Mai un termine forzato: se il vocabolario non contiene il termine
+        giusto, ritorna il nome normalizzato (identity) e lo registra in
+        ``proposals`` per la coda proposte glossario.
+        """
         n = normalize_deterministic(name)
         if not n:
             return name.lower(), "identity"
         hit = match_glossary(n, self.canonical_labels)
         if hit:
             return hit, "deterministic"
-        # fallback LLM (con cache)
+        # fallback LLM (con cache; None in cache = gia' dichiarato non risolvibile)
         if name in self.cache:
-            return self.cache[name], "llm-cache"
+            mapped = self.cache[name]
+            if mapped is None:
+                self.proposals.add(name)
+                return n, "identity"
+            return mapped, "llm-cache"
         if self.llm is not None:
             mapped = self._ask_llm(name, n)
-            if mapped:
-                self.cache[name] = mapped
-                self._save_cache()
+            self.cache[name] = mapped
+            self._save_cache()
+            if mapped is not None:
                 return mapped, "llm"
+            self.proposals.add(name)
+            return n, "identity"
+        self.proposals.add(name)
         return n, "identity"
 
     def _ask_llm(self, original: str, normalized: str) -> str | None:
@@ -163,17 +206,27 @@ class CalcMenuNormalizer:
             f"Industrial name: {original!r} (normalized: {normalized!r})\n"
             "Choose ONLY from this vocabulary (return exactly one term, no explanation):\n"
             f"{vocab}\n"
-            "If nothing fits, return the closest term anyway."
+            "Rules:\n"
+            "- If NO term in the vocabulary is a good match, reply with exactly: NO_MATCH\n"
+            "- Never invent a term and never change the ingredient species "
+            "(trout is not sole, peas are not fava beans, potato is not beetroot, "
+            "capers are not salt).\n"
+            "- A generic term (e.g. 'cheese') is acceptable only when the name "
+            "itself is generic."
         )
         try:
-            import asyncio
-            text = asyncio.run(self.llm.translate(prompt, source_lang="en", target_lang="en"))
+            text = _run_llm_coro(
+                self.llm.translate(prompt, source_lang="en", target_lang="en")
+            )
+            if text is None:
+                return None
             text = text.strip().strip("\"'.,").lower()
-            # valida: deve essere nel vocabolario o molto vicino
+            if "no_match" in text:
+                return None
             if text in self.canonical_labels:
                 return text
             hit = match_glossary(text, self.canonical_labels)
-            return hit or text
+            return hit  # None se non nel vocabolario: mai forzare
         except Exception:
             return None
 

@@ -492,11 +492,18 @@ def _section_tokens(text: str, term_map: list[tuple[str, str]]) -> list[str]:
 
 
 def _overlap(left: list[str], right: list[str]) -> float:
+    """Token overlap with bidirectional containment.
+
+    The old denominator ``min(len(left), len(right))`` was blind to additions:
+    a translation that adds content not present in the source could still score
+    1.0. Containment in both directions penalises both omissions and additions.
+    """
     left_set = set(left)
     right_set = set(right)
     if not left_set or not right_set:
         return 0.0
-    return len(left_set & right_set) / min(len(left_set), len(right_set))
+    inter = len(left_set & right_set)
+    return min(inter / len(left_set), inter / len(right_set))
 
 
 def _section_texts(parsed: ParsedDoc) -> dict[str, str]:

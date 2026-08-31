@@ -208,6 +208,12 @@ async def run_validation_workflow(
     (out_dir / "validation_report.json").write_text(
         json.dumps(report.to_dict(), ensure_ascii=False, indent=1), encoding="utf-8"
     )
+    # nomi ingredienti non risolti dal normalizzatore -> coda proposte glossario
+    if normalizer.proposals:
+        (out_dir / "glossary_proposals.json").write_text(
+            json.dumps(sorted(normalizer.proposals), ensure_ascii=False, indent=1),
+            encoding="utf-8",
+        )
     return report
 
 
