@@ -323,6 +323,20 @@ class DomainPackBundle:
         sole, trattate come ingrediente dal parser (es. "- 4 eggs")."""
         return {rule.from_unit for rule in self.units if rule.countable}
 
+    def msc_mapping(self) -> dict[str, str]:
+        """Mappa item code MSC -> termine canonico (msc_mapping.yaml, passo 7).
+
+        Assente o vuota => comportamento identico a prima (retro-compatibile).
+        """
+        path = self.root / "msc_mapping.yaml"
+        if not path.exists():
+            return {}
+        try:
+            raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        except yaml.YAMLError:
+            return {}
+        return {str(k): str(v) for k, v in raw.items()}
+
     def glossary_entries(self) -> list[GlossaryEntry]:
         entries: list[GlossaryEntry] = []
         for name in ("tecnica", "ingredienti", "stati"):

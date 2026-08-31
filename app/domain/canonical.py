@@ -302,6 +302,7 @@ def canonicalize(
         frontmatter["difficulty"] = _fm_str(parsed.frontmatter["difficulty"])
 
     term_map = _build_term_map(pack)
+    msc_mapping = pack.msc_mapping()
     ingredients: list[tuple[str, str | None, str]] = []
     unresolved: list[str] = []
     seen_unresolved: set[str] = set()
@@ -317,14 +318,21 @@ def canonicalize(
 
         qty_text = _format_decimal(qty)
         item = ingredient.item
-        lookup = _strip_item_connectors(item)
-        resolved = term_map.get(lookup.casefold())
-        if resolved is None and unit is not None and unit in countable_units:
-            # "2 egg whites" -> unit=egg, item=whites: prova "egg whites"
-            resolved = term_map.get(f"{unit} {lookup}".casefold())
-            if resolved is not None:
-                item = resolved[0]
-                unit = None  # il nome contiene gia' il contabile
+        resolved = None
+        if ingredient.code and ingredient.code in msc_mapping:
+            # code-first (passo 7): l'identita' (item code) prevale sulla
+            # stringa; il canon-log registra MAP-<code>@versione
+            item = msc_mapping[ingredient.code]
+            resolved = (item, "MAP")
+        else:
+            lookup = _strip_item_connectors(item)
+            resolved = term_map.get(lookup.casefold())
+            if resolved is None and unit is not None and unit in countable_units:
+                # "2 egg whites" -> unit=egg, item=whites: prova "egg whites"
+                resolved = term_map.get(f"{unit} {lookup}".casefold())
+                if resolved is not None:
+                    item = resolved[0]
+                    unit = None  # il nome contiene gia' il contabile
         if resolved is not None:
             item = resolved[0]
         elif lookup not in seen_unresolved:
@@ -480,6 +488,9 @@ def generate_canon_log(
 
         if before_ing.item != after_ing.item:
             rule_id = _glossary_id_for_label(pack, after_ing.item)
+            if before_ing.code and before_ing.code in pack.msc_mapping():
+                # code-first (passo 7): rule_id = MAP-<code>@versione
+                rule_id = f"MAP-{before_ing.code}@{pack.pack.version}"
             entries.append(
                 CanonLogEntry(
                     document_id,
