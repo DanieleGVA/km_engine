@@ -42,8 +42,30 @@ class OntologyRef(BaseModel):
     uri: str
 
 
+# Enum chiuso delle classi ingrediente (passo 2 PROGRAMMA-UNICO): usato dal
+# dizionario, da plausibilita.yaml e dal giudice di canone (Fase 1).
+INGREDIENT_CLASSES = {
+    "proteina", "amido", "verdura", "frutta", "latticino", "grasso",
+    "condimento", "spezia", "erba", "liquido", "dolcificante", "legume",
+    "cereale", "uovo", "fungo", "frutta_secca", "bevanda", "altro",
+}
+
+# Allergeni EU-FIC (Reg. 1169/2011, 14 categorie).
+EU_FIC_ALLERGENS = {
+    "gluten", "crustaceans", "eggs", "fish", "peanuts", "soy", "milk",
+    "nuts", "celery", "mustard", "sesame", "sulphites", "lupin", "molluscs",
+}
+
+
 class GlossaryEntry(BaseModel):
-    """One canonical term in a glossary."""
+    """One canonical term in a glossary.
+
+    Campi estesi (passo 2, tutti opzionali e retro-compatibili): ``class``
+    (enum chiuso), ``allergen_tags`` (EU-FIC 14), ``unit_weight_g``,
+    ``countable_unit`` + ``count_policy`` (integer|exact) per i contabili,
+    ``density_g_per_ml`` per i liquidi, ``is_food``, ``confidence``,
+    ``ambiguous``.
+    """
 
     id: str
     labels_en: str
@@ -51,6 +73,15 @@ class GlossaryEntry(BaseModel):
     aliases: list[str] = Field(default_factory=list)
     definition: str = ""
     ontology_uri: str | None = None
+    class_: str | None = Field(default=None, alias="class")
+    allergen_tags: list[str] = Field(default_factory=list)
+    unit_weight_g: float | None = None
+    countable_unit: str | None = None
+    count_policy: str | None = None
+    density_g_per_ml: float | None = None
+    is_food: bool = True
+    confidence: str | None = None
+    ambiguous: bool = False
 
     @field_validator("id", "labels_en", "labels_it")
     @classmethod
@@ -59,6 +90,46 @@ class GlossaryEntry(BaseModel):
         if not value:
             raise ValueError("must not be empty")
         return value
+
+    @field_validator("class_")
+    @classmethod
+    def _class_in_enum(cls, value: str | None) -> str | None:
+        if value is not None and value not in INGREDIENT_CLASSES:
+            raise ValueError(
+                f"class must be one of {sorted(INGREDIENT_CLASSES)}, got {value!r}"
+            )
+        return value
+
+    @field_validator("allergen_tags")
+    @classmethod
+    def _allergens_valid(cls, value: list[str]) -> list[str]:
+        unknown = set(value) - EU_FIC_ALLERGENS
+        if unknown:
+            raise ValueError(
+                f"allergen_tags must be EU-FIC: unknown {sorted(unknown)}"
+            )
+        return value
+
+    @field_validator("count_policy")
+    @classmethod
+    def _count_policy(cls, value: str | None) -> str | None:
+        if value is not None and value not in ("integer", "exact"):
+            raise ValueError("count_policy must be 'integer' or 'exact'")
+        return value
+
+    @model_validator(mode="after")
+    def _countable_consistency(self) -> GlossaryEntry:
+        # un contabile senza peso o senza policy e' un errore di schema
+        if self.countable_unit is not None:
+            if self.unit_weight_g is None:
+                raise ValueError(
+                    f"countable_unit {self.countable_unit!r} requires unit_weight_g"
+                )
+            if self.count_policy is None:
+                raise ValueError(
+                    f"countable_unit {self.countable_unit!r} requires count_policy"
+                )
+        return self
 
 
 class Glossary(BaseModel):
@@ -101,7 +172,12 @@ class Glossaries(BaseModel):
 
 
 class UnitRule(BaseModel):
-    """A deterministic unit conversion/rename rule."""
+    """A deterministic unit conversion/rename rule.
+
+    ``countable``: True per le unita' di conteggio (identita', factor 1.0):
+    il parser le riconosce come unita' ma, quando il token compare da solo
+    (es. "- 4 eggs"), lo tratta come ingrediente, non come unita'.
+    """
 
     rule_id: str
     from_unit: str
@@ -109,6 +185,7 @@ class UnitRule(BaseModel):
     factor: float
     rounding: int | None = None
     note: str | None = None
+    countable: bool = False
 
     @field_validator("rule_id", "from_unit", "to_unit")
     @classmethod
@@ -240,6 +317,11 @@ class DomainPackBundle:
             if plural:
                 units.add(plural)
         return units
+
+    def countable_units(self) -> set[str]:
+        """Unita' di conteggio (identita'): riconosciute come unita' ma, da
+        sole, trattate come ingrediente dal parser (es. "- 4 eggs")."""
+        return {rule.from_unit for rule in self.units if rule.countable}
 
     def glossary_entries(self) -> list[GlossaryEntry]:
         entries: list[GlossaryEntry] = []

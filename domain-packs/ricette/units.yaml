@@ -97,3 +97,150 @@
   to_unit: thread
   factor: 1.0
   rounding: null
+
+# ---------------------------------------------------------------------------
+# Passo 2 PROGRAMMA-UNICO: unita' di conteggio e forme industriali come regole
+# IDENTITA' (from=to, factor 1.0, pattern UNIT-G): entrano in known_units() per
+# il parser e canonicalize non le tocca. La conversione MKS (cl->ml, lt->l,
+# mg->g) avviene SOLO in standardize_doses (passo 8), mai qui.
+# Forme esatte per case: il parser del template e' case-sensitive.
+# ---------------------------------------------------------------------------
+- rule_id: UNIT-CL
+  from_unit: cl
+  to_unit: cl
+  factor: 1.0
+  rounding: null
+  note: centilitro - identita' (conversione MKS in standardize_doses)
+- rule_id: UNIT-LT
+  from_unit: lt
+  to_unit: lt
+  factor: 1.0
+  rounding: null
+  note: litro (forma industriale) - identita'
+- rule_id: UNIT-MG
+  from_unit: mg
+  to_unit: mg
+  factor: 1.0
+  rounding: null
+  note: milligrammo - identita' (conversione MKS in standardize_doses)
+- rule_id: UNIT-EA
+  countable: true
+  from_unit: ea
+  to_unit: ea
+  factor: 1.0
+  rounding: null
+  note: each - unita' di conteggio, mai convertita
+- rule_id: UNIT-PZ
+  countable: true
+  from_unit: pz
+  to_unit: pz
+  factor: 1.0
+  rounding: null
+  note: pezzi - unita' di conteggio, mai convertita
+- rule_id: UNIT-PC
+  countable: true
+  from_unit: pc
+  to_unit: pc
+  factor: 1.0
+  rounding: null
+  note: piece - unita' di conteggio, mai convertita
+- rule_id: UNIT-PCS
+  countable: true
+  from_unit: pcs
+  to_unit: pcs
+  factor: 1.0
+  rounding: null
+  note: pieces - unita' di conteggio, mai convertita
+- rule_id: UNIT-SERVING
+  countable: true
+  from_unit: serving
+  to_unit: serving
+  factor: 1.0
+  rounding: null
+  note: porzione - unita' di conteggio, mai convertita
+- rule_id: UNIT-SERVINGS
+  countable: true
+  from_unit: servings
+  to_unit: servings
+  factor: 1.0
+  rounding: null
+  note: porzioni - unita' di conteggio, mai convertita
+- rule_id: UNIT-PIECE
+  countable: true
+  from_unit: piece
+  to_unit: piece
+  factor: 1.0
+  rounding: null
+  note: unita' di conteggio, mai convertita
+- rule_id: UNIT-PIECES
+  countable: true
+  from_unit: pieces
+  to_unit: pieces
+  factor: 1.0
+  rounding: null
+  note: unita' di conteggio, mai convertita
+- rule_id: UNIT-EACH
+  countable: true
+  from_unit: each
+  to_unit: each
+  factor: 1.0
+  rounding: null
+  note: unita' di conteggio, mai convertita
+- rule_id: UNIT-UNIT
+  countable: true
+  from_unit: unit
+  to_unit: unit
+  factor: 1.0
+  rounding: null
+  note: unita' di conteggio, mai convertita
+- rule_id: UNIT-UNITS
+  countable: true
+  from_unit: units
+  to_unit: units
+  factor: 1.0
+  rounding: null
+  note: unita' di conteggio, mai convertita
+- rule_id: UNIT-EGG
+  countable: true
+  from_unit: egg
+  to_unit: egg
+  factor: 1.0
+  rounding: null
+  note: uovo - unita' di conteggio, mai convertita
+- rule_id: UNIT-EGGS
+  countable: true
+  from_unit: eggs
+  to_unit: eggs
+  factor: 1.0
+  rounding: null
+  note: uova - unita' di conteggio, mai convertita
+- rule_id: UNIT-TT
+  from_unit: TT
+  to_unit: TT
+  factor: 1.0
+  rounding: null
+  note: to taste (a piacere) - forma esatta per case
+- rule_id: UNIT-KG-UPPER
+  from_unit: KG
+  to_unit: KG
+  factor: 1.0
+  rounding: null
+  note: chilogrammo (forma esatta per case del corpus)
+- rule_id: UNIT-LT-UPPER
+  from_unit: LT
+  to_unit: LT
+  factor: 1.0
+  rounding: null
+  note: litro (forma esatta per case del corpus)
+- rule_id: UNIT-EA-UPPER
+  from_unit: EA
+  to_unit: EA
+  factor: 1.0
+  rounding: null
+  note: each (forma esatta per case del corpus)
+- rule_id: UNIT-PZ-UPPER
+  from_unit: PZ
+  to_unit: PZ
+  factor: 1.0
+  rounding: null
+  note: pezzi (forma esatta per case del corpus)

@@ -436,6 +436,7 @@ entries:
   aliases:
   - albumi
   - albume
+  - whites
   definition: Egg whites.
   ontology_uri: http://dbpedia.org/resource/Egg_white
 
@@ -697,6 +698,7 @@ entries:
   labels_it: tuorlo d'uovo
   aliases:
   - tuorlo
+  - yolk
   - tuorli d'uovo
   - tuorli
   - egg yolks

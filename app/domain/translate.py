@@ -91,7 +91,10 @@ async def translate_document(
     contain exactly the same multiset of content numbers as the source.
     """
     units = pack.known_units()
-    source = parse_source_md(source_md, known_units=units)
+    countable = pack.countable_units()
+    source = parse_source_md(
+        source_md, known_units=units, countable_units=countable
+    )
     source_numbers = extract_numbers(source_md)
 
     translation_input = build_translation_input(source)
@@ -111,7 +114,7 @@ async def translate_document(
         ) from exc
 
     title_en, ingredients_en, steps_en = parse_translated_body(
-        restored_body, known_units=units
+        restored_body, known_units=units, countable_units=countable
     )
     translated = ParsedDoc(
         frontmatter={

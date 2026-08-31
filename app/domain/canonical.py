@@ -275,9 +275,11 @@ def canonicalize(
     given and are never rewritten), then rewrite to the Appendix A shape.
     """
     units = _known_units(pack)
+    countable_units = pack.countable_units()
     parsed = parse_translated_md(
         translated_md, known_units=units,
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=countable_units,
     )
     document_id = _fm_str(parsed.frontmatter.get("id", ""))
 
@@ -323,6 +325,12 @@ def canonicalize(
             seen_unresolved.add(lookup)
             unresolved.append(lookup)
 
+        # unita' di conteggio che duplica il nome nell'item ("2 egg egg yolk"):
+        # l'unita' cade, il nome contiene gia' il contabile
+        if (unit is not None and unit in countable_units
+                and item.casefold().startswith(unit.casefold() + " ")):
+            unit = None
+
         suffix = render_ingredient_suffix(
             ingredient.code, ingredient.waste, ingredient.component
         )
@@ -338,7 +346,8 @@ def canonicalize(
 
     canonical_parsed = parse_translated_md(
         canonical_md, known_units=units,
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     return CanonicalDocument(
         canonical_md=canonical_md,
@@ -364,10 +373,12 @@ def generate_canon_log(
     translated = parse_translated_md(
         translated_md, known_units=units,
         optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     canonical = parse_translated_md(
         canonical_md, known_units=units,
         optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     document_id = _fm_str(
         canonical.frontmatter.get("id") or translated.frontmatter.get("id")
@@ -537,7 +548,8 @@ def verify_canon_log(
     units = _known_units(pack)
     parsed = parse_translated_md(
         translated_md, known_units=units,
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     frontmatter = {k: _fm_str(v) for k, v in parsed.frontmatter.items()}
     ingredients: list[dict[str, str | None]] = [

@@ -1,0 +1,33 @@
+# Regole di plausibilita' per classe per porzione (passo 2 PROGRAMMA-UNICO).
+# Usate dal gate dosi (passo 8) e da verify_intra (passo 9): i grammi
+# equivalenti per porzione fuori range falliscono per costruzione
+# (es. 220 KG di sale o 100 mg di timo).
+# Versionato e firmato dall'esperto di dominio (P5): valori seed da rivedere.
+per_portion_grams:
+  proteina: {min: 10, max: 400}
+  amido: {min: 10, max: 400}
+  verdura: {min: 10, max: 400}
+  frutta: {min: 10, max: 350}
+  latticino: {min: 5, max: 200}
+  grasso: {min: 1, max: 100}
+  condimento: {min: 0.1, max: 100}
+  spezia: {min: 0.01, max: 20}
+  erba: {min: 0.1, max: 30}
+  liquido: {min: 1, max: 500}
+  dolcificante: {min: 0.1, max: 100}
+  legume: {min: 10, max: 300}
+  cereale: {min: 10, max: 300}
+  uovo: {min: 5, max: 200}
+  fungo: {min: 5, max: 250}
+  frutta_secca: {min: 1, max: 100}
+  bevanda: {min: 1, max: 500}
+  altro: {min: 0.01, max: 500}
+
+# Regole trasversali (passo 9, verify_intra).
+rules:
+  # "0 KG SALT TABLE" = a piacere (non flaggato); "0 KG ONION" = anomalo
+  zero_qty_a_piacere_classes: [spezia, erba, condimento, dolcificante]
+  # unita' sospette per classe
+  suspicious_units:
+    mg: [proteina, amido, verdura, frutta, latticino, legume, cereale]
+    kg: [spezia, erba]

@@ -167,7 +167,10 @@ def _validate_frontmatter(
 
 
 def _parse_ingredient(
-    content: str, line_no: int, known_units: set[str] | None
+    content: str,
+    line_no: int,
+    known_units: set[str] | None,
+    countable_units: set[str] | None = None,
 ) -> IngredientLine:
     match = _INGREDIENT_RE.match(content)
     if not match:
@@ -182,12 +185,19 @@ def _parse_ingredient(
         raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
 
     units = known_units if known_units is not None else DEFAULT_KNOWN_UNITS
+    countable = countable_units if countable_units is not None else set()
     unit: str | None = None
     item = rest
-    first, sep, remainder = rest.partition(" ")
+    first, _sep, remainder = rest.partition(" ")
     if first in units:
-        unit = first
-        item = remainder.strip() if sep else ""
+        if remainder.strip():
+            unit = first
+            item = remainder.strip()
+        elif first in countable:
+            # unita' di conteggio da sola = ingrediente ("- 4 eggs")
+            item = first
+        else:
+            item = ""
     if not item:
         raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
 
@@ -212,6 +222,7 @@ def _parse_sections(
     ingredient_section: str,
     method_section: str,
     known_units: set[str] | None,
+    countable_units: set[str] | None = None,
 ) -> tuple[str | None, list[IngredientLine], list[str]]:
     lines = body.splitlines()
     ingredient_idx: int | None = None
@@ -252,7 +263,9 @@ def _parse_sections(
                 line=index + 1,
             )
         ingredients.append(
-            _parse_ingredient(stripped[2:], index + 1, known_units)
+            _parse_ingredient(
+                stripped[2:], index + 1, known_units, countable_units
+            )
         )
     if not ingredients:
         raise ParseError("no ingredients found", line=ingredient_idx + 1)
@@ -295,6 +308,7 @@ def _parse_document(
     *,
     require_source_lang: bool,
     optional_when_native: tuple[str, ...] = (),
+    countable_units: set[str] | None = None,
 ) -> ParsedDoc:
     frontmatter, body = _split_frontmatter(md)
     _validate_frontmatter(
@@ -303,7 +317,7 @@ def _parse_document(
         optional_when_native=optional_when_native,
     )
     body_title, ingredients, steps = _parse_sections(
-        body, ingredient_section, method_section, known_units
+        body, ingredient_section, method_section, known_units, countable_units
     )
     title = body_title or str(frontmatter["title"])
     return ParsedDoc(
@@ -317,11 +331,15 @@ def _parse_document(
 
 
 def parse_source_md(
-    md: str, *, known_units: set[str] | None = None
+    md: str,
+    *,
+    known_units: set[str] | None = None,
+    countable_units: set[str] | None = None,
 ) -> ParsedDoc:
     """Parse an Italian source document (``## Ingredienti`` / ``## Procedimento``)."""
     return _parse_document(
-        md, "Ingredienti", "Procedimento", known_units, require_source_lang=False
+        md, "Ingredienti", "Procedimento", known_units,
+        require_source_lang=False, countable_units=countable_units,
     )
 
 
@@ -330,6 +348,7 @@ def parse_translated_md(
     *,
     known_units: set[str] | None = None,
     optional_when_native: tuple[str, ...] = (),
+    countable_units: set[str] | None = None,
 ) -> ParsedDoc:
     """Parse an English translated document (``## Ingredients`` / ``## Method``).
 
@@ -344,11 +363,15 @@ def parse_translated_md(
         known_units,
         require_source_lang=True,
         optional_when_native=optional_when_native,
+        countable_units=countable_units,
     )
 
 
 def parse_translated_body(
-    body: str, *, known_units: set[str] | None = None
+    body: str,
+    *,
+    known_units: set[str] | None = None,
+    countable_units: set[str] | None = None,
 ) -> tuple[str, list[IngredientLine], list[str]]:
     """Parse an LLM-translated body (title line + ``## Ingredients``/``## Method``).
 
@@ -356,7 +379,7 @@ def parse_translated_body(
     the LLM output has no frontmatter.
     """
     body_title, ingredients, steps = _parse_sections(
-        body, "Ingredients", "Method", known_units
+        body, "Ingredients", "Method", known_units, countable_units
     )
     if body_title is None:
         raise ParseError("translated body is missing a title line", line=1)
@@ -457,6 +480,7 @@ def verify_l1(
 ) -> L1Report:
     """Run deterministic L1 verification (structure + P2 numbers)."""
     units = pack.known_units() if pack is not None else None
+    countable = pack.countable_units() if pack is not None else None
     issues: list[VerificationIssue] = []
 
     source: ParsedDoc | None = None
@@ -467,6 +491,7 @@ def verify_l1(
             known_units=units,
             optional_when_native=tuple(pack.frontmatter_optional_when_native)
             if pack is not None else (),
+            countable_units=countable,
         )
     except ParseError as exc:
         issues.append(
@@ -478,7 +503,9 @@ def verify_l1(
         source = translated
     else:
         try:
-            source = parse_source_md(source_md, known_units=units)
+            source = parse_source_md(
+                source_md, known_units=units, countable_units=countable
+            )
         except ParseError as exc:
             issues.append(
                 VerificationIssue("L1", "SOURCE_PARSE", str(exc), line=exc.line)
