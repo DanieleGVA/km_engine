@@ -34,7 +34,7 @@ services:
     healthcheck:
       # Il redirect 80->443 non deve rompere il check: usa HTTPS locale con
       # --no-check-certificate (certificato self-signed in dev).
-      test: ["CMD-SHELL", "wget -qO- --no-check-certificate https://localhost/healthz >/dev/null 2>&1"]
+      test: ["CMD-SHELL", "wget -qO- --no-check-certificate https://127.0.0.1/healthz >/dev/null 2>&1"]
       interval: 10s
       timeout: 5s
       retries: 12
@@ -44,7 +44,7 @@ services:
   km-api:
     build:
       context: ..
-      dockerfile: Dockerfile
+      dockerfile: deploy/Dockerfile
     image: km-api:0.1.0
     # scaling orizzontale: 2 repliche di default (ADR-003 D3); override con
     # `docker compose up -d --scale km-api=N`. Nessun container_name: il
@@ -105,6 +105,30 @@ services:
       retries: 12
       start_period: 15s
     restart: unless-stopped
+
+  # ---------------------------------------------------------------------------
+  # km-loader — job one-shot di caricamento libri (profilo 'loader').
+  # Avvio: docker compose -f deploy/docker-compose.yml --profile loader up km-loader
+  # Monta il canon_corpus (sola lettura) e gli script; parla con neo4j/postgres
+  # sulla rete interna del compose (nessuna porta pubblicata).
+  # ---------------------------------------------------------------------------
+  km-loader:
+    image: km-api:0.1.0
+    profiles: ["loader"]
+    env_file:
+      - .env
+    environment:
+      PYTHONPATH: /repo
+    volumes:
+      - ..:/repo:ro
+      - ${BOOKS_ROOT:-/Users/daniele.buonaiuto/Dev/rcps/foodmdm/canon_corpus}:/books:ro
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    command: ["/app/.venv/bin/python", "/repo/scripts/load_books.py", "--root", "/books", "--pack", "/repo/domain-packs/ricette"]
+    restart: "no"
 
 volumes:
   neo4j-data:
