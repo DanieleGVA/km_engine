@@ -191,8 +191,16 @@ def _parse_ingredient(
     first, _sep, remainder = rest.partition(" ")
     if first in units:
         if remainder.strip():
-            unit = first
-            item = remainder.strip()
+            if first == "egg" and remainder.strip().casefold() in (
+                "whites", "white", "yolk", "yolks",
+            ):
+                # composto: "egg whites"/"egg yolk" e' un unico ingrediente,
+                # non unita' + item (il grafo e l'embedding devono vedere
+                # "egg whites", non "whites")
+                item = rest
+            else:
+                unit = first
+                item = remainder.strip()
         elif first in countable:
             # unita' di conteggio da sola = ingrediente ("- 4 eggs")
             item = first

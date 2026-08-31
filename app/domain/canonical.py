@@ -319,6 +319,12 @@ def canonicalize(
         item = ingredient.item
         lookup = _strip_item_connectors(item)
         resolved = term_map.get(lookup.casefold())
+        if resolved is None and unit is not None and unit in countable_units:
+            # "2 egg whites" -> unit=egg, item=whites: prova "egg whites"
+            resolved = term_map.get(f"{unit} {lookup}".casefold())
+            if resolved is not None:
+                item = resolved[0]
+                unit = None  # il nome contiene gia' il contabile
         if resolved is not None:
             item = resolved[0]
         elif lookup not in seen_unresolved:

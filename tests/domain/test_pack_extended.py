@@ -43,7 +43,7 @@ source_lang: en
 servings: 10
 ---
 ## Ingredients
-- 2 egg yolk
+- 2 egg whites
 - 3 EA bread buns
 - 10 pz cherry tomatoes
 - 150 cl oil
@@ -58,10 +58,10 @@ servings: 10
         optional_when_native=tuple(pack.frontmatter_optional_when_native),
     )
     units = [i.unit for i in parsed.ingredients]
-    assert units == ["egg", "EA", "pz", "cl", "LT", "mg", "TT"]
-    # l'item non e' inquinato dall'unita'
+    assert units == [None, "EA", "pz", "cl", "LT", "mg", "TT"]
+    # "egg whites" e' un composto (item unico); l'item non e' inquinato
     assert [i.item for i in parsed.ingredients] == [
-        "yolk", "bread buns", "cherry tomatoes", "oil", "stock", "thyme", "salt",
+        "egg whites", "bread buns", "cherry tomatoes", "oil", "stock", "thyme", "salt",
     ]
 
 
@@ -76,14 +76,14 @@ source_lang: en
 servings: 10
 ---
 ## Ingredients
-- 2 egg yolk
+- 2 egg whites
 - 3 EA bread buns
 - 10 pz cherry tomatoes
 ## Method
 1. Mix.
 """
     doc = canonicalize(pack, md)
-    assert "- 2 egg yolk" in doc.canonical_md
+    assert "- 2 egg whites" in doc.canonical_md
     assert "- 3 EA bread buns" in doc.canonical_md
     assert "- 10 pz cherry tomatoes" in doc.canonical_md
     # nessuna entry di canon-log per le righe conteggio (no-op reale)
