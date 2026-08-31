@@ -38,6 +38,11 @@ MKS_FACTORS: dict[str, tuple[str, float, str]] = {
     "grain": ("g", 0.1, "DOSE-GRAIN"),
     "zest": ("g", 1.0, "DOSE-ZEST"),
     "etto": ("g", 100.0, "DOSE-ETTO"),
+    # Unita' MKS aggiuntive (formato industriale CalcMenu/Pareto)
+    "cl": ("ml", 10.0, "DOSE-CL"),
+    "dl": ("ml", 100.0, "DOSE-DL"),
+    "mg": ("g", 0.001, "DOSE-MG"),
+    "lt": ("l", 1.0, "DOSE-LT"),
 }
 
 # Unita' gia' MKS: nessuna conversione.
