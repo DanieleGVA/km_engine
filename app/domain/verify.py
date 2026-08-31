@@ -49,6 +49,28 @@ _TOKEN_RE = re.compile(r"[^\W\d_]+", flags=re.UNICODE)
 _INGREDIENT_RE = re.compile(r"^(\d+(?:\.\d+)?)\s+(.*)$")
 _STEP_RE = re.compile(r"^(\d+)\.\s+(.*)$")
 
+# Suffisso strutturale (passo 1): "{code: X, waste: Y%, component: Z}" in coda
+# alla riga ingrediente. Mai parte dell'item: e' metadato (item code, sfrido,
+# componente) escluso da L2 e da P2.
+_SUFFIX_RE = re.compile(
+    r"\s*\{code:\s*([^,}]+?)(?:,\s*waste:\s*([^,}]+?))?"
+    r"(?:,\s*component:\s*([^,}]+?))?\}\s*$"
+)
+
+
+def render_ingredient_suffix(
+    code: str | None, waste: str | None, component: str | None
+) -> str:
+    """Rende il suffisso strutturale (speculare a ``_SUFFIX_RE``)."""
+    parts: list[str] = []
+    if code:
+        parts.append(f"code: {code}")
+    if waste:
+        parts.append(f"waste: {waste}")
+    if component:
+        parts.append(f"component: {component}")
+    return " {" + ", ".join(parts) + "}" if parts else ""
+
 VALID_ADJUDICATION_STATUSES = {"pending", "approved", "rejected"}
 VALID_DECISIONS = {"approved", "rejected"}
 
@@ -59,12 +81,21 @@ VALID_DECISIONS = {"approved", "rejected"}
 
 @dataclass(frozen=True)
 class IngredientLine:
-    """One parsed ingredient line (``- {qty} {unit} {item}``)."""
+    """One parsed ingredient line (``- {qty} {unit} {item}``).
+
+    ``code``/``waste``/``component`` are structural metadata carried in the
+    ``{code: ..., waste: ..., component: ...}`` suffix (passo 1 PROGRAMMA-UNICO):
+    they are never part of ``item``, never cross the LLM, and are excluded
+    from L2 tokens and P2 numbers.
+    """
 
     raw: str
     qty: str
     unit: str | None
     item: str
+    code: str | None = None
+    waste: str | None = None
+    component: str | None = None
 
 
 @dataclass
@@ -159,7 +190,21 @@ def _parse_ingredient(
         item = remainder.strip() if sep else ""
     if not item:
         raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
-    return IngredientLine(raw=content, qty=qty, unit=unit, item=item)
+
+    # suffisso strutturale {code, waste, component}: mai parte dell'item
+    code = waste = component = None
+    suffix = _SUFFIX_RE.search(item)
+    if suffix:
+        code = suffix.group(1).strip() or None
+        waste = suffix.group(2).strip() if suffix.group(2) else None
+        component = suffix.group(3).strip() if suffix.group(3) else None
+        item = item[: suffix.start()].rstrip()
+        if not item:
+            raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
+    return IngredientLine(
+        raw=content, qty=qty, unit=unit, item=item,
+        code=code, waste=waste, component=component,
+    )
 
 
 def _parse_sections(

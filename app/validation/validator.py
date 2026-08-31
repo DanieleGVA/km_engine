@@ -100,7 +100,10 @@ def validate_recipe_md(
     servings_target: int = 10,
 ) -> RecipeValidationReport:
     """Valida una ricetta md (formato translated/canonical) senza toccare il grafo."""
-    parsed = parse_translated_md(md, known_units=pack.known_units())
+    parsed = parse_translated_md(
+        md, known_units=pack.known_units(),
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     doses = standardize_doses(md, pack, servings_target=servings_target)
     resolved, coverage = _coverage(doses.canonical_md, pack)
     return RecipeValidationReport(
@@ -128,7 +131,10 @@ def validate_and_ingest(
 ) -> RecipeValidationReport:
     """Valida, ingesta nel grafo (con riferimenti), popola il vettore e verifica il RAG."""
     report = validate_recipe_md(md, pack, servings_target=servings_target)
-    parsed = parse_translated_md(md, known_units=pack.known_units())
+    parsed = parse_translated_md(
+        md, known_units=pack.known_units(),
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     doc_id = f"{prefix}{report.recipe_id}"
     extract_document(client, None, doc_id, standardize_doses(md, pack, servings_target).canonical_md, pack, source_ref=source_ref)
     with client.session() as session:

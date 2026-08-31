@@ -20,6 +20,9 @@ NUMBER_RE = re.compile(r"(?<![\w.])-?\d+(?:\.\d+)?(?![\w.])")
 
 _FRONTMATTER_RE = re.compile(r"\A---\s*\n.*?\n---\s*\n?", re.DOTALL)
 _STEP_RE = re.compile(r"^(\s*)(\d+)\.\s+(.*)$")
+# Suffisso strutturale "{code: ..., waste: ..., component: ...}" (passo 1):
+# escluso da P2 — i numeri del suffisso (item code, sfrido) non sono contenuto.
+_SUFFIX_BLOCK_RE = re.compile(r"\{[^}]*\}")
 
 
 def strip_frontmatter(text: str) -> str:
@@ -46,6 +49,7 @@ def extract_numbers(text: str) -> list[str]:
     body = strip_frontmatter(text)
     numbers: list[str] = []
     for line in body.splitlines():
+        line = _SUFFIX_BLOCK_RE.sub("", line)  # il suffisso non e' contenuto
         match = _STEP_RE.match(line)
         if match:
             numbers.extend(_find_numbers(match.group(3)))
@@ -74,6 +78,7 @@ def mask_numbers(text: str) -> tuple[str, list[str]]:
         return f"{{N{len(numbers)}}}"
 
     for line in text.splitlines():
+        line = _SUFFIX_BLOCK_RE.sub("", line)  # il suffisso non e' contenuto
         match = _STEP_RE.match(line)
         if match:
             indent, step_no, rest = match.groups()

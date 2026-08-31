@@ -154,7 +154,10 @@ def extract_document(
     """
     del conn  # reserved for future domain_jobs persistence (WP-A7+)
 
-    parsed = parse_translated_md(canonical_md, known_units=pack.known_units())
+    parsed = parse_translated_md(
+        canonical_md, known_units=pack.known_units(),
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     frontmatter = parsed.frontmatter
     digest = _canonical_hash(canonical_md)
     now = _now()
@@ -167,8 +170,9 @@ def extract_document(
     title = str(frontmatter.get("title", ""))
     source_lang = str(frontmatter.get("source_lang", pack.language))
     servings = int(frontmatter["servings"])
-    time_min = int(frontmatter["time_min"])
-    difficulty = str(frontmatter["difficulty"])
+    # time_min/difficulty: assenti sulle card MSC EN-native (mai placeholder)
+    time_min = int(frontmatter["time_min"]) if frontmatter.get("time_min") is not None else None
+    difficulty = str(frontmatter["difficulty"]) if frontmatter.get("difficulty") is not None else None
     verification_level = str(frontmatter.get("verification_level", "L1"))
     canonical_version = int(frontmatter.get("canonical_version", 1))
 
@@ -182,6 +186,9 @@ def extract_document(
                 "position": index,
                 "qty": ingredient.qty,
                 "unit": ingredient.unit,
+                "code": ingredient.code,
+                "waste": ingredient.waste,
+                "component": ingredient.component,
                 "term_id": _term_id(resolved[0], resolved[1].id)
                 if resolved is not None
                 else None,
@@ -306,6 +313,9 @@ def extract_document(
                 SET e.label = $label,
                     e.type = 'ingredient',
                     e.position = $position,
+                    e.code = $code,
+                    e.waste = $waste,
+                    e.component = $component,
                     e.source_file = $source_uri,
                     e.confidence = 'EXTRACTED',
                     e.is_public = false,
@@ -318,6 +328,9 @@ def extract_document(
                 entity_id=row["entity_id"],
                 label=row["label"],
                 position=row["position"],
+                code=row["code"],
+                waste=row["waste"],
+                component=row["component"],
                 source_uri=source_uri,
                 doc_id=doc_id,
             )

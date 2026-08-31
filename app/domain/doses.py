@@ -16,7 +16,7 @@ from decimal import ROUND_HALF_UP, Decimal
 
 from app.domain.errors import ParseError
 from app.domain.pack import DomainPackBundle
-from app.domain.verify import parse_translated_md
+from app.domain.verify import parse_translated_md, render_ingredient_suffix
 
 # Unita' culinarie -> MKS (fattori documentati, approssimazioni standard).
 # rule_id: DOSE-<UNIT> per la tracciabilita' (P3).
@@ -90,7 +90,10 @@ def standardize_doses(
     Il canonical.md in ingresso e' il formato Appendice A (sezioni
     ``## Ingredients`` / ``## Method``, righe ``- qty unit item``).
     """
-    parsed = parse_translated_md(canonical_md, known_units=pack.known_units())
+    parsed = parse_translated_md(
+        canonical_md, known_units=pack.known_units(),
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     servings = parsed.frontmatter.get("servings")
     if not isinstance(servings, int) or servings <= 0:
         raise ParseError(
@@ -100,11 +103,14 @@ def standardize_doses(
     factor = Decimal(servings_target) / Decimal(servings)
     log: list[DoseLogEntry] = []
 
-    new_ingredients: list[tuple[str, str, str]] = []
+    new_ingredients: list[tuple[str, str, str, str | None]] = []
     for i, ing in enumerate(parsed.ingredients):
         qty = Decimal(str(ing.qty)) if ing.qty is not None else None
         unit = (ing.unit or "").lower()
         item = ing.item
+        suffix = render_ingredient_suffix(
+            ing.code, ing.waste, ing.component
+        ) or None
         before = f"{ing.qty} {ing.unit} {item}".strip()
 
         # 1) conversione MKS
@@ -127,7 +133,7 @@ def standardize_doses(
             log.append(DoseLogEntry(f"ingredients[{i}]", before, f"{qty_text} {unit} {item}", "DOSE-SCALE"))
         else:
             qty_text = "1"
-        new_ingredients.append((qty_text, unit, item))
+        new_ingredients.append((qty_text, unit, item, suffix))
 
     # ricostruisci il canonical.md con servings=10 e dosi MKS
     fm = dict(parsed.frontmatter)
@@ -139,11 +145,11 @@ def standardize_doses(
             lines.append(f"{k}: {fm[k]}")
     lines.append("---")
     lines.append("## Ingredients")
-    for qty_text, unit, item in new_ingredients:
+    for qty_text, unit, item, suffix in new_ingredients:
         if unit:
-            lines.append(f"- {qty_text} {unit} {item}")
+            lines.append(f"- {qty_text} {unit} {item}{suffix or ''}")
         else:
-            lines.append(f"- {qty_text} {item}")
+            lines.append(f"- {qty_text} {item}{suffix or ''}")
     lines.append("## Method")
     for j, step in enumerate(parsed.steps, 1):
         lines.append(f"{j}. {step}")

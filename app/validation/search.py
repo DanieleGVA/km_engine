@@ -96,7 +96,10 @@ class DocumentIndex:
                 continue
             try:
                 fp = ingredient_fingerprint(md, pack.known_units())
-                parsed = parse_translated_md(md, known_units=pack.known_units())
+                parsed = parse_translated_md(
+        md, known_units=pack.known_units(),
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
                 steps = list(parsed.steps)
             except Exception:
                 continue
@@ -146,7 +149,10 @@ def search_recipe(
     ``index``: DocumentIndex precalcolato (consigliato per run su molti
     documenti); se assente, l'indice viene costruito al volo.
     """
-    parsed = parse_translated_md(canonical_md, known_units=pack.known_units())
+    parsed = parse_translated_md(
+        canonical_md, known_units=pack.known_units(),
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     query_fp = ingredient_fingerprint(canonical_md, pack.known_units())
     query_steps = list(parsed.steps)
 

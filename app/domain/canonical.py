@@ -27,6 +27,7 @@ from app.domain.verify import (
     ParsedDoc,
     create_glossary_proposal,
     parse_translated_md,
+    render_ingredient_suffix,
 )
 
 # Structural rule ids used when a change is not a unit/glossary rule.
@@ -231,21 +232,26 @@ def _fm_str(value: Any) -> str:
 
 def _render_canonical_md(
     frontmatter: dict[str, str],
-    ingredients: list[tuple[str, str | None, str]],
+    ingredients: list[tuple[str, str | None, str, str | None]],
     steps: list[str],
 ) -> str:
-    """Render the Appendix A canonical markdown (single trailing newline)."""
+    """Render the Appendix A canonical markdown (single trailing newline).
+
+    Each ingredient is ``(qty, unit, item, suffix)`` where ``suffix`` is the
+    rendered structural metadata ``{code: ..., waste: ..., component: ...}``
+    or ``None`` (passo 1: emesso simmetricamente da recompose).
+    """
     lines = ["---"]
     for key in CANONICAL_FRONTMATTER_ORDER:
         if key in frontmatter:
             lines.append(f"{key}: {frontmatter[key]}")
     lines.append("---")
     lines.append("## Ingredients")
-    for qty, unit, item in ingredients:
+    for qty, unit, item, suffix in ingredients:
         if unit:
-            lines.append(f"- {qty} {unit} {item}")
+            lines.append(f"- {qty} {unit} {item}{suffix or ''}")
         else:
-            lines.append(f"- {qty} {item}")
+            lines.append(f"- {qty} {item}{suffix or ''}")
     lines.append("## Method")
     for index, step in enumerate(steps, start=1):
         lines.append(f"{index}. {step}")
@@ -269,10 +275,13 @@ def canonicalize(
     given and are never rewritten), then rewrite to the Appendix A shape.
     """
     units = _known_units(pack)
-    parsed = parse_translated_md(translated_md, known_units=units)
+    parsed = parse_translated_md(
+        translated_md, known_units=units,
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     document_id = _fm_str(parsed.frontmatter.get("id", ""))
 
-    frontmatter = {
+    frontmatter: dict[str, str] = {
         "title": _fm_str(parsed.frontmatter.get("title", "")),
         "id": document_id,
         "lang": pack.canonical_language,
@@ -280,11 +289,15 @@ def canonicalize(
             parsed.frontmatter.get("source_lang", pack.language)
         ),
         "servings": _fm_str(parsed.frontmatter.get("servings", "")),
-        "time_min": _fm_str(parsed.frontmatter.get("time_min", "")),
-        "difficulty": _fm_str(parsed.frontmatter.get("difficulty", "")),
         "verification_level": "L1",
         "canonical_version": "1",
     }
+    # time_min/difficulty: presenti solo se nel documento (mai placeholder,
+    # P3) — le card MSC EN-native non li hanno
+    if parsed.frontmatter.get("time_min") is not None:
+        frontmatter["time_min"] = _fm_str(parsed.frontmatter["time_min"])
+    if parsed.frontmatter.get("difficulty") is not None:
+        frontmatter["difficulty"] = _fm_str(parsed.frontmatter["difficulty"])
 
     term_map = _build_term_map(pack)
     ingredients: list[tuple[str, str | None, str]] = []
@@ -310,7 +323,10 @@ def canonicalize(
             seen_unresolved.add(lookup)
             unresolved.append(lookup)
 
-        ingredients.append((qty_text, unit, item))
+        suffix = render_ingredient_suffix(
+            ingredient.code, ingredient.waste, ingredient.component
+        )
+        ingredients.append((qty_text, unit, item, suffix or None))
 
     steps = list(parsed.steps)
     canonical_md = _render_canonical_md(frontmatter, ingredients, steps)
@@ -320,7 +336,10 @@ def canonicalize(
         for term in unresolved:
             create_glossary_proposal(conn, term, context=document_id)
 
-    canonical_parsed = parse_translated_md(canonical_md, known_units=units)
+    canonical_parsed = parse_translated_md(
+        canonical_md, known_units=units,
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     return CanonicalDocument(
         canonical_md=canonical_md,
         document_id=document_id,
@@ -342,8 +361,14 @@ def generate_canon_log(
 ) -> list[CanonLogEntry]:
     """Emit one :class:`CanonLogEntry` for every translated->canonical diff."""
     units = _known_units(pack)
-    translated = parse_translated_md(translated_md, known_units=units)
-    canonical = parse_translated_md(canonical_md, known_units=units)
+    translated = parse_translated_md(
+        translated_md, known_units=units,
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+    )
+    canonical = parse_translated_md(
+        canonical_md, known_units=units,
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+    )
     document_id = _fm_str(
         canonical.frontmatter.get("id") or translated.frontmatter.get("id")
     )
@@ -487,9 +512,14 @@ def generate_canon_log(
 
 
 def _ingredient_line(ingredient: IngredientLine) -> str:
-    if ingredient.unit:
-        return f"{ingredient.qty} {ingredient.unit} {ingredient.item}"
-    return f"{ingredient.qty} {ingredient.item}"
+    base = (
+        f"{ingredient.qty} {ingredient.unit} {ingredient.item}"
+        if ingredient.unit
+        else f"{ingredient.qty} {ingredient.item}"
+    )
+    return base + render_ingredient_suffix(
+        ingredient.code, ingredient.waste, ingredient.component
+    )
 
 
 def verify_canon_log(
@@ -505,10 +535,20 @@ def verify_canon_log(
     :class:`CanonLogVerificationError` otherwise.
     """
     units = _known_units(pack)
-    parsed = parse_translated_md(translated_md, known_units=units)
+    parsed = parse_translated_md(
+        translated_md, known_units=units,
+        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+    )
     frontmatter = {k: _fm_str(v) for k, v in parsed.frontmatter.items()}
     ingredients: list[dict[str, str | None]] = [
-        {"qty": ing.qty, "unit": ing.unit, "item": ing.item}
+        {
+            "qty": ing.qty,
+            "unit": ing.unit,
+            "item": ing.item,
+            "code": ing.code,
+            "waste": ing.waste,
+            "component": ing.component,
+        }
         for ing in parsed.ingredients
     ]
     steps = list(parsed.steps)
@@ -575,7 +615,15 @@ def verify_canon_log(
         raise CanonLogVerificationError(f"unknown canon-log field {field!r}")
 
     ingredient_tuples = [
-        (str(ing["qty"]), ing["unit"], str(ing["item"]))
+        (
+            str(ing["qty"]),
+            ing["unit"],
+            str(ing["item"]),
+            render_ingredient_suffix(
+                ing.get("code"), ing.get("waste"), ing.get("component")
+            )
+            or None,
+        )
         for ing in ingredients
     ]
     reconstructed = _render_canonical_md(frontmatter, ingredient_tuples, steps)

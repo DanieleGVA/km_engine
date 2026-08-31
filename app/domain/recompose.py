@@ -12,6 +12,7 @@ from __future__ import annotations
 from typing import Any
 
 from app.domain.canonical import CANONICAL_FRONTMATTER_ORDER
+from app.domain.verify import render_ingredient_suffix
 from app.rag.cache import recompose_cache
 from app.storage.client import Neo4jClient
 from app.storage.errors import NotFoundError
@@ -19,7 +20,7 @@ from app.storage.errors import NotFoundError
 
 def _render_canonical_md(
     frontmatter: dict[str, Any],
-    ingredients: list[tuple[str, str | None, str]],
+    ingredients: list[tuple[str, str | None, str, str | None]],
     steps: list[str],
 ) -> str:
     """Render Appendix A markdown (mirrors ``canonical._render_canonical_md``)."""
@@ -29,11 +30,11 @@ def _render_canonical_md(
             lines.append(f"{key}: {frontmatter[key]}")
     lines.append("---")
     lines.append("## Ingredients")
-    for qty, unit, item in ingredients:
+    for qty, unit, item, suffix in ingredients:
         if unit:
-            lines.append(f"- {qty} {unit} {item}")
+            lines.append(f"- {qty} {unit} {item}{suffix or ''}")
         else:
-            lines.append(f"- {qty} {item}")
+            lines.append(f"- {qty} {item}{suffix or ''}")
     lines.append("## Method")
     for index, step in enumerate(steps, start=1):
         lines.append(f"{index}. {step}")
@@ -71,6 +72,9 @@ def recompose_document(client: Neo4jClient, doc_id: str) -> str:
             MATCH (e:Entity {type: 'ingredient'})-[:PART_OF_DOC]->(d:Document {id: $doc_id})
             RETURN e.position AS position,
                    e.label AS item,
+                   e.code AS code,
+                   e.waste AS waste,
+                   e.component AS component,
                    [(e)-[:HAS_FACT]->(f:Fact)
                     WHERE f.valid_to IS NULL AND f.property = 'qty' | f.value][0] AS qty,
                    [(e)-[:HAS_FACT]->(f:Fact)
@@ -80,7 +84,15 @@ def recompose_document(client: Neo4jClient, doc_id: str) -> str:
             doc_id=doc_id,
         )
         ingredients = [
-            (record["qty"], record["unit"], record["item"])
+            (
+                record["qty"],
+                record["unit"],
+                record["item"],
+                render_ingredient_suffix(
+                    record["code"], record["waste"], record["component"]
+                )
+                or None,
+            )
             for record in ingredient_records
         ]
 
@@ -94,17 +106,20 @@ def recompose_document(client: Neo4jClient, doc_id: str) -> str:
         )
         steps = [record["text"] for record in step_records]
 
-    frontmatter = {
+    frontmatter: dict[str, Any] = {
         "title": document.get("title", ""),
         "id": document.get("document_id", document.get("id", "")),
         "lang": document.get("lang", "en"),
         "source_lang": document.get("source_lang", ""),
         "servings": document.get("servings", ""),
-        "time_min": document.get("time_min", ""),
-        "difficulty": document.get("difficulty", ""),
         "verification_level": document.get("verification_level", "L1"),
         "canonical_version": document.get("canonical_version", 1),
     }
+    # time_min/difficulty: solo se presenti (card MSC EN-native non li hanno)
+    if document.get("time_min") is not None:
+        frontmatter["time_min"] = document["time_min"]
+    if document.get("difficulty") is not None:
+        frontmatter["difficulty"] = document["difficulty"]
     rendered = _render_canonical_md(frontmatter, ingredients, steps)
     recompose_cache.set(key, rendered)
     return rendered
