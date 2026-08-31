@@ -97,10 +97,23 @@ def _adjudication_rows(items: list[dict]) -> list[str]:
     for item in items:
         if item["status"] != "pending":
             continue
-        detail = (
-            f"document={_esc(item['document_id'])} · section={_esc(item['section'])}<br>"
-            f"reason={_esc(item['reason'])}<br>suggestion={_esc(item['suggestion'])}"
-        )
+        if item.get("kind") == "dictionary":
+            # scheda dizionario (passo 6): mostra la proposta standardizzata
+            v = item.get("verdict_json") or {}
+            detail = (
+                f"<b>dizionario</b> · key={_esc(item['document_id'])}<br>"
+                f"canonical={_esc(v.get('canonical_name_en', ''))} · "
+                f"core={_esc(v.get('ingredient_core', ''))} · "
+                f"class={_esc(v.get('class', ''))}<br>"
+                f"aliases={_esc(', '.join(v.get('aliases', [])))} · "
+                f"allergens={_esc(', '.join(v.get('allergen_tags', [])))} · "
+                f"conf={_esc(v.get('confidence'))}"
+            )
+        else:
+            detail = (
+                f"document={_esc(item['document_id'])} · section={_esc(item['section'])}<br>"
+                f"reason={_esc(item['reason'])}<br>suggestion={_esc(item['suggestion'])}"
+            )
         actions = (
             f'<form method="post" action="/ui/adjudications/{item["id"]}/approve">'
             f'<button class="approve">Approve</button></form>'

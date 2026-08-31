@@ -9,6 +9,7 @@
 """
 from __future__ import annotations
 
+import json
 import re
 import uuid
 from dataclasses import dataclass
@@ -738,6 +739,11 @@ def _row_to_adjudication(row: dict[str, Any]) -> dict[str, Any]:
         "reason": row["reason"],
         "suggestion": row["suggestion"],
         "status": row["status"],
+        "kind": row.get("kind", "translation"),
+        "verdict_json": row.get("verdict_json"),
+        "llm_model": row.get("llm_model"),
+        "llm_confidence": row.get("llm_confidence"),
+        "candidate_ids": row.get("candidate_ids"),
         "resolved_by": str(row["resolved_by"]) if row["resolved_by"] is not None else None,
         "resolved_at": row["resolved_at"].isoformat() if row["resolved_at"] is not None else None,
         "created_at": row["created_at"].isoformat() if row["created_at"] is not None else None,
@@ -772,18 +778,35 @@ def create_adjudication(
     *,
     suggestion: str | None = None,
     user_id: uuid.UUID | str | None = None,
+    kind: str = "translation",
+    verdict_json: dict[str, Any] | None = None,
+    llm_model: str | None = None,
+    llm_confidence: float | None = None,
+    candidate_ids: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Create a pending adjudication row and record a CREATE audit entry."""
+    """Create a pending adjudication row and record a CREATE audit entry.
+
+    ``kind``: translation | canon | dictionary (passo 4/6 PROGRAMMA-UNICO).
+    Per le voci del dizionario, ``verdict_json`` porta la proposta
+    standardizzata (passo 5) e ``candidate_ids`` i candidati di canone.
+    """
+    if kind not in ("translation", "canon", "dictionary"):
+        raise ValueError(f"kind must be translation|canon|dictionary, got {kind!r}")
     with conn.transaction():
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute(
                 """
-                INSERT INTO adjudications (document_id, section, reason, suggestion)
-                VALUES (%s, %s, %s, %s)
+                INSERT INTO adjudications
+                    (document_id, section, reason, suggestion, kind,
+                     verdict_json, llm_model, llm_confidence, candidate_ids)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 RETURNING id, document_id, section, reason, suggestion, status,
-                          resolved_by, resolved_at, created_at
+                          resolved_by, resolved_at, created_at, kind,
+                          verdict_json, llm_model, llm_confidence, candidate_ids
                 """,
-                (document_id, section, reason, suggestion),
+                (document_id, section, reason, suggestion, kind,
+                 json.dumps(verdict_json) if verdict_json is not None else None,
+                 llm_model, llm_confidence, candidate_ids),
             )
             row = cur.fetchone()
         record_audit(
@@ -797,6 +820,7 @@ def create_adjudication(
                 "section": section,
                 "reason": reason,
                 "suggestion": suggestion,
+                "kind": kind,
                 "status": "pending",
             },
         )
