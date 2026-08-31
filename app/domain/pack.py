@@ -159,6 +159,10 @@ class DomainPack(BaseModel):
     paths: PackPaths = Field(default_factory=PackPaths)
     glossaries: list[str] = Field(default_factory=list)
     units_source: str = "units.yaml"
+    # Frontmatter keys that may be absent when the document is native in the
+    # canonical language (lang == source_lang), e.g. MSC cards have no
+    # time_min/difficulty. Never filled with a placeholder (P3).
+    frontmatter_optional_when_native: list[str] = Field(default_factory=list)
 
     @field_validator("name")
     @classmethod
@@ -218,6 +222,10 @@ class DomainPackBundle:
     @property
     def canonical_language(self) -> str:
         return self.pack.canonical_language
+
+    @property
+    def frontmatter_optional_when_native(self) -> list[str]:
+        return self.pack.frontmatter_optional_when_native
 
     def unit_rules_by_from(self) -> dict[str, UnitRule]:
         return {rule.from_unit: rule for rule in self.units}

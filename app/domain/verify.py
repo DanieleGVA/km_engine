@@ -100,19 +100,35 @@ def _split_frontmatter(md: str) -> tuple[dict[str, Any], str]:
     return fm, "\n".join(lines[end + 1:])
 
 
-def _validate_frontmatter(fm: dict[str, Any], *, require_source_lang: bool) -> None:
+def _validate_frontmatter(
+    fm: dict[str, Any],
+    *,
+    require_source_lang: bool,
+    optional_when_native: tuple[str, ...] = (),
+) -> None:
+    """Validate frontmatter keys.
+
+    ``optional_when_native``: keys that may be absent when the document is
+    native in the canonical language (``lang == source_lang``), e.g. MSC cards
+    have no ``time_min``/``difficulty``. Never filled with a placeholder.
+    """
     required = ["title", "id", "lang", "servings", "time_min", "difficulty"]
     if require_source_lang:
         required.append("source_lang")
+    native = require_source_lang and fm.get("lang") == fm.get("source_lang")
     for key in required:
+        if native and key in optional_when_native:
+            continue
         if key not in fm:
             raise ParseError(f"missing required frontmatter key {key!r}", line=1)
     if isinstance(fm["servings"], bool) or not isinstance(fm["servings"], int):
         raise ParseError("frontmatter 'servings' must be an integer", line=1)
-    if isinstance(fm["time_min"], bool) or not isinstance(fm["time_min"], int):
+    if "time_min" in fm and (
+        isinstance(fm["time_min"], bool) or not isinstance(fm["time_min"], int)
+    ):
         raise ParseError("frontmatter 'time_min' must be an integer", line=1)
     allowed_difficulty = DIFFICULTY_EN if require_source_lang else set(DIFFICULTY_MAP)
-    if fm["difficulty"] not in allowed_difficulty:
+    if "difficulty" in fm and fm["difficulty"] not in allowed_difficulty:
         raise ParseError(
             f"frontmatter 'difficulty' must be one of {sorted(allowed_difficulty)}",
             line=1,
@@ -233,9 +249,14 @@ def _parse_document(
     known_units: set[str] | None,
     *,
     require_source_lang: bool,
+    optional_when_native: tuple[str, ...] = (),
 ) -> ParsedDoc:
     frontmatter, body = _split_frontmatter(md)
-    _validate_frontmatter(frontmatter, require_source_lang=require_source_lang)
+    _validate_frontmatter(
+        frontmatter,
+        require_source_lang=require_source_lang,
+        optional_when_native=optional_when_native,
+    )
     body_title, ingredients, steps = _parse_sections(
         body, ingredient_section, method_section, known_units
     )
@@ -250,17 +271,34 @@ def _parse_document(
     )
 
 
-def parse_source_md(md: str, *, known_units: set[str] | None = None) -> ParsedDoc:
+def parse_source_md(
+    md: str, *, known_units: set[str] | None = None
+) -> ParsedDoc:
     """Parse an Italian source document (``## Ingredienti`` / ``## Procedimento``)."""
     return _parse_document(
         md, "Ingredienti", "Procedimento", known_units, require_source_lang=False
     )
 
 
-def parse_translated_md(md: str, *, known_units: set[str] | None = None) -> ParsedDoc:
-    """Parse an English translated document (``## Ingredients`` / ``## Method``)."""
+def parse_translated_md(
+    md: str,
+    *,
+    known_units: set[str] | None = None,
+    optional_when_native: tuple[str, ...] = (),
+) -> ParsedDoc:
+    """Parse an English translated document (``## Ingredients`` / ``## Method``).
+
+    ``optional_when_native``: frontmatter keys that may be absent when the
+    document is native in English (``lang == source_lang``), e.g. MSC cards
+    without ``time_min``/``difficulty``.
+    """
     return _parse_document(
-        md, "Ingredients", "Method", known_units, require_source_lang=True
+        md,
+        "Ingredients",
+        "Method",
+        known_units,
+        require_source_lang=True,
+        optional_when_native=optional_when_native,
     )
 
 
@@ -379,17 +417,27 @@ def verify_l1(
     source: ParsedDoc | None = None
     translated: ParsedDoc | None = None
     try:
-        source = parse_source_md(source_md, known_units=units)
-    except ParseError as exc:
-        issues.append(
-            VerificationIssue("L1", "SOURCE_PARSE", str(exc), line=exc.line)
+        translated = parse_translated_md(
+            translated_md,
+            known_units=units,
+            optional_when_native=tuple(pack.frontmatter_optional_when_native)
+            if pack is not None else (),
         )
-    try:
-        translated = parse_translated_md(translated_md, known_units=units)
     except ParseError as exc:
         issues.append(
             VerificationIssue("L1", "TRANSLATED_PARSE", str(exc), line=exc.line)
         )
+    if source_md == translated_md and translated is not None:
+        # documento nativo EN (es. card MSC, bypass stage-1): non esiste un
+        # sorgente IT separato — source == translated per definizione
+        source = translated
+    else:
+        try:
+            source = parse_source_md(source_md, known_units=units)
+        except ParseError as exc:
+            issues.append(
+                VerificationIssue("L1", "SOURCE_PARSE", str(exc), line=exc.line)
+            )
 
     source_numbers = extract_numbers(source_md)
     translated_numbers = extract_numbers(translated_md)
