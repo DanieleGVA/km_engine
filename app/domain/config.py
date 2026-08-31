@@ -21,6 +21,29 @@ class LLMSettings(BaseSettings):
     llm_model: str | None = None
 
 
+class JudgeSettings(BaseSettings):
+    """Settings del modello GIUDICE (passo 4 PROGRAMMA-UNICO, KM_JUDGE_*).
+
+    Separato dal modello di traduzione: il giudice (Fase 1) e' un modello
+    diverso, configurato con ``KM_JUDGE_ENDPOINT`` / ``KM_JUDGE_MODEL`` /
+    ``KM_JUDGE_API_KEY``. Se assenti, si ripiega sul modello di traduzione.
+    """
+
+    model_config = SettingsConfigDict(
+        env_prefix="KM_JUDGE_", env_file=".env", env_file_encoding="utf-8",
+        extra="ignore",
+    )
+
+    endpoint: str | None = None
+    model: str | None = None
+    api_key: str | None = None
+
+
 def get_llm_settings() -> LLMSettings:
     """Build settings from the environment."""
     return LLMSettings()
+
+
+def get_judge_settings() -> JudgeSettings:
+    """Build judge settings from the environment."""
+    return JudgeSettings()
