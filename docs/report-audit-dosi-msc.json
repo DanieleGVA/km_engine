@@ -1,0 +1,810 @@
+{
+ "pdf": "/Users/daniele.buonaiuto/Dev/rcps/foodmdm/deliverables/DLV-26_menu_pareto/Pareto_Recipe_Cards_v001.pdf",
+ "cards_pdf": 1653,
+ "cards_parsed": 1382,
+ "cards_with_output": 1315,
+ "lines_compared": 15175,
+ "stats": {
+  "unita_diversa": 547,
+  "qty_diversa": 193,
+  "no_output": 67,
+  "n_righe_diverso": 1,
+  "righe_mancanti_output": 1
+ },
+ "qty_mismatch_count": 193,
+ "qty_mismatch_sample": [
+  {
+   "code": "RF422654",
+   "idx": 5,
+   "item": "oil sunflower seeds",
+   "expected_qty": "150",
+   "actual_qty": "15",
+   "unit": "ml"
+  },
+  {
+   "code": "RF11351",
+   "idx": 5,
+   "item": "rum myers 1l",
+   "expected_qty": "20",
+   "actual_qty": "2",
+   "unit": "ml"
+  },
+  {
+   "code": "RF06133",
+   "idx": 7,
+   "item": "herb thyme fresh",
+   "expected_qty": "0.01",
+   "actual_qty": "10",
+   "unit": "g"
+  },
+  {
+   "code": "RF10817",
+   "idx": 8,
+   "item": "vegetable stock",
+   "expected_qty": "1000",
+   "actual_qty": "100",
+   "unit": "ml"
+  },
+  {
+   "code": "RF09082",
+   "idx": 5,
+   "item": "rum myers 1l",
+   "expected_qty": "20",
+   "actual_qty": "2",
+   "unit": "ml"
+  },
+  {
+   "code": "RF04992",
+   "idx": 1,
+   "item": "vinegar white 50cl",
+   "expected_qty": "100",
+   "actual_qty": "10",
+   "unit": "ml"
+  },
+  {
+   "code": "RF04992",
+   "idx": 2,
+   "item": "oil olive extra virgin",
+   "expected_qty": "100",
+   "actual_qty": "10",
+   "unit": "ml"
+  },
+  {
+   "code": "RF04992",
+   "idx": 10,
+   "item": "juice orange concentrate",
+   "expected_qty": "400",
+   "actual_qty": "40",
+   "unit": "ml"
+  },
+  {
+   "code": "RF00034",
+   "idx": 17,
+   "item": "vegetable stock",
+   "expected_qty": "1200",
+   "actual_qty": "120",
+   "unit": "ml"
+  },
+  {
+   "code": "RF10249",
+   "idx": 5,
+   "item": "oil for frying pet",
+   "expected_qty": "200",
+   "actual_qty": "20",
+   "unit": "ml"
+  },
+  {
+   "code": "RF10249",
+   "idx": 10,
+   "item": "seeds cumin",
+   "expected_qty": "0.01",
+   "actual_qty": "10",
+   "unit": "g"
+  },
+  {
+   "code": "RF10249",
+   "idx": 11,
+   "item": "seeds coriander / cilantro",
+   "expected_qty": "0.01",
+   "actual_qty": "10",
+   "unit": "g"
+  },
+  {
+   "code": "RF10249",
+   "idx": 27,
+   "item": "juice lemon",
+   "expected_qty": "20",
+   "actual_qty": "2",
+   "unit": "ml"
+  },
+  {
+   "code": "RF00962",
+   "idx": 3,
+   "item": "wine white",
+   "expected_qty": "100",
+   "actual_qty": "10",
+   "unit": "ml"
+  },
+  {
+   "code": "RF00962",
+   "idx": 4,
+   "item": "fish stock",
+   "expected_qty": "500",
+   "actual_qty": "50",
+   "unit": "ml"
+  },
+  {
+   "code": "RF00962",
+   "idx": 6,
+   "item": "cream heavy cooking",
+   "expected_qty": "100",
+   "actual_qty": "10",
+   "unit": "ml"
+  },
+  {
+   "code": "RF06876",
+   "idx": 0,
+   "item": "carrot cream",
+   "expected_qty": "300",
+   "actual_qty": "30",
+   "unit": "ml"
+  },
+  {
+   "code": "RF06876",
+   "idx": 1,
+   "item": "vegetable stock",
+   "expected_qty": "300",
+   "actual_qty": "30",
+   "unit": "ml"
+  },
+  {
+   "code": "RF413860",
+   "idx": 12,
+   "item": "lamb sauce",
+   "expected_qty": "300",
+   "actual_qty": "30",
+   "unit": "ml"
+  },
+  {
+   "code": "RF02330",
+   "idx": 2,
+   "item": "oil olive",
+   "expected_qty": "50",
+   "actual_qty": "5",
+   "unit": "ml"
+  },
+  {
+   "code": "RF02330",
+   "idx": 4,
+   "item": "wine white",
+   "expected_qty": "100",
+   "actual_qty": "10",
+   "unit": "ml"
+  },
+  {
+   "code": "RF02353",
+   "idx": 3,
+   "item": "fish stock",
+   "expected_qty": "800",
+   "actual_qty": "80",
+   "unit": "ml"
+  },
+  {
+   "code": "RF02353",
+   "idx": 5,
+   "item": "milk whole 3,5% fat long life",
+   "expected_qty": "200",
+   "actual_qty": "20",
+   "unit": "ml"
+  },
+  {
+   "code": "RF02353",
+   "idx": 6,
+   "item": "cream heavy cooking",
+   "expected_qty": "200",
+   "actual_qty": "20",
+   "unit": "ml"
+  },
+  {
+   "code": "RF417366",
+   "idx": 1,
+   "item": "oil olive",
+   "expected_qty": "400",
+   "actual_qty": "40",
+   "unit": "ml"
+  },
+  {
+   "code": "RF07905",
+   "idx": 4,
+   "item": "aged modena balsamic vinaigrette(cc)",
+   "expected_qty": "200",
+   "actual_qty": "20",
+   "unit": "ml"
+  },
+  {
+   "code": "RF10730",
+   "idx": 18,
+   "item": "parsley oil",
+   "expected_qty": "20",
+   "actual_qty": "2",
+   "unit": "ml"
+  },
+  {
+   "code": "RF10749",
+   "idx": 6,
+   "item": "vegetable stock",
+   "expected_qty": "1500",
+   "actual_qty": "150",
+   "unit": "ml"
+  },
+  {
+   "code": "RF01970",
+   "idx": 10,
+   "item": "vegetable broth",
+   "expected_qty": "10",
+   "actual_qty": "1",
+   "unit": "ml"
+  },
+  {
+   "code": "RF10250",
+   "idx": 6,
+   "item": "oil sunflower seeds",
+   "expected_qty": "200",
+   "actual_qty": "20",
+   "unit": "ml"
+  },
+  {
+   "code": "RF10250",
+   "idx": 7,
+   "item": "sauce soya",
+   "expected_qty": "200",
+   "actual_qty": "20",
+   "unit": "ml"
+  },
+  {
+   "code": "RF13188",
+   "idx": 2,
+   "item": "herb chives fresh",
+   "expected_qty": "0.05",
+   "actual_qty": "50",
+   "unit": "g"
+  },
+  {
+   "code": "RF13188",
+   "idx": 4,
+   "item": "salt table",
+   "expected_qty": "0.02",
+   "actual_qty": "20",
+   "unit": "g"
+  },
+  {
+   "code": "RF13188",
+   "idx": 5,
+   "item": "peppercorn black ground",
+   "expected_qty": "0.02",
+   "actual_qty": "20",
+   "unit": "g"
+  },
+  {
+   "code": "RF13849",
+   "idx": 5,
+   "item": "sauce smokey bbq",
+   "expected_qty": "400",
+   "actual_qty": "40",
+   "unit": "ml"
+  },
+  {
+   "code": "RF421833",
+   "idx": 7,
+   "item": "wine red",
+   "expected_qty": "200",
+   "actual_qty": "20",
+   "unit": "ml"
+  },
+  {
+   "code": "RF412790",
+   "idx": 7,
+   "item": "wine white",
+   "expected_qty": "500",
+   "actual_qty": "50",
+   "unit": "ml"
+  },
+  {
+   "code": "RF13865",
+   "idx": 7,
+   "item": "herb bay leaves/laurel fresh",
+   "expected_qty": "0.05",
+   "actual_qty": "50",
+   "unit": "g"
+  },
+  {
+   "code": "RF13865",
+   "idx": 8,
+   "item": "spice chili powder",
+   "expected_qty": "0.05",
+   "actual_qty": "50",
+   "unit": "g"
+  },
+  {
+   "code": "RF13865",
+   "idx": 10,
+   "item": "spice turmeric",
+   "expected_qty": "0.03",
+   "actual_qty": "30",
+   "unit": "g"
+  }
+ ],
+ "unit_mismatch_count": 547,
+ "unit_mismatch_sample": [
+  {
+   "code": "RF422654",
+   "idx": 1,
+   "item": "green peppercorn sauce(cc)",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF422654",
+   "idx": 5,
+   "item": "oil sunflower seeds",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF11351",
+   "idx": 5,
+   "item": "rum myers 1l",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF06133",
+   "idx": 7,
+   "item": "herb thyme fresh",
+   "expected_unit": "g",
+   "actual_unit": "mg"
+  },
+  {
+   "code": "RF422215",
+   "idx": 6,
+   "item": "oil olive",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF10817",
+   "idx": 8,
+   "item": "vegetable stock",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF425654",
+   "idx": 2,
+   "item": "garlic peeled",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425654",
+   "idx": 4,
+   "item": "beef stock",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425654",
+   "idx": 5,
+   "item": "chicken stock brown",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF424480",
+   "idx": 3,
+   "item": "oil soybean seeds pet",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425656",
+   "idx": 7,
+   "item": "green peppercorn sauce(cc)",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF426406",
+   "idx": 3,
+   "item": "dressing caesar salad",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF426409",
+   "idx": 3,
+   "item": "oil sunflower seeds",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF09826",
+   "idx": 0,
+   "item": "milk whole 3,5% fat long life",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF09826",
+   "idx": 1,
+   "item": "cream whipping for pastry 36% uht sugar free",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF426405",
+   "idx": 4,
+   "item": "oil olive extra virgin",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF426405",
+   "idx": 5,
+   "item": "red wine sauce",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF426405",
+   "idx": 6,
+   "item": "black peppercorn sauce",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF01971",
+   "idx": 0,
+   "item": "vegetable broth",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425081",
+   "idx": 8,
+   "item": "milk whole 3,5% fat long life",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425081",
+   "idx": 9,
+   "item": "milk partially skimmed 1,5-2% fat long life",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425081",
+   "idx": 10,
+   "item": "milk skimmed long life",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425081",
+   "idx": 11,
+   "item": "soya milk",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF425081",
+   "idx": 12,
+   "item": "rice milk",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF423577",
+   "idx": 1,
+   "item": "milk whole 3,5% fat long life",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF423577",
+   "idx": 7,
+   "item": "juice orange 1l",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF09082",
+   "idx": 5,
+   "item": "rum myers 1l",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF04992",
+   "idx": 1,
+   "item": "vinegar white 50cl",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF04992",
+   "idx": 2,
+   "item": "oil olive extra virgin",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF04992",
+   "idx": 10,
+   "item": "juice orange concentrate",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF415054",
+   "idx": 0,
+   "item": "water",
+   "expected_unit": "l",
+   "actual_unit": "lt"
+  },
+  {
+   "code": "RF00034",
+   "idx": 17,
+   "item": "vegetable stock",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF10249",
+   "idx": 5,
+   "item": "oil for frying pet",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF10249",
+   "idx": 10,
+   "item": "seeds cumin",
+   "expected_unit": "g",
+   "actual_unit": "mg"
+  },
+  {
+   "code": "RF10249",
+   "idx": 11,
+   "item": "seeds coriander / cilantro",
+   "expected_unit": "g",
+   "actual_unit": "mg"
+  },
+  {
+   "code": "RF10249",
+   "idx": 27,
+   "item": "juice lemon",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF00962",
+   "idx": 3,
+   "item": "wine white",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF00962",
+   "idx": 4,
+   "item": "fish stock",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF00962",
+   "idx": 6,
+   "item": "cream heavy cooking",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  },
+  {
+   "code": "RF06876",
+   "idx": 0,
+   "item": "carrot cream",
+   "expected_unit": "ml",
+   "actual_unit": "cl"
+  }
+ ],
+ "edge_case_counts": {
+  "unita_conteggio": 342,
+  "unita_mg": 35
+ },
+ "edge_cases_sample": {
+  "unita_conteggio": [
+   [
+    "RF419554",
+    "Roasted new potatoes",
+    1.0,
+    "serving"
+   ],
+   [
+    "RF12867",
+    "LIGHT WHITE BISCUIT SHEETS",
+    0.5,
+    "pz"
+   ],
+   [
+    "RF42713721",
+    "Roasted new potatoes",
+    10.0,
+    "serving"
+   ],
+   [
+    "RF412876",
+    "Roasted new potatoes",
+    10.0,
+    "serving"
+   ],
+   [
+    "RF42713787",
+    "Roasted new potatoes",
+    10.0,
+    "serving"
+   ],
+   [
+    "RF427146950",
+    "BREAD BUNS HAMBURGER PRESLICED FRZ",
+    10.0,
+    "ea"
+   ],
+   [
+    "RF427146950",
+    "SUNDRY TOMATOES",
+    10.0,
+    "serving"
+   ],
+   [
+    "RF413823",
+    "BREAD BUNS HOT DOG",
+    10.0,
+    "pz"
+   ],
+   [
+    "RF422287",
+    "Steamed potatoes",
+    10.0,
+    "serving"
+   ],
+   [
+    "RF422215",
+    "BUTTER UNSALTED LOAF",
+    0.5,
+    "ea"
+   ],
+   [
+    "RF07791",
+    "Roasted new potatoes",
+    10.0,
+    "serving"
+   ],
+   [
+    "RF413056",
+    "Roasted new potatoes",
+    10.0,
+    "serving"
+   ],
+   [
+    "RF425654",
+    "SOURDOUGH WHITE BREAD(SLICED LOAF)",
+    250.0,
+    "slice"
+   ],
+   [
+    "RF08984",
+    "BREAD BUNS HAMBURGER PRESLICED FRZ",
+    1.0,
+    "ea"
+   ],
+   [
+    "RF02314",
+    "WAFER STICKS FOR ICE CREAM",
+    1.0,
+    "ea"
+   ]
+  ],
+  "unita_mg": [
+   [
+    "RF06133",
+    "HERB THYME FRESH",
+    10.0,
+    "mg"
+   ],
+   [
+    "RF10249",
+    "SEEDS CUMIN",
+    10.0,
+    "mg"
+   ],
+   [
+    "RF10249",
+    "SEEDS CORIANDER / CILANTRO",
+    10.0,
+    "mg"
+   ],
+   [
+    "RF13188",
+    "HERB CHIVES FRESH",
+    5.0,
+    "mg"
+   ],
+   [
+    "RF13188",
+    "SALT TABLE",
+    2.0,
+    "mg"
+   ],
+   [
+    "RF13188",
+    "PEPPERCORN BLACK GROUND",
+    2.0,
+    "mg"
+   ],
+   [
+    "RF13865",
+    "HERB BAY LEAVES/LAUREL FRESH",
+    50.0,
+    "mg"
+   ],
+   [
+    "RF13865",
+    "SPICE CHILI POWDER",
+    50.0,
+    "mg"
+   ],
+   [
+    "RF13865",
+    "SPICE TURMERIC",
+    30.0,
+    "mg"
+   ],
+   [
+    "RF13865",
+    "SPICE NUTMEG GROUND",
+    20.0,
+    "mg"
+   ],
+   [
+    "RF414296",
+    "SPICE CHILI PEPPER CRUSHED",
+    10.0,
+    "mg"
+   ],
+   [
+    "RF422411",
+    "SPICE CINNAMON GROUND",
+    5.0,
+    "mg"
+   ],
+   [
+    "RF423696",
+    "HONEY",
+    20.0,
+    "mg"
+   ],
+   [
+    "RF413796",
+    "SPICE CINNAMON STICK",
+    30.0,
+    "mg"
+   ],
+   [
+    "RF413796",
+    "PEPPERCORN BLACK GROUND",
+    50.0,
+    "mg"
+   ]
+  ]
+ }
+}
