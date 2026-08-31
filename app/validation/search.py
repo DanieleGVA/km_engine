@@ -98,7 +98,8 @@ class DocumentIndex:
                 fp = ingredient_fingerprint(md, pack.known_units())
                 parsed = parse_translated_md(
         md, known_units=pack.known_units(),
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
                 steps = list(parsed.steps)
             except Exception:
@@ -151,7 +152,8 @@ def search_recipe(
     """
     parsed = parse_translated_md(
         canonical_md, known_units=pack.known_units(),
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     query_fp = ingredient_fingerprint(canonical_md, pack.known_units())
     query_steps = list(parsed.steps)

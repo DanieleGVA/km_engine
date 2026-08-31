@@ -156,7 +156,8 @@ def extract_document(
 
     parsed = parse_translated_md(
         canonical_md, known_units=pack.known_units(),
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     frontmatter = parsed.frontmatter
     digest = _canonical_hash(canonical_md)

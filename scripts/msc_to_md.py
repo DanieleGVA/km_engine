@@ -184,6 +184,11 @@ def parse_ingredient_row(line: str) -> IngredientRow | None:
     unit = tokens[unit_idx]
     name = " ".join(tokens[:unit_idx - 1])
     tail = tokens[unit_idx + 1:]
+    if not name and tail:
+        # riga malformata con qty+unita' nel nome ("— 0.2 KG CHIA SEEDS —"):
+        # il nome e' la coda (prep), non un ingrediente senza nome
+        name = " ".join(t for t in tail if t not in ("—", "-"))
+        tail = []
     # coda: prep + wastage ("TO TASTE", "GRILLED", "10%", "—")
     waste = None
     prep = None

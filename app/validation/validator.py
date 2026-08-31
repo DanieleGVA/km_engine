@@ -102,7 +102,8 @@ def validate_recipe_md(
     """Valida una ricetta md (formato translated/canonical) senza toccare il grafo."""
     parsed = parse_translated_md(
         md, known_units=pack.known_units(),
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     doses = standardize_doses(md, pack, servings_target=servings_target)
     resolved, coverage = _coverage(doses.canonical_md, pack)
@@ -133,7 +134,8 @@ def validate_and_ingest(
     report = validate_recipe_md(md, pack, servings_target=servings_target)
     parsed = parse_translated_md(
         md, known_units=pack.known_units(),
-        optional_when_native=tuple(pack.frontmatter_optional_when_native)
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
     )
     doc_id = f"{prefix}{report.recipe_id}"
     extract_document(client, None, doc_id, standardize_doses(md, pack, servings_target).canonical_md, pack, source_ref=source_ref)
