@@ -88,6 +88,7 @@ from app.domain.verify import (
     parse_source_md,
     parse_translated_md,
     update_document_verification_level,
+    verify_intra,
     verify_l1,
     verify_l2,
 )
@@ -160,6 +161,7 @@ __all__ = [
     "update_document_verification_level",
     "validate_pack",
     "verify_canon_log",
+    "verify_intra",
     "verify_l1",
     "verify_l2",
     "write_canon_log",

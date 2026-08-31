@@ -1042,3 +1042,150 @@ def decide_glossary_proposal(
             new_value={"status": decision},
         )
     return _row_to_proposal(updated)
+
+
+# ---------------------------------------------------------------------------
+# Passo 9 PROGRAMMA-UNICO: verify_intra (screen 6 famiglie)
+# ---------------------------------------------------------------------------
+
+@dataclass
+class IntraFinding:
+    """Una contraddizione interna alla card (passo 9)."""
+
+    family: str
+    severity: str  # low | medium | high
+    message: str
+    section: str | None = None
+    line: int | None = None
+
+
+@dataclass
+class IntraReport:
+    """Esito dello screen intra-documento."""
+
+    findings: list[IntraFinding]
+
+    @property
+    def passed(self) -> bool:
+        return not any(f.severity == "high" for f in self.findings)
+
+
+# Temperature USPH (limiti di sicurezza per la conservazione/servizio).
+_USPH_TEMP_RANGE = (0.0, 90.0)  # °C: sotto 0 o sopra 90 => anomalo
+
+
+def _step_temperatures(step: str) -> list[float]:
+    return [
+        float(m.group(1))
+        for m in re.finditer(r"(-?\d+(?:\.\d+)?)\s*°\s*c", step, re.IGNORECASE)
+    ]
+
+
+def verify_intra(md: str, pack: DomainPackBundle) -> IntraReport:
+    """Screen intra-documento: 6 famiglie di contraddizioni.
+
+    1. citato-non-costato: ingrediente citato nella procedura ma assente
+       dalla distinta (severita' cap medium se plausibilmente in sotto-ricetta)
+    2. titolo vs distinta: termine del titolo assente dalla distinta
+    3. mass balance: quantita' zero anomale (a-piacere escluso)
+    4. temperature: fuori range USPH
+    5. integrita' unita': unita' sospette per classe (mg su proteine, kg su erbe)
+    6. duplicati: stesso ingrediente con quantita' diverse
+    """
+    parsed = parse_translated_md(
+        md, known_units=pack.known_units(),
+        optional_when_native=tuple(pack.frontmatter_optional_when_native),
+        countable_units=pack.countable_units(),
+    )
+    findings: list[IntraFinding] = []
+
+    class_by_item = {
+        e.labels_en.casefold(): e.class_ for e in pack.glossary_entries()
+        if e.class_ is not None
+    }
+    a_piacere_classes = set(
+        pack.rules.get("plausibilita", {}).get("rules", {}).get(
+            "zero_qty_a_piacere_classes", [])
+    )
+
+    # 1) citato-non-costato
+    ing_tokens = set()
+    for ing in parsed.ingredients:
+        ing_tokens.update(_tokens(ing.item))
+    for idx, step in enumerate(parsed.steps):
+        step_tokens = _tokens(step)
+        # termini del glossario ingredienti citati nella procedura
+        for entry in pack.glossary_entries():
+            label = entry.labels_en.casefold()
+            if label in step_tokens and label not in ing_tokens:
+                # severita' cap medium: potrebbe essere in una sotto-ricetta
+                # (il giudice della Fase 1 decide); mai high
+                findings.append(IntraFinding(
+                    "cited_not_costed", "medium",
+                    f"ingrediente {entry.labels_en!r} citato nella procedura "
+                    f"ma assente dalla distinta (possibile sotto-ricetta)",
+                    section="steps", line=idx + 1,
+                ))
+
+    # 2) titolo vs distinta
+    title_tokens = _tokens(parsed.title)
+    for entry in pack.glossary_entries():
+        label = entry.labels_en.casefold()
+        if label in title_tokens and label not in ing_tokens:
+            findings.append(IntraFinding(
+                "title_vs_bill", "medium",
+                f"termine del titolo {entry.labels_en!r} assente dalla distinta",
+                section="title",
+            ))
+
+    # 3) mass balance: qty 0 anomale (a-piacere escluso)
+    for idx, ing in enumerate(parsed.ingredients):
+        if ing.qty is not None and float(ing.qty) == 0:
+            cls = class_by_item.get(ing.item.casefold())
+            if cls in a_piacere_classes:
+                continue  # "0 KG SALT TABLE" = a piacere, non flaggato
+            findings.append(IntraFinding(
+                "mass_balance", "high",
+                f"quantita' zero anomala: {ing.qty} {ing.unit or ''} {ing.item}",
+                section="ingredients", line=idx + 1,
+            ))
+
+    # 4) temperature fuori range USPH
+    for idx, step in enumerate(parsed.steps):
+        for temp in _step_temperatures(step):
+            if temp < _USPH_TEMP_RANGE[0] or temp > _USPH_TEMP_RANGE[1]:
+                findings.append(IntraFinding(
+                    "temperature", "high",
+                    f"temperatura {temp:g}°C fuori range USPH "
+                    f"{_USPH_TEMP_RANGE[0]:g}-{_USPH_TEMP_RANGE[1]:g}",
+                    section="steps", line=idx + 1,
+                ))
+
+    # 5) integrita' unita': unita' sospette per classe
+    suspicious = pack.rules.get("plausibilita", {}).get("rules", {}).get(
+        "suspicious_units", {})
+    for idx, ing in enumerate(parsed.ingredients):
+        cls = class_by_item.get(ing.item.casefold())
+        unit = (ing.unit or "").lower()
+        if cls and unit in suspicious and cls in suspicious[unit]:
+            findings.append(IntraFinding(
+                "unit_integrity", "medium",
+                f"unita' {ing.unit!r} sospetta per classe {cls!r} "
+                f"({ing.item})",
+                section="ingredients", line=idx + 1,
+            ))
+
+    # 6) duplicati: stesso item con quantita' diverse
+    seen: dict[str, str] = {}
+    for idx, ing in enumerate(parsed.ingredients):
+        key = ing.item.casefold()
+        if key in seen and seen[key] != ing.qty:
+            findings.append(IntraFinding(
+                "duplicates", "medium",
+                f"ingrediente {ing.item!r} duplicato con quantita' diverse "
+                f"({seen[key]} vs {ing.qty})",
+                section="ingredients", line=idx + 1,
+            ))
+        seen.setdefault(key, ing.qty)
+
+    return IntraReport(findings=findings)
