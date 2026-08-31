@@ -45,6 +45,7 @@ class LLMClient(Protocol):
 
 def _judge_prompt(system: str, user: str, schema: type[BaseModel]) -> str:
     return (
+        f"{user}\n\n"
         "Respond with a single JSON object that validates against this JSON "
         "schema. No prose, no markdown fences, no trailing text.\n"
         f"JSON schema:\n{json.dumps(schema.model_json_schema())}"
@@ -52,13 +53,17 @@ def _judge_prompt(system: str, user: str, schema: type[BaseModel]) -> str:
 
 
 def _parse_judge(text: str, schema: type[BaseModel]) -> dict[str, Any]:
-    """Parse + validate the judge output; raises on non-conformant output."""
+    """Parse + validate the judge output; raises on non-conformant output.
+
+    ``model_dump(by_alias=True)``: il JSON usa gli alias (es. ``class``),
+    cosi' il chiamante puo' ri-validare con lo stesso schema.
+    """
     text = text.strip()
     if text.startswith("```"):
         text = text.strip("`")
         text = text.removeprefix("json")
     data = json.loads(text)
-    return schema.model_validate(data).model_dump()
+    return schema.model_validate(data).model_dump(by_alias=True)
 
 
 class HttpLLMClient:
@@ -99,7 +104,7 @@ class HttpLLMClient:
             ],
             "temperature": 0,
         }
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        async with httpx.AsyncClient(timeout=180.0) as client:
             response = await client.post(
                 endpoint, json=payload, headers=self._headers(api_key)
             )

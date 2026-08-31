@@ -43,6 +43,14 @@ SYSTEM_PROMPT = (
     "- allergen_tags must be EU-FIC: " + ", ".join(sorted(EU_FIC_ALLERGENS)) + "\n"
     "- countable items: countable_unit + count_policy ('integer'|'exact') + "
     "unit_weight_g; liquids: density_g_per_ml.\n"
+    "EVERY entry in the output MUST include ALL these fields (no omission):\n"
+    "key (string, same as input), corpus ('msc' or 'book', same as input), "
+    "canonical_name_en (string), ingredient_core (string), states (array of "
+    "strings), pack_format (string or null), class (string or null), aliases "
+    "(array of strings), allergen_tags (array of strings), is_food (boolean), "
+    "countable_unit (string or null), count_policy ('integer' or 'exact' or "
+    "null), unit_weight_g (number or null), density_g_per_ml (number or null), "
+    "confidence (number 0-1), ambiguous (boolean).\n"
     "Respond with a single JSON object: {\"entries\": [...]}."
 )
 
