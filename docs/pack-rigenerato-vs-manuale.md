@@ -12,9 +12,9 @@ Pipeline deterministica eseguita sul PILOT (15 ricette validate).
 
 ## Normalizzazione vs golden pilot A
 
-- Precision: **97.8%**
-- Recall: **100.0%**
-- Match: 90 (draft risolte 92, golden risolte 90)
+- Precision: **94.6%**
+- Recall: **96.7%**
+- Match: 87 (draft risolte 92, golden risolte 90)
 
 ## Codegen (suite-tipo A sul draft)
 

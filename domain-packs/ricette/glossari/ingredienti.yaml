@@ -6771,3 +6771,626 @@ entries:
   class: cereale
   allergen_tags:
   - gluten
+- id: ING-DICT-0951
+  labels_en: vegetable stock
+  labels_it: vegetable stock
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00745).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0952
+  labels_en: boston lettuce
+  labels_it: boston lettuce
+  aliases:
+  - boston lettuce
+  - lettuce boston
+  definition: Standardizzato da dizionario (msc, key=CM01277).
+  class: verdura
+- id: ING-DICT-0953
+  labels_en: demi-glace
+  labels_it: demi-glace
+  aliases:
+  - demi glace
+  definition: Standardizzato da dizionario (msc, key=SF00225).
+  class: condimento
+  allergen_tags:
+  - celery
+  - gluten
+- id: ING-DICT-0954
+  labels_en: dijon mustard
+  labels_it: dijon mustard
+  aliases:
+  - dijon mustard
+  definition: Standardizzato da dizionario (msc, key=CM01099).
+  class: condimento
+  allergen_tags:
+  - mustard
+- id: ING-DICT-0955
+  labels_en: chocolate
+  labels_it: chocolate
+  aliases:
+  - dark chocolate covering
+  definition: Standardizzato da dizionario (msc, key=CM01818).
+  class: altro
+  allergen_tags:
+  - soy
+- id: ING-DICT-0956
+  labels_en: semi-skimmed milk
+  labels_it: semi-skimmed milk
+  aliases:
+  - partially skimmed milk
+  - long life milk
+  definition: Standardizzato da dizionario (msc, key=CM01156).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0957
+  labels_en: béchamel
+  labels_it: béchamel
+  aliases:
+  - bechamel sauce
+  definition: Standardizzato da dizionario (msc, key=SF00042).
+  class: condimento
+  allergen_tags:
+  - milk
+  - gluten
+- id: ING-DICT-0958
+  labels_en: chicken stock
+  labels_it: chicken stock
+  aliases:
+  - white chicken stock
+  definition: Standardizzato da dizionario (msc, key=SF00106).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0959
+  labels_en: mirepoix
+  labels_it: mirepoix
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00427).
+  class: verdura
+  allergen_tags:
+  - celery
+- id: ING-DICT-0960
+  labels_en: balsamic vinegar
+  labels_it: balsamic vinegar
+  aliases:
+  - balsamic vinegar
+  definition: Standardizzato da dizionario (msc, key=CM00135).
+  class: condimento
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0961
+  labels_en: hamburger buns
+  labels_it: hamburger buns
+  aliases:
+  - hamburger buns presliced
+  definition: Standardizzato da dizionario (msc, key=CM02057).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0962
+  labels_en: vanilla ice cream
+  labels_it: vanilla ice cream
+  aliases:
+  - vanilla ice cream gluten free
+  definition: Standardizzato da dizionario (msc, key=CM01377).
+  class: latticino
+  allergen_tags:
+  - milk
+- id: ING-DICT-0963
+  labels_en: mashed potatoes
+  labels_it: mashed potatoes
+  aliases:
+  - mashed potato
+  definition: Standardizzato da dizionario (msc, key=RF414803).
+  class: verdura
+  allergen_tags:
+  - milk
+- id: ING-DICT-0964
+  labels_en: dark chocolate covering
+  labels_it: dark chocolate covering
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06316).
+  class: altro
+  allergen_tags:
+  - soy
+- id: ING-DICT-0965
+  labels_en: dark chocolate ganache
+  labels_it: dark chocolate ganache
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF310169).
+  class: altro
+  allergen_tags:
+  - milk
+- id: ING-DICT-0966
+  labels_en: vanilla sauce
+  labels_it: vanilla sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00737).
+  class: condimento
+  allergen_tags:
+  - milk
+  - eggs
+- id: ING-DICT-0967
+  labels_en: Taggiasca olives
+  labels_it: Taggiasca olives
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01027).
+  class: verdura
+- id: ING-DICT-0968
+  labels_en: almond cream
+  labels_it: almond cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00008).
+  class: altro
+  allergen_tags:
+  - nuts
+  - milk
+  - eggs
+- id: ING-DICT-0969
+  labels_en: beef stock
+  labels_it: beef stock
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00046).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0970
+  labels_en: balsamic vinegar cream
+  labels_it: balsamic vinegar cream
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01710).
+  class: condimento
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0971
+  labels_en: veal stock
+  labels_it: veal stock
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00741).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0972
+  labels_en: red vinegar
+  labels_it: red vinegar
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00128).
+  class: condimento
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0973
+  labels_en: Caesar dressing
+  labels_it: Caesar dressing
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01650).
+  class: condimento
+  allergen_tags:
+  - eggs
+  - fish
+  - milk
+- id: ING-DICT-0974
+  labels_en: sponge sheet
+  labels_it: sponge sheet
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06597).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+- id: ING-DICT-0975
+  labels_en: Parslied breadcrumbs
+  labels_it: Parslied breadcrumbs
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00467).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0976
+  labels_en: Hamburger bun
+  labels_it: Hamburger bun
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM02058).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0977
+  labels_en: Choux pastry
+  labels_it: Choux pastry
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00151).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+  - milk
+- id: ING-DICT-0978
+  labels_en: Oyster sauce
+  labels_it: Oyster sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00566).
+  class: condimento
+  allergen_tags:
+  - molluscs
+  - gluten
+- id: ING-DICT-0979
+  labels_en: chicken gravy
+  labels_it: chicken gravy
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00102).
+  class: condimento
+  allergen_tags:
+  - celery
+  - gluten
+- id: ING-DICT-0980
+  labels_en: hoisin sauce
+  labels_it: hoisin sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM00575).
+  class: condimento
+  allergen_tags:
+  - soy
+  - gluten
+- id: ING-DICT-0981
+  labels_en: pesto sauce
+  labels_it: pesto sauce
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06259).
+  class: condimento
+  allergen_tags:
+  - nuts
+  - milk
+- id: ING-DICT-0982
+  labels_en: lamb stock
+  labels_it: lamb stock
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=RF07828).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0983
+  labels_en: beef gravy
+  labels_it: beef gravy
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00045).
+  class: condimento
+  allergen_tags:
+  - celery
+  - gluten
+- id: ING-DICT-0984
+  labels_en: court bouillon
+  labels_it: court bouillon
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00199).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0985
+  labels_en: garlic mashed potatoes
+  labels_it: garlic mashed potatoes
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00279).
+  class: verdura
+  allergen_tags:
+  - milk
+- id: ING-DICT-0986
+  labels_en: Marsala wine
+  labels_it: Marsala wine
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01170).
+  class: bevanda
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0987
+  labels_en: white chocolate covering
+  labels_it: white chocolate covering
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01815).
+  class: altro
+  allergen_tags:
+  - milk
+  - soy
+- id: ING-DICT-0988
+  labels_en: milk chocolate covering
+  labels_it: milk chocolate covering
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM06317).
+  class: altro
+  allergen_tags:
+  - milk
+  - soy
+- id: ING-DICT-0989
+  labels_en: balsamic syrup
+  labels_it: balsamic syrup
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00031).
+  class: condimento
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0990
+  labels_en: veal gravy
+  labels_it: veal gravy
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=SF00740).
+  class: condimento
+  allergen_tags:
+  - celery
+  - gluten
+- id: ING-DICT-0991
+  labels_en: pancake mix
+  labels_it: pancake mix
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01137).
+  class: altro
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0992
+  labels_en: white chocolate substitute
+  labels_it: white chocolate substitute
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01797).
+  class: altro
+  allergen_tags:
+  - milk
+- id: ING-DICT-0993
+  labels_en: rice crispies
+  labels_it: rice crispies
+  aliases: []
+  definition: Standardizzato da dizionario (msc, key=CM01964).
+  class: cereale
+  allergen_tags:
+  - gluten
+- id: ING-DICT-0994
+  labels_en: meat broth
+  labels_it: meat broth
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di brodo di carne (vedi preparazioni
+    di base)).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0995
+  labels_en: celery stalk
+  labels_it: celery stalk
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=costa di celery).
+  class: verdura
+  allergen_tags:
+  - celery
+- id: ING-DICT-0996
+  labels_en: dry white wine
+  labels_it: dry white wine
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=dry white wine).
+  class: bevanda
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-0997
+  labels_en: broth
+  labels_it: broth
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di brodo).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-0998
+  labels_en: black olive
+  labels_it: black olive
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di olive nere denocciolate).
+  class: verdura
+- id: ING-DICT-0999
+  labels_en: asafoetida
+  labels_it: asafoetida
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=teaspoon ground asafoetida).
+  class: spezia
+  allergen_tags:
+  - gluten
+- id: ING-DICT-1000
+  labels_en: red wine vinegar
+  labels_it: red wine vinegar
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di aceto di red wine).
+  class: condimento
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-1001
+  labels_en: bouillon
+  labels_it: bouillon
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=quarts white or classic bouillon
+    [no. 323 or 324]).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-1002
+  labels_en: flour
+  labels_it: flour
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=flour).
+  class: amido
+  allergen_tags:
+  - gluten
+- id: ING-DICT-1003
+  labels_en: corn flour
+  labels_it: corn flour
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di wheat flour di mais::corn
+    flour).
+  class: amido
+- id: ING-DICT-1004
+  labels_en: vanilla tuile decorating paste
+  labels_it: vanilla tuile decorating paste
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=recipe vanilla tuile decorating
+    paste).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+  - milk
+- id: ING-DICT-1005
+  labels_en: Marsala vergine wine
+  labels_it: Marsala vergine wine
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=di marsala vergine).
+  class: bevanda
+  allergen_tags:
+  - sulphites
+- id: ING-DICT-1006
+  labels_en: ribbon-pattern decorated sponge sheet
+  labels_it: ribbon-pattern decorated sponge sheet
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=ribbon-pattern decorated sponge
+    sheet).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+- id: ING-DICT-1007
+  labels_en: crêpe
+  labels_it: crêpe
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=crépes [see no. 2017]).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+  - milk
+- id: ING-DICT-1008
+  labels_en: chicken consommé
+  labels_it: chicken consommé
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=quarts chicken consommé [no.
+    361]).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-1009
+  labels_en: vanilla soufflé
+  labels_it: vanilla soufflé
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=recipe vanilla soufflé [no.
+    2040]).
+  class: altro
+  allergen_tags:
+  - eggs
+  - milk
+  - gluten
+- id: ING-DICT-1010
+  labels_en: gelatin
+  labels_it: gelatin
+  aliases:
+  - unflavored gelatin
+  definition: Standardizzato da dizionario (book, key=teaspoons (6 g) unflavored gelatin
+    powder).
+  class: altro
+- id: ING-DICT-1011
+  labels_en: brown stock
+  labels_it: brown stock
+  aliases:
+  - brown stock
+  definition: Standardizzato da dizionario (book, key=brown stock [no. 4]).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-1012
+  labels_en: demi-glaze sauce
+  labels_it: demi-glaze sauce
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=demi-glaze sauce [no. 20]).
+  class: condimento
+  allergen_tags:
+  - celery
+  - gluten
+- id: ING-DICT-1013
+  labels_en: ragù
+  labels_it: ragù
+  aliases:
+  - meat sauce
+  definition: Standardizzato da dizionario (book, key=di ragù (vedi preparazioni di
+    base)).
+  class: condimento
+  allergen_tags:
+  - celery
+- id: ING-DICT-1014
+  labels_en: duchesse potato base
+  labels_it: duchesse potato base
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=duchesse potato base [no. 1770]).
+  class: verdura
+  allergen_tags:
+  - milk
+  - eggs
+- id: ING-DICT-1015
+  labels_en: petite marmite
+  labels_it: petite marmite
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=litres (34 pt or 9 u.s. cups)
+    petite marmite).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-1016
+  labels_en: mornay sauce
+  labels_it: mornay sauce
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=sauce mornay [no. 56]).
+  class: condimento
+  allergen_tags:
+  - milk
+  - gluten
+- id: ING-DICT-1017
+  labels_en: flan crust
+  labels_it: flan crust
+  aliases: []
+  definition: Standardizzato da dizionario (book, key=baked flan crust [no. 605],
+    prepared with rich).
+  class: cereale
+  allergen_tags:
+  - gluten
+  - milk
+  - eggs
+- id: ING-DICT-1018
+  labels_en: court-bouillon
+  labels_it: court-bouillon
+  aliases:
+  - court bouillon
+  definition: Standardizzato da dizionario (book, key=di court-bouillon (vedi preparazioni
+    di base)).
+  class: liquido
+  allergen_tags:
+  - celery
+- id: ING-DICT-1019
+  labels_en: pitted black olive
+  labels_it: pitted black olive
+  aliases:
+  - olive nere snocciolate
+  definition: Standardizzato da dizionario (book, key=di olive nere snocciolate).
+  class: verdura
+- id: ING-DICT-1020
+  labels_en: shortcrust pastry
+  labels_it: shortcrust pastry
+  aliases:
+  - pasta frolla
+  definition: Standardizzato da dizionario (book, key=di pasta frolla (vedi preparazioni
+    di base)).
+  class: altro
+  allergen_tags:
+  - gluten
+  - eggs
+  - milk
+- id: ING-DICT-1021
+  labels_en: meat ragù
+  labels_it: meat ragù
+  aliases:
+  - ragù
+  - meat sauce
+  definition: Standardizzato da dizionario (book, key=di ragù di carne (vedi preparazioni
+    di base)).
+  class: condimento
+  allergen_tags:
+  - celery

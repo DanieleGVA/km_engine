@@ -1,7 +1,7 @@
 name: ricette
 language: it
 canonical_language: en
-version: 1.0.1
+version: 1.0.2
 frontmatter_optional_when_native:
 - time_min
 - difficulty

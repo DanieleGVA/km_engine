@@ -44,8 +44,8 @@ entries:
   ontology_uri: null
 - aliases: []
   definition: ''
-  id: ING-PARMESAN-CHEESE
-  labels_en: parmesan cheese
+  id: ING-PARMIGIANO-REGGIANO
+  labels_en: parmigiano reggiano
   labels_it: parmigiano reggiano
   ontology_uri: null
 - aliases: []

@@ -162,7 +162,21 @@ def load_pack(client: Neo4jClient, pack_dir: str | Path) -> dict[str, Any]:
                 teams=_term_value(term, "teams", default=[]) or [],
             )
 
-    return {"pack_id": pid, "terms": len(terms)}
+    # vincoli strutturali (R3 alias!=canonical, R9 una classe per canonical):
+    # report di collisione a ogni ingest (mai bloccante: decide l'umano)
+    from app.domain.dictionary_rules import validate_dictionary_constraints
+
+    all_entries = []
+    for glossary_name in glossary_names:
+        glossary_path = pack_dir / "glossari" / f"{glossary_name}.yaml"
+        raw = yaml.safe_load(glossary_path.read_text(encoding="utf-8"))
+        if isinstance(raw, dict):
+            all_entries.extend(raw.get("entries", []))
+        elif isinstance(raw, list):
+            all_entries.extend(raw)
+    problems = validate_dictionary_constraints(all_entries)
+
+    return {"pack_id": pid, "terms": len(terms), "constraint_problems": problems}
 
 
 def main() -> int:

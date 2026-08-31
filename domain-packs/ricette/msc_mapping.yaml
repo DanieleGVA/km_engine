@@ -12,7 +12,9 @@ CM00089: walnut
 CM00090: walnuts
 CM00094: wafer stick
 CM00124: white vinegar
+CM00128: red vinegar
 CM00131: Apple cider vinegar
+CM00135: balsamic vinegar
 CM00136: apple vinegar
 CM00149: vegetable patties
 CM00157: boneless veal leg
@@ -84,6 +86,9 @@ CM00548: Tabasco sauce
 CM00551: Tabasco sauce
 CM00556: soy sauce
 CM00557: smoky barbecue sauce
+CM00564: pesto
+CM00566: Oyster sauce
+CM00575: hoisin sauce
 CM00585: barbecue sauce
 CM00586: apple sauce
 CM00591: table salt
@@ -146,7 +151,9 @@ CM01016: orange
 CM01017: fresh yellow onion
 CM01019: fresh spring onion
 CM01023: fresh red onion
+CM01027: Taggiasca olives
 CM01031: Kalamata olives
+CM01032: green olive
 CM01036: pitted black olives
 CM01040: sunflower seed oil
 CM01044: olive oil
@@ -160,6 +167,7 @@ CM01067: pine nuts
 CM01070: cashew nuts
 CM01076: egg noodles
 CM01080: rice vermicelli
+CM01099: dijon mustard
 CM01100: mustard
 CM01101: mustard
 CM01103: mussels
@@ -169,11 +177,14 @@ CM01112: dried porcini mushrooms
 CM01113: porcini mushrooms
 CM01121: champignon mushroom
 CM01122: champignon mushroom
+CM01137: pancake mix
 CM01138: Natural muffin mix
 CM01150: whole milk
 CM01152: soya milk
+CM01156: semi-skimmed milk
 CM01159: condensed milk
 CM01163: cantaloupe
+CM01170: Marsala wine
 CM01177: margarine
 CM01181: Diced mango
 CM01182: mango
@@ -186,6 +197,7 @@ CM01271: mesclun lettuce
 CM01272: lollo lettuce
 CM01273: iceberg lettuce
 CM01275: Curly chicory
+CM01277: boston lettuce
 CM01279: lemongrass
 CM01285: fresh lemon
 CM01286: fresh leeks
@@ -198,6 +210,7 @@ CM01331: lime juice
 CM01333: unsweetened lemon juice
 CM01334: lemon juice
 CM01335: lemon juice
+CM01377: vanilla ice cream
 CM01417: low-calorie vanilla ice cream
 CM01436: honey
 CM01441: fresh thyme
@@ -245,6 +258,7 @@ CM01628: fresh eggs
 CM01629: eggplant
 CM01631: fresh long eggplant
 CM01649: ranch dressing
+CM01650: Caesar dressing
 CM01651: blue cheese dressing
 CM01653: puff pastry dough
 CM01690: Fresh daikon
@@ -254,6 +268,7 @@ CM01699: Fresh currants
 CM01700: fresh cucumber
 CM01706: vegan whipping cream
 CM01708: whipping cream
+CM01710: balsamic vinegar cream
 CM01714: sour cream
 CM01718: heavy cream
 CM01722: dried cranberry
@@ -272,7 +287,11 @@ CM01778: cocoa powder
 CM01787: clam meat
 CM01788: clams in shell
 CM01792: mango chutney
+CM01797: white chocolate substitute
 CM01798: dark chocolate substitute
+CM01815: white chocolate covering
+CM01817: dark chocolate covering
+CM01818: chocolate
 CM01830: chicken and turkey patties
 CM01837: whole chicken
 CM01850: boneless skinless chicken breast
@@ -300,6 +319,7 @@ CM01935: unsalted cream cheese
 CM01940: cheddar cheese
 CM01955: asiago cheese
 CM01961: chaat masala
+CM01964: rice crispies
 CM01965: Oat flakes
 CM01970: celery root
 CM01971: fresh celery
@@ -319,6 +339,8 @@ CM02036: fresh broccoli florets
 CM02046: frozen presliced white sandwich bread
 CM02051: bread crumbs
 CM02053: bread crumbs
+CM02057: hamburger buns
+CM02058: Hamburger bun
 CM02065: Brandy
 CM02066: Brandy
 CM02078: Fresh blueberries
@@ -367,9 +389,13 @@ CM05363: beets
 CM05675: clam base
 CM05770: frozen raw shell-on shrimp tails
 CM06072: chocolate transfer sheet
+CM06259: pesto sauce
 CM06277: apricot spray glaze
 CM06290: sun-dried tomato
+CM06316: dark chocolate covering
+CM06317: milk chocolate covering
 CM06481: string bean
+CM06597: sponge sheet
 CM06598: cocoa sponge sheet
 CM06637: classic butter crumble
 CM06996: whole beef tenderloin
@@ -384,6 +410,8 @@ CM2656: butter
 CM2684: Carrot
 CM2731: Boneless chicken leg quarter
 CM2732: Chicken leg quarter
+CM2741: white chocolate covering
+CM2742: dark chocolate covering
 CM2833: egg
 CM2856: peeled garlic
 CM2868: Prosciutto di Parma
@@ -407,10 +435,13 @@ CM3759: sesame seeds
 CM3771: turmeric powder
 CM3850: kiwifruit
 RF07446: steamed vegetables
+RF07828: lamb stock
 RF09781: whipped cream
 RF10104: Roasted rosemary potatoes
 RF10259: roasted new potatoes
 RF12604: shellfish stock
+RF310169: dark chocolate ganache
+RF414803: mashed potatoes
 RF415703: Whipped cream
 RF420852: Basil oil
 RF423573: cherry tomatoes
@@ -418,22 +449,35 @@ RF424338: Salt and pepper
 RF425340: mini baguette
 RF427087: pickled red onion
 RF427146713: soybean sprout
+SF00008: almond cream
+SF00031: balsamic syrup
+SF00042: béchamel
+SF00045: beef gravy
+SF00046: beef stock
+SF00102: chicken gravy
+SF00106: chicken stock
 SF00142: chocolate sauce
+SF00151: Choux pastry
 SF00163: clarified butter
+SF00199: court bouillon
 SF00208: croutons
 SF00211: cucumber raita
+SF00225: demi-glace
 SF00249: egg wash
 SF00257: fish stock
 SF00258: fish velouté
 SF00266: fresh fruit mix
 SF00267: fresh tomato sauce
 SF00268: fresh cherry tomato sauce
+SF00279: garlic mashed potatoes
 SF00304: grilled tomato half
 SF00320: hollandaise sauce
 SF00330: hummus
 SF00379: shellfish bisque sauce
+SF00427: mirepoix
 SF00432: mixed wild berries compote
 SF00466: parsley oil
+SF00467: Parslied breadcrumbs
 SF00477: pastry cream
 SF00505: pizza dough
 SF00523: raspberry coulis
@@ -445,6 +489,12 @@ SF00655: sugar syrup
 SF00667: sweet dough
 SF00699: tartare sauce
 SF00713: tomato concassè
+SF00715: tomato sauce
 SF00733: vanilla diplomat cream
+SF00737: vanilla sauce
+SF00740: veal gravy
+SF00741: veal stock
+SF00742: vegetable broth
+SF00745: vegetable stock
 SF00776: White sponge sheet
 SF00794: french meringue

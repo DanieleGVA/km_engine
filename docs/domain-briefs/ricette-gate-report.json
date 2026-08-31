@@ -15,9 +15,9 @@
     "normalization": {
       "draft_resolved": 92,
       "golden_resolved": 90,
-      "matches": 90,
-      "precision": 0.9783,
-      "recall": 1.0
+      "matches": 87,
+      "precision": 0.9457,
+      "recall": 0.9667
     },
     "relative_coverage": 1.0222,
     "roundtrip_ok": 15,
