@@ -84,3 +84,95 @@ def test_e2e_batch_writes_log(pg_conn) -> None:
     # pulizia
     with pg_conn.cursor() as cur:
         cur.execute("DELETE FROM canon_adjudication_log WHERE document_id = 'RF0001'")
+
+
+def _fake_mixed() -> FakeLLMClient:
+    """Componente A approvato, componente B canon_gap (candidati propri)."""
+    cand_a = [{"document_id": "bk_a-0001", "title": "A", "lines": ["- 100 g chicken"]}]
+    cand_b = [{"document_id": "bk_b-0001", "title": "B", "lines": ["- 50 g rice"]}]
+    ok = {
+        "component": "protein", "overall": "ok", "confidence": 0.9,
+        "motivation": "m", "lines": [{"line": 0, "verdict": "ok", "reason": "r",
+                                     "citation": "bk_a-0001:0", "base": "ratio"}],
+    }
+    gap = {
+        "component": "starch", "overall": "canon_gap", "confidence": 0.4,
+        "motivation": "no candidate covers the component", "lines": [],
+    }
+    judgements = {}
+    for perm in _permutations([c["document_id"] for c in cand_a]):
+        ordered = [cand_a[0] if cid == "bk_a-0001" else None for cid in perm]
+        ordered = [c for c in ordered if c]
+        judgements[(CANON_JUDGE_SYSTEM, build_component_prompt(
+            "protein", ["- 100 g chicken"], ordered))] = ok
+    for perm in _permutations([c["document_id"] for c in cand_b]):
+        ordered = [cand_b[0] if cid == "bk_b-0001" else None for cid in perm]
+        ordered = [c for c in ordered if c]
+        judgements[(CANON_JUDGE_SYSTEM, build_component_prompt(
+            "starch", ["- 50 g rice"], ordered))] = gap
+    return FakeLLMClient(judgements=judgements)
+
+
+def test_e2e_batch_resume_skips_judged(pg_conn) -> None:
+    """Resume: un componente gia' giudicato (coda umana o log) viene saltato,
+    non duplicato."""
+    pack = load_domain_pack(str(PACK_DIR))
+    card = {
+        "id": "RF0003",
+        "canonical_md": "## Ingredients\n- 100 g chicken\n## Method\n1. Cook.",
+        "components": [
+            {"name": "protein", "lines": ["- 100 g chicken"],
+             "candidates": [{"document_id": "bk_a-0001", "title": "A",
+                              "lines": ["- 100 g chicken"]}]},
+        ],
+    }
+    # prima run: giudica e scrive nel log (batch_approve)
+    r1 = _run(run_e2e_batch(_fake_mixed(), [card], pack, pg_conn))
+    assert r1.batch_approved == 1
+    assert r1.log_entries == 1
+    # seconda run (stessa card): il componente e' gia' nel log => skip
+    r2 = _run(run_e2e_batch(_fake_mixed(), [card], pack, pg_conn))
+    assert r2.skipped == 1
+    assert r2.batch_approved == 0
+    with pg_conn.cursor() as cur:
+        cur.execute(
+            "SELECT count(*) FROM canon_adjudication_log "
+            "WHERE document_id = 'RF0003'")
+        assert cur.fetchone()[0] == 1
+        cur.execute(
+            "DELETE FROM canon_adjudication_log WHERE document_id = 'RF0003'")
+
+
+def test_e2e_batch_components_path(pg_conn) -> None:
+    """Con componenti espliciti il giudice giudica PER componente, ognuno
+    con i propri candidati: approvato -> log, canon_gap -> coda umana."""
+    pack = load_domain_pack(str(PACK_DIR))
+    card = {
+        "id": "RF0002",
+        "canonical_md": "## Ingredients\n- 100 g chicken\n- 50 g rice\n## Method\n1. Cook.",
+        "components": [
+            {"name": "protein", "lines": ["- 100 g chicken"],
+             "candidates": [{"document_id": "bk_a-0001", "title": "A",
+                              "lines": ["- 100 g chicken"]}]},
+            {"name": "starch", "lines": ["- 50 g rice"],
+             "candidates": [{"document_id": "bk_b-0001", "title": "B",
+                              "lines": ["- 50 g rice"]}]},
+        ],
+    }
+    result = _run(run_e2e_batch(_fake_mixed(), [card], pack, pg_conn))
+    assert result.processed == 1
+    assert result.components == 2
+    assert result.batch_approved == 1
+    assert result.canon_gap == 1
+    assert result.human == 0
+    assert result.log_entries == 1
+    with pg_conn.cursor() as cur:
+        cur.execute(
+            "SELECT count(*) FROM canon_adjudication_log WHERE document_id = 'RF0002'")
+        assert cur.fetchone()[0] == 1
+        cur.execute(
+            "SELECT count(*) FROM adjudications WHERE document_id = 'RF0002' "
+            "AND kind = 'canon' AND status = 'pending'")
+        assert cur.fetchone()[0] == 1
+        cur.execute("DELETE FROM canon_adjudication_log WHERE document_id = 'RF0002'")
+        cur.execute("DELETE FROM adjudications WHERE document_id = 'RF0002'")

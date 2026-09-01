@@ -23,10 +23,13 @@ class E2EResult:
     """Esito della run end-to-end su un batch."""
 
     processed: int = 0
+    components: int = 0
+    skipped: int = 0
     batch_approved: int = 0
     human: int = 0
     canon_gap: int = 0
     log_entries: int = 0
+    errors: list[str] = field(default_factory=list)
     coverage_problems: list[str] = field(default_factory=list)
     rollback_ok: bool = True
     report: dict = field(default_factory=dict)
@@ -98,11 +101,31 @@ async def run_e2e_batch(
     for card in batch:
         result.processed += 1
         card_md = card.get("canonical_md", "")
-        components = _card_components(card_md)
-        for comp_name, comp_lines in components:
-            k3: K3Result = await route_k3(
-                judge, comp_name, comp_lines, card.get("candidates", [])
-            )
+        # Componenti espliciti (nome + righe + candidati propri) se forniti
+        # dal chiamante; altrimenti fallback: card intera come unico
+        # componente "main" con i candidati della card.
+        components = card.get("components") or [
+            {"name": name, "lines": lines, "candidates": card.get("candidates", [])}
+            for name, lines in _card_components(card_md)
+        ]
+        for comp in components:
+            result.components += 1
+            comp_name = comp["name"]
+            comp_lines = comp["lines"]
+            candidates = comp.get("candidates", card.get("candidates", []))
+            section = f"component:{comp_name}"
+            # Resume: componente gia' giudicato in una run precedente
+            # (coda umana o log) => salta, non duplica.
+            if _already_judged(conn, card["id"], section):
+                result.skipped += 1
+                continue
+            try:
+                k3: K3Result = await route_k3(
+                    judge, comp_name, comp_lines, candidates
+                )
+            except Exception as exc:  # noqa: BLE001 - una card non deve uccidere il batch
+                result.errors.append(f"{card['id']}:{comp_name}: {exc!r}")
+                continue
             if k3.route == "batch_approve":
                 result.batch_approved += 1
                 verdict = k3.runs[0]
@@ -116,10 +139,13 @@ async def run_e2e_batch(
                 _enqueue_human(conn, card["id"], comp_name, k3, "divergent")
     result.report = {
         "processed": result.processed,
+        "components": result.components,
+        "skipped": result.skipped,
         "batch_approved": result.batch_approved,
         "human": result.human,
         "canon_gap": result.canon_gap,
         "log_entries": result.log_entries,
+        "errors": result.errors[:20],
     }
     return result
 
@@ -165,15 +191,36 @@ def _write_log(
         cur.execute(
             """
             INSERT INTO canon_adjudication_log
-                (document_id, kind, verdict_json, llm_model, llm_confidence,
-                 candidate_ids)
-            VALUES (%s, 'canon', %s, %s, %s, %s)
+                (document_id, section, kind, verdict_json, llm_model,
+                 llm_confidence, candidate_ids)
+            VALUES (%s, %s, 'canon', %s, %s, %s, %s)
             """,
             (
                 document_id,
+                f"component:{component}",
                 json.dumps(verdict.model_dump()),
                 "judge",
                 verdict.confidence,
                 k3.permutations[0] if k3.permutations else [],
             ),
         )
+
+
+def _already_judged(
+    conn: psycopg.Connection, document_id: str, section: str
+) -> bool:
+    """Resume: il componente e' gia' stato giudicato (coda umana o log)."""
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT EXISTS (
+                SELECT 1 FROM adjudications
+                WHERE document_id = %s AND section = %s AND kind = 'canon'
+                UNION ALL
+                SELECT 1 FROM canon_adjudication_log
+                WHERE document_id = %s AND section = %s
+            )
+            """,
+            (document_id, section, document_id, section),
+        )
+        return bool(cur.fetchone()[0])

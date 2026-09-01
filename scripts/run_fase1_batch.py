@@ -31,6 +31,15 @@ from scripts.msc_to_md import card_to_md, extract_cards
 PACK_DIR = pathlib.Path(__file__).resolve().parents[1] / "domain-packs" / "ricette"
 
 
+def _candidate_lines(hit, max_lines=5):
+    """Righe ingrediente del candidato dal suo canonical_md (per il prompt).
+
+    Il giudice confronta le righe della card con le righe del candidato:
+    servono le righe PROPRIE del candidato, mai quelle della query.
+    """
+    return [l for l in hit.canonical_md.splitlines() if l.startswith("- ")][:max_lines]
+
+
 def _retrieve_candidates(client, embedding, admin, component_lines, limit=3):
     """Retrieval candidati di canone per componente (RAG).
 
@@ -42,7 +51,7 @@ def _retrieve_candidates(client, embedding, admin, component_lines, limit=3):
         hits = rag_query(client, admin, query, lang="en", limit=limit, embedding=embedding)
         return [
             {"document_id": h.document_id, "title": h.title,
-             "lines": component_lines[:3]}  # prompt piu' corto
+             "lines": _candidate_lines(h)}
             for h in hits
         ]
     except Exception:
@@ -52,7 +61,8 @@ def _retrieve_candidates(client, embedding, admin, component_lines, limit=3):
 async def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--pdf", required=True, type=pathlib.Path)
-    ap.add_argument("--limit", type=int, default=20)
+    ap.add_argument("--limit", type=int, default=None,
+                    help="numero massimo di card (default: tutte)")
     ap.add_argument("--dsn", default=None)
     args = ap.parse_args()
 
@@ -64,7 +74,9 @@ async def main() -> int:
     admin = Principal("fase1_admin", ("admin",), (), "default", "fase1_jwt")
     embedding = build_embedding_from_graph(client, pack)
 
-    cards = extract_cards(args.pdf)[: args.limit]
+    cards = extract_cards(args.pdf)
+    if args.limit is not None:
+        cards = cards[: args.limit]
     batch = []
     t0 = time.time()
     for card in cards:
@@ -86,22 +98,31 @@ async def main() -> int:
             optional_when_native=tuple(pack.frontmatter_optional_when_native),
             countable_units=pack.countable_units(),
         )
-        card_candidates = []
         msc_map = pack.msc_mapping()
+        card_components = []
         for comp in components:
-            # termini canonici: code-first (msc_mapping) > item normalizzato
+            # righe REALI della card per questo componente (con dosi): il
+            # giudice confronta queste con le righe dei candidati
+            comp_lines = [
+                parsed_doses.ingredients[p].raw for p in comp.ingredient_positions
+            ]
+            # termini canonici per il retrieval: code-first (msc_mapping) >
+            # item normalizzato
             comp_terms = []
             for p in comp.ingredient_positions:
                 ing = parsed_doses.ingredients[p]
                 term = msc_map.get(ing.code or "", ing.item)
                 comp_terms.append(term)
-            comp_lines = [f"- {t}" for t in comp_terms]
-            cands = _retrieve_candidates(client, embedding, admin, comp_lines)
-            card_candidates.extend(cands)
+            cands = _retrieve_candidates(client, embedding, admin, comp_terms)
+            card_components.append({
+                "name": comp.label,
+                "lines": comp_lines,
+                "candidates": cands,
+            })
         batch.append({
             "id": card.code,
             "canonical_md": doses.canonical_md,
-            "candidates": card_candidates,
+            "components": card_components,
         })
 
     llm = HttpLLMClient()
@@ -109,7 +130,7 @@ async def main() -> int:
     elapsed = time.time() - t0
     result.report["cards"] = len(batch)
     result.report["elapsed_s"] = round(elapsed, 1)
-    result.report["llm_calls"] = result.processed * 3  # k=3 per componente
+    result.report["llm_calls"] = result.components * 3  # k=3 per componente
     print(json.dumps(result.report, ensure_ascii=False, indent=1))
     conn.close()
     client.close()

@@ -11,6 +11,7 @@ strutturato all'LLM. Output sempre schema-valido o errore esplicito
 """
 from __future__ import annotations
 
+import asyncio
 import json
 from typing import Any, Protocol, runtime_checkable
 
@@ -104,16 +105,28 @@ class HttpLLMClient:
             ],
             "temperature": 0,
         }
-        async with httpx.AsyncClient(timeout=self.settings.llm_timeout) as client:
-            response = await client.post(
-                endpoint, json=payload, headers=self._headers(api_key)
-            )
-            response.raise_for_status()
-            data = response.json()
-        try:
-            return data["choices"][0]["message"]["content"]
-        except (KeyError, IndexError, TypeError) as exc:
-            raise RuntimeError(f"unexpected LLM response shape: {data!r}") from exc
+        # Retry su errori transitori (5xx, connessione): un 502 del proxy
+        # LLM non deve uccidere un batch da migliaia di chiamate.
+        last_error: Exception | None = None
+        for attempt in range(4):
+            try:
+                async with httpx.AsyncClient(timeout=self.settings.llm_timeout) as client:
+                    response = await client.post(
+                        endpoint, json=payload, headers=self._headers(api_key)
+                    )
+                    response.raise_for_status()
+                    data = response.json()
+                try:
+                    return data["choices"][0]["message"]["content"]
+                except (KeyError, IndexError, TypeError) as exc:
+                    raise RuntimeError(
+                        f"unexpected LLM response shape: {data!r}"
+                    ) from exc
+            except (httpx.HTTPStatusError, httpx.TransportError) as exc:
+                last_error = exc
+                if attempt < 3:
+                    await asyncio.sleep(5 * (2 ** attempt))
+        raise last_error
 
     async def translate(
         self, text: str, *, source_lang: str, target_lang: str
