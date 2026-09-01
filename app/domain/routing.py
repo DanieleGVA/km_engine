@@ -8,6 +8,7 @@ autorizza un'applicazione.
 """
 from __future__ import annotations
 
+import asyncio
 import hashlib
 from dataclasses import dataclass, field
 from typing import Any
@@ -68,14 +69,20 @@ async def route_k3(
     """Esegue il giudice k=3 con ordine dei candidati permutato e instrada."""
     candidate_ids = [c["document_id"] for c in candidates]
     perms = _permutations(candidate_ids)
-    runs: list[ComponentVerdict] = []
     by_id = {c["document_id"]: c for c in candidates}
-    for perm in perms:
+
+    async def _run_one(perm: list[str]) -> ComponentVerdict:
         # ordine dei candidati = ordine della permutazione (verificabile)
         ordered = [by_id[cid] for cid in perm if cid in by_id]
-        runs.append(await judge_component(
+        return await judge_component(
             judge, component, card_lines, ordered, house_rules
-        ))
+        )
+
+    # k=3 in parallelo: le esecuzioni sono indipendenti (stesso prompt,
+    # ordine candidati permutato); il batch reale fa ~900 chiamate LLM.
+    runs: list[ComponentVerdict] = list(
+        await asyncio.gather(*(_run_one(p) for p in perms))
+    )
     agree = _agreement(runs)
     if runs and runs[0].overall == "canon_gap":
         route = "canon_gap"

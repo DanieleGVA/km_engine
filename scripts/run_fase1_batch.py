@@ -49,16 +49,46 @@ def _lex_tokens(text: str) -> set[str]:
 
 
 def _lexical_score(query_tokens: set[str], hit) -> float:
-    """Overlap tra i token della query e l'identita' del candidato
-    (titolo + termini canonici + entita'). Il segnale lessicale e' piu'
-    affidabile del coseno hashing (che collida su testi lunghi)."""
+    """Match lessicale binario: 1.0 se QUALSIASI token della query compare
+    nell'identita' del candidato (titolo + termini canonici + entita').
+
+    Il coseno hashing collida su testi lunghi e la frazione penalizza i
+    match parziali (es. 'boneless skinless chicken breast' vs un doc che ha
+    solo 'chicken'): per il giudice basta che il candidato sia dello stesso
+    ingrediente, poi la qualita' delle righe decide se confrontare.
+    """
     if not query_tokens:
         return 0.0
     text = " ".join(
         str(p) for p in [hit.title, *(hit.terms or []), *(hit.entities or [])] if p
     )
     t = _lex_tokens(text)
-    return len(query_tokens & t) / len(query_tokens)
+    return 1.0 if (query_tokens & t) else 0.0
+
+
+_GARBAGE_MARKERS = (
+    "ingrediente", "servings", "serving", "page", "recipe", "minutes",
+    "hours", "procedure", "ingredient", "preparation", "method", "step",
+)
+
+
+def _line_quality(hit) -> float:
+    """Frazione di righe del candidato che sono righe ingrediente parseabili
+    (non frammenti di procedura tipo '1.67 ingrediente' o '10 to 6 servings')."""
+    lines = _candidate_lines(hit, max_lines=8)
+    if not lines:
+        return 0.0
+    good = 0
+    for l in lines:
+        body = l[2:].strip()  # dopo "- "
+        if not body:
+            continue
+        if any(m in body.casefold() for m in _GARBAGE_MARKERS):
+            continue
+        # deve iniziare con numero o lettera (non punteggiatura/spazzatura)
+        if body[0].isalnum():
+            good += 1
+    return good / len(lines)
 
 
 def _retrieve_candidates(client, embedding, admin, component_lines, limit=3):
@@ -67,15 +97,17 @@ def _retrieve_candidates(client, embedding, admin, component_lines, limit=3):
     La query usa i TERMINI CANONICI (non i nomi industriali grezzi): i nomi
     canonici matchano il vocabolario del canone, i nomi CalcMenu no.
     Il vettoriale e' rumoroso (hashing a 384 bucket): si recuperano piu'
-    candidati e si riordina per overlap lessicale con l'identita' del
-    documento (titolo+termini+entita'), poi per coseno.
+    candidati e si riordina per (1) overlap lessicale con l'identita' del
+    documento, (2) qualita' delle righe ingrediente (i canonical_md di alcuni
+    libri contengono frammenti di procedura), (3) coseno.
     """
     query = " ".join(component_lines)
     try:
         hits = rag_query(client, admin, query, lang="en", limit=limit * 3,
                          embedding=embedding)
         q_tokens = _lex_tokens(query)
-        hits.sort(key=lambda h: (-_lexical_score(q_tokens, h), -h.cosine))
+        hits.sort(key=lambda h: (
+            -_lexical_score(q_tokens, h), -_line_quality(h), -h.cosine))
         return [
             {"document_id": h.document_id, "title": h.title,
              "lines": _candidate_lines(h)}
