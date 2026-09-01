@@ -14,6 +14,7 @@ import argparse
 import asyncio
 import json
 import pathlib
+import re
 import time
 
 import psycopg
@@ -41,19 +42,44 @@ def _candidate_lines(hit, max_lines=5):
     return [l for l in hit.canonical_md.splitlines() if l.startswith("- ")][:max_lines]
 
 
+def _lex_tokens(text: str) -> set[str]:
+    """Token lessicali con stemming-lite (plurale): 'almonds' -> 'almond'."""
+    toks = set(re.findall(r"[a-z0-9]+", text.casefold()))
+    return toks | {t[:-1] for t in toks if t.endswith("s") and len(t) > 3}
+
+
+def _lexical_score(query_tokens: set[str], hit) -> float:
+    """Overlap tra i token della query e l'identita' del candidato
+    (titolo + termini canonici + entita'). Il segnale lessicale e' piu'
+    affidabile del coseno hashing (che collida su testi lunghi)."""
+    if not query_tokens:
+        return 0.0
+    text = " ".join(
+        str(p) for p in [hit.title, *(hit.terms or []), *(hit.entities or [])] if p
+    )
+    t = _lex_tokens(text)
+    return len(query_tokens & t) / len(query_tokens)
+
+
 def _retrieve_candidates(client, embedding, admin, component_lines, limit=3):
     """Retrieval candidati di canone per componente (RAG).
 
     La query usa i TERMINI CANONICI (non i nomi industriali grezzi): i nomi
     canonici matchano il vocabolario del canone, i nomi CalcMenu no.
+    Il vettoriale e' rumoroso (hashing a 384 bucket): si recuperano piu'
+    candidati e si riordina per overlap lessicale con l'identita' del
+    documento (titolo+termini+entita'), poi per coseno.
     """
     query = " ".join(component_lines)
     try:
-        hits = rag_query(client, admin, query, lang="en", limit=limit, embedding=embedding)
+        hits = rag_query(client, admin, query, lang="en", limit=limit * 3,
+                         embedding=embedding)
+        q_tokens = _lex_tokens(query)
+        hits.sort(key=lambda h: (-_lexical_score(q_tokens, h), -h.cosine))
         return [
             {"document_id": h.document_id, "title": h.title,
              "lines": _candidate_lines(h)}
-            for h in hits
+            for h in hits[:limit]
         ]
     except Exception:
         return []
