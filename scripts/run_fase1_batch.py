@@ -20,6 +20,7 @@ import psycopg
 
 from app.auth import Principal
 from app.domain import load_domain_pack, parse_translated_md
+from app.domain.canonical import canonicalize
 from app.domain.components import decompose_document
 from app.domain.doses import standardize_doses
 from app.domain.e2e import run_e2e_batch
@@ -84,12 +85,11 @@ async def main() -> int:
             continue
         md = card_to_md(card)
         try:
-            canonical = parse_translated_md(
-                md, known_units=pack.known_units(),
-                optional_when_native=tuple(pack.frontmatter_optional_when_native),
-                countable_units=pack.countable_units(),
-            )
-            doses = standardize_doses(md, pack, servings_target=10)
+            # canonicalize (passo 7): risoluzione code-first del dizionario.
+            # Senza questo passo la decomposizione e il giudice vedono i nomi
+            # industriali grezzi e il class-lookup collassa tutto in "main".
+            canon = canonicalize(pack, md)
+            doses = standardize_doses(canon.canonical_md, pack, servings_target=10)
         except Exception:
             continue
         components = decompose_document(doses.canonical_md, card.code, pack)
