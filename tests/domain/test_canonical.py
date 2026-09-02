@@ -22,6 +22,8 @@ from app.domain import (
     verify_canon_log,
     write_canon_log,
 )
+from app.domain.canonical import _build_term_map
+from app.domain.normalize import normalize_key
 
 from .conftest import read_corpus, real_recipe_names
 
@@ -325,3 +327,62 @@ def test_ia5_write_canon_log_persists(pack, pg_conn) -> None:
     assert len(rows) == written
     unit_rows = [row for row in rows if row[1] == "ingredients[0].unit"]
     assert unit_rows and unit_rows[0][4] == "UNIT-DL"
+
+
+# ---------------------------------------------------------------------------
+# WP-F1 — simmetria della chiave di lookup (D2)
+# ---------------------------------------------------------------------------
+
+def test_f1_glossary_symmetry(pack) -> None:
+    """Ogni termine del glossario e' raggiungibile dalla propria chiave.
+
+    Se un solo termine non si trova nella mappa costruita da se stesso, il
+    lookup e la costruzione della mappa usano due normalizzazioni diverse:
+    e' esattamente il difetto D2, in forma testabile.
+    """
+    term_map = _build_term_map(pack)
+    for entry in pack.glossary_entries():
+        for term in (entry.labels_en, entry.labels_it, *entry.aliases):
+            key = normalize_key(term)
+            if not key:
+                continue
+            assert key in term_map, f"{entry.id}: {term!r} -> {key!r}"
+
+
+def test_f1_regression_d2(pack) -> None:
+    """Le tre forme in cui la traduzione consegna l'olio risolvono tutte."""
+    for item in (
+        "di extra virgin olive oil",
+        "extra virgin olive oil",
+        "di olio extravergine di oliva",
+        "olio extravergine d’oliva",
+    ):
+        doc = canonicalize(pack, _translated_md("1", "dl", item, doc_id="ia5-F1"))
+        assert doc.unresolved_terms == [], item
+        assert _ingredient_lines(doc.canonical_md) == [
+            "- 100 ml extra virgin olive oil"
+        ], item
+
+
+def test_f1_compound_conjunction_resolves(pack) -> None:
+    """``sale e pepe`` e' una voce di glossario: la ``e`` non va rimossa."""
+    doc = canonicalize(pack, _translated_md("1", None, "sale e pepe", doc_id="ia5-F1b"))
+    assert doc.unresolved_terms == []
+
+
+def test_f1_elision_resolves(pack) -> None:
+    """``d'aglio`` (292 righe nel corpus) risolve come ``aglio``."""
+    doc = canonicalize(pack, _translated_md("2", "clove", "d’aglio", doc_id="ia5-F1c"))
+    assert doc.unresolved_terms == []
+    assert _ingredient_lines(doc.canonical_md) == ["- 2 clove garlic"]
+
+
+def test_f1_unresolved_still_untouched(pack) -> None:
+    """T10 non cambia: un termine non risolto non viene mai riscritto."""
+    doc = canonicalize(
+        pack, _translated_md("120", "g", "mandorle dolci sbucciate", doc_id="ia5-F1d")
+    )
+    assert doc.unresolved_terms == ["mandorle dolci sbucciate"]
+    assert _ingredient_lines(doc.canonical_md) == [
+        "- 120 g mandorle dolci sbucciate"
+    ]

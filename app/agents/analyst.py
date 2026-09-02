@@ -41,6 +41,7 @@ from app.domain import (
     parse_translated_md,
     translate_document,
 )
+from app.domain.normalize import normalize_key
 from app.domain.pack import DomainPackBundle
 
 # Deterministic culinary seed used to detect technique/state candidates in the
@@ -79,9 +80,6 @@ ONTOLOGY_CANDIDATES: list[OntologyCandidate] = [
 ]
 
 _PAREN_RE = re.compile(r"\([^)]*\)")
-_LEADING_CONNECTOR_RE = re.compile(r"^(?:di|e)\s+", flags=re.IGNORECASE)
-_INNER_CONNECTOR_RE = re.compile(r"\s+(?:di|e)\s+", flags=re.IGNORECASE)
-_WS_RE = re.compile(r"\s+")
 
 DEFAULT_BRIEF_DIR = Path("docs/domain-briefs")
 
@@ -89,16 +87,15 @@ DEFAULT_BRIEF_DIR = Path("docs/domain-briefs")
 def clean_item(item: str) -> str:
     """Normalize an ingredient item for pairing source<->translated.
 
-    Removes parenthetical weights (``(1.2 kg)``), leading/inner Italian
-    connectors (``di``/``e``), unicode apostrophes and repeated whitespace.
-    The original text is preserved in the brief contexts, so this is
-    non-destructive (P3).
+    Removes parenthetical weights (``(1.2 kg)``) and then applies
+    :func:`app.domain.normalize.normalize_key`, la stessa chiave usata dal
+    canonicalizzatore (WP-F1). Prima l'analista toglieva anche i connettori
+    *interni*, cosi' il brief proponeva ``olio extravergine oliva`` come
+    termine sorgente e il pack generato non poteva piu' incontrare l'item
+    reale ``olio extravergine di oliva``: era D2 replicato nella pipeline
+    degli agenti. Il testo originale resta nei contexts del brief (P3).
     """
-    item = _PAREN_RE.sub(" ", item)
-    item = _LEADING_CONNECTOR_RE.sub("", item)
-    item = _INNER_CONNECTOR_RE.sub(" ", item)
-    item = item.replace("\u2019", "'")
-    return _WS_RE.sub(" ", item).strip()
+    return normalize_key(_PAREN_RE.sub(" ", item))
 
 
 def _word_pattern(term: str) -> re.Pattern[str]:

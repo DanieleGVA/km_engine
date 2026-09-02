@@ -13,7 +13,6 @@ bidirectional: applying the entries to ``translated.md`` reproduces
 """
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
@@ -21,6 +20,7 @@ from typing import Any
 import psycopg
 
 from app.domain.errors import DomainError
+from app.domain.normalize import normalize_key
 from app.domain.pack import DomainPackBundle, UnitRule
 from app.domain.verify import (
     IngredientLine,
@@ -178,19 +178,24 @@ def _format_decimal(value: Decimal) -> str:
 # ---------------------------------------------------------------------------
 
 def _build_term_map(pack: DomainPackBundle) -> dict[str, tuple[str, str]]:
-    """Map ``term.casefold() -> (labels_en, glossary_id)``.
+    """Map ``normalize_key(term) -> (labels_en, glossary_id)``.
+
+    La chiave e' prodotta da :func:`app.domain.normalize.normalize_key`, la
+    stessa funzione applicata all'item da canonicalizzare (WP-F1): senza
+    questa simmetria ``olio extravergine di oliva`` nel glossario e
+    ``olio extravergine oliva`` nell'item non si incontrano mai (D2).
 
     Exact full-phrase matching is deliberate: a term with an extra modifier
     (e.g. ``mandorle dolci sbucciate``) must NOT resolve to the shorter alias
     ``mandorle dolci`` (T10). The map is built longest-first so duplicate
-    casefolded keys keep the longest source term deterministically.
+    normalized keys keep the longest source term deterministically.
     """
     pairs: list[tuple[str, str, str]] = []
     for entry in pack.glossary_entries():
         for term in (entry.labels_en, entry.labels_it, *entry.aliases):
-            term = term.strip().casefold()
-            if term:
-                pairs.append((term, entry.labels_en, entry.id))
+            key = normalize_key(term)
+            if key:
+                pairs.append((key, entry.labels_en, entry.id))
     pairs.sort(key=lambda item: len(item[0]), reverse=True)
     term_map: dict[str, tuple[str, str]] = {}
     for term, label_en, entry_id in pairs:
@@ -198,24 +203,11 @@ def _build_term_map(pack: DomainPackBundle) -> dict[str, tuple[str, str]]:
     return term_map
 
 
-def _strip_item_connectors(item: str) -> str:
-    """Rimuove connettori grammaticali IT residui (``di``, ``e``) da un item.
-
-    La traduzione puo' produrre ``di extra virgin olive oil`` o ``salt e black
-    pepper``; il connettore non fa parte del termine e impedisce il match
-    esatto con labels_en. Deterministico e non distruttivo: il canon-log
-    conserva il prima/dopo (P3).
-    """
-    out = re.sub(r"^(?:di|e)\s+", "", item.strip(), flags=re.IGNORECASE)
-    out = re.sub(r"\s+(?:di|e)\s+", " ", out, flags=re.IGNORECASE)
-    return out.strip().replace("\u2019", "'")
-
-
 def _glossary_id_for_label(pack: DomainPackBundle, label: str) -> str | None:
-    """Return the glossary id whose ``labels_en`` equals ``label`` (casefold)."""
-    key = label.strip().casefold()
+    """Return the glossary id whose ``labels_en`` equals ``label``."""
+    key = normalize_key(label)
     for entry in pack.glossary_entries():
-        if entry.labels_en.casefold() == key:
+        if normalize_key(entry.labels_en) == key:
             return entry.id
     return None
 
@@ -325,11 +317,11 @@ def canonicalize(
             item = msc_mapping[ingredient.code]
             resolved = (item, "MAP")
         else:
-            lookup = _strip_item_connectors(item)
-            resolved = term_map.get(lookup.casefold())
+            lookup = normalize_key(item)
+            resolved = term_map.get(lookup)
             if resolved is None and unit is not None and unit in countable_units:
                 # "2 egg whites" -> unit=egg, item=whites: prova "egg whites"
-                resolved = term_map.get(f"{unit} {lookup}".casefold())
+                resolved = term_map.get(normalize_key(f"{unit} {item}"))
                 if resolved is not None:
                     item = resolved[0]
                     unit = None  # il nome contiene gia' il contabile

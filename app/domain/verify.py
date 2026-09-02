@@ -28,6 +28,7 @@ from app.domain.errors import (
     GlossaryProposalNotFoundError,
     ParseError,
 )
+from app.domain.normalize import normalize_text
 from app.domain.numbers import extract_numbers, numbers_multiset_equal
 from app.domain.pack import DomainPackBundle
 
@@ -596,22 +597,35 @@ def _tokens(text: str) -> list[str]:
 def normalize_terms(text: str, term_map: list[tuple[str, str]]) -> str:
     """Replace glossary terms with their canonical English label.
 
+    Testo e termini passano per la stessa :func:`normalize_text` (WP-F1):
+    apostrofi tipografici, casefold ed elisioni sono trattati in un solo
+    posto, cosi' L2 e lo stadio 2 vedono la stessa chiave. La spaziatura non
+    viene toccata: qui si sostituisce dentro una sezione, non si costruisce
+    una chiave di lookup.
+
     Single-pass alternation (longest term first) so a shorter alias that is a
     substring of a longer term or of its replacement is not re-replaced.
     """
+    norm_text = normalize_text(text)
     if not term_map:
-        return text.casefold().replace("\u2019", "'")
-    # Normalizza gli apostrofi unicode (U+2019) a ASCII: i testi reali usano
-    # "sott\u2019olio", i glossari "sott'olio".
-    norm_terms = [(t.casefold().replace("\u2019", "'"), r) for t, r in term_map]
+        return norm_text
+    norm_terms = [
+        (key, replacement)
+        for key, replacement in (
+            (normalize_text(term).strip(), replacement)
+            for term, replacement in term_map
+        )
+        if key
+    ]
+    if not norm_terms:
+        return norm_text
     replacements = dict(norm_terms)
     pattern = re.compile(
         r"\b(" + "|".join(re.escape(t) for t, _ in norm_terms) + r")\b",
         flags=re.IGNORECASE,
     )
-    norm_text = text.casefold().replace("\u2019", "'")
     return pattern.sub(
-        lambda match: replacements[match.group(1).casefold().replace("\u2019", "'")],
+        lambda match: replacements[normalize_text(match.group(1)).strip()],
         norm_text,
     )
 

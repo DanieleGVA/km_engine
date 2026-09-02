@@ -65,7 +65,9 @@ def test_unknown_code_falls_back_to_literal() -> None:
     doc = canonicalize(pack, MD)
     # ZZ99999 non nel mapping: resta il nome grezzo (irrisolto, non inventato)
     assert "- 20 g UNKNOWN ITEM {code: ZZ99999}" in doc.canonical_md
-    assert "UNKNOWN ITEM" in doc.unresolved_terms
+    # ``unresolved_terms`` porta la chiave normalizzata (WP-F1): e' la stessa
+    # che finisce in glossary_proposals e nel report di copertura.
+    assert "unknown item" in doc.unresolved_terms
 
 
 def test_without_mapping_backward_compatible() -> None:

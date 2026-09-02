@@ -22,8 +22,8 @@ from tests.domain.conftest import REPO_ROOT
 
 CORPUS_DIR = REPO_ROOT / "tests" / "fixtures" / "corpus_marchesi_full"
 
-# Baseline WP-F0 misurato il 2026-09-02 (lookup: _strip_item_connectors).
-EXPECTED_COVERAGE = 0.4795
+# WP-F1: lookup = normalize_key (era 0.4795 con _strip_item_connectors).
+EXPECTED_COVERAGE = 0.6518
 COVERAGE_TOLERANCE = 0.005
 EXPECTED_LINES = 10892
 EXPECTED_DOCS = 1462
@@ -58,15 +58,20 @@ def test_coverage_unresolved_sorted_with_candidates(corpus_report) -> None:
     assert counts == sorted(counts, reverse=True)
 
     first = unresolved[0]
-    assert first.term == "olio extravergine oliva"
-    assert first.count == 823
+    assert first.term == "brodo di carne"
+    assert first.count == 121
     assert first.examples
     assert first.candidates
-    # Il candidato migliore e' la chiave di glossario che il connettore
-    # asimmetrico impedisce di raggiungere (D2).
     best_key, best_score = first.candidates[0]
-    assert "olio extravergine" in best_key
-    assert best_score > 0.7
+    assert best_key == "brodo di pesce"
+    assert best_score > 0.4
+
+    # D2 chiuso in WP-F1: le tre forme che dominavano il residuo di F0
+    # (olio extravergine, sale e pepe, d'aglio) non sono piu' irrisolte.
+    terms = {term.term for term in unresolved}
+    assert "olio extravergine di oliva" not in terms
+    assert "sale e pepe" not in terms
+    assert "aglio" not in terms
 
 
 def test_coverage_report_json_roundtrip(corpus_report, tmp_path) -> None:

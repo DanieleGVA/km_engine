@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Literal
 
 from app.domain.errors import ParseError
+from app.domain.normalize import normalize_key
 from app.domain.pack import DomainPackBundle
 
 Stage = Literal["source", "translated"]
@@ -165,12 +166,9 @@ def lookup_key(item: str) -> str:
     """Chiave di lookup: la stessa che usa ``canonicalize``.
 
     Importata, mai ricopiata: se la misura e la canonicalizzazione usassero due
-    normalizzazioni diverse il report mentirebbe. Da WP-F1 diventa
-    ``normalize.normalize_key``.
+    normalizzazioni diverse il report mentirebbe.
     """
-    from app.domain.canonical import _strip_item_connectors
-
-    return _strip_item_connectors(item).casefold()
+    return normalize_key(item)
 
 
 def build_lookup(pack: DomainPackBundle) -> dict[str, tuple[str, str]]:

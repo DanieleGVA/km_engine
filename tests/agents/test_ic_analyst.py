@@ -70,10 +70,18 @@ def test_ic_analyst_write_and_load_brief(tmp_path, pilot_brief: DomainBrief) -> 
 
 
 def test_ic_analyst_clean_item() -> None:
+    """WP-F1: ``clean_item`` e' ``normalize_key`` + rimozione parentesi.
+
+    Il connettore INTERNO non viene piu' rimosso: ``sale e pepe`` e
+    ``olio extravergine di oliva`` sono termini interi, e il brief deve
+    proporli nella forma che il canonicalizzatore incontrera' davvero (D2).
+    """
     assert clean_item("pollo intero (1.2 kg)") == "pollo intero"
     assert clean_item("di extra virgin olive oil") == "extra virgin olive oil"
-    assert clean_item("sale e pepe") == "sale pepe"
-    assert clean_item("  farina  00 ") == "farina 00"
+    assert clean_item("sale e pepe") == "sale e pepe"
+    assert clean_item("olio extravergine di oliva") == "olio extravergine di oliva"
+    assert clean_item("2 spicchi d’aglio") == "2 spicchi aglio"
+    assert clean_item("  Farina  00 ") == "farina 00"
 
 
 def test_ic_analyst_default_brief_path() -> None:

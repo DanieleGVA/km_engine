@@ -3,7 +3,7 @@ entries:
   definition: ''
   id: ING-EXTRA-VIRGIN-OLIVE-OIL
   labels_en: extra virgin olive oil
-  labels_it: olio extravergine oliva
+  labels_it: olio extravergine di oliva
   ontology_uri: null
 - aliases: []
   definition: ''
@@ -130,13 +130,13 @@ entries:
   definition: ''
   id: ING-BREWER-S-YEAST
   labels_en: brewer's yeast
-  labels_it: lievito birra
+  labels_it: lievito di birra
   ontology_uri: null
 - aliases: []
   definition: ''
   id: ING-BUFFALO-MOZZARELLA
   labels_en: buffalo mozzarella
-  labels_it: mozzarella bufala
+  labels_it: mozzarella di bufala
   ontology_uri: null
 - aliases: []
   definition: ''
@@ -172,7 +172,7 @@ entries:
   definition: ''
   id: ING-DURUM-WHEAT-FLOUR
   labels_en: durum wheat flour
-  labels_it: farina grano duro
+  labels_it: farina di grano duro
   ontology_uri: null
 - aliases: []
   definition: ''
@@ -190,7 +190,7 @@ entries:
   definition: ''
   id: ING-FISH-STOCK
   labels_en: fish stock
-  labels_it: fumetto pesce
+  labels_it: fumetto di pesce
   ontology_uri: null
 - aliases: []
   definition: ''
@@ -208,7 +208,7 @@ entries:
   definition: ''
   id: ING-GROUND-BEEF
   labels_en: ground beef
-  labels_it: carne macinata manzo
+  labels_it: carne macinata di manzo
   ontology_uri: null
 - aliases: []
   definition: ''
@@ -304,13 +304,13 @@ entries:
   definition: ''
   id: ING-TOMATO-PASSATA
   labels_en: tomato passata
-  labels_it: passata pomodoro
+  labels_it: passata di pomodoro
   ontology_uri: null
 - aliases: []
   definition: ''
   id: ING-TOMATO-SAUCE
   labels_en: tomato sauce
-  labels_it: salsa pomodoro
+  labels_it: salsa di pomodoro
   ontology_uri: null
 - aliases: []
   definition: ''
