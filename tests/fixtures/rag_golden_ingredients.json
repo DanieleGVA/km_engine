@@ -1,0 +1,128 @@
+{
+  "version": "1.0",
+  "generated_by": "manuale (WP-F6): una query per ricetta su un ingrediente distintivo, in italiano e in inglese",
+  "corpus": "tests/fixtures/corpus_ricette (15 committed recipes)",
+  "note": "Le query interrogano il CONTENUTO (ingredienti), non il titolo: e' la ricerca che un cuoco fa davvero, ed e' quella che la normalizzazione dei termini deve rendere possibile.",
+  "pairs": [
+    {
+      "query": "recipes with saffron",
+      "document_id": "RIC-002",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con zafferano",
+      "document_id": "RIC-002",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with apple",
+      "document_id": "RIC-003",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con lievito di birra",
+      "document_id": "RIC-004",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with rosemary and chicken",
+      "document_id": "RIC-005",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con mozzarella di bufala",
+      "document_id": "RIC-006",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with lentils",
+      "document_id": "RIC-007",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con zucchine",
+      "document_id": "RIC-008",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with mascarpone",
+      "document_id": "RIC-009",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con savoiardi e caffè",
+      "document_id": "RIC-009",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with ground beef and red wine",
+      "document_id": "RIC-010",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con nutella",
+      "document_id": "RIC-011",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with breadcrumbs and tomato passata",
+      "document_id": "RIC-012",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con pangrattato",
+      "document_id": "RIC-012",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with asparagus and Grana Padano",
+      "document_id": "RIC-101",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con asparagi",
+      "document_id": "RIC-101",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with clams and fregola",
+      "document_id": "RIC-102",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con vongole",
+      "document_id": "RIC-102",
+      "lang": "it",
+      "kind": "ingredient"
+    },
+    {
+      "query": "recipes with bitter almonds",
+      "document_id": "RIC-103",
+      "lang": "en",
+      "kind": "ingredient"
+    },
+    {
+      "query": "ricette con mandorle amare",
+      "document_id": "RIC-103",
+      "lang": "it",
+      "kind": "ingredient"
+    }
+  ]
+}

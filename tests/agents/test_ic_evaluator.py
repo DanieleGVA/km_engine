@@ -25,6 +25,10 @@ async def test_ic_evaluator_metrics(tmp_path, pilot_brief: DomainBrief, ic_clien
     assert metrics["roundtrip_total"] == 15
     assert metrics["roundtrip_ratio"] == 1.0
     assert metrics["relative_coverage"] >= 0.90
+    # WP-F6: il gate e' sulla copertura ASSOLUTA, non piu' sul rapporto col
+    # pack manuale (che restava alto anche se entrambi risolvevano poco).
+    assert metrics["draft_coverage"] >= metrics["gate_corpus_coverage_threshold"]
+    assert metrics["gate_coverage"] is True
     assert metrics["gate"] is True
 
     normalization = metrics["normalization"]

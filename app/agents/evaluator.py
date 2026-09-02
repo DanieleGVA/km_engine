@@ -36,6 +36,10 @@ DEFAULT_DOC_PREFIX = "ice_"
 DEFAULT_REPORT_DIR = Path("docs/domain-briefs")
 
 GATE_ROUNDTRIP = 1.0
+# WP-F6: il gate e' sulla copertura ASSOLUTA del corpus, non piu' sul rapporto
+# col pack manuale. Il rapporto restava alto anche quando entrambi i pack
+# risolvevano poco: confrontava due misure sbagliate allo stesso modo.
+GATE_CORPUS_COVERAGE = 0.85
 GATE_RELATIVE_COVERAGE = 0.90
 
 
@@ -227,7 +231,7 @@ async def evaluate_draft(
     normalization = _normalization_metrics(draft_decisions, golden_decisions)
 
     gate_roundtrip = roundtrip_ratio >= GATE_ROUNDTRIP
-    gate_coverage = relative_coverage >= GATE_RELATIVE_COVERAGE
+    gate_coverage = draft_coverage >= GATE_CORPUS_COVERAGE
     gate = gate_roundtrip and gate_coverage
 
     metrics = {
@@ -250,6 +254,8 @@ async def evaluate_draft(
         "normalization": normalization,
         "gate_roundtrip": gate_roundtrip,
         "gate_coverage": gate_coverage,
+        "gate_corpus_coverage_threshold": GATE_CORPUS_COVERAGE,
+        "gate_relative_coverage": relative_coverage >= GATE_RELATIVE_COVERAGE,
         "gate": gate,
     }
 
@@ -292,6 +298,7 @@ async def evaluate_draft(
     summary = (
         f"evaluator: round-trip {draft_rt_ok}/{draft_rt_total} "
         f"({roundtrip_ratio:.1%}), draft coverage {draft_coverage:.1%} "
+        f"(gate >= {GATE_CORPUS_COVERAGE:.0%}) "
         f"vs manual {manual_coverage:.1%} (relative {relative_coverage:.1%}), "
         f"precision {normalization['precision']:.1%}, "
         f"recall {normalization['recall']:.1%} -> gate {'PASS' if gate else 'FAIL'}"

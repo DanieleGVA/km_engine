@@ -12,7 +12,9 @@ strutturato all'LLM. Output sempre schema-valido o errore esplicito
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
+from collections.abc import Sequence
 from typing import Any, Protocol, runtime_checkable
 
 import httpx
@@ -31,12 +33,63 @@ class JudgeOutputError(DomainError):
     """Raised when the LLM judge output is not schema-valid after one retry."""
 
 
+def build_translation_system_prompt(
+    source_lang: str,
+    target_lang: str,
+    glossary: Sequence[str] | None = None,
+) -> str:
+    """Prompt di sistema della traduzione (WP-F6): P2 + vincolo di glossario.
+
+    E' una funzione pura cosi' il manifest del golden puo' registrarne
+    l'hash: se il prompt cambia, il golden va rigenerato e si sa perche'.
+    """
+    lines = [
+        (
+            "You are a faithful culinary translator. Translate the document "
+            f"from {source_lang} to {target_lang}."
+        ),
+        (
+            "Preserve every {Nk} placeholder exactly, in the same order, and "
+            "do not invent, drop or reorder numbers."
+        ),
+        "Do not translate, reformat or comment on the {Nk} placeholders.",
+    ]
+    if glossary:
+        # Nessun taglio: tagliare un elenco ordinato alfabeticamente
+        # toglierebbe termini a caso, e il termine mancante sarebbe proprio
+        # quello che il traduttore parafrasa. Il prompt cresce col glossario,
+        # ma il golden si genera una volta sola.
+        terms = list(dict.fromkeys(glossary))
+        lines.append(
+            "Use exactly these canonical terms for the ingredients whenever "
+            "the source mentions them; do not substitute a synonym:"
+        )
+        lines.extend(f"- {term}" for term in terms)
+    return "\n".join(lines)
+
+
+def translation_prompt_sha256(
+    source_lang: str,
+    target_lang: str,
+    glossary: Sequence[str] | None = None,
+) -> str:
+    """Hash del prompt, per il manifest del golden."""
+    return hashlib.sha256(
+        build_translation_system_prompt(source_lang, target_lang, glossary).encode()
+    ).hexdigest()
+
+
 @runtime_checkable
 class LLMClient(Protocol):
     """Translate a text block or produce a structured judgement."""
 
     async def translate(
-        self, text: str, *, source_lang: str, target_lang: str
+        self,
+        text: str,
+        *,
+        source_lang: str,
+        target_lang: str,
+        glossary: Sequence[str] | None = None,
     ) -> str: ...
 
     async def judge(
@@ -129,14 +182,23 @@ class HttpLLMClient:
         raise last_error
 
     async def translate(
-        self, text: str, *, source_lang: str, target_lang: str
+        self,
+        text: str,
+        *,
+        source_lang: str,
+        target_lang: str,
+        glossary: Sequence[str] | None = None,
     ) -> str:
-        system = (
-            "You are a faithful culinary translator. Translate the "
-            "document from "
-            f"{source_lang} to {target_lang}. Preserve every "
-            "{Nk} placeholder exactly, in the same order, and do "
-            "not invent, drop or reorder numbers."
+        """Traduzione vincolata al glossario (WP-F6).
+
+        Senza il vincolo il traduttore sceglie ogni volta un sinonimo diverso
+        (``EVOO``, ``olive oil``, ``extra-virgin olive oil``) e lo stadio 2
+        non puo' risolverli: la copertura crolla fra sorgente e tradotto per
+        una ragione che non ha nulla a che vedere col glossario. Passare le
+        etichette canoniche costa poco e toglie il problema alla radice.
+        """
+        system = build_translation_system_prompt(
+            source_lang, target_lang, glossary
         )
         return await self._chat(
             self.settings.llm_endpoint, self.settings.llm_model,
@@ -184,7 +246,12 @@ class FakeLLMClient:
         self.judgements = dict(judgements or {})
 
     async def translate(
-        self, text: str, *, source_lang: str, target_lang: str
+        self,
+        text: str,
+        *,
+        source_lang: str,
+        target_lang: str,
+        glossary: Sequence[str] | None = None,
     ) -> str:
         if text in self.translations:
             return self.translations[text]

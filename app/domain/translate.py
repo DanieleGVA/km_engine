@@ -40,6 +40,22 @@ class TranslatedDocument:
     title_en: str
 
 
+def glossary_labels(pack: DomainPackBundle) -> list[str]:
+    """Etichette canoniche degli ingredienti da vincolare in traduzione (WP-F6).
+
+    Solo gli ingredienti: sono i termini su cui lo stadio 2 fa il lookup. Le
+    tecniche e gli stati compaiono nel procedimento, dove una parafrasi non
+    rompe nulla.
+    """
+    return sorted(
+        {
+            entry.labels_en.strip()
+            for entry in pack.glossaries.ingredienti.entries
+            if entry.labels_en.strip()
+        }
+    )
+
+
 def build_translation_input(parsed: ParsedDoc) -> str:
     """Rebuild the body sent to the LLM (title + sections, no frontmatter)."""
     lines = [parsed.title, "", "## Ingredienti"]
@@ -103,6 +119,7 @@ async def translate_document(
         masked_input,
         source_lang=pack.language,
         target_lang=pack.canonical_language,
+        glossary=glossary_labels(pack),
     )
 
     try:

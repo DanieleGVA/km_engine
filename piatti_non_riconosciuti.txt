@@ -1,0 +1,387 @@
+PIATTI NON RICONOSCIUTI (45) — componenti con canon_gap/divergent
+
+====================================================================================================
+RF00978 — Cream of tomato & basil soup(VG)(CC)
+  [canon_gap] component:vegetable: None of the provided canon candidates contain vegetable ingredients (onion, leeks, celery, garlic, tomatoes). The candidates are for pasta, fish, and other dishes without these vegetables.
+  [canon_gap] component:fat: No candidate matches the fat component with both olive oil and basil oil; candidates have only olive oil or no oil.
+  [canon_gap] component:sauce: No canon candidate matches a simple sauce of tomato paste and salt. The closest candidate (Slagle Slat) includes additional ingredients and different quantities, so it cannot serve as a reference.
+  [canon_gap] component:main: No candidate matches the quantity 800 ml vegetable broth; candidates have 2.5 l, 5 l, or no broth.
+  [canon_gap] component:spice: No canon candidate matches ground white peppercorn; all provided candidates are for different dishes/ingredients.
+
+====================================================================================================
+RF02314 — MSC sundae - vanilla ice cream, meringue shards, chocolate sauce, whipped cream(CC)
+  [flag] component:dairy: Vanilla ice cream quantity matches reference; whipped cream quantity is uncertain relative to reference.
+  [canon_gap] component:sauce: No canon candidate matches a chocolate sauce; all candidates are savoury sauces.
+  [canon_gap] component:other: No canon candidate matches the component (french meringue + wafer sticks).
+
+====================================================================================================
+RF04267 — Classic hot dog, chips(PK)(CC)
+  [canon_gap] component:main: No canon candidate matches the hot dog component (frankfurter, buns, relish, sauerkraut). All provided candidates are unrelated: one is an incomplete ingredient list, one is an Indian spice mix, and one is an Italian egg dish.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (lettuce, tomatoes, cucumber, onion, frozen French fries). The provided candidates are for goulash, potage, and a lettuce/watercress garnish, none of which correspond to this component.
+
+====================================================================================================
+RF06133 — Grilled chicken breast - asparagus, tomato, chips(CC)
+  [canon_gap] component:main protein: No canon candidate matches a boneless skinless chicken breast at 1400g. Candidates are either missing chicken quantity, use whole chicken, or are a salad with no clear protein quantity.
+  [canon_gap] component:sauce: No canon candidate represents a sauce component; all candidates are main dishes or salads.
+  [canon_gap] component:spice: No candidate recipe contains ground white peppercorn; all candidates are unrelated (paneer, cumin, raita).
+  [canon_gap] component:fat: No canon candidate references sunflower seed oil or any fat ingredient; all provided candidates are unrelated (apples, bread, string beans).
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (asparagus, tomatoes, French fries).
+  [canon_gap] component:herb: No candidate recipe contains fresh thyme or any herb component; all candidates are unrelated (fish garnish, spice mix, chickpea dish).
+
+====================================================================================================
+RF06830 — Chicken Biryani - rice, fried onions, hard-boiled eggs, cucumber raita(CC)
+  [canon_gap] component:dairy: No canon candidate matches the dairy component (cucumber raita, yogurt, milk). The provided candidates are Gushtaaba Kari (meat dish), Mattha (yogurt drink but no cucumber raita), and Créme A Saint-Honoré (dessert with milk, not yogurt). None align with the specific dairy items and quantities.
+  [canon_gap] component:main: No canon candidate matches the combination of boiled eggs and poppy seeds. The first candidate has poppy seeds but no eggs; the other two have eggs but no poppy seeds. Additionally, the quantity '0 KG' for boiled eggs is invalid.
+  [canon_gap] component:spice: No canon candidate matches the spice mix (equal parts cardamom seeds, cinnamon, cloves, saffron). Saffron is absent from all candidates and proportions differ.
+  [canon_gap] component:vegetable: No candidate recipe contains ginger or chili peppers; component does not match any canon candidate.
+  [canon_gap] component:nuts: No canon candidate contains nuts or similar ingredients; all candidates are for other recipes (turmeric, lamb, keora).
+  [canon_gap] component:sauce: No canon candidate represents a sauce component; candidates are steak seasoning, yogurt salad, and an incomplete seasoning line.
+  [canon_gap] component:fat: No canon candidate matches the fat component (sunflower seed oil). All provided candidates are unrelated (apples, bread, string beans).
+  [canon_gap] component:main protein: No canon candidate matches the ingredient 'Chicken leg quarter' (1500 g). Candidates include club steaks, chicken korma ingredients, and pork chops, none of which correspond to this main protein.
+  [canon_gap] component:cereal: No canon candidate matches a plain basmati rice component; closest candidate (bk_jerusalem_a_cookbook-0035) includes orzo and different quantity (250g vs 400g).
+
+====================================================================================================
+RF07791 — Grilled chicken breast - potatoes & garden vegetables of the day(CC)
+  [canon_gap] component:main protein: No candidate provides a clear reference for 1400 g boneless skinless chicken breast; candidates either lack explicit chicken quantity or use different cuts/forms.
+  [canon_gap] component:sauce: No candidate matches a sauce component; all candidates are main dishes or salads.
+  [canon_gap] component:spice: No candidate recipe contains ground white peppercorn; none of the provided canon candidates match this spice component.
+  [canon_gap] component:fat: No candidate recipe contains a fat/oil ingredient; all candidates are unrelated (apples, bread, string beans).
+  [canon_gap] component:vegetable: No candidate matches the component 'roasted new potatoes' as a vegetable side; the only candidate mentioning new potatoes is a main dish with peppers and cream, not roasted.
+  [canon_gap] component:main: No candidate matches the component: vegetables of the day is not present in any of the provided canon candidates.
+
+====================================================================================================
+RF08563 — Pennette pasta, fresh tomato-basil sauce(VG)(CC)
+  [canon_gap] component:sauce: No canon candidate provides a reference for tomato sauce quantity; all candidates are for other dishes (lamb chops, beef fillet, asparagus with Hollandaise).
+  [canon_gap] component:dairy: No candidate matches the Grana Padano amount of 100 g for 10 portions.
+
+====================================================================================================
+RF08973 — Grilled lobster tail - roasted asparagus tips, straw potatoes, choice of clarified herb butter or
+  [canon_gap] component:vegetable: No canon candidate matches a vegetable component with potato and asparagus.
+  [canon_gap] component:herb: None of the provided canon candidates (raita, egg curry, gobhi pullao) contain herbs such as chives, tarragon, or parsley. No reference matches the herb component.
+  [canon_gap] component:fruit: No canon candidate matches a fruit component with fresh lemon. The provided candidates are main dishes or garnishes, not fruit components.
+  [canon_gap] component:sauce: No candidate provides a direct reference for a hollandaise sauce component. The candidates are main dishes with hollandaise as an ingredient, but none specifies a sauce recipe with quantities comparable to the card.
+  [canon_gap] component:fat: No candidate includes frying oil; all candidates have only extra virgin olive oil, and quantities differ.
+  [canon_gap] component:dairy: No canon candidate matches the dairy/butter component for pastry.
+  [canon_gap] component:spice: None of the provided canon candidates include ground white peppercorn; the closest is black pepper in the paneer dish, but that is not white peppercorn.
+  [canon_gap] component:main: No canon candidate matches lobster tail main; all candidates are for other dishes (squid, spaghetti, fish garnish).
+
+====================================================================================================
+RF08984 — Vegetarian burger -available on request
+  [canon_gap] component:cereal: No canon candidate matches the component 'cereal' with hamburger buns; all candidates are unrelated (Italian soup, beef garnish, peanut masala).
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (patties, lettuce, cucumber, onion). All candidates are unrelated main dishes.
+  [canon_gap] component:main: No canon candidate matches the component line; quantities and units differ significantly.
+  [canon_gap] component:fat: No canon candidate matches the fat component (sunflower seed oil). All provided candidates are unrelated (apples, bread, string beans).
+  [canon_gap] component:sauce: No canon candidate matches a sauce component; all candidates are for other dishes.
+
+====================================================================================================
+RF10585 — Classic Caesar salad - cos lettuce, grilled chicken breast, croutons, parmesan cheese, creamy Caesar
+  [canon_gap] component:main protein: No candidate provides a clear reference for 400 g boneless skinless chicken breast. The candidates are chicken dishes but lack explicit chicken breast quantities or cuts.
+  [canon_gap] component:fat: No canon candidates provided for comparison.
+  [canon_gap] component:vegetable: No canon candidate matches the full component: the only candidate containing romaine lettuce (bk_the_lebanese_kitchen-0426) does not include garlic, and no candidate includes garlic. Therefore the component cannot be validated against the provided canon.
+  [canon_gap] component:sauce: No canon candidate matches a Caesar dressing sauce; all candidates are unrelated (pasta, butter dressing, egg-based).
+  [canon_gap] component:spice: No canon candidate contains ground white peppercorn; all candidates are for different dishes/spices.
+  [canon_gap] component:liquid: No candidate matches the proposed quantity of 20 ml lemon juice; candidates have 75 ml and 112.5 ml.
+  [flag] component:dairy: The Grana Padano quantity differs from the reference candidate.
+  [canon_gap] component:cereal: No canon candidate matches the cereal/croutons component.
+
+====================================================================================================
+RF10817 — Minestrone soup - fresh seasonal vegetables, extra virgin olive oil(VG)(CC)
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component; all candidates are for specific dishes (besan kae pudhae, zuppa di onion, rasam podi) with different ingredients.
+  [canon_gap] component:fat: No candidate matches the fat component: candidates contain only extra virgin olive oil in quantities 150-225 ml, while the component specifies 50 ml olive oil and 10 ml extra virgin olive oil (total 60 ml).
+  [canon_gap] component:liquid: No canon candidate provides a reference for vegetable stock liquid component.
+  [canon_gap] component:sauce: No candidate recipe matches a sauce component; the provided candidates are main dishes or incomplete, and none list table salt as an ingredient.
+  [canon_gap] component:spice: No canon candidate contains black peppercorn; component cannot be validated.
+  [canon_gap] component:legume: No canon candidate contains green peas; all candidates are fish stew, pea soup (no ingredient list), or pork shanks with onion.
+  [canon_gap] component:herb: No canon candidate provides a standalone herb component reference. The candidates are full recipes, not component-level references for fresh basil. The only basil mention (25 ml chopped fresh basil) is part of a specific dish and uses a different unit (ml vs g), so it cannot serve as a direct benchmark for this herb component.
+
+====================================================================================================
+RF10833 — Grilled or steamed salmon fillet - extra virgin olive oil, lemon & parsley(*)(CC)
+  [canon_gap] component:main protein: No canon candidate matches salmon fillet; candidates are sardines, beef, lamb.
+  [canon_gap] component:spice: No canon candidate contains ground white peppercorn; all provided candidates are for different dishes or spices (black pepper paneer, ground cumin, roasted bell pepper raita).
+  [canon_gap] component:sauce: No canon candidate corresponds to a sauce component; all candidates are for main dishes or salads.
+  [flag] component:fat: Reference identified as calamari con spinaci; olive oil quantity differs by 5 ml.
+  [canon_gap] component:fruit: No component or candidates provided in the prompt.
+  [canon_gap] component:herb: No candidate provides a comparable quantity for fresh parsley in grams; the only candidate with parsley uses volume (ml) and cannot be directly compared without a conversion factor.
+
+====================================================================================================
+RF11351 — Crème caramel - marinated fresh fruit panaché(YC)(CC)
+  [canon_gap] component:main: No candidate matches the component 'main' with a caramel ingredient; all provided candidates are unrelated or list different main ingredients.
+  [canon_gap] component:dairy: No candidate reference matches the dairy component (condensed milk and whole milk). The provided candidates are unrelated (onion, servings).
+  [canon_gap] component:egg: No canon candidate matches the egg component; all provided candidates are unrelated (truffle/veal, bread, cream).
+  [canon_gap] component:other: No candidate recipe includes vanilla extract as an ingredient; none of the provided canon candidates match this component.
+  [canon_gap] component:garnish & serving: No canon candidate matches the garnish & serving component; all candidates are unrelated (dal, gooseberry sauce, pastry).
+
+====================================================================================================
+RF12867 — Tiramisù - mascarpone cream, sponge fingers dipped in coffee, bitter cocoa powder(AA-YC-MR
+  [canon_gap] component:mascarpone cream: No candidate recipe matches a mascarpone cream component. All provided candidates are for savoury dishes (beef, sauce, peas) and none contain mascarpone, eggs, or sugar in a dessert context.
+  [canon_gap] component:composition: No candidate matches the composition ingredients (biscuit sheets and coffee kahlua syrup).
+  [canon_gap] component:garnish & serving: No candidate matches the component: cocoa powder, chocolate, and white chocolate covering as a garnish. The Marbleized Chocolate lacks cocoa and has different ratios; White Chocolate Décor is incomplete.
+
+====================================================================================================
+RF13277 — Beef burger or cheeseburger - lettuce, tomatoes, onions, pickles, onion rings, house sauce,
+  [canon_gap] component:main protein: No canon candidate matches beef patties; all candidates are for sauces, mussels, or rice.
+  [canon_gap] component:dairy: No canon candidate matches a dairy component with butter and cheddar cheese.
+  [canon_gap] component:cereal: No candidate recipe matches the component 'cereal' with hamburger buns; all candidates are unrelated (Italian soup, garnish, peanut masala).
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (iceberg lettuce, tomatoes, gherkins, frozen French fries).
+  [canon_gap] component:sauce: None of the provided canon candidates correspond to a sauce (mayonnaise, ketchup, mustard, vinegar). The candidates are garlic paste, dough, and consomme. No reference available.
+  [canon_gap] component:main: None of the provided canon candidates correspond to a relish ingredient; all candidates are for different dishes (salad, eggs with lobster, potato dish).
+  [canon_gap] component:spice: No candidates provided
+
+====================================================================================================
+RF411898 — Cheeseburger - with yellow cheese gherkins & ketchup(NEW BUFFET)
+  [canon_gap] component:cereal: The component 'cereal' with line '10 ea hamburger buns' does not match any of the provided canon candidates (zuppa di cappone, Garnish Bréhan, Peanut Masala). No reference exists, so the component abstains.
+  [canon_gap] component:fat: No canon candidate matches the fat component; all provided candidates are unrelated (apples, bread, string beans).
+  [canon_gap] component:main protein: No canon candidate matches the component 'main protein' (beef patties). The provided candidates are for sorrel sauce, mussels, and Italian rice, none of which are beef patties.
+  [canon_gap] component:sauce: No canon candidate corresponds to a sauce with salt and ketchup.
+  [canon_gap] component:spice: No canon candidate contains black peppercorn; component cannot be validated.
+  [canon_gap] component:dairy: No canon candidate contains dairy or cheese; all candidates are fish-based main courses. Cannot validate the cheese quantity against any provided reference.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component with gherkins.
+
+====================================================================================================
+RF412642 — Grilled chicken breast(CREW)
+  [canon_gap] component:main protein: No canon candidate matches a simple 700 g chicken breast; all candidates are full dishes with different proteins or unspecified quantities.
+  [canon_gap] component:sauce: No candidate matches a sauce component; all candidates are for other dishes.
+  [canon_gap] component:spice: No candidate recipe includes ground white peppercorn; none of the provided canon candidates match this spice component.
+  [canon_gap] component:fat: No canon candidate matches the fat component; all provided candidates are unrelated (apples, hours, string beans).
+
+====================================================================================================
+RF412804 — Caesar salad - cos lettuce, croutons, parmesan, Caesar dressing - on request with: chicken breast,
+  [canon_gap] component:for the salad: No candidate recipe matches the salad component (romaine, caesar dressing, Grana Padano). All provided candidates are for other dishes (red cabbage salad, mushroom salad, and a soup).
+  [canon_gap] component:for garnish and plating: No canon candidate matches the garnish component; candidates are main dishes without anchovy fillet or croutons.
+
+====================================================================================================
+RF412876 — Grilled beef filet mignon - thyme-roasted vegetables, natural jus(*)(YC)(CC)
+  [canon_gap] component:main protein: No canon candidate matches the main protein component (whole beef tenderloin). All candidates are different dishes (veal slices, garlic/ginger, eggplant).
+  [canon_gap] component:fat: No candidate recipe matches the fat component: two lines of 100 ml olive oil each. The closest candidate (bk_la_cucina_italiana_i-1155) has 112.5 ml olive oil and also butter, but does not match the specified quantity or structure.
+  [canon_gap] component:spice: No canon candidate matches a spice/seasoning component; all candidates are main dishes.
+  [canon_gap] component:herb: No candidate provides ingredient quantities for rosemary; cannot compare.
+  [canon_gap] component:vegetable: None of the canon candidates (trippa con i fagioli, risotto con le rane, Akhni) correspond to a vegetable medley component. The component contains roasted new potatoes, asparagus, garlic, zucchini, carrot, bell peppers, and eggplant, which do not appear in any candidate.
+  [canon_gap] component:sauce: No canon candidate matches a sauce component; all candidates are main dishes or consommé.
+
+====================================================================================================
+RF413056 — Grilled beef sirloin steak - rosemary gravy or béarnaise sauce(WOC AA)(*)(CC)
+  [canon_gap] component:main protein: No canon candidate matches a beef striploin main protein; all candidates are dessert, vegetable consommé, or placeholder.
+  [canon_gap] component:fat: No candidate matches the fat quantity of 100 ml olive oil; candidates have 225 ml and 500 ml.
+  [canon_gap] component:sauce: No candidate recipe is a sauce; all candidates are for steak seasoning, yogurt salad, or a generic seasoning instruction. The component 'sauce' with only salt cannot be matched to any provided canon candidate.
+  [canon_gap] component:spice: No canon candidate contains black peppercorn or any spice; all candidates are unrelated (squid, poultry garnish, lentil dish).
+  [canon_gap] component:vegetable: No canon candidate matches a vegetable side dish; all candidates are main dishes (rice, curry, beef).
+  [canon_gap] component:dairy: No canon candidate contains unsalted butter; component cannot be validated against provided candidates.
+  [flag] component:herb: Quantity unit mismatch with reference; needs conversion to verify.
+  [canon_gap] component:main: No candidate matches the sauce ingredients; all candidates are main dish items (ground beef, rice, zite).
+
+====================================================================================================
+RF413823 — Pork hot dog
+  [canon_gap] component:main: No canon candidate matches the hot dog component; all candidates are Italian dishes (fish stew, cauliflower, chicken) with no frankfurters, buns, pickles, or roasted onions. Abstaining with CANON_GAP.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (french fries, onion, tomatoes, lettuce, jalapeno). All provided candidates are unrelated (bean salad, lamb soup, pasta ragù).
+  [canon_gap] component:spice: No canon candidate matches a spice component; all candidates are for main dishes with different ingredients.
+  [canon_gap] component:sauce: None of the provided canon candidates correspond to a sauce with mustard, ketchup, mayonnaise, and salt. The candidates are Parmesan Water (thyme, horseradish), minestra di maltagliati (pasta, beans, etc.), and a bread recipe placeholder. No reference can be identified, so the component abstains with CANON_GAP.
+
+====================================================================================================
+RF413871 — Rigatoni alla Bolognese - pasta in a hearty meat sauce(CC)
+  [canon_gap] component:main: No canon candidate includes rigatoni or beef trimmings; all candidates feature boiled beef slices and other ingredients, none match the component's ingredients.
+  [canon_gap] component:fat: No candidate recipe contains a fat component with 150 ml olive oil; quantities in candidates are 225 ml and 500 ml, and none match the component context.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (celery, carrot, onion, tomatoes, garlic). All candidates are main dishes with different ingredients.
+  [canon_gap] component:herb: No candidate matches the herb component; the only candidate with herbs (bk_la_cucina_italiana_i-0840) lacks thyme and has different quantities.
+  [canon_gap] component:beverage: No candidate provides a beverage component with red wine; the closest candidate (bk_great_italian_cookin-0506) has 833.33 ml red wine as an ingredient, not a beverage, and the amount does not match 200 ml.
+  [canon_gap] component:sauce: No canon candidate matches a simple tomato paste and salt sauce; all candidates contain additional ingredients and different contexts.
+  [canon_gap] component:liquid: No canon candidate contains beef stock; all candidates are main dishes or sauces without beef stock.
+  [canon_gap] component:spice: No canon candidate matches the spice component (nutmeg and black pepper). All candidates are main dishes without spice lists.
+  [canon_gap] component:dairy: No canon candidate contains butter; none of the provided recipes reference this ingredient.
+
+====================================================================================================
+RF413872 — Pasta with fresh tomato sauce(VG)(CC)
+  [canon_gap] component:cereal: No canon candidate matches the proposed quantity of 900 g spaghetti; all candidates have 700-800 g.
+  [canon_gap] component:sauce: No canon candidate provides a reference for tomato sauce quantity; all candidates are for different dishes.
+  [canon_gap] component:herb: No candidate provides a clear reference for the proposed 50 g basil. The candidates have widely varying basil amounts (10 g, 10 g, 100 g) and unknown portion scaling, so a direct comparison is impossible.
+
+====================================================================================================
+RF414413 — Grilled beef hamburger(CREW)
+  [canon_gap] component:main protein: No canon candidate matches beef patties; all candidates are for different dishes (sorrel sauce, mussels, rice).
+  [canon_gap] component:spice: No candidate recipe includes ground white peppercorn; none of the provided canon candidates match this spice component.
+  [canon_gap] component:sauce: No canon candidate corresponds to a sauce component; all candidates are main dishes or salads.
+  [canon_gap] component:fat: No canon candidate matches the fat component; all candidates are unrelated (apples, bread, string beans).
+
+====================================================================================================
+RF414414 — Grilled chicken-turkey hamburger(CREW)
+  [canon_gap] component:main protein: No canon candidate matches a chicken and turkey patty main protein. The only protein candidate is whole chicken breasts (bk_great_italian_cookin-0966), which differs in form and quantity; the other candidates are vegetarian or a fish garnish.
+  [canon_gap] component:spice: None of the provided canon candidates mention ground white peppercorn. The candidates include black pepper (Kaali Mirch), cumin, and raita, none of which match the component.
+  [canon_gap] component:sauce: No candidate recipe corresponds to a sauce component; all candidates are main dishes or salads.
+  [canon_gap] component:fat: No canon candidate matches the fat component (sunflower seed oil). All provided candidates are unrelated (apples, bread, string beans).
+
+====================================================================================================
+RF414420 — Chicken & turkey hot dog(CREW)
+  [canon_gap] component:main: No canon candidate matches the ingredient 'frankfurter sausage'.
+
+====================================================================================================
+RF414451 — Potato croquettes(CREW)
+  [canon_gap] component:main: No candidate matches the potato croquette component. The only potato-based candidate (bk_great_italian_cookin-1357) has a much larger quantity (3.33 lb potatoes) and does not specify croquette form.
+
+====================================================================================================
+RF414996 — Vegetarian burger(CREW)
+  [canon_gap] component:vegetable: No canon candidate matches vegetable patties; all candidates are unrelated (bouillon, beef fillet, eels).
+  [canon_gap] component:spice: No canon candidate includes ground white peppercorn; cannot validate.
+  [canon_gap] component:sauce: No canon candidate corresponds to a sauce component; the only line is 0 g table salt, which is not represented in any candidate.
+  [canon_gap] component:fat: No canon candidate matches the fat component (sunflower seed oil).
+
+====================================================================================================
+RF419554 — T-bone steak - 500 g / 1.1 lbs, roast potatoes, grilled cherry tomatoes, French beans(PROMO)(*)(CC)
+  [canon_gap] component:main: No canon candidate matches the component (t-bone steak and salt).
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component; all candidates are for different dishes.
+  [canon_gap] component:herb: No canon candidate matches the herb component; abstaining.
+  [canon_gap] component:fat: No candidate recipe matches the fat component quantity (100 ml EVOO); all candidates have 75 or 150 ml.
+  [canon_gap] component:spice: No candidate recipe contains ground black peppercorn; cannot validate.
+
+====================================================================================================
+RF422205 — Grandma's chocolate cake - layers of dulce de leche, chocolate fudge(CC)
+  [canon_gap] component:grandma's chocolate cake: No canon candidate matches the component 'grandma's chocolate cake'.
+  [canon_gap] component:chocolate icing: No canon candidate matches a chocolate icing; all candidates are chocolate-based but not icing.
+  [canon_gap] component:to built the cake: No candidate recipe matches the component 'to built the cake' with dulce de leche.
+  [canon_gap] component:plating & serving: No candidate includes butterscotch caramel sauce; ice cream quantities are in scoops/volumes, not grams.
+
+====================================================================================================
+RF422215 — Grilled cold water lobster tail - hot drawn butter(CC)
+  [canon_gap] component:main: No canon candidate matches lobster tail; all candidates are for different dishes (squid, spaghetti, mushroom garnish).
+  [canon_gap] component:fat: No input provided for validation.
+  [canon_gap] component:fruit: No canon candidate includes lemon or a fruit component; cannot validate.
+  [flag] component:herb: The reference recipe (bk_the_lebanese_kitchen-0184) uses 112.5 ml chopped fresh parsley, which is approximately 28 g, while the component specifies 50 g. This is a significant overage.
+  [canon_gap] component:sauce: No canon candidate corresponds to a sauce component; the provided candidates are for steak, yogurt salad, and a seasoning instruction.
+  [canon_gap] component:spice: No canon candidate contains ground black peppercorn or any spice; all candidates are unrelated (squid, poultry garnish, lasagnette).
+
+====================================================================================================
+RF422287 — Steamed or grilled Atlantic salmon fillet - potatoes, garden vegetables(*)(CC)
+  [canon_gap] component:main protein: No canon candidate matches salmon fillet; all candidates are beef, lamb, or sardines.
+  [canon_gap] component:sauce: No canon candidate corresponds to a sauce component; all candidates are main dishes or salads.
+  [canon_gap] component:spice: No canon candidate references ground white peppercorn; cannot validate.
+  [canon_gap] component:fat: No candidate recipe contains 30 ml extra virgin olive oil; all candidates have 75 ml or 150 ml.
+  [canon_gap] component:liquid: Insufficient data provided to validate the component against canon candidates.
+  [canon_gap] component:herb: No candidate matches the herb component (parsley and tarragon). All candidates are main dishes without relevant herb quantities.
+  [canon_gap] component:vegetable: No canon candidate matches a vegetable component with steamed vegetables and shallot. Candidates are main dishes with fish, cardoons, or beef, none of which align with the given ingredients or quantities.
+  [canon_gap] component:main: No candidate recipe matches the component '10 serving steamed potatoes'. The candidates are cabbage and lamb soup, a potato dish fragment, and a vegetable soup, none of which are steamed potatoes as a main.
+  [canon_gap] component:fruit: No canon candidate includes lemon as an ingredient; all candidates lack lemon in their ingredient lists.
+  [canon_gap] component:beverage: No candidate matches a beverage component; all candidates are main dishes with wine as an ingredient, not a beverage.
+  [canon_gap] component:dairy: No canon candidate contains both heavy cream and butter in comparable quantities.
+  [canon_gap] component:starch: No canon candidate matches a starch component with cornstarch; all candidates are unrelated (sweetbreads, lamb curry, Madeira sauce).
+
+====================================================================================================
+RF422423 — Grilled chicken breast - roast potatoes(CC)
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component; all candidates are unrelated dishes.
+  [canon_gap] component:main protein: No canon candidate matches the component 'main protein' with chicken breast. The provided candidates are for different dishes (Saffron Chicken, Chicken Cacciatora, Minced Chicken Salad) and none specify boneless skinless chicken breast in grams.
+  [canon_gap] component:sauce: No canon candidate matches a sauce component; the only line (salt) cannot be validated against any provided recipe.
+  [canon_gap] component:spice: No candidate recipe contains black peppercorn; cannot validate.
+  [canon_gap] component:fat: No canon candidate matches the fat component; all candidates are unrelated (apples, bread, string beans).
+  [canon_gap] component:herb: No canon candidate matches fresh thyme; all candidates are unrelated (fish garnish, Indian sweets, serving count).
+
+====================================================================================================
+RF422654 — Grilled beef minute steak - garlic & herb butter or peppercorn sauce, grilled tomatoes, chips(*)(CC)
+  [canon_gap] component:main protein: No candidate matches a beef striploin main protein; all candidates are desserts, soups, or sauces.
+  [canon_gap] component:main: No canon candidate matches the component (green peppercorn sauce and garlic herb butter).
+  [canon_gap] component:sauce: No canon candidate matches a sauce component; all candidates are for other dishes (steak, yogurt salad, seasoning).
+  [canon_gap] component:spice: No candidate recipe contains black peppercorn or any spice; none of the provided canon candidates are relevant.
+  [canon_gap] component:fat: No canon candidate matches the fat component; all provided candidates are unrelated (apples, hours, string beans).
+  [canon_gap] component:vegetable: No candidate recipe matches the component: it includes frozen French fries, which are not present in any of the provided candidates. The only candidate with tomatoes (bk_jerusalem_a_cookbook-0015) does not include French fries and is a different dish.
+
+====================================================================================================
+RF425646 — Prawn cocktail - classic horseradish cocktail sauce, fresh lemon(CC)
+  [canon_gap] component:main: No canon candidate matches shrimp tails and cocktail sauce.
+  [canon_gap] component:vegetable: No canon candidate matches the component 'vegetable' with iceberg lettuce. All provided candidates are for main dishes with different ingredients.
+  [canon_gap] component:fruit: No canon candidate provides a lemon quantity; component cannot be validated.
+
+====================================================================================================
+RF425654 — French onion soup - gruyère crouton(CC)
+  [canon_gap] component:vegetable: No candidate matches the vegetable component with large quantities of onions and garlic.
+  [canon_gap] component:sauce: No canon candidate matches a sauce with apple cider vinegar and salt.
+  [canon_gap] component:liquid: No canon candidate contains beef stock; all candidates are for different dishes.
+  [canon_gap] component:main: No canon candidate matches the component ingredients (brown chicken stock and sourdough bread). All candidates are for different dishes.
+  [canon_gap] component:herb: No candidate recipe includes bay leaves or thyme; cannot validate.
+  [canon_gap] component:spice: Nessun candidato canonico contiene pepe nero macinato; tutti i candidati riguardano altri ingredienti (squid, bouillon, garnish, lasagnette e lentils). Impossibile identificare un riferimento per la dose di pepe nero.
+  [canon_gap] component:fat: No canon candidate matches the fat component (sunflower seed oil).
+  [canon_gap] component:dairy: No canon candidate matches the dairy component (Gruyère cheese).
+
+====================================================================================================
+RF425656 — Sirloin steak - choice of herb butter, chimichurri, or green peppercorn sauce(*)(CC)
+  [canon_gap] component:main protein: No canon candidate matches a beef striploin main protein; all candidates are desserts or vegetable dishes.
+  [canon_gap] component:herb: No candidate provides ingredient quantities for comparison; cannot validate the herb component.
+  [canon_gap] component:sauce: No canon candidate matches a sauce component; all candidates are unrelated (steak seasoning, yogurt salad, generic seasoning).
+  [canon_gap] component:spice: No canon candidate contains ground black peppercorn; cannot validate.
+  [canon_gap] component:fat: None of the provided canon candidates relate to fat or sunflower oil; cannot validate.
+  [canon_gap] component:garlic herbs butter: No canon candidate matches the component 'garlic herbs butter' or its associated lines (mashed potatoes, steamed vegetables, green peppercorn sauce, chimichurri sauce). The provided candidates are unrelated (Celery Royale, Sauce Hongroise, Grated Cheese).
+
+====================================================================================================
+RF426090 — New York cheesecake - strawberry compote(CAR 2024 AA)(CC)
+  [canon_gap] component:other: No canon candidate matches the component ingredients (graham cracker crumbs, vanilla extract).
+  [canon_gap] component:dairy: No canon candidate matches the dairy component (butter, cream cheese, sour cream). The only candidate with sour cream (bk_escoffier_le_guide_c-0688) does not include butter or cream cheese, and the other candidates have no dairy. Therefore, no reference can be established.
+  [canon_gap] component:sweetener: No canon candidate matches a sweetener component; all candidates are unrelated (apples, boiled sugar, maccheroni).
+  [canon_gap] component:egg: No canon candidate contains a comparable egg quantity; the only egg-containing candidates use count (10 egg) or egg yolk, not grams, and quantities do not match.
+  [canon_gap] component:starch: No candidate recipe contains cornstarch or a starch component; none of the provided candidates are relevant.
+  [canon_gap] component:sauce: No canon candidate matches a strawberry sauce component.
+  [canon_gap] component:main: No canon candidate matches a strawberry compote; candidates are raspberry compote, peach compote, and strawberry hearts (a pastry).
+
+====================================================================================================
+RF42713421 — Warm apple crumble(YC&MDR 2024)(AA LUNCH)(NSA, VG)(CC)
+  [canon_gap] component:fruit: No canon candidate matches the apple quantities (625 g frozen + 625 g fresh) or the dual-line structure.
+  [canon_gap] component:sweetener: No canon candidate matches a sweetener component; all candidates are unrelated (pistachio cookies, beef, spaghetti).
+  [canon_gap] component:fat: No canon candidate matches margarine; component cannot be validated.
+  [canon_gap] component:spice: No canon candidate matches a single spice cinnamon; all candidates are blends or mixtures.
+  [flag] component:nuts: The component is labeled 'nuts' but the only line is raisins. The quantity 62.5 g is half of the 125 g raisins in the reference recipe bk_la_cucina_italiana_i-1256, with no declared adaptation.
+  [canon_gap] component:crumble: No canon candidate matches a crumble component; all candidates are unrelated dishes.
+
+====================================================================================================
+RF42713551 — Chicken broth(CREW)
+  [canon_gap] component:main protein: No canon candidate matches whole chicken; candidates use chicken breast, lack chicken, or are consommé.
+  [canon_gap] component:liquid: No canon candidate contains water or a liquid component; cannot validate.
+  [canon_gap] component:herb: No canon candidate contains thyme or bay leaves; all candidates are unrelated (ginger-chile paste, asparagus, pork with olives).
+  [canon_gap] component:spice: No candidate contains ground white peppercorn; cannot validate against provided canon.
+  [canon_gap] component:sauce: No canon candidate represents a sauce component; all candidates are main dishes or salads.
+
+====================================================================================================
+RF42713706 — Angus beef burger - crispy bacon, onion rings, cheddar cheese, chips, gherkins(YC)(*)(CC)
+  [canon_gap] component:main: No canon candidate matches the component (lettuce and fries).
+  [canon_gap] component:vegetable: None of the provided canon candidates correspond to a vegetable component with fresh onion, fresh tomatoes, and gherkins. The candidates are for main dishes with different ingredients.
+  [canon_gap] component:main protein: No candidates provided for comparison.
+  [canon_gap] component:dairy: No canon candidate matches a dairy component with American cheese and butter. All candidates are fish or poultry dishes.
+  [canon_gap] component:cereal: No candidate recipe matches the component 'cereal' with line '10 pz hamburger buns'. All candidates are unrelated (soup, garnish, peanut masala).
+
+====================================================================================================
+RF42713721 — Grilled or steamed salmon fillet - garden vegetables, hollandaise sauce(YC)(*)(CC)
+  [canon_gap] component:main protein: No canon candidate matches salmon fillet; all candidates are different proteins (sardines, beef, lamb).
+  [canon_gap] component:fat: No candidate recipe contains a fat component matching 100 ml olive oil.
+  [canon_gap] component:spice: No candidate is a spice component; all candidates are main dishes with salt and pepper mentioned, but none provide a spice blend or salt and pepper as a standalone component.
+  [canon_gap] component:herb: No component or canon candidates provided for validation.
+  [canon_gap] component:fruit: No canon candidate matches a fruit component with fresh lemon; all candidates are for other dishes.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (roasted new potatoes, asparagus, zucchini, carrot, broccoli).
+  [canon_gap] component:sauce: No canon candidate provides a hollandaise sauce recipe; the candidates are for other dishes or only mention hollandaise as a serving sauce without ingredient details.
+
+====================================================================================================
+RF42713787 — Grilled chicken breast - lemon oil, roasted vegetables, green asparagus(YC)(CC)
+  [canon_gap] component:main protein: None of the canon candidates provide a comparable quantity for boneless skinless chicken breast. The candidates are whole dishes with mixed ingredients, not a direct protein component. Therefore, no reference can be established.
+  [canon_gap] component:fat: No candidate matches the component structure: the component has three olive oil lines while all candidates have a single olive oil line (or none).
+  [canon_gap] component:sauce: No canon candidate matches a sauce component; salt alone cannot be validated.
+  [canon_gap] component:spice: No candidate recipe includes ground white peppercorn; all candidates are for different dishes (paneer, cumin, raita).
+  [canon_gap] component:herb: No canon candidate provides a herb blend; candidates are for risotto, anchovy butter, and oil.
+  [canon_gap] component:fruit: No canon candidate contains lemon or fruit component.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component; all candidates are for different dishes (peppers only, braised beef, Indian rice dish) and none contain the mix of potatoes, asparagus, zucchini, peppers, eggplant, and garlic.
+
+====================================================================================================
+RF427146950 — Vegan burger - tofu & roasted sweet pepper spread, onion-flavoured chips(VG)(CC)
+  [canon_gap] component:main: No candidate recipe matches the component: the component contains vegan burger and pickled vegetables, while candidates are unrelated (apples/celery, beef, or an incomplete pickled vegetables entry).
+  [canon_gap] component:cereal: No canon candidate matches the component 'cereal' or the ingredient 'hamburger buns'.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component ingredients (bell pepper, onion, garlic, tomatoes, jalapeno, dried tomatoes, frozen fries).
+  [canon_gap] component:nuts: No canon candidate references nuts or almonds; all provided candidates are unrelated (fish, bread, chickpeas). Cannot validate the component against any reference.
+  [canon_gap] component:fat: No candidate recipe provides a fat component with 50 ml olive oil; the closest candidates have 225 ml or 500 ml olive oil, which do not match the scaled quantity.
+  [canon_gap] component:spice: No candidate recipe contains all three spices (ground cumin, black peppercorn, onion powder). The closest candidate bk_jerusalem_a_cookbook-0083 has ground cumin but lacks the other two; bk_jerusalem_a_cookbook-0062 has ground cumin and paprika but lacks black peppercorn and onion powder. No single candidate matches the spice component.
+  [canon_gap] component:herb: No canon candidate matches the herb component; abstaining.
+  [canon_gap] component:liquid: No candidate matches the given lemon juice quantity; the closest candidates have 75 ml or 112.5 ml, while the component specifies 5 ml.
+  [canon_gap] component:main protein: No candidate provides ingredient quantities for tofu; cannot compare 100 g tofu against any reference.
+  [canon_gap] component:sauce: No candidate recipe corresponds to a sauce component; all provided candidates are main dishes or salads.
+
+====================================================================================================
+RF427146963 — Crunchy vegan tenders - lemon-avocado emulsion, cabbage & carrot coleslaw, roasted sweet
+  [canon_gap] component:main: No canon candidate matches the ingredient 'vegan chicken' in the main component.
+  [canon_gap] component:fruit: No canon candidate matches the fruit component with avocado and lime.
+  [canon_gap] component:herb: No canon candidate matches the herb mix (coriander, parsley, rosemary). Candidates contain only single herbs or none.
+  [canon_gap] component:fat: No candidate matches the fat component (sunflower and sesame oils).
+  [canon_gap] component:beverage: No canon candidate contains soya milk; all candidates are main dishes without soya milk.
+  [canon_gap] component:spice: No canon candidate matches the spice component (white/black peppercorn, sweet paprika, onion powder). The closest candidate (bk_jerusalem_a_cookbook-0062) includes sweet paprika but in tbsp quantities and also includes cumin, not matching the component's composition or scale.
+  [canon_gap] component:sauce: No canon candidate corresponds to a sauce component; all candidates are main dishes or salads.
+  [canon_gap] component:vegetable: No canon candidate matches the vegetable component (cabbage, red cabbage, carrot, ginger, sweet potato). The only candidate with red cabbage (bk_great_italian_cookin-1246) is a specific dish with butter, vinegar, stock, and apples, not a comparable vegetable mix.
+  [canon_gap] component:liquid: No candidate matches the lime juice quantity of 30 ml for 10 portions; candidates have 150 ml and 1250 ml, and no scaling information is provided.
