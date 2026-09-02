@@ -22,8 +22,8 @@ from tests.domain.conftest import REPO_ROOT
 
 CORPUS_DIR = REPO_ROOT / "tests" / "fixtures" / "corpus_marchesi_full"
 
-# WP-F2: units.yaml sorgente unica (F0 0.4795 -> F1 0.6518 -> F2 0.6671).
-EXPECTED_COVERAGE = 0.6671
+# F0 0.4795 -> F1 0.6518 -> F2 0.6671 -> F3 0.6800 (bonifica del corpus).
+EXPECTED_COVERAGE = 0.6800
 COVERAGE_TOLERANCE = 0.005
 EXPECTED_LINES = 10892
 EXPECTED_DOCS = 1462

@@ -1,0 +1,63 @@
+{
+  "corpus": "/Users/daniele.buonaiuto/km_engine/tests/fixtures/corpus_marchesi_full",
+  "applied": true,
+  "files_changed": 1338,
+  "by_rule": {
+    "R1-quantita-gia-presente": 190,
+    "R2-pizzico-confermato-dal-procedimento": 8,
+    "R3-q.b.": 1962
+  },
+  "parse_errors": [],
+  "examples": [
+    {
+      "file": "mar-0002.md",
+      "before": "- 1 pizzico il succo di 2 limoni",
+      "after": "- q.b. il succo di 2 limoni"
+    },
+    {
+      "file": "mar-0002.md",
+      "before": "- 1 pizzico sale e pepe",
+      "after": "- q.b. sale e pepe"
+    },
+    {
+      "file": "mar-0003.md",
+      "before": "- 1 pizzico farina",
+      "after": "- q.b. farina"
+    },
+    {
+      "file": "mar-0003.md",
+      "before": "- 1 pizzico olio per friggere",
+      "after": "- q.b. olio per friggere"
+    },
+    {
+      "file": "mar-0003.md",
+      "before": "- 1 pizzico sale",
+      "after": "- q.b. sale"
+    },
+    {
+      "file": "mar-0005.md",
+      "before": "- 1 pizzico il succo di ½ limone",
+      "after": "- q.b. il succo di ½ limone"
+    },
+    {
+      "file": "mar-0005.md",
+      "before": "- 1 pizzico sale e pepe",
+      "after": "- q.b. sale e pepe"
+    },
+    {
+      "file": "mar-0006.md",
+      "before": "- 1 pizzico olio per friggere",
+      "after": "- q.b. olio per friggere"
+    },
+    {
+      "file": "mar-0006.md",
+      "before": "- 1 pizzico sale",
+      "after": "- q.b. sale"
+    },
+    {
+      "file": "mar-0007.md",
+      "before": "- 1 pizzico pepe",
+      "after": "- q.b. pepe"
+    }
+  ]
+}
