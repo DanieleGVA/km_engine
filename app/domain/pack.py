@@ -58,6 +58,10 @@ class GlossaryEntry(BaseModel):
     aliases: list[str] = Field(default_factory=list)
     definition: str = ""
     ontology_uri: str | None = None
+    # WP-F5: gerarchia leggera ("brodo di carne" e' piu' specifico di "brodo").
+    # Per ora e' solo un dato: nessuna risoluzione lo usa, cosi' non puo'
+    # introdurre generalizzazioni silenziose.
+    broader_than: str | None = None
     class_: str | None = Field(default=None, alias="class")
     allergen_tags: list[str] = Field(default_factory=list)
     unit_weight_g: float | None = None
@@ -153,6 +157,15 @@ class Glossaries(BaseModel):
                         f"(already used in {seen[entry.id]!r})"
                     )
                 seen[entry.id] = name
+        # WP-F5: una gerarchia che punta a un id inesistente e' un errore, non
+        # un dato mancante: meglio fallire al caricamento del pack.
+        for name in ("tecnica", "ingredienti", "stati"):
+            for entry in getattr(self, name).entries:
+                if entry.broader_than and entry.broader_than not in seen:
+                    raise ValueError(
+                        f"{entry.id!r}: broader_than {entry.broader_than!r} "
+                        "does not exist in any glossary"
+                    )
         return self
 
 
