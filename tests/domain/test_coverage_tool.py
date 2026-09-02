@@ -22,8 +22,8 @@ from tests.domain.conftest import REPO_ROOT
 
 CORPUS_DIR = REPO_ROOT / "tests" / "fixtures" / "corpus_marchesi_full"
 
-# F0 0.4795 -> F1 0.6518 -> F2 0.6671 -> F3 0.6800 (bonifica del corpus).
-EXPECTED_COVERAGE = 0.6800
+# F0 0.4795 -> F1 0.6518 -> F2 0.6671 -> F3 0.6800 -> F4 0.7376 (resolver).
+EXPECTED_COVERAGE = 0.7376
 COVERAGE_TOLERANCE = 0.005
 EXPECTED_LINES = 10892
 EXPECTED_DOCS = 1462
@@ -72,6 +72,25 @@ def test_coverage_unresolved_sorted_with_candidates(corpus_report) -> None:
     assert "olio extravergine di oliva" not in terms
     assert "sale e pepe" not in terms
     assert "aglio" not in terms
+
+
+def test_f4_by_rule_reports_every_level(corpus_report) -> None:
+    """Il report dice QUALE livello ha risolto: senza questo il numero e' cieco."""
+    by_rule = corpus_report.by_rule
+    assert by_rule["GLOSS-EXACT"] > 0
+    assert by_rule["GLOSS-ALIAS"] > 0
+    assert by_rule["GLOSS-HEAD"] > 0
+    assert by_rule["GLOSS-UNRESOLVED"] > 0
+    resolved = sum(
+        count for rule, count in by_rule.items() if rule != "GLOSS-UNRESOLVED"
+    )
+    assert resolved == corpus_report.lines_resolved
+
+    # Il livello fuzzy e' conservativo per costruzione (soglia 0.92 con
+    # margine): su questo corpus non scatta mai, e comunque non puo' superare
+    # il 3% delle righe (gate GF4).
+    fuzzy = by_rule.get("GLOSS-FUZZY", 0)
+    assert fuzzy / corpus_report.lines_total <= 0.03
 
 
 def test_coverage_report_json_roundtrip(corpus_report, tmp_path) -> None:

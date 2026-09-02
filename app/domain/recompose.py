@@ -54,6 +54,8 @@ def recompose_document(client: Neo4jClient, doc_id: str) -> str:
                    e.component AS component,
                    e.qty_max AS qty_max,
                    e.to_taste AS to_taste,
+                   e.state AS state,
+                   e.prep AS prep,
                    [(e)-[:HAS_FACT]->(f:Fact)
                     WHERE f.valid_to IS NULL AND f.property = 'qty' | f.value][0] AS qty,
                    [(e)-[:HAS_FACT]->(f:Fact)
@@ -73,6 +75,8 @@ def recompose_document(client: Neo4jClient, doc_id: str) -> str:
                 component=record["component"],
                 qty_max=record["qty_max"],
                 to_taste=bool(record["to_taste"]),
+                state=tuple(record["state"] or ()),
+                prep=record["prep"],
             )
             for record in ingredient_records
         ]

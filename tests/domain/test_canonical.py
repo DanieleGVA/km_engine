@@ -266,8 +266,8 @@ def test_ia5_t10_unresolved_terms_queued_and_not_rewritten(pack, pg_conn) -> Non
         "title: Amaretti\nid: ia5-RIC-103\nlang: en\nsource_lang: it\n"
         "servings: 4\ntime_min: 55\ndifficulty: medium\n---\n"
         "## Ingredients\n"
-        "- 120 g mandorle dolci sbucciate\n"
-        "- 80 g mandorle amare sbucciate\n"
+        "- 120 g funghi porcini\n"
+        "- 80 g brodo di carne\n"
         "- 160 g sugar\n"
         "## Method\n"
         "1. Toast the almonds.\n"
@@ -276,22 +276,21 @@ def test_ia5_t10_unresolved_terms_queued_and_not_rewritten(pack, pg_conn) -> Non
 
     # Il termine NON viene riscritto e qty/unità restano.
     assert _ingredient_lines(doc.canonical_md) == [
-        "- 120 g mandorle dolci sbucciate",
-        "- 80 g mandorle amare sbucciate",
+        "- 120 g funghi porcini",
+        "- 80 g brodo di carne",
         "- 160 g sugar",
     ]
-    # Nessun id glossario inventato per i termini irrisolti.
-    assert "ING-SWEET-ALMONDS" not in doc.canonical_md
-    assert "ING-BITTER-ALMONDS" not in doc.canonical_md
-    assert doc.unresolved_terms == [
-        "mandorle dolci sbucciate",
-        "mandorle amare sbucciate",
-    ]
+    assert doc.unresolved_terms == ["funghi porcini", "brodo di carne"]
 
     proposals = list_glossary_proposals(pg_conn, status="pending")
     terms = {proposal["term"] for proposal in proposals}
-    assert "mandorle dolci sbucciate" in terms
-    assert "mandorle amare sbucciate" in terms
+    assert "funghi porcini" in terms
+    # WP-F4: la proposta porta i candidati piu' vicini, cosi' chi lavora la
+    # coda vede se manca un alias o serve una voce nuova.
+    proposal = next(p for p in proposals if p["term"] == "brodo di carne")
+    assert proposal["candidates"], proposal
+    assert {"key", "score"} <= set(proposal["candidates"][0])
+    assert "brodo di carne" in terms
     for proposal in proposals:
         if proposal["term"] in terms:
             assert proposal["status"] == "pending"
@@ -299,12 +298,10 @@ def test_ia5_t10_unresolved_terms_queued_and_not_rewritten(pack, pg_conn) -> Non
 
 
 def test_ia5_t10_no_proposals_without_conn(pack) -> None:
-    md = _translated_md("120", "g", "mandorle dolci sbucciate", doc_id="ia5-NC")
+    md = _translated_md("120", "g", "funghi porcini", doc_id="ia5-NC")
     doc = canonicalize(pack, md, conn=None)
-    assert doc.unresolved_terms == ["mandorle dolci sbucciate"]
-    assert _ingredient_lines(doc.canonical_md) == [
-        "- 120 g mandorle dolci sbucciate"
-    ]
+    assert doc.unresolved_terms == ["funghi porcini"]
+    assert _ingredient_lines(doc.canonical_md) == ["- 120 g funghi porcini"]
 
 
 # ---------------------------------------------------------------------------
@@ -380,9 +377,104 @@ def test_f1_elision_resolves(pack) -> None:
 def test_f1_unresolved_still_untouched(pack) -> None:
     """T10 non cambia: un termine non risolto non viene mai riscritto."""
     doc = canonicalize(
-        pack, _translated_md("120", "g", "mandorle dolci sbucciate", doc_id="ia5-F1d")
+        pack, _translated_md("120", "g", "funghi porcini", doc_id="ia5-F1d")
     )
-    assert doc.unresolved_terms == ["mandorle dolci sbucciate"]
-    assert _ingredient_lines(doc.canonical_md) == [
-        "- 120 g mandorle dolci sbucciate"
-    ]
+    assert doc.unresolved_terms == ["funghi porcini"]
+    assert _ingredient_lines(doc.canonical_md) == ["- 120 g funghi porcini"]
+
+
+# ---------------------------------------------------------------------------
+# WP-F4 — stati e preparazione nel markdown canonico (opzione A)
+# ---------------------------------------------------------------------------
+
+def test_f4_states_are_kept_in_the_markdown(pack) -> None:
+    """"mandorle dolci sbucciate" -> "sweet almonds [peeled]": niente si perde."""
+    doc = canonicalize(
+        pack, _translated_md("120", "g", "mandorle dolci sbucciate", doc_id="ia5-F4a")
+    )
+    assert _ingredient_lines(doc.canonical_md) == ["- 120 g sweet almonds [peeled]"]
+    assert doc.unresolved_terms == []
+    assert doc.parsed.ingredients[0].state == ("peeled",)
+
+
+def test_f4_unresolved_head_keeps_the_item_whole(pack) -> None:
+    """Testa non risolta: l'item resta intero, lo stato non viene duplicato.
+
+    L'informazione "sotto sale" c'e' gia', dentro l'item che T10 vieta di
+    riscrivere; aggiungerla anche in coda come ``[salted]`` la ripeterebbe.
+    Lo stato staccato resta comunque nella ``Resolution``, che alimenta la
+    coda proposte (WP-F5).
+    """
+    doc = canonicalize(
+        pack, _translated_md("50", "g", "capperi sotto sale", doc_id="ia5-F4b")
+    )
+    assert _ingredient_lines(doc.canonical_md) == ["- 50 g capperi sotto sale"]
+    assert doc.unresolved_terms == ["capperi sotto sale"]
+
+
+def test_f4_prep_and_inner_quantity(pack) -> None:
+    """La dose scritta dentro l'item diventa la dose della riga."""
+    md = (
+        "---\n"
+        "title: Test\nid: ia5-F4c\nlang: en\nsource_lang: it\n"
+        "servings: 1\ntime_min: 1\ndifficulty: easy\n---\n"
+        "## Ingredients\n"
+        "- to taste il succo di 1 limone\n"
+        "## Method\n"
+        "1. Cook.\n"
+    )
+    doc = canonicalize(pack, md)
+    assert _ingredient_lines(doc.canonical_md) == ["- 1 lemon (juice)"]
+    ingredient = doc.parsed.ingredients[0]
+    assert ingredient.qty == "1"
+    assert ingredient.prep == "juice"
+
+
+def test_f4_canon_log_explains_state_and_prep(pack) -> None:
+    """T9 resta bidirezionale con stati e preparazione sulla riga."""
+    md = (
+        "---\n"
+        "title: Test\nid: ia5-F4d\nlang: en\nsource_lang: it\n"
+        "servings: 1\ntime_min: 1\ndifficulty: easy\n---\n"
+        "## Ingredients\n"
+        "- 120 g mandorle dolci sbucciate\n"
+        "- to taste il succo di 1 limone\n"
+        "## Method\n"
+        "1. Cook.\n"
+    )
+    doc = canonicalize(pack, md)
+    fields = {entry.field for entry in doc.log_entries}
+    assert "ingredients[0].state" in fields
+    assert "ingredients[1].prep" in fields
+    state_entry = next(
+        entry for entry in doc.log_entries if entry.field == "ingredients[0].state"
+    )
+    assert state_entry.before_text == ""
+    assert state_entry.after_text == "peeled"
+    assert state_entry.rule_id == "STA-SBUCCIATO"
+    assert verify_canon_log(pack, md, doc.canonical_md, doc.log_entries)
+
+
+def test_f4_by_rule_counts_every_line(pack) -> None:
+    """``by_rule`` copre tutte le righe: la misura non perde nessun caso."""
+    md = (
+        "---\n"
+        "title: Test\nid: ia5-F4e\nlang: en\nsource_lang: it\n"
+        "servings: 1\ntime_min: 1\ndifficulty: easy\n---\n"
+        "## Ingredients\n"
+        "- 1 clove garlic\n"
+        "- 1 dl olio evo\n"
+        "- 120 g mandorle dolci sbucciate\n"
+        "- 80 g funghi porcini\n"
+        "## Method\n"
+        "1. Cook.\n"
+    )
+    doc = canonicalize(pack, md)
+    assert doc.by_rule == {
+        "GLOSS-EXACT": 1,
+        "GLOSS-ALIAS": 1,
+        "GLOSS-HEAD": 1,
+        "GLOSS-UNRESOLVED": 1,
+    }
+    assert sum(doc.by_rule.values()) == len(doc.parsed.ingredients)
+    assert doc.unresolved_candidates["funghi porcini"]

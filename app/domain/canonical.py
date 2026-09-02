@@ -13,14 +13,15 @@ bidirectional: applying the entries to ``translated.md`` reproduces
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from collections import Counter
+from dataclasses import dataclass, field
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
 
 import psycopg
 
 from app.domain.errors import DomainError
-from app.domain.normalize import normalize_key
+from app.domain.normalize import Resolution, Resolver, normalize_key
 from app.domain.pack import DomainPackBundle, UnitRule
 from app.domain.verify import (
     IngredientLine,
@@ -37,6 +38,9 @@ RULE_STRUCT_METHOD = "STRUCT-METHOD"
 RULE_STRUCT_SERIALIZATION = "STRUCT-SERIALIZATION"
 RULE_STRUCT_UNIT = "STRUCT-UNIT"
 RULE_GLOSSARY_LITERAL = "GLOSSARY-LITERAL"
+RULE_MAP = "MAP"
+RULE_STATE = "STRUCT-STATE"
+RULE_PREP = "STRUCT-PREP"
 
 CANONICAL_FRONTMATTER_ORDER = (
     "title",
@@ -79,6 +83,14 @@ class CanonicalDocument:
     parsed: ParsedDoc
     log_entries: list[CanonLogEntry]
     unresolved_terms: list[str]
+    # WP-F4: quale livello ha risolto ogni riga, i candidati dei termini non
+    # risolti (input della coda proposte, WP-F5) e le risoluzioni fuzzy da
+    # far rivedere a una persona.
+    by_rule: dict[str, int] = field(default_factory=dict)
+    unresolved_candidates: dict[str, list[tuple[str, float]]] = field(
+        default_factory=dict
+    )
+    fuzzy_reviews: list[tuple[str, Resolution]] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -149,6 +161,17 @@ def _build_term_map(pack: DomainPackBundle) -> dict[str, tuple[str, str]]:
     for term, label_en, entry_id in pairs:
         term_map.setdefault(term, (label_en, entry_id))
     return term_map
+
+
+def _state_rule_id(pack: DomainPackBundle, states: tuple[str, ...]) -> str | None:
+    """``rule_id`` della voce ``stati`` che spiega il primo stato, se esiste."""
+    if not states:
+        return None
+    key = normalize_key(states[0])
+    for entry in pack.glossaries.stati.entries:
+        if normalize_key(entry.labels_en) == key:
+            return entry.id
+    return None
 
 
 def _glossary_id_for_label(pack: DomainPackBundle, label: str) -> str | None:
@@ -241,11 +264,14 @@ def canonicalize(
     if parsed.frontmatter.get("difficulty") is not None:
         frontmatter["difficulty"] = _fm_str(parsed.frontmatter["difficulty"])
 
-    term_map = _build_term_map(pack)
+    resolver = Resolver(pack)
     msc_mapping = pack.msc_mapping()
     ingredients: list[IngredientLine] = []
     unresolved: list[str] = []
     seen_unresolved: set[str] = set()
+    unresolved_candidates: dict[str, list[tuple[str, float]]] = {}
+    by_rule: Counter[str] = Counter()
+    fuzzy_reviews: list[tuple[str, Resolution]] = []
 
     for ingredient in parsed.ingredients:
         rule = pack.unit_rule_for(ingredient.unit)
@@ -255,26 +281,46 @@ def canonicalize(
         qty_text = _convert_quantity(ingredient.qty, rule)
         qty_max_text = _convert_quantity(ingredient.qty_max, rule)
         item = ingredient.item
-        resolved = None
+        state = ingredient.state
+        prep = ingredient.prep
         if ingredient.code and ingredient.code in msc_mapping:
             # code-first (passo 7): l'identita' (item code) prevale sulla
             # stringa; il canon-log registra MAP-<code>@versione
             item = msc_mapping[ingredient.code]
-            resolved = (item, "MAP")
+            by_rule[RULE_MAP] += 1
         else:
-            lookup = normalize_key(item)
-            resolved = term_map.get(lookup)
-            if resolved is None and unit is not None and unit in countable_units:
+            resolution = resolver.resolve(item)
+            if (
+                not resolution.resolved
+                and unit is not None
+                and unit in countable_units
+            ):
                 # "2 egg whites" -> unit=egg, item=whites: prova "egg whites"
-                resolved = term_map.get(normalize_key(f"{unit} {item}"))
-                if resolved is not None:
-                    item = resolved[0]
+                joined = resolver.resolve(f"{unit} {item}")
+                if joined.resolved:
+                    resolution = joined
                     unit = None  # il nome contiene gia' il contabile
-        if resolved is not None:
-            item = resolved[0]
-        elif lookup not in seen_unresolved:
-            seen_unresolved.add(lookup)
-            unresolved.append(lookup)
+            by_rule[resolution.rule_id] += 1
+            if resolution.resolved:
+                # Gli stati e la preparazione escono dall'item e diventano
+                # metadati della riga: l'informazione si sposta, non si perde
+                # (opzione A: resta nel markdown, leggibile da chi cucina).
+                state = state + resolution.states
+                prep = prep or resolution.prep
+                if resolution.qty is not None and qty_text is None:
+                    # la dose era dentro l'item ("il succo di 1 limone")
+                    qty_text = resolution.qty
+                item = resolution.label_en
+            else:
+                # T10: l'item resta esattamente com'era, modificatori
+                # compresi. Ripetere lo stato in coda lo duplicherebbe.
+                lookup = normalize_key(item)
+                if lookup not in seen_unresolved:
+                    seen_unresolved.add(lookup)
+                    unresolved.append(lookup)
+                    unresolved_candidates[lookup] = list(resolution.candidates)
+            if resolution.needs_review:
+                fuzzy_reviews.append((item, resolution))
 
         # unita' di conteggio che duplica il nome nell'item ("2 egg egg yolk"):
         # l'unita' cade, il nome contiene gia' il contabile
@@ -293,6 +339,8 @@ def canonicalize(
                 component=ingredient.component,
                 qty_max=qty_max_text,
                 to_taste=ingredient.to_taste,
+                state=state,
+                prep=prep,
             )
         )
 
@@ -302,7 +350,12 @@ def canonicalize(
 
     if conn is not None:
         for term in unresolved:
-            create_glossary_proposal(conn, term, context=document_id)
+            create_glossary_proposal(
+                conn,
+                term,
+                context=document_id,
+                candidates=unresolved_candidates.get(term),
+            )
 
     canonical_parsed = parse_translated_md(
         canonical_md, known_units=units,
@@ -316,6 +369,9 @@ def canonicalize(
         parsed=canonical_parsed,
         log_entries=entries,
         unresolved_terms=unresolved,
+        by_rule=dict(by_rule),
+        unresolved_candidates=unresolved_candidates,
+        fuzzy_reviews=fuzzy_reviews,
     )
 
 
@@ -461,6 +517,30 @@ def generate_canon_log(
                 )
             )
 
+        # WP-F4: stato e preparazione staccati dall'item. Il canon-log li
+        # spiega come ogni altra differenza, cosi' T9 resta bidirezionale.
+        if before_ing.state != after_ing.state:
+            entries.append(
+                CanonLogEntry(
+                    document_id,
+                    f"ingredients[{index}].state",
+                    ", ".join(before_ing.state),
+                    ", ".join(after_ing.state),
+                    _state_rule_id(pack, after_ing.state) or RULE_STATE,
+                )
+            )
+
+        if before_ing.prep != after_ing.prep:
+            entries.append(
+                CanonLogEntry(
+                    document_id,
+                    f"ingredients[{index}].prep",
+                    before_ing.prep or "",
+                    after_ing.prep or "",
+                    RULE_PREP,
+                )
+            )
+
     # Steps: text is preserved by canonicalization; log any difference.
     translated_steps = translated.steps
     canonical_steps = canonical.steps
@@ -530,6 +610,8 @@ def verify_canon_log(
             "to_taste": ing.to_taste,
             "unit": ing.unit,
             "item": ing.item,
+            "state": ing.state,
+            "prep": ing.prep,
             "code": ing.code,
             "waste": ing.waste,
             "component": ing.component,
@@ -563,10 +645,12 @@ def verify_canon_log(
             index = int(field.split("[")[1].split("]")[0])
             subfield = field.split(".")[1]
             ingredient = ingredients[index]
-            if subfield in ("qty", "qty_max", "unit"):
+            if subfield in ("qty", "qty_max", "unit", "prep"):
                 current = ingredient[subfield] or ""
             elif subfield == "item":
                 current = ingredient["item"]
+            elif subfield == "state":
+                current = ", ".join(ingredient["state"])
             else:
                 raise CanonLogVerificationError(
                     f"unknown canon-log ingredient subfield {subfield!r}"
@@ -578,6 +662,12 @@ def verify_canon_log(
                 )
             if subfield == "item":
                 ingredient["item"] = entry.after_text
+            elif subfield == "state":
+                ingredient["state"] = tuple(
+                    part.strip()
+                    for part in entry.after_text.split(",")
+                    if part.strip()
+                )
             else:
                 ingredient[subfield] = entry.after_text or None
             continue
@@ -606,6 +696,8 @@ def verify_canon_log(
             component=ing.get("component"),
             qty_max=ing.get("qty_max"),
             to_taste=bool(ing.get("to_taste")),
+            state=tuple(ing.get("state") or ()),
+            prep=ing.get("prep"),
         )
         for ing in ingredients
     ]

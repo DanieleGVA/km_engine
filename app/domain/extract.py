@@ -31,6 +31,7 @@ from typing import Any
 
 import psycopg
 
+from app.domain.normalize import normalize_key
 from app.domain.pack import DomainPackBundle
 from app.domain.verify import parse_translated_md
 
@@ -89,12 +90,12 @@ def _pack_id(pack: DomainPackBundle) -> str:
 def _glossary_index(
     pack: DomainPackBundle,
 ) -> dict[str, tuple[str, Any]]:
-    """Map ``labels_en.casefold() -> (namespace, entry)`` for the glossaries."""
+    """Map ``normalize_key(labels_en) -> (namespace, entry)`` (WP-F1/F4)."""
     by_label_en: dict[str, tuple[str, Any]] = {}
     for namespace in ("tecnica", "ingredienti", "stati"):
         glossary = getattr(pack.glossaries, namespace)
         for entry in glossary.entries:
-            key = entry.labels_en.strip().casefold()
+            key = normalize_key(entry.labels_en)
             if key:
                 by_label_en.setdefault(key, (namespace, entry))
     return by_label_en
@@ -102,6 +103,15 @@ def _glossary_index(
 
 def _term_id(namespace: str, entry_id: str) -> str:
     return f"{namespace}:{entry_id}"
+
+
+def _state_term_id(pack: DomainPackBundle, label: str) -> str | None:
+    """``stati:<id>`` della voce che spiega lo stato, se il glossario la ha."""
+    key = normalize_key(label)
+    for entry in pack.glossaries.stati.entries:
+        if normalize_key(entry.labels_en) == key:
+            return _term_id("stati", entry.id)
+    return None
 
 
 def _find_step_terms(
@@ -179,7 +189,7 @@ def extract_document(
 
     ingredient_rows: list[dict[str, Any]] = []
     for index, ingredient in enumerate(parsed.ingredients):
-        resolved = by_label_en.get(ingredient.item.strip().casefold())
+        resolved = by_label_en.get(normalize_key(ingredient.item))
         ingredient_rows.append(
             {
                 "entity_id": f"{doc_id}:ing:{index}",
@@ -195,6 +205,13 @@ def extract_document(
                 # recomposer deve poterli rileggere per il round-trip T11.
                 "qty_max": ingredient.qty_max,
                 "to_taste": ingredient.to_taste,
+                # WP-F4: stato e preparazione. Stanno sull'Entity (per il
+                # round-trip) e come Fact (per essere interrogabili).
+                "state": list(ingredient.state),
+                "prep": ingredient.prep,
+                "state_term_ids": [
+                    _state_term_id(pack, label) for label in ingredient.state
+                ],
                 "term_id": _term_id(resolved[0], resolved[1].id)
                 if resolved is not None
                 else None,
@@ -239,6 +256,8 @@ def extract_document(
     facts_count = (
         sum(1 for row in ingredient_rows if row["qty"] is not None)
         + sum(1 for row in ingredient_rows if row["unit"] is not None)
+        + sum(len(row["state"]) for row in ingredient_rows)
+        + sum(1 for row in ingredient_rows if row["prep"])
         + len(step_fact_rows)
     )
     terms_linked = sum(1 for row in ingredient_rows if row["term_id"]) + len(
@@ -324,6 +343,8 @@ def extract_document(
                     e.component = $component,
                     e.qty_max = $qty_max,
                     e.to_taste = $to_taste,
+                    e.state = $state,
+                    e.prep = $prep,
                     e.source_file = $source_uri,
                     e.confidence = 'EXTRACTED',
                     e.is_public = false,
@@ -341,6 +362,8 @@ def extract_document(
                 component=row["component"],
                 qty_max=row["qty_max"],
                 to_taste=row["to_taste"],
+                state=row["state"],
+                prep=row["prep"],
                 source_uri=source_uri,
                 doc_id=doc_id,
             )
@@ -398,6 +421,66 @@ def extract_document(
                     source_id=source_id,
                     fact_id=f"{row['entity_id']}:unit",
                     value=row["unit"],
+                    now=now,
+                )
+
+            # WP-F4: uno stato per Fact, collegato al CanonicalTerm che lo
+            # spiega quando la voce esiste nel glossario "stati".
+            for position, label in enumerate(row["state"]):
+                fact_id = f"{row['entity_id']}:state:{position}"
+                tx.run(
+                    """
+                    MATCH (e:Entity {id: $entity_id})
+                    MATCH (s:Source {id: $source_id})
+                    MERGE (f:Fact {id: $fact_id})
+                    SET f.logical_id = $fact_id,
+                        f.property = 'state',
+                        f.value = $value,
+                        f.valid_from = $now,
+                        f.status = 'valid',
+                        f.confidence = 'EXTRACTED',
+                        f.source_id = $source_id
+                    MERGE (e)-[:HAS_FACT]->(f)
+                    MERGE (f)-[:DERIVED_FROM]->(s)
+                    """,
+                    entity_id=row["entity_id"],
+                    source_id=source_id,
+                    fact_id=fact_id,
+                    value=label,
+                    now=now,
+                )
+                term_id = row["state_term_ids"][position]
+                if term_id is not None:
+                    tx.run(
+                        """
+                        MATCH (f:Fact {id: $fact_id})
+                        MATCH (t:CanonicalTerm {id: $term_id})
+                        MERGE (f)-[:NORMALIZED_TO]->(t)
+                        """,
+                        fact_id=fact_id,
+                        term_id=term_id,
+                    )
+
+            if row["prep"]:
+                tx.run(
+                    """
+                    MATCH (e:Entity {id: $entity_id})
+                    MATCH (s:Source {id: $source_id})
+                    MERGE (f:Fact {id: $fact_id})
+                    SET f.logical_id = $fact_id,
+                        f.property = 'prep',
+                        f.value = $value,
+                        f.valid_from = $now,
+                        f.status = 'valid',
+                        f.confidence = 'EXTRACTED',
+                        f.source_id = $source_id
+                    MERGE (e)-[:HAS_FACT]->(f)
+                    MERGE (f)-[:DERIVED_FROM]->(s)
+                    """,
+                    entity_id=row["entity_id"],
+                    source_id=source_id,
+                    fact_id=f"{row['entity_id']}:prep",
+                    value=row["prep"],
                     now=now,
                 )
 

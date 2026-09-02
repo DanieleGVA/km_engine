@@ -28,7 +28,7 @@ from app.domain.errors import (
     GlossaryProposalNotFoundError,
     ParseError,
 )
-from app.domain.normalize import normalize_text
+from app.domain.normalize import LEADING_ARTICLE_RE, normalize_text
 from app.domain.numbers import extract_numbers, numbers_multiset_equal
 from app.domain.pack import DomainPackBundle
 from app.domain.quantities import (
@@ -46,13 +46,16 @@ DIFFICULTY_EN = {"easy", "medium", "hard"}
 _TOKEN_RE = re.compile(r"[^\W\d_]+", flags=re.UNICODE)
 _STEP_RE = re.compile(r"^(\d+)\.\s+(.*)$")
 
-# Articolo o partitivo in testa all'item, residuo della segmentazione
-# ("il succo di 1 limone"): non fa parte del nome dell'ingrediente.
-_LEADING_ARTICLE_RE = re.compile(
-    r"^(?:(?:il|lo|la|i|gli|le|un|uno|una|dei|degli|delle)\s+"
-    r"|(?:l|un|dell|degl|all|nell)['’]\s*)",
-    re.IGNORECASE,
-)
+# Articolo o partitivo in testa all'item ("il succo di 1 limone"): non fa
+# parte del nome. Definito in normalize.py, che e' il posto dove vive la
+# normalizzazione dei termini (WP-F1): qui e' solo un alias, non una copia.
+_LEADING_ARTICLE_RE = LEADING_ARTICLE_RE
+
+# Stati canonici in coda alla riga: "- 100 g capers [salted]" (WP-F4, opzione A:
+# l'informazione resta nel markdown, non solo nel grafo).
+_STATE_RE = re.compile(r"\s*\[([^\]]+)\]\s*$")
+# Preparazione in coda: "- 1 lemon (juice)".
+_PREP_RE = re.compile(r"\s*\(([^)]+)\)\s*$")
 
 # Suffisso strutturale (passo 1): "{code: X, waste: Y%, component: Z}" in coda
 # alla riga ingrediente. Mai parte dell'item: e' metadato (item code, sfrido,
@@ -95,10 +98,14 @@ class IngredientLine:
 
     WP-F3: ``qty`` puo' essere ``None`` (riga senza dose o "q.b."), ``qty_max``
     porta l'estremo alto di un intervallo ("2-3 uova") e ``to_taste`` dice che
-    la dose e' a piacere. Prima il parser pretendeva una cifra iniziale su
-    ogni riga:
-    per soddisfarlo il corpus era stato riscritto iniettando "1 pizzico" su
-    2.160 righe, cioe' inventando una dose che il libro non dava (D4).
+    la dose e' a piacere. Prima il parser pretendeva una cifra iniziale su ogni
+    riga: per soddisfarlo il corpus era stato riscritto iniettando "1 pizzico"
+    su 2.160 righe, cioe' inventando una dose che il libro non dava (D4).
+
+    WP-F4: ``state`` sono gli stati canonici staccati dall'item
+    (``capperi sotto sale`` -> ``capers [salted]``) e ``prep`` la preparazione
+    (``il succo di 1 limone`` -> ``1 lemon (juice)``). Restano nel markdown,
+    non solo nel grafo: il canonical.md deve bastare a chi cucina.
     """
 
     raw: str
@@ -110,6 +117,8 @@ class IngredientLine:
     component: str | None = None
     qty_max: str | None = None
     to_taste: bool = False
+    state: tuple[str, ...] = ()
+    prep: str | None = None
 
 
 @dataclass
@@ -262,6 +271,24 @@ def _parse_ingredient(
         if not item:
             raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
 
+    # stati e preparazione in coda (WP-F4): metadati della riga, non nome
+    state: tuple[str, ...] = ()
+    match = _STATE_RE.search(item)
+    if match:
+        state = tuple(
+            part.strip() for part in match.group(1).split(",") if part.strip()
+        )
+        item = item[: match.start()].rstrip()
+
+    prep: str | None = None
+    match = _PREP_RE.search(item)
+    if match:
+        prep = match.group(1).strip() or None
+        item = item[: match.start()].rstrip()
+
+    if not item:
+        raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
+
     # articolo in testa: non fa parte del nome ("il succo di 1 limone")
     stripped_item = _LEADING_ARTICLE_RE.sub("", item, count=1).strip()
     if stripped_item:
@@ -269,7 +296,7 @@ def _parse_ingredient(
     return IngredientLine(
         raw=content, qty=qty, unit=unit, item=item,
         code=code, waste=waste, component=component,
-        qty_max=qty_max, to_taste=to_taste,
+        qty_max=qty_max, to_taste=to_taste, state=state, prep=prep,
     )
 
 
@@ -302,6 +329,11 @@ def render_ingredient_line(
     else:
         head = qty_text
 
+    if ingredient.prep:
+        item_text = f"{item_text} ({ingredient.prep})"
+    if ingredient.state:
+        item_text = f"{item_text} [{', '.join(ingredient.state)}]"
+
     suffix = render_ingredient_suffix(
         ingredient.code, ingredient.waste, ingredient.component
     )
@@ -319,6 +351,8 @@ def render_ingredient_parts(
     code: str | None = None,
     waste: str | None = None,
     component: str | None = None,
+    state: tuple[str, ...] = (),
+    prep: str | None = None,
     to_taste_text: str = TO_TASTE_EN,
 ) -> str:
     """Come :func:`render_ingredient_line` a partire dai campi sciolti."""
@@ -326,7 +360,7 @@ def render_ingredient_parts(
         IngredientLine(
             raw="", qty=qty, unit=unit, item=item,
             code=code, waste=waste, component=component,
-            qty_max=qty_max, to_taste=to_taste,
+            qty_max=qty_max, to_taste=to_taste, state=state, prep=prep,
         ),
         to_taste_text=to_taste_text,
     )
@@ -879,6 +913,7 @@ def _row_to_proposal(row: dict[str, Any]) -> dict[str, Any]:
         "id": row["id"],
         "term": row["term"],
         "context": row["context"],
+        "candidates": row.get("candidates"),
         "status": row["status"],
         "resolved_by": str(row["resolved_by"]) if row["resolved_by"] is not None else None,
         "resolved_at": row["resolved_at"].isoformat() if row["resolved_at"] is not None else None,
@@ -1078,17 +1113,28 @@ def create_glossary_proposal(
     context: str | None = None,
     *,
     user_id: uuid.UUID | str | None = None,
+    candidates: list[tuple[str, float]] | None = None,
 ) -> dict[str, Any]:
-    """Create a pending glossary proposal and record a CREATE audit entry."""
+    """Create a pending glossary proposal and record a CREATE audit entry.
+
+    ``candidates`` (WP-F4) sono i termini di glossario piu' vicini con il loro
+    punteggio: chi lavora la coda vede subito se manca un alias o una voce.
+    """
+    payload = (
+        json.dumps([{"key": key, "score": score} for key, score in candidates])
+        if candidates
+        else None
+    )
     with conn.transaction():
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute(
                 """
-                INSERT INTO glossary_proposals (term, context)
-                VALUES (%s, %s)
-                RETURNING id, term, context, status, resolved_by, resolved_at, created_at
+                INSERT INTO glossary_proposals (term, context, candidates)
+                VALUES (%s, %s, %s)
+                RETURNING id, term, context, candidates, status, resolved_by,
+                          resolved_at, created_at
                 """,
-                (term, context),
+                (term, context, payload),
             )
             row = cur.fetchone()
         record_audit(
@@ -1151,7 +1197,8 @@ def decide_glossary_proposal(
                 UPDATE glossary_proposals
                 SET status = %s, resolved_by = %s, resolved_at = %s
                 WHERE id = %s
-                RETURNING id, term, context, status, resolved_by, resolved_at, created_at
+                RETURNING id, term, context, candidates, status, resolved_by,
+                          resolved_at, created_at
                 """,
                 (decision, _as_uuid(user_id), _now(), proposal_id),
             )

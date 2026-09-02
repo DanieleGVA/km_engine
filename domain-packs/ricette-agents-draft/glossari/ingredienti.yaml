@@ -110,8 +110,8 @@ entries:
   ontology_uri: null
 - aliases: []
   definition: ''
-  id: ING-BITTER-ALMONDS-SBUCCIATE
-  labels_en: bitter almonds sbucciate
+  id: ING-BITTER-ALMONDS-PEELED
+  labels_en: bitter almonds peeled
   labels_it: mandorle amare sbucciate
   ontology_uri: null
 - aliases: []
@@ -290,8 +290,8 @@ entries:
   ontology_uri: null
 - aliases: []
   definition: ''
-  id: ING-SWEET-ALMONDS-SBUCCIATE
-  labels_en: sweet almonds sbucciate
+  id: ING-SWEET-ALMONDS-PEELED
+  labels_en: sweet almonds peeled
   labels_it: mandorle dolci sbucciate
   ontology_uri: null
 - aliases: []

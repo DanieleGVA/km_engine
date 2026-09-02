@@ -197,9 +197,14 @@ def detect_modifier_terms(
     A term is a modifier ambiguity when it contains a whole glossary alias plus
     extra words (e.g. ``mandorle dolci sbucciate`` contains ``mandorle dolci``).
     Exact aliases are not flagged. Longest alias wins deterministically.
+
+    Solo il glossario INGREDIENTI: la base cercata qui e' l'ingrediente. Da
+    WP-F4 il glossario ``stati`` contiene anche i modificatori stessi
+    (``chopped``, ``peeled``), e includerli farebbe vincere il modificatore
+    sulla base che deve trovare (``garlic chopped`` -> ``chopped``).
     """
     pairs: list[tuple[str, str, str]] = []
-    for entry in pack.glossary_entries():
+    for entry in pack.glossaries.ingredienti.entries:
         for alias in (entry.labels_en, entry.labels_it, *entry.aliases):
             alias = alias.strip().casefold()
             if alias:

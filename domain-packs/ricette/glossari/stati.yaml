@@ -30,3 +30,162 @@ entries:
     aliases: [cremoso, cremosa, cremosi, cremose]
     definition: Having a smooth, creamy consistency.
     ontology_uri: null
+
+  # -------------------------------------------------------------------------
+  # WP-F4 — stati dell'INGREDIENTE (non della cottura).
+  # Servono a conservare nel canonical.md l'informazione che la risoluzione a
+  # livelli stacca dall'item: "capperi sotto sale" -> "capers [salted]".
+  # NON influiscono sulla copertura: quali modificatori si possono staccare lo
+  # decide la lista chiusa in regole/normalizzazione.yaml, queste voci
+  # decidono solo se il modificatore staccato viene conservato o scartato.
+  # -------------------------------------------------------------------------
+  - id: STA-SOTTO-SALE
+    labels_en: salted
+    labels_it: sotto sale
+    aliases: [sotto sale, salato, salata, salati, salate, in salamoia]
+    definition: Preserved in salt or brine.
+    ontology_uri: null
+  - id: STA-SOTT-OLIO
+    labels_en: in oil
+    labels_it: sott'olio
+    aliases: [sott'olio, sotto olio]
+    definition: Preserved in oil.
+    ontology_uri: null
+  - id: STA-SOTTO-ACETO
+    labels_en: pickled
+    labels_it: sotto aceto
+    aliases: [sotto aceto]
+    definition: Preserved in vinegar.
+    ontology_uri: null
+  - id: STA-DENOCCIOLATO
+    labels_en: pitted
+    labels_it: denocciolato
+    aliases: [denocciolato, denocciolata, denocciolati, denocciolate, snocciolato, snocciolata, snocciolati, snocciolate]
+    definition: With the stone removed.
+    ontology_uri: null
+  - id: STA-SBUCCIATO
+    labels_en: peeled
+    labels_it: sbucciato
+    aliases: [sbucciato, sbucciata, sbucciati, sbucciate, pelato, pelata, pelati, pelate, spellato, spellati, mondato, mondati]
+    definition: With the skin removed.
+    ontology_uri: null
+  - id: STA-SGUSCIATO
+    labels_en: shelled
+    labels_it: sgusciato
+    aliases: [sgusciato, sgusciata, sgusciati, sgusciate, sgranato, sgranata, sgranati, sgranate]
+    definition: Removed from its shell or pod.
+    ontology_uri: null
+  - id: STA-TRITATO
+    labels_en: chopped
+    labels_it: tritato
+    aliases: [tritato, tritata, tritati, tritate]
+    definition: Finely chopped.
+    ontology_uri: null
+  - id: STA-GRATTUGIATO
+    labels_en: grated
+    labels_it: grattugiato
+    aliases: [grattugiato, grattugiata, grattugiati, grattugiate]
+    definition: Reduced to shreds with a grater.
+    ontology_uri: null
+  - id: STA-AFFETTATO
+    labels_en: sliced
+    labels_it: affettato
+    aliases: [affettato, affettata, affettati, affettate, a fette, a fettine, a rondelle]
+    definition: Cut into slices.
+    ontology_uri: null
+  - id: STA-A-DADINI
+    labels_en: diced
+    labels_it: a dadini
+    aliases: [a dadini, a cubetti]
+    definition: Cut into small cubes.
+    ontology_uri: null
+  - id: STA-A-PEZZI
+    labels_en: in pieces
+    labels_it: a pezzi
+    aliases: [a pezzi, a pezzetti, a striscioline, a listarelle, a julienne]
+    definition: Cut into pieces.
+    ontology_uri: null
+  - id: STA-A-SCAGLIE
+    labels_en: flaked
+    labels_it: a scaglie
+    aliases: [a scaglie]
+    definition: Cut into thin flakes.
+    ontology_uri: null
+  - id: STA-IN-POLVERE
+    labels_en: powdered
+    labels_it: in polvere
+    aliases: [in polvere]
+    definition: Ground to a powder.
+    ontology_uri: null
+  - id: STA-CHIARIFICATO
+    labels_en: clarified
+    labels_it: chiarificato
+    aliases: [chiarificato, chiarificata]
+    definition: Clarified by removing milk solids or impurities.
+    ontology_uri: null
+  - id: STA-FRESCO
+    labels_en: fresh
+    labels_it: fresco
+    aliases: [fresco, fresca, freschi, fresche]
+    definition: Fresh, not preserved or dried.
+    ontology_uri: null
+  - id: STA-SECCO
+    labels_en: dried
+    labels_it: secco
+    aliases: [secco, secca, secchi, secche]
+    definition: Dried.
+    ontology_uri: null
+  - id: STA-RAFFERMO
+    labels_en: stale
+    labels_it: raffermo
+    aliases: [raffermo, rafferma, raffermi, rafferme]
+    definition: Stale (of bread).
+    ontology_uri: null
+  - id: STA-LESSATO
+    labels_en: boiled
+    labels_it: lessato
+    aliases: [lessato, lessata, lessati, lessate]
+    definition: Cooked in boiling water.
+    ontology_uri: null
+  - id: STA-CRUDO
+    labels_en: raw
+    labels_it: crudo
+    aliases: [crudo, cruda, crudi, crude]
+    definition: Raw, uncooked.
+    ontology_uri: null
+  - id: STA-COTTO
+    labels_en: cooked
+    labels_it: cotto
+    aliases: [cotto, cotta, cotti, cotte]
+    definition: Cooked.
+    ontology_uri: null
+  - id: STA-INTERO
+    labels_en: whole
+    labels_it: intero
+    aliases: [intero, intera, interi, intere]
+    definition: Whole, not cut.
+    ontology_uri: null
+  - id: STA-MATURO
+    labels_en: ripe
+    labels_it: maturo
+    aliases: [maturo, matura, maturi, mature]
+    definition: Ripe.
+    ontology_uri: null
+  - id: STA-NOVELLO
+    labels_en: new
+    labels_it: novello
+    aliases: [novello, novella, novelli, novelle]
+    definition: New season, young.
+    ontology_uri: null
+  - id: STA-RAMATO
+    labels_en: vine-ripened
+    labels_it: ramato
+    aliases: [ramato, ramati]
+    definition: Ripened on the vine (of tomatoes).
+    ontology_uri: null
+  - id: STA-LAVATO
+    labels_en: washed
+    labels_it: lavato
+    aliases: [lavato, lavati]
+    definition: Washed.
+    ontology_uri: null

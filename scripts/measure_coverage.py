@@ -66,6 +66,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", default=None, help="file JSON del report")
     parser.add_argument("--top", type=int, default=50)
     parser.add_argument(
+        "--dump-fuzzy",
+        default=None,
+        help="file markdown con le risoluzioni del livello L3 da rivedere",
+    )
+    parser.add_argument(
         "--min-coverage",
         type=float,
         default=None,
@@ -79,6 +84,34 @@ def main(argv: list[str] | None = None) -> int:
     if args.out:
         path = report.write_json(args.out)
         print(f"\nreport JSON: {path}")
+    if args.dump_fuzzy:
+        path = pathlib.Path(args.dump_fuzzy)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        rules = pack.rules.get("normalizzazione", {})
+        share = (
+            f" ({len(report.fuzzy) / report.lines_total:.2%})"
+            if report.lines_total
+            else ""
+        )
+        lines = [
+            f"# Risoluzioni fuzzy (L3) — {report.pack_id}",
+            "",
+            (
+                f"soglia {rules.get('fuzzy_threshold')} · "
+                f"margine {rules.get('fuzzy_margin')}"
+            ),
+            "",
+            f"Totale: {len(report.fuzzy)} righe su {report.lines_total}{share}",
+            "",
+            "| documento | item | risolto in | score |",
+            "|---|---|---|---|",
+        ]
+        lines.extend(
+            f"| {item.document} | {item.item} | {item.label_en} | {item.score:.3f} |"
+            for item in report.fuzzy
+        )
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        print(f"risoluzioni fuzzy: {path} ({len(report.fuzzy)} righe)")
     if args.min_coverage is not None and report.coverage < args.min_coverage:
         print(
             f"\nGATE FALLITO: coverage {report.coverage:.2%} < "

@@ -1,13 +1,170 @@
 name: normalizzazione
-version: 1.0.0
+version: 1.1.0
 # Ordine fisso di applicazione nello stadio 2 (WP-A5): unità -> termini -> struttura.
 order: [units, terms, structure]
-unit_plural_map:
-  cucchiai: cucchiaio
-  tazze: tazza
-  spicchi: spicchio
-  pizzichi: pizzico
-  bustine: bustina
-  mazzetti: mazzetto
-  foglie: foglia
-  rametti: rametto
+
+# ---------------------------------------------------------------------------
+# WP-F4 — risoluzione a livelli.
+# I livelli sono, nell'ordine: GLOSS-EXACT, GLOSS-ALIAS, GLOSS-HEAD,
+# GLOSS-FUZZY, GLOSS-UNRESOLVED. Il primo che risolve vince.
+# ---------------------------------------------------------------------------
+
+# Soglia e margine del livello fuzzy (trigram Jaccard su normalize_key).
+# Il margine impedisce di scegliere fra due candidati quasi equivalenti:
+# meglio un termine non risolto che un termine risolto male (T10).
+fuzzy_threshold: 0.92
+fuzzy_margin: 0.05
+
+# Prefissi che descrivono una PREPARAZIONE dell'ingrediente, non l'ingrediente:
+# "il succo di 1 limone" e' un limone, con prep = juice. Il valore e'
+# l'etichetta inglese, perche' il markdown canonico e' in inglese.
+prep_prefixes:
+  succo di: juice
+  il succo di: juice
+  scorza grattugiata di: grated zest
+  scorza di: zest
+  buccia grattugiata di: grated zest
+  buccia di: zest
+  foglie di: leaves
+  foglioline di: leaves
+  mollica di: crumb
+  polpa di: pulp
+  punta di: tip
+
+# Modificatori che NON cambiano l'identita' dell'ingrediente e possono essere
+# staccati per cercarne la testa. La lista e' CHIUSA di proposito: e' quello
+# che impedisce a "funghi porcini" di risolversi in "funghi" e a
+# "pasta sfoglia" di risolversi in "pasta". Un termine che si distingue per un
+# aggettivo discriminante (colore, varieta', provenienza) non entra qui.
+# Un modificatore che corrisponde a una voce del glossario "stati" viene
+# conservato come stato sulla riga canonica; gli altri sono scartati e
+# registrati nel log.
+modifiers:
+  # conservazione
+  - sotto sale
+  - sott'olio
+  - sotto aceto
+  - in salamoia
+  - secco
+  - secca
+  - secchi
+  - secche
+  - fresco
+  - fresca
+  - freschi
+  - fresche
+  - raffermo
+  - rafferma
+  - raffermi
+  - rafferme
+  # pulitura
+  - denocciolato
+  - denocciolata
+  - denocciolati
+  - denocciolate
+  - snocciolato
+  - snocciolata
+  - snocciolati
+  - snocciolate
+  - sbucciato
+  - sbucciata
+  - sbucciati
+  - sbucciate
+  - sgusciato
+  - sgusciata
+  - sgusciati
+  - sgusciate
+  - sgranato
+  - sgranata
+  - sgranati
+  - sgranate
+  - pelato
+  - pelata
+  - pelati
+  - pelate
+  - spellato
+  - spellati
+  - mondato
+  - mondati
+  - lavato
+  - lavati
+  # taglio
+  - tritato
+  - tritata
+  - tritati
+  - tritate
+  - grattugiato
+  - grattugiata
+  - grattugiati
+  - grattugiate
+  - affettato
+  - affettata
+  - affettati
+  - affettate
+  - a fette
+  - a fettine
+  - a dadini
+  - a cubetti
+  - a pezzi
+  - a pezzetti
+  - a rondelle
+  - a scaglie
+  - a striscioline
+  - a listarelle
+  - a julienne
+  - in polvere
+  # cottura e stato
+  - chiarificato
+  - chiarificata
+  - lessato
+  - lessata
+  - lessati
+  - lessate
+  - crudo
+  - cruda
+  - crudi
+  - crude
+  - cotto
+  - cotta
+  - cotti
+  - cotte
+  - intero
+  - intera
+  - interi
+  - intere
+  - maturo
+  - matura
+  - maturi
+  - mature
+  - novello
+  - novella
+  - novelli
+  - novelle
+  - ramato
+  - ramati
+  # generici (staccati e scartati: non portano informazione riutilizzabile)
+  - piccolo
+  - piccola
+  - piccoli
+  - piccole
+  - grande
+  - grandi
+  - grosso
+  - grossa
+  - grossi
+  - grosse
+  - medio
+  - media
+  - medi
+  - medie
+  - abbondante
+  - scarso
+  - scarsa
+  - per friggere
+  - per la teglia
+  - per la pasta
+  - per spolverare
+  - per servire
+  - per guarnire
+  - per ungere
+  - per il piano di lavoro

@@ -19,14 +19,19 @@ from pathlib import Path
 from typing import Literal
 
 from app.domain.errors import ParseError
-from app.domain.normalize import normalize_key
+from app.domain.normalize import (
+    RULE_EXACT,
+    RULE_UNRESOLVED,
+    Resolver,
+    normalize_key,
+)
 from app.domain.pack import DomainPackBundle
 
 Stage = Literal["source", "translated"]
 
-# rule_id emesso dalla misura finche' il resolver a livelli (F4) non esiste.
-RULE_GLOSS_EXACT = "GLOSS-EXACT"
-RULE_GLOSS_UNRESOLVED = "GLOSS-UNRESOLVED"
+# I rule_id dei livelli vengono dal resolver: la misura non ne conia di suoi.
+RULE_GLOSS_EXACT = RULE_EXACT
+RULE_GLOSS_UNRESOLVED = RULE_UNRESOLVED
 
 
 # ---------------------------------------------------------------------------
@@ -112,6 +117,24 @@ class UnresolvedTerm:
         }
 
 
+@dataclass(frozen=True)
+class FuzzyResolution:
+    """Una risoluzione del livello L3, da far rivedere a una persona."""
+
+    item: str
+    label_en: str
+    score: float
+    document: str
+
+    def to_json(self) -> dict:
+        return {
+            "item": self.item,
+            "label_en": self.label_en,
+            "score": self.score,
+            "document": self.document,
+        }
+
+
 @dataclass
 class CoverageReport:
     """Esito della misura su un corpus."""
@@ -127,6 +150,7 @@ class CoverageReport:
     by_rule: dict[str, int]
     unresolved: list[UnresolvedTerm]
     parse_errors: list[str] = field(default_factory=list)
+    fuzzy: list[FuzzyResolution] = field(default_factory=list)
 
     @property
     def unresolved_lines(self) -> int:
@@ -145,6 +169,7 @@ class CoverageReport:
             "by_rule": dict(sorted(self.by_rule.items())),
             "unresolved_terms": len(self.unresolved),
             "unresolved": [term.to_json() for term in self.unresolved],
+            "fuzzy": [item.to_json() for item in self.fuzzy],
             "parse_errors": self.parse_errors,
         }
 
@@ -178,6 +203,15 @@ def build_lookup(pack: DomainPackBundle) -> dict[str, tuple[str, str]]:
     return _build_term_map(pack)
 
 
+def build_resolver(pack: DomainPackBundle) -> Resolver:
+    """Il resolver a livelli usato da ``canonicalize`` (WP-F4).
+
+    La misura usa lo stesso oggetto, non una riproduzione: ``by_rule`` nel
+    report dice davvero quale livello ha risolto ogni riga.
+    """
+    return Resolver(pack)
+
+
 def measure_coverage(
     pack: DomainPackBundle,
     corpus_dir: str | Path,
@@ -209,8 +243,8 @@ def measure_documents(
     """Come :func:`measure_coverage` ma su documenti gia' in memoria."""
     from app.domain.verify import parse_source_md, parse_translated_md
 
-    term_map = build_lookup(pack)
-    glossary_keys = sorted(term_map)
+    resolver = build_resolver(pack)
+    glossary_keys = sorted(build_lookup(pack))
     known_units = pack.known_units()
     countable_units = pack.countable_units()
 
@@ -231,6 +265,7 @@ def measure_documents(
     counts: Counter[str] = Counter()
     examples: dict[str, list[str]] = defaultdict(list)
     parse_errors: list[str] = []
+    fuzzy: list[FuzzyResolution] = []
 
     for name in sorted(documents):
         try:
@@ -241,12 +276,25 @@ def measure_documents(
         docs_parsed += 1
         for ingredient in doc.ingredients:
             lines_total += 1
-            key = lookup_key(ingredient.item)
-            if key in term_map:
+            resolution = resolver.resolve(ingredient.item)
+            by_rule[resolution.rule_id] += 1
+            if resolution.needs_review and resolution.label_en:
+                fuzzy.append(
+                    FuzzyResolution(
+                        item=ingredient.item,
+                        label_en=resolution.label_en,
+                        score=(
+                            resolution.candidates[0][1]
+                            if resolution.candidates
+                            else 0.0
+                        ),
+                        document=name,
+                    )
+                )
+            if resolution.resolved:
                 lines_resolved += 1
-                by_rule[RULE_GLOSS_EXACT] += 1
             else:
-                by_rule[RULE_GLOSS_UNRESOLVED] += 1
+                key = lookup_key(ingredient.item)
                 counts[key] += 1
                 if len(examples[key]) < 3:
                     examples[key].append(ingredient.raw)
@@ -276,4 +324,5 @@ def measure_documents(
         by_rule=dict(by_rule),
         unresolved=unresolved,
         parse_errors=parse_errors,
+        fuzzy=fuzzy,
     )
