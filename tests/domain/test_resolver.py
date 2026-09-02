@@ -14,6 +14,7 @@ from app.domain.normalize import (
     RULE_HEAD,
     RULE_UNRESOLVED,
     Resolver,
+    normalize_key,
 )
 
 
@@ -198,3 +199,57 @@ def test_f4_states_only_decide_preservation_not_resolution(pack) -> None:
     assert "al dente" in state_labels
     assert "al dente" not in modifiers
     assert resolver.resolve("pasta al dente").rule_id == RULE_UNRESOLVED
+
+
+# ---------------------------------------------------------------------------
+# WP-F7 — i modificatori valgono anche nella forma inglese
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize(
+    ("translated_item", "head", "state"),
+    [
+        ("butter clarified", "butter", "clarified"),
+        ("tomato vine-ripened", "tomato", "vine-ripened"),
+        ("bread stale", "bread", "stale"),
+        ("pea shelled", "pea", "shelled"),
+        ("zucchini new", "zucchini", "new"),
+    ],
+)
+def test_f7_modifiers_work_on_the_translated_item(
+    resolver, translated_item, head, state
+) -> None:
+    """Il resolver gira sul documento TRADOTTO, dove i modificatori sono inglesi.
+
+    La lista in ``normalizzazione.yaml`` e' dichiarata in italiano; senza la
+    forma inglese il livello HEAD non staccava nulla e la testa non si
+    risolveva. Era D2 che ricompariva a un terzo livello: una tabella che
+    conosce un solo lato del confronto.
+    """
+    resolution = resolver.resolve(translated_item)
+    assert resolution.rule_id == RULE_HEAD, translated_item
+    assert resolution.label_en == head
+    assert state in resolution.states
+
+
+def test_f7_english_forms_do_not_widen_the_closed_list(pack) -> None:
+    """Si aggiunge solo la traduzione di modificatori GIA' ammessi.
+
+    La difesa contro la generalizzazione resta: un aggettivo discriminante non
+    diventa staccabile solo perche' e' inglese.
+    """
+    resolver = Resolver(pack)
+    declared = {
+        normalize_key(m) for m in pack.rules["normalizzazione"]["modifiers"]
+    }
+    states_by_it = {}
+    for entry in pack.glossaries.stati.entries:
+        for term in (entry.labels_it, *entry.aliases):
+            states_by_it[normalize_key(term)] = normalize_key(entry.labels_en)
+    expected = declared | {
+        states_by_it[key] for key in declared if key in states_by_it
+    }
+    assert set(resolver._modifiers) == {key for key in expected if key}
+
+    # nessun discriminante e' entrato dalla porta di servizio
+    for discriminant in ("porcini", "sfoglia", "rosso", "di mais"):
+        assert normalize_key(discriminant) not in resolver._modifiers

@@ -376,7 +376,12 @@ async def test_ic5_curator_cycle_incremental_and_bitemporal(
 
     issues = mine_issues(ic5_client, ic5_pg_conn, pack)
     glossary_issues = [i for i in issues if i.kind == "glossary_proposal"]
-    assert len(glossary_issues) >= 5
+    # Da WP-F4 il resolver stacca da solo i modificatori dichiarati
+    # (``sbucciate``, ``a cubetti``, ``tritato``, ``fresco``): al Curator
+    # arrivano solo le ambiguita' che il codice non sa gia' sciogliere. E' il
+    # comportamento voluto — il gate umano lavora sul residuo, non su cio' che
+    # una regola deterministica risolve — quindi la soglia non e' piu' 5.
+    assert glossary_issues, "il Curator non ha trovato nessuna ambiguita'"
 
     proposals = [propose_extension(issue, pack) for issue in glossary_issues]
     for proposal in proposals:
@@ -511,7 +516,11 @@ async def test_ic5_e2e_curator_reduces_ambiguities(
     translated = await _initial_extract(ic5_client, ic5_pg_conn, pack, corpus)
 
     initial = _count_unresolved(pack, translated)
-    assert initial >= 5
+    # Vedi la nota in test_ic5_curator_cycle_incremental_and_bitemporal: dal
+    # WP-F4 il resolver assorbe i modificatori dichiarati, quindi le
+    # ambiguita' iniziali sono poche. L'invariante che conta resta la
+    # riduzione, non il valore di partenza.
+    assert initial >= 1
 
     for _cycle in range(3):
         issues = mine_issues(ic5_client, ic5_pg_conn, pack)

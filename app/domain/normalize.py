@@ -194,14 +194,26 @@ class Resolver:
                 if key:
                     self._states.setdefault(key, entry.labels_en)
 
+        # I modificatori sono dichiarati in italiano, ma il resolver gira sul
+        # documento TRADOTTO: li' "chiarificato" e' gia' "clarified". Senza la
+        # forma inglese il livello HEAD non stacca nulla e la testa non si
+        # risolve — e' D2 che ricompare a un terzo livello. Si aggiunge solo
+        # l'etichetta inglese di modificatori GIA' ammessi, quindi la lista
+        # resta chiusa: "porcini" non diventa staccabile.
+        declared = {
+            key
+            for key in (
+                normalize_key(modifier) for modifier in rules.get("modifiers", [])
+            )
+            if key
+        }
+        translated = {
+            normalize_key(self._states[key])
+            for key in declared
+            if key in self._states
+        }
         self._modifiers: list[str] = sorted(
-            {
-                key
-                for key in (
-                    normalize_key(modifier) for modifier in rules.get("modifiers", [])
-                )
-                if key
-            },
+            {key for key in declared | translated if key},
             key=len,
             reverse=True,
         )
