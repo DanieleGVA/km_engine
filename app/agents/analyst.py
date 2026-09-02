@@ -203,6 +203,8 @@ def analyze_corpus(
     source_corpus: dict[str, str],
     translated_corpus: dict[str, TranslatedDocument | str],
     *,
+    known_units: set[str],
+    countable_units: set[str] | None = None,
     domain: str = "ricette",
     language: str = "it",
     canonical_language: str = "en",
@@ -211,8 +213,11 @@ def analyze_corpus(
     """Build a :class:`DomainBrief` from source + translated corpora.
 
     ``translated_corpus`` values may be :class:`TranslatedDocument` instances
-    or raw translated markdown strings.
+    or raw translated markdown strings. ``known_units`` viene dal pack
+    (``pack.known_units()``): il parser non ha piu' una tabella di default
+    propria (WP-F2).
     """
+    countable_units = countable_units or set()
     ingredient_entities: list[CandidateEntity] = []
     unit_counter: Counter[str] = Counter()
     unit_examples: dict[str, list[str]] = defaultdict(list)
@@ -229,8 +234,12 @@ def analyze_corpus(
             else translated_value
         )
 
-        source = parse_source_md(source_md)
-        translated = parse_translated_md(translated_md)
+        source = parse_source_md(
+            source_md, known_units=known_units, countable_units=countable_units
+        )
+        translated = parse_translated_md(
+            translated_md, known_units=known_units, countable_units=countable_units
+        )
 
         if len(source.ingredients) != len(translated.ingredients):
             pairing_mismatches += 1

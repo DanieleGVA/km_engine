@@ -528,7 +528,11 @@ def _build_rows(
     doc_id: str, canonical_md: str, pack: DomainPackBundle
 ) -> dict[str, Any]:
     """Build the same deterministic rows as ``app.domain.extract`` (read-only)."""
-    parsed = parse_translated_md(canonical_md, known_units=pack.known_units())
+    parsed = parse_translated_md(
+        canonical_md,
+        known_units=pack.known_units(),
+        countable_units=pack.countable_units(),
+    )
     frontmatter = parsed.frontmatter
     by_label_en = _glossary_index(pack)
 

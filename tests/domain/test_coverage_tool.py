@@ -22,8 +22,8 @@ from tests.domain.conftest import REPO_ROOT
 
 CORPUS_DIR = REPO_ROOT / "tests" / "fixtures" / "corpus_marchesi_full"
 
-# WP-F1: lookup = normalize_key (era 0.4795 con _strip_item_connectors).
-EXPECTED_COVERAGE = 0.6518
+# WP-F2: units.yaml sorgente unica (F0 0.4795 -> F1 0.6518 -> F2 0.6671).
+EXPECTED_COVERAGE = 0.6671
 COVERAGE_TOLERANCE = 0.005
 EXPECTED_LINES = 10892
 EXPECTED_DOCS = 1462

@@ -170,7 +170,12 @@ async def test_ic_e2e_regenerate_ricette_pack(ic_client) -> None:
 
     # WP-C1 — Domain Analyst.
     translated = await translate_corpus(pack, corpus, llm)
-    brief = analyze_corpus(corpus, translated)
+    brief = analyze_corpus(
+        corpus,
+        translated,
+        known_units=pack.known_units(),
+        countable_units=pack.countable_units(),
+    )
     brief_path = write_brief(brief, BRIEF_DIR / "ricette-v1.json")
     assert brief_path.is_file()
 

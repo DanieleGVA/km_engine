@@ -35,18 +35,6 @@ from app.domain.pack import DomainPackBundle
 DIFFICULTY_MAP = {"facile": "easy", "medio": "medium", "difficile": "hard"}
 DIFFICULTY_EN = {"easy", "medium", "hard"}
 
-DEFAULT_KNOWN_UNITS: set[str] = {
-    "g", "kg", "ml", "l", "dl", "°C", "min", "h",
-    "cucchiaio", "cucchiai", "tablespoon", "tablespoons",
-    "tazza", "tazze", "cup", "cups",
-    "pizzico", "pizzichi", "pinch", "pinches",
-    "spicchio", "spicchi", "clove", "cloves",
-    "foglia", "foglie", "leaf", "leaves",
-    "rametto", "rametti", "sprig", "sprigs",
-    "bustina", "bustine", "sachet", "sachets",
-    "mazzetto", "mazzetti", "bunch", "bunches",
-}
-
 _TOKEN_RE = re.compile(r"[^\W\d_]+", flags=re.UNICODE)
 _INGREDIENT_RE = re.compile(r"^(\d+(?:\.\d+)?)\s+(.*)$")
 _STEP_RE = re.compile(r"^(\d+)\.\s+(.*)$")
@@ -171,7 +159,7 @@ def _validate_frontmatter(
 def _parse_ingredient(
     content: str,
     line_no: int,
-    known_units: set[str] | None,
+    known_units: set[str],
     countable_units: set[str] | None = None,
 ) -> IngredientLine:
     match = _INGREDIENT_RE.match(content)
@@ -186,7 +174,7 @@ def _parse_ingredient(
     if not rest:
         raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
 
-    units = known_units if known_units is not None else DEFAULT_KNOWN_UNITS
+    units = known_units
     countable = countable_units if countable_units is not None else set()
     unit: str | None = None
     item = rest
@@ -231,7 +219,7 @@ def _parse_sections(
     body: str,
     ingredient_section: str,
     method_section: str,
-    known_units: set[str] | None,
+    known_units: set[str],
     countable_units: set[str] | None = None,
 ) -> tuple[str | None, list[IngredientLine], list[str]]:
     lines = body.splitlines()
@@ -314,7 +302,7 @@ def _parse_document(
     md: str,
     ingredient_section: str,
     method_section: str,
-    known_units: set[str] | None,
+    known_units: set[str],
     *,
     require_source_lang: bool,
     optional_when_native: tuple[str, ...] = (),
@@ -343,10 +331,15 @@ def _parse_document(
 def parse_source_md(
     md: str,
     *,
-    known_units: set[str] | None = None,
+    known_units: set[str],
     countable_units: set[str] | None = None,
 ) -> ParsedDoc:
-    """Parse an Italian source document (``## Ingredienti`` / ``## Procedimento``)."""
+    """Parse an Italian source document (``## Ingredienti`` / ``## Procedimento``).
+
+    ``known_units`` e' obbligatorio (WP-F2): l'unica sorgente delle unita' e'
+    ``units.yaml`` via ``pack.known_units()``. Il vecchio default silenzioso
+    ``DEFAULT_KNOWN_UNITS`` era una quarta tabella divergente.
+    """
     return _parse_document(
         md, "Ingredienti", "Procedimento", known_units,
         require_source_lang=False, countable_units=countable_units,
@@ -356,7 +349,7 @@ def parse_source_md(
 def parse_translated_md(
     md: str,
     *,
-    known_units: set[str] | None = None,
+    known_units: set[str],
     optional_when_native: tuple[str, ...] = (),
     countable_units: set[str] | None = None,
 ) -> ParsedDoc:
@@ -380,7 +373,7 @@ def parse_translated_md(
 def parse_translated_body(
     body: str,
     *,
-    known_units: set[str] | None = None,
+    known_units: set[str],
     countable_units: set[str] | None = None,
 ) -> tuple[str, list[IngredientLine], list[str]]:
     """Parse an LLM-translated body (title line + ``## Ingredients``/``## Method``).

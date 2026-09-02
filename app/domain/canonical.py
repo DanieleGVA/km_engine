@@ -50,34 +50,6 @@ CANONICAL_FRONTMATTER_ORDER = (
     "canonical_version",
 )
 
-# Italian plural forms used by the corpus (mirrors pack._UNIT_PLURALS without
-# importing a private symbol). ``units.yaml`` already stores ``foglie`` and
-# ``rametti`` as plural ``from_unit`` values.
-_ITALIAN_PLURALS: dict[str, str] = {
-    "cucchiaio": "cucchiai",
-    "tazza": "tazze",
-    "spicchio": "spicchi",
-    "pizzico": "pizzichi",
-    "bustina": "bustine",
-    "mazzetto": "mazzetti",
-    "foglia": "foglie",
-    "rametto": "rametti",
-}
-
-# English plural forms accepted in translated.md and normalized to the
-# canonical singular ``to_unit``.
-_ENGLISH_PLURALS: dict[str, str] = {
-    "tablespoon": "tablespoons",
-    "cup": "cups",
-    "pinch": "pinches",
-    "clove": "cloves",
-    "leaf": "leaves",
-    "sprig": "sprigs",
-    "sachet": "sachets",
-    "bunch": "bunches",
-}
-
-
 class CanonicalizationError(DomainError):
     """Base error for stage-2 canonicalization."""
 
@@ -112,40 +84,6 @@ class CanonicalDocument:
 # ---------------------------------------------------------------------------
 # Unit helpers
 # ---------------------------------------------------------------------------
-
-def _known_units(pack: DomainPackBundle) -> set[str]:
-    """All unit tokens the canonicalizer must recognize (source + canonical)."""
-    units: set[str] = set()
-    for rule in pack.units:
-        units.add(rule.from_unit)
-        units.add(rule.to_unit)
-        italian_plural = _ITALIAN_PLURALS.get(rule.from_unit)
-        if italian_plural:
-            units.add(italian_plural)
-        english_plural = _ENGLISH_PLURALS.get(rule.to_unit)
-        if english_plural:
-            units.add(english_plural)
-    return units
-
-
-def _unit_rule_for_token(
-    pack: DomainPackBundle, token: str | None
-) -> UnitRule | None:
-    """Return the unit rule that recognizes ``token`` (source or canonical)."""
-    if not token:
-        return None
-    for rule in pack.units:
-        candidates = {rule.from_unit, rule.to_unit}
-        italian_plural = _ITALIAN_PLURALS.get(rule.from_unit)
-        if italian_plural:
-            candidates.add(italian_plural)
-        english_plural = _ENGLISH_PLURALS.get(rule.to_unit)
-        if english_plural:
-            candidates.add(english_plural)
-        if token in candidates:
-            return rule
-    return None
-
 
 def _apply_unit_rule(qty: Decimal, rule: UnitRule) -> Decimal:
     """Exact Decimal conversion with the rule's declared rounding.
@@ -266,7 +204,7 @@ def canonicalize(
     (unresolved terms are queued in ``glossary_proposals`` when ``conn`` is
     given and are never rewritten), then rewrite to the Appendix A shape.
     """
-    units = _known_units(pack)
+    units = pack.known_units()
     countable_units = pack.countable_units()
     parsed = parse_translated_md(
         translated_md, known_units=units,
@@ -301,7 +239,7 @@ def canonicalize(
 
     for ingredient in parsed.ingredients:
         qty = Decimal(ingredient.qty)
-        rule = _unit_rule_for_token(pack, ingredient.unit)
+        rule = pack.unit_rule_for(ingredient.unit)
         if rule is not None:
             qty = _apply_unit_rule(qty, rule)
             unit = rule.to_unit
@@ -375,7 +313,7 @@ def generate_canon_log(
     canonical_md: str,
 ) -> list[CanonLogEntry]:
     """Emit one :class:`CanonLogEntry` for every translated->canonical diff."""
-    units = _known_units(pack)
+    units = pack.known_units()
     translated = parse_translated_md(
         translated_md, known_units=units,
         optional_when_native=tuple(pack.frontmatter_optional_when_native),
@@ -449,8 +387,8 @@ def generate_canon_log(
         after_ing = canonical_ings[index]
 
         if before_ing.qty != after_ing.qty:
-            rule = _unit_rule_for_token(pack, before_ing.unit) or _unit_rule_for_token(
-                pack, after_ing.unit
+            rule = pack.unit_rule_for(before_ing.unit) or pack.unit_rule_for(
+                after_ing.unit
             )
             entries.append(
                 CanonLogEntry(
@@ -465,8 +403,8 @@ def generate_canon_log(
         before_unit = before_ing.unit or ""
         after_unit = after_ing.unit or ""
         if before_unit != after_unit:
-            rule = _unit_rule_for_token(pack, before_ing.unit) or _unit_rule_for_token(
-                pack, after_ing.unit
+            rule = pack.unit_rule_for(before_ing.unit) or pack.unit_rule_for(
+                after_ing.unit
             )
             entries.append(
                 CanonLogEntry(
@@ -554,7 +492,7 @@ def verify_canon_log(
     ``canonical_md`` byte-for-byte and no entry is a no-op. Raises
     :class:`CanonLogVerificationError` otherwise.
     """
-    units = _known_units(pack)
+    units = pack.known_units()
     parsed = parse_translated_md(
         translated_md, known_units=units,
         optional_when_native=tuple(pack.frontmatter_optional_when_native),

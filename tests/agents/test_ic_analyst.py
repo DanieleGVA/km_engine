@@ -47,8 +47,18 @@ async def test_ic_analyst_deterministic() -> None:
     corpus = pilot_corpus()
     llm = build_fake_llm(pack, corpus)
 
-    first = analyze_corpus(corpus, await translate_corpus(pack, corpus, llm))
-    second = analyze_corpus(corpus, await translate_corpus(pack, corpus, llm))
+    first = analyze_corpus(
+        corpus,
+        await translate_corpus(pack, corpus, llm),
+        known_units=pack.known_units(),
+        countable_units=pack.countable_units(),
+    )
+    second = analyze_corpus(
+        corpus,
+        await translate_corpus(pack, corpus, llm),
+        known_units=pack.known_units(),
+        countable_units=pack.countable_units(),
+    )
 
     first_dump = first.model_dump(mode="json")
     second_dump = second.model_dump(mode="json")

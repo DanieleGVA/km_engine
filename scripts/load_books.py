@@ -458,12 +458,20 @@ async def load_book(book_dir: pathlib.Path, pack, client: Neo4jClient, principal
     for i, (r, md) in enumerate(zip(recipes, mds)):
         try:
             if lang == "it":
-                parsed = parse_source_md(md, known_units=set())
+                parsed = parse_source_md(
+                    md,
+                    known_units=pack.known_units(),
+                    countable_units=pack.countable_units(),
+                )
                 translated = await translate_document(pack, md, llm)
                 canonical = canonicalize(pack, translated.translated_md)
             else:
                 # libri EN: md gia' in formato translated (## Ingredients/## Method)
-                parsed = parse_translated_md(md, known_units=set())
+                parsed = parse_translated_md(
+                    md,
+                    known_units=pack.known_units(),
+                    countable_units=pack.countable_units(),
+                )
                 canonical = canonicalize(pack, md)
             doses = standardize_doses(canonical.canonical_md, pack, servings_target=10)
             ref = {"author": book_dir.name, "book": book_dir.name,

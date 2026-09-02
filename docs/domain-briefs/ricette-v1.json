@@ -162,7 +162,7 @@
       "frequency": 2,
       "kind": "ingredient",
       "source_terms": [
-        "costa sedano"
+        "sedano"
       ],
       "term": "celery"
     },
@@ -748,7 +748,7 @@
       "term": "golden"
     }
   ],
-  "generated_at": "2026-09-02T11:20:36.654292+00:00",
+  "generated_at": "2026-09-02T11:49:00.724240+00:00",
   "language": "it",
   "ontologies": [
     {
@@ -770,7 +770,7 @@
     "source_documents": 15,
     "state_entities": 2,
     "technique_entities": 6,
-    "unit_types": 14
+    "unit_types": 15
   },
   "units": [
     {
@@ -883,6 +883,13 @@
       ],
       "frequency": 2,
       "unit": "bustina"
+    },
+    {
+      "examples": [
+        "1 costa sedano"
+      ],
+      "frequency": 2,
+      "unit": "costa"
     },
     {
       "examples": [
@@ -1060,7 +1067,7 @@
           "frequency": 2,
           "kind": "ingredient",
           "source_terms": [
-            "costa sedano"
+            "sedano"
           ],
           "term": "celery"
         },

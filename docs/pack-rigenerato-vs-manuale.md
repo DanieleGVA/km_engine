@@ -26,7 +26,7 @@ Pipeline deterministica eseguita sul PILOT (15 ricette validate).
 
 - Entità candidate: 62
 - Vocabolari: ingredienti (54), tecnica (6), stati (2)
-- Unità rilevate: 14
+- Unità rilevate: 15
 - Ambiguità: 3
 - Ontologie candidate: 2
 
@@ -34,7 +34,7 @@ Pipeline deterministica eseguita sul PILOT (15 ricette validate).
 
 - Staging dir: `/Users/daniele.buonaiuto/km_engine/domain-packs/ricette-agents-draft`
 - Entry glossario: 62
-- Regole unità: 18
+- Regole unità: 27
 
 ## Artefatti
 

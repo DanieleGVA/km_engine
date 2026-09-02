@@ -385,6 +385,7 @@ def main() -> int:
             parse_translated_md(
                 md, known_units=pack.known_units(),
                 optional_when_native=tuple(pack.frontmatter_optional_when_native),
+                countable_units=pack.countable_units(),
             )
             l1 = verify_l1(md, md, pack=pack)
             if not l1.passed:

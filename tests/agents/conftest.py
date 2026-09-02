@@ -106,7 +106,12 @@ async def pilot_brief():
     corpus = pilot_corpus()
     llm = build_fake_llm(pack, corpus)
     translated = await translate_corpus(pack, corpus, llm)
-    return analyze_corpus(corpus, translated)
+    return analyze_corpus(
+        corpus,
+        translated,
+        known_units=pack.known_units(),
+        countable_units=pack.countable_units(),
+    )
 
 
 # ---------------------------------------------------------------------------

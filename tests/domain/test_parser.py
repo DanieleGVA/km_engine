@@ -35,65 +35,79 @@ def test_real_recipe_qty_without_unit(pack) -> None:
     assert albumi.item == "albumi"
 
 
-def test_missing_frontmatter_raises() -> None:
+def test_missing_frontmatter_raises(pack) -> None:
     with pytest.raises(ParseError, match="frontmatter"):
-        parse_source_md("## Ingredienti\n- 1 g sale\n## Procedimento\n1. x\n")
+        parse_source_md(
+            "## Ingredienti\n- 1 g sale\n## Procedimento\n1. x\n",
+            known_units=pack.known_units(),
+        )
 
 
-def test_missing_required_key_raises() -> None:
+def test_missing_required_key_raises(pack) -> None:
     md = (
         "---\ntitle: X\nid: RIC-X\nlang: it\nservings: 2\n"
         "difficulty: facile\n---\n## Ingredienti\n- 1 g sale\n"
         "## Procedimento\n1. x\n"
     )
     with pytest.raises(ParseError, match="time_min"):
-        parse_source_md(md)
+        parse_source_md(md, known_units=pack.known_units())
 
 
-def test_missing_ingredients_section_raises() -> None:
+def test_missing_ingredients_section_raises(pack) -> None:
     md = (
         "---\ntitle: X\nid: RIC-X\nlang: it\nservings: 2\ntime_min: 10\n"
         "difficulty: facile\n---\n## Procedimento\n1. x\n"
     )
     with pytest.raises(ParseError, match="Ingredienti"):
-        parse_source_md(md)
+        parse_source_md(md, known_units=pack.known_units())
 
 
-def test_sections_out_of_order_raise() -> None:
+def test_sections_out_of_order_raise(pack) -> None:
     md = (
         "---\ntitle: X\nid: RIC-X\nlang: it\nservings: 2\ntime_min: 10\n"
         "difficulty: facile\n---\n## Procedimento\n1. x\n"
         "## Ingredienti\n- 1 g sale\n"
     )
     with pytest.raises(ParseError, match="must come after"):
-        parse_source_md(md)
+        parse_source_md(md, known_units=pack.known_units())
 
 
-def test_ingredient_without_quantity_raises() -> None:
+def test_ingredient_without_quantity_raises(pack) -> None:
     md = (
         "---\ntitle: X\nid: RIC-X\nlang: it\nservings: 2\ntime_min: 10\n"
         "difficulty: facile\n---\n## Ingredienti\n- sale\n"
         "## Procedimento\n1. x\n"
     )
     with pytest.raises(ParseError, match="quantity"):
-        parse_source_md(md)
+        parse_source_md(md, known_units=pack.known_units())
 
 
-def test_step_numbering_gap_raises() -> None:
+def test_step_numbering_gap_raises(pack) -> None:
     md = (
         "---\ntitle: X\nid: RIC-X\nlang: it\nservings: 2\ntime_min: 10\n"
         "difficulty: facile\n---\n## Ingredienti\n- 1 g sale\n"
         "## Procedimento\n1. x\n3. y\n"
     )
     with pytest.raises(ParseError, match="expected step 2"):
-        parse_source_md(md)
+        parse_source_md(md, known_units=pack.known_units())
 
 
-def test_empty_ingredient_item_raises() -> None:
+def test_empty_ingredient_item_raises(pack) -> None:
     md = (
         "---\ntitle: X\nid: RIC-X\nlang: it\nservings: 2\ntime_min: 10\n"
         "difficulty: facile\n---\n## Ingredienti\n- 1 g\n"
         "## Procedimento\n1. x\n"
     )
     with pytest.raises(ParseError, match="item is empty"):
+        parse_source_md(md, known_units=pack.known_units())
+
+
+def test_f2_parse_requires_known_units() -> None:
+    """WP-F2: nessun default silenzioso, le unita' vengono solo dal pack."""
+    md = (
+        "---\ntitle: X\nid: RIC-X\nlang: it\nservings: 2\ntime_min: 5\n"
+        "difficulty: facile\n---\n## Ingredienti\n- 1 g sale\n"
+        "## Procedimento\n1. x\n"
+    )
+    with pytest.raises(TypeError, match="known_units"):
         parse_source_md(md)

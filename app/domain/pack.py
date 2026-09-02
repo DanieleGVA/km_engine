@@ -20,21 +20,6 @@ from app.domain.errors import DomainPackValidationError
 _VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
 _LANG_RE = re.compile(r"^[a-z]{2}$")
 
-# Italian plural forms used by the corpus. The parser needs them to split
-# ``2 cucchiai olio`` into unit + item even though units.yaml stores the
-# canonical singular ``cucchiaio``.
-_UNIT_PLURALS: dict[str, str] = {
-    "cucchiaio": "cucchiai",
-    "tazza": "tazze",
-    "spicchio": "spicchi",
-    "pizzico": "pizzichi",
-    "bustina": "bustine",
-    "mazzetto": "mazzetti",
-    "foglia": "foglie",
-    "rametto": "rametti",
-}
-
-
 class OntologyRef(BaseModel):
     """External ontology reference (P7)."""
 
@@ -174,6 +159,13 @@ class Glossaries(BaseModel):
 class UnitRule(BaseModel):
     """A deterministic unit conversion/rename rule.
 
+    ``from_forms``/``to_forms`` (WP-F2): le varianti accettate della stessa
+    unita' (plurali, abbreviazioni, sinonimi). Sono qui e in nessun altro
+    posto: prima le stesse tabelle vivevano duplicate in
+    ``pack._UNIT_PLURALS``, ``verify.DEFAULT_KNOWN_UNITS`` e
+    ``canonical._ITALIAN_PLURALS``/``_ENGLISH_PLURALS``, e divergevano
+    (``rametto`` singolare non era riconosciuto da nessuna delle tre).
+
     ``countable``: True per le unita' di conteggio (identita', factor 1.0):
     il parser le riconosce come unita' ma, quando il token compare da solo
     (es. "- 4 eggs"), lo tratta come ingrediente, non come unita'.
@@ -185,7 +177,29 @@ class UnitRule(BaseModel):
     factor: float
     rounding: int | None = None
     note: str | None = None
+    from_forms: list[str] = Field(default_factory=list)
+    to_forms: list[str] = Field(default_factory=list)
     countable: bool = False
+
+    def source_forms(self) -> set[str]:
+        """Forme accettate in ingresso (documento sorgente)."""
+        return {self.from_unit, *self.from_forms}
+
+    def target_forms(self) -> set[str]:
+        """Forme accettate in uscita (documento tradotto/canonico)."""
+        return {self.to_unit, *self.to_forms}
+
+    def forms(self) -> set[str]:
+        """Tutti i token che questa regola riconosce."""
+        return self.source_forms() | self.target_forms()
+
+    @field_validator("from_forms", "to_forms")
+    @classmethod
+    def _forms_non_empty(cls, value: list[str]) -> list[str]:
+        forms = [form.strip() for form in value]
+        if any(not form for form in forms):
+            raise ValueError("unit forms must not be empty")
+        return forms
 
     @field_validator("rule_id", "from_unit", "to_unit")
     @classmethod
@@ -307,21 +321,46 @@ class DomainPackBundle:
     def unit_rules_by_from(self) -> dict[str, UnitRule]:
         return {rule.from_unit: rule for rule in self.units}
 
+    def _unit_index(self) -> dict[str, UnitRule]:
+        """Token -> regola. Le forme *sorgente* vincono sulle forme di arrivo.
+
+        ``ml`` e' forma sorgente di UNIT-ML e forma di arrivo di UNIT-DL: chi
+        parsa ``250 ml`` deve trovare l'identita', non la conversione da dl.
+        """
+        index = self.__dict__.get("_unit_index_cache")
+        if index is None:
+            index = {}
+            for rule in self.units:
+                for form in sorted(rule.source_forms()):
+                    index.setdefault(form, rule)
+            for rule in self.units:
+                for form in sorted(rule.target_forms()):
+                    index.setdefault(form, rule)
+            self.__dict__["_unit_index_cache"] = index
+        return index
+
+    def unit_rule_for(self, token: str | None) -> UnitRule | None:
+        """La regola che riconosce ``token`` (sorgente o canonico), o None."""
+        if not token:
+            return None
+        return self._unit_index().get(token)
+
     def known_units(self) -> set[str]:
-        """All unit tokens the parser should recognize (source + canonical)."""
-        units: set[str] = set()
-        for rule in self.units:
-            units.add(rule.from_unit)
-            units.add(rule.to_unit)
-            plural = _UNIT_PLURALS.get(rule.from_unit)
-            if plural:
-                units.add(plural)
-        return units
+        """All unit tokens the parser should recognize (source + canonical).
+
+        Sorgente unica: ``units.yaml``. Nessuna tabella di plurali altrove.
+        """
+        return set(self._unit_index())
 
     def countable_units(self) -> set[str]:
         """Unita' di conteggio (identita'): riconosciute come unita' ma, da
         sole, trattate come ingrediente dal parser (es. "- 4 eggs")."""
-        return {rule.from_unit for rule in self.units if rule.countable}
+        return {
+            form
+            for rule in self.units
+            if rule.countable
+            for form in rule.forms()
+        }
 
     def msc_mapping(self) -> dict[str, str]:
         """Mappa item code MSC -> termine canonico (msc_mapping.yaml, passo 7).
@@ -443,6 +482,8 @@ def validate_pack(pack_dir: str | Path) -> list[str]:
             errors.append(f"{units_path}: units file must be a YAML list")
         else:
             seen_rule_ids: set[str] = set()
+            source_owner: dict[str, str] = {}
+            target_unit: dict[str, tuple[str, str]] = {}
             for index, item in enumerate(units_raw):
                 try:
                     rule = UnitRule.model_validate(item)
@@ -454,6 +495,28 @@ def validate_pack(pack_dir: str | Path) -> list[str]:
                 if rule.rule_id in seen_rule_ids:
                     errors.append(f"{units_path}[{index}]: duplicate rule_id {rule.rule_id!r}")
                 seen_rule_ids.add(rule.rule_id)
+                # WP-F2: un token non puo' essere forma sorgente di due regole
+                # (il parser non saprebbe quale conversione applicare).
+                for form in sorted(rule.source_forms()):
+                    owner = source_owner.get(form)
+                    if owner is not None and owner != rule.rule_id:
+                        errors.append(
+                            f"{units_path}[{index}]: source form {form!r} is "
+                            f"already claimed by rule {owner!r}"
+                        )
+                    source_owner.setdefault(form, rule.rule_id)
+                # Una forma di arrivo puo' ripetersi (``ml`` e' arrivo di
+                # UNIT-DL e sorgente di UNIT-ML) ma non puo' portare a due
+                # unita' canoniche diverse.
+                for form in sorted(rule.target_forms()):
+                    previous = target_unit.get(form)
+                    if previous is not None and previous[1] != rule.to_unit:
+                        errors.append(
+                            f"{units_path}[{index}]: target form {form!r} maps to "
+                            f"{rule.to_unit!r} but rule {previous[0]!r} maps it "
+                            f"to {previous[1]!r}"
+                        )
+                    target_unit.setdefault(form, (rule.rule_id, rule.to_unit))
 
     rules_dir = root / pack.paths.rules
     if rules_dir.is_dir():

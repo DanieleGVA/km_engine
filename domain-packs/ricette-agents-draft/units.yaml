@@ -40,54 +40,201 @@
   rule_id: UNIT-H
   to_unit: h
 - factor: 1.0
+  from_forms:
+  - cucchiai
   from_unit: cucchiaio
   note: 1 tablespoon = 15 ml
   rounding: null
   rule_id: UNIT-CUCCHIAIO
+  to_forms:
+  - tablespoons
+  - tbsp
   to_unit: tablespoon
 - factor: 1.0
+  from_forms:
+  - cucchiaini
+  from_unit: cucchiaino
+  note: 1 teaspoon = 5 ml
+  rounding: null
+  rule_id: UNIT-CUCCHIAINO
+  to_forms:
+  - teaspoons
+  - tsp
+  to_unit: teaspoon
+- factor: 1.0
+  from_forms:
+  - tazze
   from_unit: tazza
   note: 1 cup = 250 ml
   rounding: null
   rule_id: UNIT-TAZZA
+  to_forms:
+  - cups
   to_unit: cup
 - factor: 1.0
+  from_forms:
+  - tazzine
+  from_unit: tazzina
+  rounding: null
+  rule_id: UNIT-TAZZINA
+  to_forms:
+  - demitasses
+  to_unit: demitasse
+- factor: 1.0
+  from_forms:
+  - bicchieri
+  from_unit: bicchiere
+  rounding: null
+  rule_id: UNIT-BICCHIERE
+  to_forms:
+  - glasses
+  to_unit: glass
+- factor: 1.0
+  from_forms:
+  - pizzichi
+  - presa
+  - prese
   from_unit: pizzico
   rounding: null
   rule_id: UNIT-PIZZICO
+  to_forms:
+  - pinches
   to_unit: pinch
 - factor: 1.0
+  from_forms:
+  - manciate
+  from_unit: manciata
+  rounding: null
+  rule_id: UNIT-MANCIATA
+  to_forms:
+  - handfuls
+  to_unit: handful
+- countable: true
+  factor: 1.0
+  from_forms:
+  - spicchi
   from_unit: spicchio
   rounding: null
   rule_id: UNIT-SPICCHIO
+  to_forms:
+  - cloves
   to_unit: clove
-- factor: 1.0
+- countable: true
+  factor: 1.0
+  from_forms:
+  - foglie
   from_unit: foglia
   rounding: null
   rule_id: UNIT-FOGLIA
+  to_forms:
+  - leaves
   to_unit: leaf
-- factor: 1.0
+- countable: true
+  factor: 1.0
+  from_forms:
+  - rametti
+  - ciuffo
+  - ciuffi
   from_unit: rametto
   rounding: null
   rule_id: UNIT-RAMETTO
+  to_forms:
+  - sprigs
   to_unit: sprig
-- factor: 1.0
+- countable: true
+  factor: 1.0
+  from_forms:
+  - bustine
   from_unit: bustina
   rounding: null
   rule_id: UNIT-BUSTINA
+  to_forms:
+  - sachets
   to_unit: sachet
-- factor: 1.0
+- countable: true
+  factor: 1.0
+  from_forms:
+  - mazzetti
+  - mazzo
+  - mazzi
   from_unit: mazzetto
   rounding: null
   rule_id: UNIT-MAZZETTO
+  to_forms:
+  - bunches
   to_unit: bunch
-- factor: 1.0
-  from_unit: fette
+- countable: true
+  factor: 1.0
+  from_forms:
+  - fette
+  - fettina
+  - fettine
+  from_unit: fetta
   rounding: null
-  rule_id: UNIT-FETTE
+  rule_id: UNIT-FETTA
+  to_forms:
+  - slices
   to_unit: slice
-- factor: 1.0
-  from_unit: fili
+- countable: true
+  factor: 1.0
+  from_forms:
+  - filetti
+  from_unit: filetto
   rounding: null
-  rule_id: UNIT-FILI
+  rule_id: UNIT-FILETTO
+  to_forms:
+  - fillets
+  to_unit: fillet
+- countable: true
+  factor: 1.0
+  from_forms:
+  - fili
+  from_unit: filo
+  rounding: null
+  rule_id: UNIT-FILO
+  to_forms:
+  - threads
   to_unit: thread
+- countable: true
+  factor: 1.0
+  from_forms:
+  - coste
+  - costola
+  - costole
+  - gambo
+  - gambi
+  from_unit: costa
+  rounding: null
+  rule_id: UNIT-COSTA
+  to_forms:
+  - stalks
+  to_unit: stalk
+- countable: true
+  factor: 1.0
+  from_unit: grani
+  note: 'solo il plurale: ''grano'' da solo e'' il cereale'
+  rounding: null
+  rule_id: UNIT-GRANI
+  to_forms:
+  - grains
+  to_unit: grain
+- countable: true
+  factor: 1.0
+  from_forms:
+  - bacche
+  from_unit: bacca
+  rounding: null
+  rule_id: UNIT-BACCA
+  to_forms:
+  - berries
+  to_unit: berry
+- countable: true
+  factor: 1.0
+  from_forms:
+  - fogli
+  from_unit: foglio
+  rounding: null
+  rule_id: UNIT-FOGLIO
+  to_forms:
+  - sheets
+  to_unit: sheet

@@ -86,7 +86,11 @@ def generate_pairs(pack, corpus: dict[str, str]) -> list[dict]:
     pairs: list[dict] = []
     for name in sorted(corpus):
         source_md = corpus[name]
-        source = parse_source_md(source_md, known_units=pack.known_units())
+        source = parse_source_md(
+            source_md,
+            known_units=pack.known_units(),
+            countable_units=pack.countable_units(),
+        )
         title_it = source.title
         title_en = normalize_terms(title_it, pack.it_to_en_terms())
         document_id = source.frontmatter["id"]

@@ -34,11 +34,15 @@ from app.ops.rollback import apply_rollback_versions, snapshot_document_facts
 from app.storage.client import Neo4jClient
 
 
-def _doc_id_from_md(md: str, fallback: str) -> str:
+def _doc_id_from_md(
+    md: str, fallback: str, known_units: set[str], countable_units: set[str]
+) -> str:
     from app.domain.verify import parse_translated_md
 
     try:
-        parsed = parse_translated_md(md)
+        parsed = parse_translated_md(
+            md, known_units=known_units, countable_units=countable_units
+        )
         return str(parsed.frontmatter.get("id", fallback))
     except Exception:  # noqa: BLE001 - fallback esplicito
         return fallback
@@ -76,7 +80,12 @@ def main() -> int:
     try:
         if args.translated_md:
             md = Path(args.translated_md).read_text(encoding="utf-8")
-            doc_id = args.doc_id or _doc_id_from_md(md, Path(args.translated_md).stem)
+            doc_id = args.doc_id or _doc_id_from_md(
+                md,
+                Path(args.translated_md).stem,
+                old_pack.known_units(),
+                old_pack.countable_units(),
+            )
             result = rollback_one(client, old_pack, doc_id, md)
             print(result)
             return 0
@@ -84,7 +93,9 @@ def main() -> int:
         corpus = sorted(Path(args.corpus_dir).glob("*.md"))
         for path in corpus:
             md = path.read_text(encoding="utf-8")
-            doc_id = _doc_id_from_md(md, path.stem)
+            doc_id = _doc_id_from_md(
+                md, path.stem, old_pack.known_units(), old_pack.countable_units()
+            )
             result = rollback_one(client, old_pack, doc_id, md)
             print(result)
         return 0

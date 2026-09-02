@@ -44,59 +44,174 @@
   to_unit: h
   factor: 1.0
   rounding: null
+# ---------------------------------------------------------------------------
+# Unita' culinarie (WP-F2). from_forms/to_forms sono la SOLA sorgente delle
+# varianti accettate (plurali, abbreviazioni, sinonimi): prima le stesse
+# tabelle vivevano duplicate e divergenti in pack._UNIT_PLURALS,
+# verify.DEFAULT_KNOWN_UNITS e canonical._ITALIAN_PLURALS/_ENGLISH_PLURALS.
+# countable: unita' di conteggio, mai convertita; da sola (es. "- 2 coste")
+# il parser la tratta come ingrediente, non come unita'.
+# ---------------------------------------------------------------------------
 - rule_id: UNIT-TBSP
   from_unit: cucchiaio
+  from_forms: [cucchiai]
   to_unit: tablespoon
+  to_forms: [tablespoons, tbsp]
   factor: 1.0
   rounding: null
   note: 1 tablespoon = 15 ml
+- rule_id: UNIT-TSP
+  from_unit: cucchiaino
+  from_forms: [cucchiaini]
+  to_unit: teaspoon
+  to_forms: [teaspoons, tsp]
+  factor: 1.0
+  rounding: null
+  note: 1 teaspoon = 5 ml
 - rule_id: UNIT-CUP
   from_unit: tazza
+  from_forms: [tazze]
   to_unit: cup
+  to_forms: [cups]
   factor: 1.0
   rounding: null
   note: 1 cup = 250 ml
+- rule_id: UNIT-DEMITASSE
+  from_unit: tazzina
+  from_forms: [tazzine]
+  to_unit: demitasse
+  to_forms: [demitasses]
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-GLASS
+  from_unit: bicchiere
+  from_forms: [bicchieri]
+  to_unit: glass
+  to_forms: [glasses]
+  factor: 1.0
+  rounding: null
 - rule_id: UNIT-PINCH
   from_unit: pizzico
+  from_forms: [pizzichi, presa, prese]
   to_unit: pinch
+  to_forms: [pinches]
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-HANDFUL
+  from_unit: manciata
+  from_forms: [manciate]
+  to_unit: handful
+  to_forms: [handfuls]
   factor: 1.0
   rounding: null
 - rule_id: UNIT-CLOVE
+  countable: true
   from_unit: spicchio
+  from_forms: [spicchi]
   to_unit: clove
+  to_forms: [cloves]
   factor: 1.0
   rounding: null
 - rule_id: UNIT-LEAF
-  from_unit: foglie
+  countable: true
+  from_unit: foglia
+  from_forms: [foglie]
   to_unit: leaf
+  to_forms: [leaves]
   factor: 1.0
   rounding: null
 - rule_id: UNIT-SPRIG
-  from_unit: rametti
+  countable: true
+  from_unit: rametto
+  from_forms: [rametti, ciuffo, ciuffi]
   to_unit: sprig
+  to_forms: [sprigs]
   factor: 1.0
   rounding: null
 - rule_id: UNIT-SACHET
+  countable: true
   from_unit: bustina
+  from_forms: [bustine]
   to_unit: sachet
+  to_forms: [sachets]
   factor: 1.0
   rounding: null
 - rule_id: UNIT-BUNCH
+  countable: true
   from_unit: mazzetto
+  from_forms: [mazzetti, mazzo, mazzi]
   to_unit: bunch
+  to_forms: [bunches]
   factor: 1.0
   rounding: null
-
 - rule_id: UNIT-SLICE
-  from_unit: fette
+  countable: true
+  from_unit: fetta
+  from_forms: [fette, fettina, fettine]
   to_unit: slice
+  to_forms: [slices]
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-FILLET
+  countable: true
+  from_unit: filetto
+  from_forms: [filetti]
+  to_unit: fillet
+  to_forms: [fillets]
   factor: 1.0
   rounding: null
 - rule_id: UNIT-THREAD
-  from_unit: fili
+  countable: true
+  from_unit: filo
+  from_forms: [fili]
   to_unit: thread
+  to_forms: [threads]
   factor: 1.0
   rounding: null
+- rule_id: UNIT-STALK
+  countable: true
+  from_unit: costa
+  from_forms: [coste, costola, costole, gambo, gambi]
+  to_unit: stalk
+  to_forms: [stalks]
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-GRAIN
+  countable: true
+  from_unit: grani
+  to_unit: grain
+  to_forms: [grains]
+  factor: 1.0
+  rounding: null
+  note: >-
+    solo il plurale: "grano" da solo e' il cereale, non un'unita'
+    (corpus: 10 righe "grani di pepe" contro 2 righe "grano"/"grano precotto")
+- rule_id: UNIT-BERRY
+  countable: true
+  from_unit: bacca
+  from_forms: [bacche]
+  to_unit: berry
+  to_forms: [berries]
+  factor: 1.0
+  rounding: null
+- rule_id: UNIT-SHEET
+  countable: true
+  from_unit: foglio
+  from_forms: [fogli]
+  to_unit: sheet
+  to_forms: [sheets]
+  factor: 1.0
+  rounding: null
+
+# Non regole di unita', per decisione presa sul corpus (WP-F2):
+# - "noce": 7 righe su 7 sono ingrediente ("noci tritate", "noce di vitello"),
+#   zero sono la dose "noce di burro". UNIT-KNOB sposterebbe l'ingrediente
+#   dentro l'unita' e lo perderebbe.
+# - "chiodo/chiodi": tutte le 15 righe sono "chiodi di garofano", che e' un
+#   ingrediente intero; come unita' l'item diventerebbe "garofano".
+#   Va risolto come voce di glossario (WP-F5).
+# - "goccia/gocce": le 3 righe del corpus sono "gocce di cioccolato", cioe'
+#   le gocce di cioccolato come ingrediente, non una dose in gocce.
 
 # ---------------------------------------------------------------------------
 # Passo 2 PROGRAMMA-UNICO: unita' di conteggio e forme industriali come regole
@@ -168,10 +283,14 @@
 - rule_id: UNIT-PIECE
   countable: true
   from_unit: piece
+  from_forms: [pezzo, pezzi]
   to_unit: piece
   factor: 1.0
   rounding: null
-  note: unita' di conteggio, mai convertita
+  note: >-
+    unita' di conteggio, mai convertita. Le forme italiane "pezzo/pezzi"
+    stanno qui e non in una regola separata: "piece" e' gia' di questa
+    regola e un token non puo' appartenere a due regole sorgente (WP-F2).
 - rule_id: UNIT-PIECES
   countable: true
   from_unit: pieces

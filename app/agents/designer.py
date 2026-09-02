@@ -41,6 +41,10 @@ difficulty: facile|medio|difficile
 # Deterministic unit knowledge base (SI + canonical culinary units, P7).
 # ``from_unit`` is the canonical singular source form; the parser already knows
 # the Italian plural forms. The designer emits one rule per ``from_unit``.
+# Conoscenza di unita' del designer. ``from_forms``/``to_forms`` sono le
+# varianti accettate (WP-F2): stanno qui, e finiscono in units.yaml, invece che
+# in una tabella di plurali separata come il vecchio ``_UNIT_ALIASES``, che
+# divergeva dalle altre quattro copie sparse per il codice.
 _UNIT_SPECS: list[dict] = [
     {"from_unit": "g", "to_unit": "g", "factor": 1.0, "rounding": None, "note": None},
     {"from_unit": "kg", "to_unit": "kg", "factor": 1.0, "rounding": None, "note": None},
@@ -50,29 +54,26 @@ _UNIT_SPECS: list[dict] = [
     {"from_unit": "°C", "to_unit": "°C", "factor": 1.0, "rounding": None, "note": None},
     {"from_unit": "min", "to_unit": "min", "factor": 1.0, "rounding": None, "note": None},
     {"from_unit": "h", "to_unit": "h", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "cucchiaio", "to_unit": "tablespoon", "factor": 1.0, "rounding": None, "note": "1 tablespoon = 15 ml"},
-    {"from_unit": "tazza", "to_unit": "cup", "factor": 1.0, "rounding": None, "note": "1 cup = 250 ml"},
-    {"from_unit": "pizzico", "to_unit": "pinch", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "spicchio", "to_unit": "clove", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "foglia", "to_unit": "leaf", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "rametto", "to_unit": "sprig", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "bustina", "to_unit": "sachet", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "mazzetto", "to_unit": "bunch", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "fette", "to_unit": "slice", "factor": 1.0, "rounding": None, "note": None},
-    {"from_unit": "fili", "to_unit": "thread", "factor": 1.0, "rounding": None, "note": None},
+    {"from_unit": "cucchiaio", "from_forms": ["cucchiai"], "to_unit": "tablespoon", "to_forms": ["tablespoons", "tbsp"], "factor": 1.0, "rounding": None, "note": "1 tablespoon = 15 ml"},
+    {"from_unit": "cucchiaino", "from_forms": ["cucchiaini"], "to_unit": "teaspoon", "to_forms": ["teaspoons", "tsp"], "factor": 1.0, "rounding": None, "note": "1 teaspoon = 5 ml"},
+    {"from_unit": "tazza", "from_forms": ["tazze"], "to_unit": "cup", "to_forms": ["cups"], "factor": 1.0, "rounding": None, "note": "1 cup = 250 ml"},
+    {"from_unit": "tazzina", "from_forms": ["tazzine"], "to_unit": "demitasse", "to_forms": ["demitasses"], "factor": 1.0, "rounding": None, "note": None},
+    {"from_unit": "bicchiere", "from_forms": ["bicchieri"], "to_unit": "glass", "to_forms": ["glasses"], "factor": 1.0, "rounding": None, "note": None},
+    {"from_unit": "pizzico", "from_forms": ["pizzichi", "presa", "prese"], "to_unit": "pinch", "to_forms": ["pinches"], "factor": 1.0, "rounding": None, "note": None},
+    {"from_unit": "manciata", "from_forms": ["manciate"], "to_unit": "handful", "to_forms": ["handfuls"], "factor": 1.0, "rounding": None, "note": None},
+    {"from_unit": "spicchio", "from_forms": ["spicchi"], "to_unit": "clove", "to_forms": ["cloves"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "foglia", "from_forms": ["foglie"], "to_unit": "leaf", "to_forms": ["leaves"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "rametto", "from_forms": ["rametti", "ciuffo", "ciuffi"], "to_unit": "sprig", "to_forms": ["sprigs"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "bustina", "from_forms": ["bustine"], "to_unit": "sachet", "to_forms": ["sachets"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "mazzetto", "from_forms": ["mazzetti", "mazzo", "mazzi"], "to_unit": "bunch", "to_forms": ["bunches"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "fetta", "from_forms": ["fette", "fettina", "fettine"], "to_unit": "slice", "to_forms": ["slices"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "filetto", "from_forms": ["filetti"], "to_unit": "fillet", "to_forms": ["fillets"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "filo", "from_forms": ["fili"], "to_unit": "thread", "to_forms": ["threads"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "costa", "from_forms": ["coste", "costola", "costole", "gambo", "gambi"], "to_unit": "stalk", "to_forms": ["stalks"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "grani", "to_unit": "grain", "to_forms": ["grains"], "factor": 1.0, "rounding": None, "note": "solo il plurale: 'grano' da solo e' il cereale", "countable": True},
+    {"from_unit": "bacca", "from_forms": ["bacche"], "to_unit": "berry", "to_forms": ["berries"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
+    {"from_unit": "foglio", "from_forms": ["fogli"], "to_unit": "sheet", "to_forms": ["sheets"], "factor": 1.0, "rounding": None, "note": None, "countable": True},
 ]
-
-# Observed plural/singular surface forms -> canonical ``from_unit``.
-_UNIT_ALIASES: dict[str, str] = {
-    "cucchiai": "cucchiaio",
-    "tazze": "tazza",
-    "spicchi": "spicchio",
-    "pizzichi": "pizzico",
-    "bustine": "bustina",
-    "mazzetti": "mazzetto",
-    "foglie": "foglia",
-    "rametti": "rametto",
-}
 
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
 
@@ -174,6 +175,12 @@ def _build_units(brief: DomainBrief) -> list[dict]:
             "factor": spec["factor"],
             "rounding": spec["rounding"],
         }
+        if spec.get("from_forms"):
+            rule["from_forms"] = list(spec["from_forms"])
+        if spec.get("to_forms"):
+            rule["to_forms"] = list(spec["to_forms"])
+        if spec.get("countable"):
+            rule["countable"] = True
         if spec["note"]:
             rule["note"] = spec["note"]
         rules.append(rule)
