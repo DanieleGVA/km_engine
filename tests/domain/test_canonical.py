@@ -266,8 +266,8 @@ def test_ia5_t10_unresolved_terms_queued_and_not_rewritten(pack, pg_conn) -> Non
         "title: Amaretti\nid: ia5-RIC-103\nlang: en\nsource_lang: it\n"
         "servings: 4\ntime_min: 55\ndifficulty: medium\n---\n"
         "## Ingredients\n"
-        "- 120 g funghi porcini\n"
-        "- 80 g brodo di carne\n"
+        "- 120 g farina di mais\n"
+        "- 80 g peperone rosso\n"
         "- 160 g sugar\n"
         "## Method\n"
         "1. Toast the almonds.\n"
@@ -276,21 +276,21 @@ def test_ia5_t10_unresolved_terms_queued_and_not_rewritten(pack, pg_conn) -> Non
 
     # Il termine NON viene riscritto e qty/unità restano.
     assert _ingredient_lines(doc.canonical_md) == [
-        "- 120 g funghi porcini",
-        "- 80 g brodo di carne",
+        "- 120 g farina di mais",
+        "- 80 g peperone rosso",
         "- 160 g sugar",
     ]
-    assert doc.unresolved_terms == ["funghi porcini", "brodo di carne"]
+    assert doc.unresolved_terms == ["farina di mais", "peperone rosso"]
 
     proposals = list_glossary_proposals(pg_conn, status="pending")
     terms = {proposal["term"] for proposal in proposals}
-    assert "funghi porcini" in terms
+    assert "farina di mais" in terms
     # WP-F4: la proposta porta i candidati piu' vicini, cosi' chi lavora la
     # coda vede se manca un alias o serve una voce nuova.
-    proposal = next(p for p in proposals if p["term"] == "brodo di carne")
+    proposal = next(p for p in proposals if p["term"] == "peperone rosso")
     assert proposal["candidates"], proposal
     assert {"key", "score"} <= set(proposal["candidates"][0])
-    assert "brodo di carne" in terms
+    assert "peperone rosso" in terms
     for proposal in proposals:
         if proposal["term"] in terms:
             assert proposal["status"] == "pending"
@@ -298,10 +298,10 @@ def test_ia5_t10_unresolved_terms_queued_and_not_rewritten(pack, pg_conn) -> Non
 
 
 def test_ia5_t10_no_proposals_without_conn(pack) -> None:
-    md = _translated_md("120", "g", "funghi porcini", doc_id="ia5-NC")
+    md = _translated_md("120", "g", "farina di mais", doc_id="ia5-NC")
     doc = canonicalize(pack, md, conn=None)
-    assert doc.unresolved_terms == ["funghi porcini"]
-    assert _ingredient_lines(doc.canonical_md) == ["- 120 g funghi porcini"]
+    assert doc.unresolved_terms == ["farina di mais"]
+    assert _ingredient_lines(doc.canonical_md) == ["- 120 g farina di mais"]
 
 
 # ---------------------------------------------------------------------------
@@ -377,10 +377,10 @@ def test_f1_elision_resolves(pack) -> None:
 def test_f1_unresolved_still_untouched(pack) -> None:
     """T10 non cambia: un termine non risolto non viene mai riscritto."""
     doc = canonicalize(
-        pack, _translated_md("120", "g", "funghi porcini", doc_id="ia5-F1d")
+        pack, _translated_md("120", "g", "farina di mais", doc_id="ia5-F1d")
     )
-    assert doc.unresolved_terms == ["funghi porcini"]
-    assert _ingredient_lines(doc.canonical_md) == ["- 120 g funghi porcini"]
+    assert doc.unresolved_terms == ["farina di mais"]
+    assert _ingredient_lines(doc.canonical_md) == ["- 120 g farina di mais"]
 
 
 # ---------------------------------------------------------------------------
@@ -400,16 +400,16 @@ def test_f4_states_are_kept_in_the_markdown(pack) -> None:
 def test_f4_unresolved_head_keeps_the_item_whole(pack) -> None:
     """Testa non risolta: l'item resta intero, lo stato non viene duplicato.
 
-    L'informazione "sotto sale" c'e' gia', dentro l'item che T10 vieta di
-    riscrivere; aggiungerla anche in coda come ``[salted]`` la ripeterebbe.
+    L'informazione "secca" c'e' gia', dentro l'item che T10 vieta di
+    riscrivere; aggiungerla anche in coda come ``[dried]`` la ripeterebbe.
     Lo stato staccato resta comunque nella ``Resolution``, che alimenta la
     coda proposte (WP-F5).
     """
     doc = canonicalize(
-        pack, _translated_md("50", "g", "capperi sotto sale", doc_id="ia5-F4b")
+        pack, _translated_md("50", "g", "farina di mais secca", doc_id="ia5-F4b")
     )
-    assert _ingredient_lines(doc.canonical_md) == ["- 50 g capperi sotto sale"]
-    assert doc.unresolved_terms == ["capperi sotto sale"]
+    assert _ingredient_lines(doc.canonical_md) == ["- 50 g farina di mais secca"]
+    assert doc.unresolved_terms == ["farina di mais secca"]
 
 
 def test_f4_prep_and_inner_quantity(pack) -> None:
@@ -465,7 +465,7 @@ def test_f4_by_rule_counts_every_line(pack) -> None:
         "- 1 clove garlic\n"
         "- 1 dl olio evo\n"
         "- 120 g mandorle dolci sbucciate\n"
-        "- 80 g funghi porcini\n"
+        "- 80 g farina di mais\n"
         "## Method\n"
         "1. Cook.\n"
     )
@@ -477,4 +477,4 @@ def test_f4_by_rule_counts_every_line(pack) -> None:
         "GLOSS-UNRESOLVED": 1,
     }
     assert sum(doc.by_rule.values()) == len(doc.parsed.ingredients)
-    assert doc.unresolved_candidates["funghi porcini"]
+    assert doc.unresolved_candidates["farina di mais"]

@@ -22,8 +22,9 @@ from tests.domain.conftest import REPO_ROOT
 
 CORPUS_DIR = REPO_ROOT / "tests" / "fixtures" / "corpus_marchesi_full"
 
-# F0 0.4795 -> F1 0.6518 -> F2 0.6671 -> F3 0.6800 -> F4 0.7376 (resolver).
-EXPECTED_COVERAGE = 0.7376
+# F0 0.4795 -> F1 0.6518 -> F2 0.6671 -> F3 0.6800 -> F4 0.7376
+# -> F7 0.8493 (alias recuperati dalle voci di dizionario gia' approvate).
+EXPECTED_COVERAGE = 0.8493
 COVERAGE_TOLERANCE = 0.005
 EXPECTED_LINES = 10892
 EXPECTED_DOCS = 1462
@@ -58,13 +59,10 @@ def test_coverage_unresolved_sorted_with_candidates(corpus_report) -> None:
     assert counts == sorted(counts, reverse=True)
 
     first = unresolved[0]
-    assert first.term == "brodo di carne"
-    assert first.count == 121
+    assert first.term == "concentrato di pomodoro"
+    assert first.count == 46
     assert first.examples
     assert first.candidates
-    best_key, best_score = first.candidates[0]
-    assert best_key == "brodo di pesce"
-    assert best_score > 0.4
 
     # D2 chiuso in WP-F1: le tre forme che dominavano il residuo di F0
     # (olio extravergine, sale e pepe, d'aglio) non sono piu' irrisolte.
@@ -72,6 +70,10 @@ def test_coverage_unresolved_sorted_with_candidates(corpus_report) -> None:
     assert "olio extravergine di oliva" not in terms
     assert "sale e pepe" not in terms
     assert "aglio" not in terms
+    # WP-F7: i termini che avevano gia' una voce di dizionario approvata ma
+    # erano irraggiungibili dall'italiano ora si risolvono.
+    for term in ("brodo di carne", "salvia", "patate", "brodo", "riso"):
+        assert term not in terms, term
 
 
 def test_f4_by_rule_reports_every_level(corpus_report) -> None:

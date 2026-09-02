@@ -4078,7 +4078,8 @@ entries:
 - id: ING-DICT-0568
   labels_en: potato
   labels_it: potato
-  aliases: []
+  aliases:
+  - patate
   definition: Standardizzato da dizionario (book, key=patate).
   class: verdura
 - id: ING-DICT-0569
@@ -4090,7 +4091,8 @@ entries:
 - id: ING-DICT-0570
   labels_en: lard
   labels_it: lard
-  aliases: []
+  aliases:
+  - di lardo
   definition: Standardizzato da dizionario (book, key=di lardo).
   class: grasso
 - id: ING-DICT-0571
@@ -4102,7 +4104,8 @@ entries:
 - id: ING-DICT-0572
   labels_en: rice
   labels_it: rice
-  aliases: []
+  aliases:
+  - di riso
   definition: Standardizzato da dizionario (book, key=di riso).
   class: cereale
 - id: ING-DICT-0573
@@ -4126,7 +4129,8 @@ entries:
 - id: ING-DICT-0575
   labels_en: sage
   labels_it: sage
-  aliases: []
+  aliases:
+  - di salvia
   definition: Standardizzato da dizionario (book, key=di salvia).
   class: erba
 - id: ING-DICT-0576
@@ -4152,7 +4156,8 @@ entries:
 - id: ING-DICT-0579
   labels_en: pine nuts
   labels_it: pine nuts
-  aliases: []
+  aliases:
+  - di pinoli
   definition: Standardizzato da dizionario (book, key=di pinoli).
   class: frutta_secca
   allergen_tags:
@@ -4186,7 +4191,8 @@ entries:
 - id: ING-DICT-0584
   labels_en: bread dough
   labels_it: bread dough
-  aliases: []
+  aliases:
+  - di pasta da pane
   definition: Standardizzato da dizionario (book, key=di pasta da pane).
   class: cereale
   allergen_tags:
@@ -4209,13 +4215,15 @@ entries:
 - id: ING-DICT-0587
   labels_en: sausage
   labels_it: sausage
-  aliases: []
+  aliases:
+  - di salsiccia
   definition: Standardizzato da dizionario (book, key=di salsiccia).
   class: proteina
 - id: ING-DICT-0588
   labels_en: spinach
   labels_it: spinach
-  aliases: []
+  aliases:
+  - di spinaci
   definition: Standardizzato da dizionario (book, key=di spinaci).
   class: verdura
 - id: ING-DICT-0589
@@ -4228,7 +4236,8 @@ entries:
 - id: ING-DICT-0590
   labels_en: artichoke
   labels_it: artichoke
-  aliases: []
+  aliases:
+  - carciofi
   definition: Standardizzato da dizionario (book, key=carciofi).
   class: verdura
 - id: ING-DICT-0591
@@ -4254,13 +4263,15 @@ entries:
 - id: ING-DICT-0594
   labels_en: porcini mushroom
   labels_it: porcini mushroom
-  aliases: []
+  aliases:
+  - di funghi porcini
   definition: Standardizzato da dizionario (book, key=di funghi porcini).
   class: fungo
 - id: ING-DICT-0595
   labels_en: cream
   labels_it: cream
-  aliases: []
+  aliases:
+  - di panna
   definition: Standardizzato da dizionario (book, key=di panna).
   class: latticino
   allergen_tags:
@@ -4349,7 +4360,8 @@ entries:
 - id: ING-DICT-0608
   labels_en: dried mushroom
   labels_it: dried mushroom
-  aliases: []
+  aliases:
+  - di funghi secchi
   definition: Standardizzato da dizionario (book, key=di funghi secchi).
   class: fungo
 - id: ING-DICT-0609
@@ -4461,7 +4473,8 @@ entries:
 - id: ING-DICT-0624
   labels_en: originario rice
   labels_it: originario rice
-  aliases: []
+  aliases:
+  - di riso originario
   definition: Standardizzato da dizionario (book, key=di riso originario).
   class: cereale
 - id: ING-DICT-0625
@@ -4500,7 +4513,8 @@ entries:
 - id: ING-DICT-0630
   labels_en: green olive
   labels_it: green olive
-  aliases: []
+  aliases:
+  - di olive verdi denocciolate
   definition: Standardizzato da dizionario (book, key=di olive verdi denocciolate).
   class: verdura
 - id: ING-DICT-0631
@@ -4538,7 +4552,8 @@ entries:
 - id: ING-DICT-0636
   labels_en: bell pepper
   labels_it: bell pepper
-  aliases: []
+  aliases:
+  - peperoni
   definition: Standardizzato da dizionario (book, key=peperoni).
   class: verdura
 - id: ING-DICT-0637
@@ -4587,20 +4602,23 @@ entries:
 - id: ING-DICT-0643
   labels_en: clove
   labels_it: clove
-  aliases: []
+  aliases:
+  - chiodi di garofano
   definition: Standardizzato da dizionario (book, key=chiodi di garofano).
   class: spezia
 - id: ING-DICT-0644
   labels_en: rabbit
   labels_it: rabbit
-  aliases: []
+  aliases:
+  - coniglio pronto per la cottura tagliato a pezzi
   definition: Standardizzato da dizionario (book, key=coniglio pronto per la cottura
     tagliato a pezzi).
   class: proteina
 - id: ING-DICT-0645
   labels_en: fresh cream
   labels_it: fresh cream
-  aliases: []
+  aliases:
+  - di panna fresca
   definition: Standardizzato da dizionario (book, key=di panna fresca).
   class: latticino
   allergen_tags:
@@ -4608,7 +4626,8 @@ entries:
 - id: ING-DICT-0646
   labels_en: pumpkin pulp
   labels_it: pumpkin pulp
-  aliases: []
+  aliases:
+  - di polpa di zucca
   definition: Standardizzato da dizionario (book, key=di polpa di zucca).
   class: verdura
 - id: ING-DICT-0647
@@ -4620,7 +4639,8 @@ entries:
 - id: ING-DICT-0648
   labels_en: eggplant
   labels_it: eggplant
-  aliases: []
+  aliases:
+  - melanzane
   definition: Standardizzato da dizionario (book, key=melanzane).
   class: verdura
 - id: ING-DICT-0649
@@ -4649,7 +4669,8 @@ entries:
 - id: ING-DICT-0652
   labels_en: eel
   labels_it: eel
-  aliases: []
+  aliases:
+  - anguilla di circa 1 kg spellata e pronta per la cottura
   definition: Standardizzato da dizionario (book, key=anguilla di circa 1 kg spellata
     e pronta per la cottura).
   class: proteina
@@ -4664,7 +4685,8 @@ entries:
 - id: ING-DICT-0654
   labels_en: pancetta
   labels_it: pancetta
-  aliases: []
+  aliases:
+  - di pancetta tagliata a dadini
   definition: Standardizzato da dizionario (book, key=di pancetta tagliata a dadini).
   class: proteina
 - id: ING-DICT-0655
@@ -4676,13 +4698,15 @@ entries:
 - id: ING-DICT-0656
   labels_en: cooked ham
   labels_it: cooked ham
-  aliases: []
+  aliases:
+  - di prosciutto cotto
   definition: Standardizzato da dizionario (book, key=di prosciutto cotto).
   class: proteina
 - id: ING-DICT-0657
   labels_en: stockfish
   labels_it: stockfish
-  aliases: []
+  aliases:
+  - di stoccafisso già ammollato
   definition: Standardizzato da dizionario (book, key=di stoccafisso già ammollato).
   class: proteina
   allergen_tags:
@@ -4841,6 +4865,7 @@ entries:
   labels_it: cardoon
   aliases:
   - cardoni
+  - di cardi
   definition: Standardizzato da dizionario (book, key=di cardi).
   class: verdura
 - id: ING-DICT-0680
@@ -4848,6 +4873,7 @@ entries:
   labels_it: almond
   aliases:
   - chopped almonds
+  - di mandorle tritate
   definition: Standardizzato da dizionario (book, key=di mandorle tritate).
   class: frutta_secca
   allergen_tags:
@@ -5022,6 +5048,7 @@ entries:
   labels_it: caper
   aliases:
   - capers in vinegar
+  - di capperi sott'aceto
   definition: Standardizzato da dizionario (book, key=di capperi sott'aceto).
   class: verdura
 - id: ING-DICT-0704
@@ -5130,13 +5157,15 @@ entries:
 - id: ING-DICT-0719
   labels_en: ground beef
   labels_it: ground beef
-  aliases: []
+  aliases:
+  - di carne di manzo macinata
   definition: Standardizzato da dizionario (book, key=di carne di manzo macinata).
   class: proteina
 - id: ING-DICT-0720
   labels_en: dried borlotti bean
   labels_it: dried borlotti bean
-  aliases: []
+  aliases:
+  - di fagioli borlotti secchi
   definition: Standardizzato da dizionario (book, key=di fagioli borlotti secchi).
   class: legume
 - id: ING-DICT-0721
@@ -5148,7 +5177,8 @@ entries:
 - id: ING-DICT-0722
   labels_en: veal cut
   labels_it: veal cut
-  aliases: []
+  aliases:
+  - di girello o di noce di vitello
   definition: Standardizzato da dizionario (book, key=di girello o di noce di vitello).
   class: proteina
 - id: ING-DICT-0723
@@ -5162,7 +5192,8 @@ entries:
 - id: ING-DICT-0724
   labels_en: short pasta
   labels_it: short pasta
-  aliases: []
+  aliases:
+  - di pasta corta
   definition: Standardizzato da dizionario (book, key=di pasta corta).
   class: cereale
   allergen_tags:
@@ -5170,7 +5201,8 @@ entries:
 - id: ING-DICT-0725
   labels_en: puff pastry
   labels_it: puff pastry
-  aliases: []
+  aliases:
+  - di pasta sfoglia
   definition: Standardizzato da dizionario (book, key=di pasta sfoglia).
   class: cereale
   allergen_tags:
@@ -5186,7 +5218,8 @@ entries:
 - id: ING-DICT-0727
   labels_en: riso fino rice
   labels_it: riso fino rice
-  aliases: []
+  aliases:
+  - di riso fino
   definition: Standardizzato da dizionario (book, key=di riso fino).
   class: cereale
 - id: ING-DICT-0728
@@ -5198,7 +5231,8 @@ entries:
 - id: ING-DICT-0729
   labels_en: vanillin
   labels_it: vanillin
-  aliases: []
+  aliases:
+  - di vanillina
   definition: Standardizzato da dizionario (book, key=di vanillina).
   class: altro
 - id: ING-DICT-0730
@@ -5254,7 +5288,8 @@ entries:
 - id: ING-DICT-0738
   labels_en: potato
   labels_it: potato
-  aliases: []
+  aliases:
+  - patata
   definition: Standardizzato da dizionario (book, key=patata).
   class: verdura
 - id: ING-DICT-0739
@@ -5374,7 +5409,8 @@ entries:
 - id: ING-DICT-0757
   labels_en: veal chop
   labels_it: veal chop
-  aliases: []
+  aliases:
+  - costolette di vitello
   definition: Standardizzato da dizionario (book, key=costolette di vitello).
   class: proteina
 - id: ING-DICT-0758
@@ -5386,19 +5422,22 @@ entries:
 - id: ING-DICT-0759
   labels_en: herbs
   labels_it: herbs
-  aliases: []
+  aliases:
+  - di erbette
   definition: Standardizzato da dizionario (book, key=di erbette).
   class: erba
 - id: ING-DICT-0760
   labels_en: borlotti bean
   labels_it: borlotti bean
-  aliases: []
+  aliases:
+  - di fagioli borlotti sgranati
   definition: Standardizzato da dizionario (book, key=di fagioli borlotti sgranati).
   class: legume
 - id: ING-DICT-0761
   labels_en: green bean
   labels_it: green bean
-  aliases: []
+  aliases:
+  - di fagiolini
   definition: Standardizzato da dizionario (book, key=di fagiolini).
   class: verdura
 - id: ING-DICT-0762
@@ -5427,7 +5466,8 @@ entries:
 - id: ING-DICT-0765
   labels_en: tuna
   labels_it: tuna
-  aliases: []
+  aliases:
+  - di tonno
   definition: Standardizzato da dizionario (book, key=di tonno).
   class: proteina
   allergen_tags:
@@ -5435,7 +5475,8 @@ entries:
 - id: ING-DICT-0766
   labels_en: tripe
   labels_it: tripe
-  aliases: []
+  aliases:
+  - di trippa precotta
   definition: Standardizzato da dizionario (book, key=di trippa precotta).
   class: proteina
 - id: ING-DICT-0767
@@ -5584,13 +5625,15 @@ entries:
 - id: ING-DICT-0789
   labels_en: pork chop
   labels_it: pork chop
-  aliases: []
+  aliases:
+  - braciole di maiale
   definition: Standardizzato da dizionario (book, key=braciole di maiale).
   class: proteina
 - id: ING-DICT-0790
   labels_en: cauliflower
   labels_it: cauliflower
-  aliases: []
+  aliases:
+  - cavolfiore
   definition: Standardizzato da dizionario (book, key=cavolfiore).
   class: verdura
 - id: ING-DICT-0791
@@ -5620,6 +5663,7 @@ entries:
   aliases:
   - cappello del prete
   - beef shoulder clod
+  - di cappello del prete di manzo
   definition: Standardizzato da dizionario (book, key=di cappello del prete di manzo).
   class: proteina
 - id: ING-DICT-0795
@@ -5628,6 +5672,7 @@ entries:
   aliases:
   - chickpeas
   - garbanzo beans
+  - di ceci
   definition: Standardizzato da dizionario (book, key=di ceci).
   class: legume
 - id: ING-DICT-0796
@@ -5981,6 +6026,7 @@ entries:
   labels_it: caper
   aliases:
   - capers
+  - di capperi
   definition: Standardizzato da dizionario (book, key=di capperi).
   class: verdura
 - id: ING-DICT-0842
@@ -5999,7 +6045,8 @@ entries:
 - id: ING-DICT-0844
   labels_en: veal liver
   labels_it: veal liver
-  aliases: []
+  aliases:
+  - di fettine di fegato di vitello
   definition: Standardizzato da dizionario (book, key=di fettine di fegato di vitello).
   class: proteina
 - id: ING-DICT-0845
@@ -6015,6 +6062,7 @@ entries:
   labels_it: walnut
   aliases:
   - walnuts
+  - di noci tritate
   definition: Standardizzato da dizionario (book, key=di noci tritate).
   class: frutta_secca
   allergen_tags:
@@ -6022,13 +6070,15 @@ entries:
 - id: ING-DICT-0847
   labels_en: ground beef
   labels_it: ground beef
-  aliases: []
+  aliases:
+  - di polpa di manzo macinata
   definition: Standardizzato da dizionario (book, key=di polpa di manzo macinata).
   class: proteina
 - id: ING-DICT-0848
   labels_en: ground veal
   labels_it: ground veal
-  aliases: []
+  aliases:
+  - di polpa di vitello macinata
   definition: Standardizzato da dizionario (book, key=di polpa di vitello macinata).
   class: proteina
 - id: ING-DICT-0849
@@ -6036,19 +6086,22 @@ entries:
   labels_it: rice
   aliases:
   - superfine rice
+  - di riso superfino
   definition: Standardizzato da dizionario (book, key=di riso superfino).
   class: cereale
 - id: ING-DICT-0850
   labels_en: veal kidney
   labels_it: veal kidney
-  aliases: []
+  aliases:
+  - di rognone di vitello pronto per la cottura
   definition: Standardizzato da dizionario (book, key=di rognone di vitello pronto
     per la cottura).
   class: proteina
 - id: ING-DICT-0851
   labels_en: cuttlefish
   labels_it: cuttlefish
-  aliases: []
+  aliases:
+  - di seppie pronte per la cottura
   definition: Standardizzato da dizionario (book, key=di seppie pronte per la cottura).
   class: proteina
 - id: ING-DICT-0852
@@ -6110,6 +6163,7 @@ entries:
   labels_it: fennel
   aliases:
   - finocchio
+  - finocchi
   definition: Standardizzato da dizionario (book, key=finocchi).
   class: verdura
 - id: ING-DICT-0860
@@ -6135,6 +6189,7 @@ entries:
   labels_it: red mullet
   aliases:
   - large red mullets
+  - grosse triglie
   definition: Standardizzato da dizionario (book, key=grosse triglie).
   class: proteina
 - id: ING-DICT-0864
@@ -6190,6 +6245,7 @@ entries:
   labels_it: eggplant
   aliases:
   - round eggplant
+  - melanzane tonde
   definition: Standardizzato da dizionario (book, key=melanzane tonde).
   class: verdura
 - id: ING-DICT-0872
@@ -6225,7 +6281,8 @@ entries:
 - id: ING-DICT-0876
   labels_en: potato
   labels_it: potato
-  aliases: []
+  aliases:
+  - patata bollita
   definition: Standardizzato da dizionario (book, key=patata bollita).
   class: verdura
 - id: ING-DICT-0877
@@ -6424,7 +6481,8 @@ entries:
 - id: ING-DICT-0906
   labels_en: duck
   labels_it: duck
-  aliases: []
+  aliases:
+  - anatra pronta per la cottura
   definition: Standardizzato da dizionario (book, key=anatra pronta per la cottura).
   class: proteina
 - id: ING-DICT-0907
@@ -6692,6 +6750,7 @@ entries:
   labels_it: lamb pieces
   aliases:
   - polpa di agnello a pezzi
+  - di polpa di agnello tagliata a pezzi
   definition: Standardizzato da dizionario (book, key=di polpa di agnello tagliata
     a pezzi).
   class: proteina
@@ -6700,6 +6759,7 @@ entries:
   labels_it: beef cubes
   aliases:
   - polpa di manzo a dadini
+  - di polpa di manzo tagliata a dadi
   definition: Standardizzato da dizionario (book, key=di polpa di manzo tagliata a
     dadi).
   class: proteina
@@ -7145,7 +7205,8 @@ entries:
 - id: ING-DICT-0994
   labels_en: meat broth
   labels_it: meat broth
-  aliases: []
+  aliases:
+  - di brodo di carne
   definition: Standardizzato da dizionario (book, key=di brodo di carne (vedi preparazioni
     di base)).
   class: liquido
@@ -7170,7 +7231,8 @@ entries:
 - id: ING-DICT-0997
   labels_en: broth
   labels_it: broth
-  aliases: []
+  aliases:
+  - di brodo
   definition: Standardizzato da dizionario (book, key=di brodo).
   class: liquido
   allergen_tags:
@@ -7178,7 +7240,8 @@ entries:
 - id: ING-DICT-0998
   labels_en: black olive
   labels_it: black olive
-  aliases: []
+  aliases:
+  - di olive nere denocciolate
   definition: Standardizzato da dizionario (book, key=di olive nere denocciolate).
   class: verdura
 - id: ING-DICT-0999
@@ -7235,7 +7298,8 @@ entries:
 - id: ING-DICT-1005
   labels_en: Marsala vergine wine
   labels_it: Marsala vergine wine
-  aliases: []
+  aliases:
+  - di marsala vergine
   definition: Standardizzato da dizionario (book, key=di marsala vergine).
   class: bevanda
   allergen_tags:
@@ -7389,6 +7453,7 @@ entries:
   aliases:
   - ragù
   - meat sauce
+  - di ragù di carne
   definition: Standardizzato da dizionario (book, key=di ragù di carne (vedi preparazioni
     di base)).
   class: condimento

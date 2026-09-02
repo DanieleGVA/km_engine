@@ -67,36 +67,52 @@ def test_f4_level_head_with_prep(resolver) -> None:
 
 
 def test_f4_level_unresolved_carries_candidates(resolver) -> None:
-    resolution = resolver.resolve("brodo di carne")
+    resolution = resolver.resolve("concentrato di pomodoro")
     assert resolution.rule_id == RULE_UNRESOLVED
     assert resolution.label_en is None
     assert resolution.candidates
     keys = [key for key, _ in resolution.candidates]
-    assert any("brodo" in key for key in keys)
+    assert any("pomodoro" in key for key in keys)
 
 
 # ---------------------------------------------------------------------------
 # Cio' che NON deve risolvere
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize(
-    "item",
-    [
-        "funghi porcini",     # porcini discrimina la specie
-        "riso originario",    # originario e' una varieta'
-        "pasta sfoglia",      # sfoglia non e' un modificatore
-        "farina di mais",     # il mais cambia l'ingrediente
-        "brodo di carne",     # carne vs pesce vs vegetale
-        "peperone rosso",     # il colore discrimina
-    ],
-)
-def test_f4_head_does_not_overgeneralize(resolver, item) -> None:
-    """La lista chiusa dei modificatori e' l'unica difesa: verifichiamola."""
-    resolution = resolver.resolve(item)
-    assert resolution.rule_id == RULE_UNRESOLVED, (
-        f"{item!r} risolto a {resolution.label_en!r} con {resolution.rule_id}: "
-        "il livello HEAD sta generalizzando su un aggettivo discriminante"
+# (termine specifico, testa generica che NON deve assorbirlo)
+DISCRIMINANT_CASES = [
+    ("funghi porcini", "funghi"),      # porcini discrimina la specie
+    ("riso originario", "riso"),       # originario e' una varieta'
+    ("pasta sfoglia", "pasta"),        # sfoglia non e' un modificatore
+    ("farina di mais", "farina"),      # il mais cambia l'ingrediente
+    ("brodo di carne", "brodo"),       # carne vs pesce vs vegetale
+    ("peperone rosso", "peperone"),    # il colore discrimina
+]
+
+
+@pytest.mark.parametrize(("item", "generic"), DISCRIMINANT_CASES)
+def test_f4_head_does_not_overgeneralize(resolver, item, generic) -> None:
+    """Un aggettivo discriminante non deve far collassare il termine sulla testa.
+
+    L'invariante non e' "resta irrisolto": e' "non diventa il termine generico".
+    Quando il glossario ha la voce specifica (``funghi porcini`` ->
+    ``porcini mushroom``) risolvere e' giusto; quello che non deve succedere e'
+    che il livello HEAD stacchi ``porcini`` e restituisca ``funghi``.
+    """
+    specific = resolver.resolve(item)
+    generic_resolution = resolver.resolve(generic)
+
+    if specific.rule_id == RULE_UNRESOLVED:
+        return  # nessuna voce: irrisolto e' l'esito corretto
+    assert specific.rule_id != RULE_HEAD or not generic_resolution.resolved, (
+        f"{item!r} risolto per HEAD mentre {generic!r} e' un termine noto: "
+        "il modificatore discriminante e' stato staccato"
     )
+    if generic_resolution.resolved:
+        assert specific.label_en != generic_resolution.label_en, (
+            f"{item!r} e {generic!r} risolvono entrambi a "
+            f"{specific.label_en!r}: la distinzione e' persa"
+        )
 
 
 def test_f4_no_invention_on_unresolved(resolver) -> None:
@@ -109,9 +125,9 @@ def test_f4_no_invention_on_unresolved(resolver) -> None:
 
 def test_f4_states_survive_an_unresolved_head(resolver) -> None:
     """Anche quando la testa non risolve, lo stato staccato non si perde."""
-    resolution = resolver.resolve("capperi sotto sale")
+    resolution = resolver.resolve("farina di mais secca")
     assert resolution.rule_id == RULE_UNRESOLVED
-    assert resolution.states == ("salted",)
+    assert resolution.states == ("dried",)
 
 
 def test_f4_generic_modifiers_are_dropped_not_kept(resolver) -> None:
@@ -144,8 +160,8 @@ def test_f4_fuzzy_threshold_is_conservative(pack) -> None:
 def test_f4_fuzzy_margin_blocks_ambiguous_pairs(pack) -> None:
     """Con due candidati vicini non si sceglie: si lascia irrisolto."""
     resolver = Resolver(pack, fuzzy_threshold=0.3, fuzzy_margin=0.05)
-    # "brodo" e' quasi equidistante da "brodo di pesce" e "brodo vegetale"
-    assert resolver.resolve("brodo").rule_id == RULE_UNRESOLVED
+    # "ginepro" e' quasi equidistante da "ginger" e "ground ginger"
+    assert resolver.resolve("ginepro").rule_id == RULE_UNRESOLVED
 
 
 def test_f4_fuzzy_resolves_when_one_candidate_is_clearly_closer(pack) -> None:
