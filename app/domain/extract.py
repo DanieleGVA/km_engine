@@ -190,6 +190,11 @@ def extract_document(
                 "code": ingredient.code,
                 "waste": ingredient.waste,
                 "component": ingredient.component,
+                # WP-F3: metadati strutturali della dose, non fatti misurabili;
+                # stanno sull'Entity come code/waste/component perche' il
+                # recomposer deve poterli rileggere per il round-trip T11.
+                "qty_max": ingredient.qty_max,
+                "to_taste": ingredient.to_taste,
                 "term_id": _term_id(resolved[0], resolved[1].id)
                 if resolved is not None
                 else None,
@@ -232,7 +237,7 @@ def extract_document(
 
     entities_count = len(ingredient_rows) + len(step_rows) + len(term_rows)
     facts_count = (
-        len(ingredient_rows)  # one qty fact per ingredient
+        sum(1 for row in ingredient_rows if row["qty"] is not None)
         + sum(1 for row in ingredient_rows if row["unit"] is not None)
         + len(step_fact_rows)
     )
@@ -317,6 +322,8 @@ def extract_document(
                     e.code = $code,
                     e.waste = $waste,
                     e.component = $component,
+                    e.qty_max = $qty_max,
+                    e.to_taste = $to_taste,
                     e.source_file = $source_uri,
                     e.confidence = 'EXTRACTED',
                     e.is_public = false,
@@ -332,6 +339,8 @@ def extract_document(
                 code=row["code"],
                 waste=row["waste"],
                 component=row["component"],
+                qty_max=row["qty_max"],
+                to_taste=row["to_taste"],
                 source_uri=source_uri,
                 doc_id=doc_id,
             )
@@ -345,27 +354,30 @@ def extract_document(
                     entity_id=row["entity_id"],
                     term_id=row["term_id"],
                 )
-            tx.run(
-                """
-                MATCH (e:Entity {id: $entity_id})
-                MATCH (s:Source {id: $source_id})
-                MERGE (f:Fact {id: $fact_id})
-                SET f.logical_id = $fact_id,
-                    f.property = 'qty',
-                    f.value = $value,
-                    f.valid_from = $now,
-                    f.status = 'valid',
-                    f.confidence = 'EXTRACTED',
-                    f.source_id = $source_id
-                MERGE (e)-[:HAS_FACT]->(f)
-                MERGE (f)-[:DERIVED_FROM]->(s)
-                """,
-                entity_id=row["entity_id"],
-                source_id=source_id,
-                fact_id=f"{row['entity_id']}:qty",
-                value=row["qty"],
-                now=now,
-            )
+            # Una riga "q.b." non ha una quantita': nessun Fact qty inventato
+            # con valore vuoto (P3: mai un placeholder al posto di un dato).
+            if row["qty"] is not None:
+                tx.run(
+                    """
+                    MATCH (e:Entity {id: $entity_id})
+                    MATCH (s:Source {id: $source_id})
+                    MERGE (f:Fact {id: $fact_id})
+                    SET f.logical_id = $fact_id,
+                        f.property = 'qty',
+                        f.value = $value,
+                        f.valid_from = $now,
+                        f.status = 'valid',
+                        f.confidence = 'EXTRACTED',
+                        f.source_id = $source_id
+                    MERGE (e)-[:HAS_FACT]->(f)
+                    MERGE (f)-[:DERIVED_FROM]->(s)
+                    """,
+                    entity_id=row["entity_id"],
+                    source_id=source_id,
+                    fact_id=f"{row['entity_id']}:qty",
+                    value=row["qty"],
+                    now=now,
+                )
             if row["unit"] is not None:
                 tx.run(
                     """

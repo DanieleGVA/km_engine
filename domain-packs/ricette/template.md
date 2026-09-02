@@ -8,5 +8,7 @@ difficulty: facile|medio|difficile
 ---
 ## Ingredienti
 - {qty} {unit} {item}
+- {qty}-{qty_max} {unit} {item}
+- q.b. {item}
 ## Procedimento
 1. <step>

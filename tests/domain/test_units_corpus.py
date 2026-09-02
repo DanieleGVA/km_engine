@@ -18,21 +18,23 @@ from tests.domain.conftest import REPO_ROOT
 CORPUS_DIR = REPO_ROOT / "tests" / "fixtures" / "corpus_marchesi_full"
 
 # Token che, se aprono un item, sono quasi certamente un'unita' non consumata.
-SUSPECT_UNIT_TOKENS = frozenset(
-    """
-    cucchiaio cucchiai cucchiaino cucchiaini tazza tazze tazzina tazzine
-    bicchiere bicchieri pizzico pizzichi presa prese manciata manciate
-    spicchio spicchi foglia foglie rametto rametti ciuffo ciuffi
-    mazzetto mazzetti mazzo mazzi bustina bustine
-    fetta fette fettina fettine filetto filetti filo fili
-    costa coste costola costole gambo gambi grani bacca bacche
-    foglio fogli pezzo pezzi
-    """.split()
-)
+SUSPECT_UNIT_TOKENS = frozenset({
+    "cucchiaio", "cucchiai", "cucchiaino", "cucchiaini",
+    "tazza", "tazze", "tazzina", "tazzine", "bicchiere", "bicchieri",
+    "pizzico", "pizzichi", "presa", "prese", "manciata", "manciate",
+    "spicchio", "spicchi", "foglia", "foglie", "rametto", "rametti",
+    "ciuffo", "ciuffi", "mazzetto", "mazzetti", "mazzo", "mazzi",
+    "bustina", "bustine", "fetta", "fette", "fettina", "fettine",
+    "filetto", "filetti", "filo", "fili", "costa", "coste",
+    "costola", "costole", "gambo", "gambi", "grani", "bacca", "bacche",
+    "foglio", "fogli", "pezzo", "pezzi",
+})
 
 # Token deliberatamente NON promossi a unita' (decisione presa sul corpus,
 # documentata in units.yaml): qui sono ingredienti, non dosi.
-NOT_UNITS_BY_DECISION = frozenset({"noce", "noci", "chiodo", "chiodi", "goccia", "gocce", "grano"})
+NOT_UNITS_BY_DECISION = frozenset({
+    "noce", "noci", "chiodo", "chiodi", "goccia", "gocce", "grano",
+})
 
 MAX_ALLOWED_OCCURRENCES = 5
 

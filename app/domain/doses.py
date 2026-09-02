@@ -16,12 +16,17 @@ Regole:
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from decimal import ROUND_HALF_UP, Decimal
 
+from app.domain.canonical import render_canonical_md
 from app.domain.errors import ParseError
 from app.domain.pack import DomainPackBundle
-from app.domain.verify import parse_translated_md, render_ingredient_suffix
+from app.domain.verify import (
+    IngredientLine,
+    parse_translated_md,
+    render_ingredient_line,
+)
 
 # Unita' culinarie -> MKS (fattori documentati, approssimazioni standard).
 # rule_id: DOSE-<UNIT> per la tracciabilita' (P3).
@@ -173,16 +178,35 @@ def standardize_doses(
         if e.class_ is not None
     }
 
-    new_ingredients: list[tuple[str, str, str, str | None]] = []
+    new_ingredients: list[IngredientLine] = []
+
+    def keep(ingredient: IngredientLine, **overrides: object) -> IngredientLine:
+        """Riga in uscita: come quella in ingresso salvo i campi convertiti."""
+        return replace(ingredient, raw="", **overrides)
+
+    def scaled_max(
+        ingredient: IngredientLine, source: Decimal | None, result: Decimal | None
+    ) -> str | None:
+        """L'estremo alto di un intervallo segue la stessa scala del basso."""
+        if ingredient.qty_max is None or source is None or result is None:
+            return ingredient.qty_max
+        if source == 0:
+            return ingredient.qty_max
+        return _fmt_qty(Decimal(ingredient.qty_max) * (result / source))
+
     for i, ing in enumerate(parsed.ingredients):
         qty = Decimal(str(ing.qty)) if ing.qty is not None else None
         unit = (ing.unit or "").lower()
         item = ing.item
-        suffix = render_ingredient_suffix(
-            ing.code, ing.waste, ing.component
-        ) or None
-        before = f"{ing.qty} {ing.unit} {item}".strip()
+        before = render_ingredient_line(ing).removeprefix("- ")
         mass_g: Decimal | None = None
+
+        # 0-bis) riga senza dose ("q.b. sale"): niente da scalare (WP-F3).
+        if qty is None:
+            new_ingredients.append(keep(ing, item=item))
+            log.append(DoseLogEntry(f"ingredients[{i}]", before, before,
+                                    "DOSE-A-PIACERE"))
+            continue
 
         # 0) a-piacere / zero anomalo
         if qty is not None and qty == 0:
@@ -193,14 +217,14 @@ def standardize_doses(
             cls = class_by_item.get(item.casefold())
             if unit in ("tt",) or cls in a_piacere_classes:
                 # a piacere: riga invariata, nessuno scaling
-                new_ingredients.append((ing.qty, ing.unit, item, suffix))
+                new_ingredients.append(keep(ing, item=item))
                 log.append(DoseLogEntry(f"ingredients[{i}]", before, before,
                                         "DOSE-A-PIACERE"))
                 continue
             issues.append(f"ingredients[{i}]: qty 0 anomalo ({before})")
             log.append(DoseLogEntry(f"ingredients[{i}]", before, before,
                                     "DOSE-ZERO-ANOMALOUS"))
-            new_ingredients.append((ing.qty, ing.unit, item, suffix))
+            new_ingredients.append(keep(ing, item=item))
             continue
 
         # 1) contabile: unita' naturale intoccabile, grammi solo a log
@@ -232,7 +256,10 @@ def standardize_doses(
             else:
                 issues.append(
                     f"ingredients[{i}]: contabile senza peso ({before})")
-            new_ingredients.append((qty_text, count_unit, item, suffix))
+            new_ingredients.append(
+                keep(ing, qty=qty_text, unit=count_unit, item=item,
+                     qty_max=scaled_max(ing, qty, scaled))
+            )
             continue
 
         # 2) misurata: conversione MKS + scaling
@@ -249,7 +276,7 @@ def standardize_doses(
             issues.append(f"ingredients[{i}]: unita' sconosciuta ({before})")
             log.append(DoseLogEntry(f"ingredients[{i}]", before, before,
                                     "DOSE-UNKNOWN"))
-            new_ingredients.append((ing.qty, ing.unit, item, suffix))
+            new_ingredients.append(keep(ing, item=item))
             continue
 
         scaled = qty * factor
@@ -272,9 +299,12 @@ def standardize_doses(
             log.append(DoseLogEntry(f"ingredients[{i}]", before,
                                     f"{qty_text} {unit} {item}",
                                     "DOSE-MASS-G", mass_g=_fmt_qty(mass_g)))
-        new_ingredients.append((qty_text, unit, item, suffix))
+        new_ingredients.append(
+            keep(ing, qty=qty_text, unit=unit, item=item,
+                 qty_max=scaled_max(ing, Decimal(str(ing.qty)), scaled))
+        )
 
-        # 3) gate di plausibilita' per classe per porzione
+        # 3) gate di plausibilita'' per classe per porzione
         if mass_g is not None:
             cls = class_by_item.get(item.casefold())
             rng = _plausibility_range(pack, cls)
@@ -288,24 +318,9 @@ def standardize_doses(
                         f"g/porzione, range {rng[0]}-{rng[1]})")
 
     # ricostruisci il canonical.md con servings=10 e dosi MKS
-    fm = dict(parsed.frontmatter)
-    fm["servings"] = servings_target
-    lines = ["---"]
-    for k in ("title", "id", "lang", "source_lang", "servings", "time_min",
-              "difficulty", "verification_level", "canonical_version"):
-        if k in fm:
-            lines.append(f"{k}: {fm[k]}")
-    lines.append("---")
-    lines.append("## Ingredients")
-    for qty_text, unit, item, suffix in new_ingredients:
-        if unit:
-            lines.append(f"- {qty_text} {unit} {item}{suffix or ''}")
-        else:
-            lines.append(f"- {qty_text} {item}{suffix or ''}")
-    lines.append("## Method")
-    for j, step in enumerate(parsed.steps, 1):
-        lines.append(f"{j}. {step}")
-    md = "\n".join(lines) + "\n"
+    fm = {k: str(v) for k, v in parsed.frontmatter.items()}
+    fm["servings"] = str(servings_target)
+    md = render_canonical_md(fm, new_ingredients, list(parsed.steps))
 
     return DoseStandardizedDocument(
         canonical_md=md,

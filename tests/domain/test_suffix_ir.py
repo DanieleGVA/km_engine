@@ -192,16 +192,12 @@ def test_roundtrip_with_suffix_idempotent() -> None:
         doc.canonical_md, known_units=pack.known_units(),
         optional_when_native=tuple(pack.frontmatter_optional_when_native),
     )
-    # ricostruisci e ri-parse
-    from app.domain.canonical import _render_canonical_md
+    # ricostruisci e ri-parse (WP-F3: il renderer prende le righe parsate,
+    # il suffisso lo deriva da sole)
+    from app.domain.canonical import render_canonical_md
 
     fm = {k: str(v) for k, v in parsed1.frontmatter.items()}
-    ingredients = [
-        (ing.qty, ing.unit, ing.item,
-         render_ingredient_suffix(ing.code, ing.waste, ing.component) or None)
-        for ing in parsed1.ingredients
-    ]
-    md2 = _render_canonical_md(fm, ingredients, list(parsed1.steps))
+    md2 = render_canonical_md(fm, list(parsed1.ingredients), list(parsed1.steps))
     assert md2 == doc.canonical_md
     parsed2 = parse_translated_md(
         md2, known_units=pack.known_units(),

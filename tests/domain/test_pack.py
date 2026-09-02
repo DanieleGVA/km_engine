@@ -190,7 +190,8 @@ def test_f2_duplicate_source_form_is_rejected(tmp_path) -> None:
 
 def test_f2_no_hardcoded_unit_tables_left() -> None:
     """Le tabelle duplicate non esistono piu' in nessun modulo."""
-    from app.domain import canonical, pack as pack_module, verify
+    from app.domain import canonical, verify
+    from app.domain import pack as pack_module
 
     for module, symbol in (
         (pack_module, "_UNIT_PLURALS"),

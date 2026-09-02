@@ -27,7 +27,7 @@ from app.domain.verify import (
     ParsedDoc,
     create_glossary_proposal,
     parse_translated_md,
-    render_ingredient_suffix,
+    render_ingredient_line,
 )
 
 # Structural rule ids used when a change is not a unit/glossary rule.
@@ -102,6 +102,16 @@ def _apply_unit_rule(qty: Decimal, rule: UnitRule) -> Decimal:
     )
 
 
+def _convert_quantity(qty: str | None, rule: UnitRule | None) -> str | None:
+    """Applica la regola di unita' a una quantita' che puo' essere assente."""
+    if qty is None:
+        return None
+    value = Decimal(qty)
+    if rule is not None:
+        value = _apply_unit_rule(value, rule)
+    return _format_decimal(value)
+
+
 def _format_decimal(value: Decimal) -> str:
     """Serialize a Decimal per Appendix A (int without .0, max 3 decimals)."""
     if value == value.to_integral_value():
@@ -160,16 +170,16 @@ def _fm_str(value: Any) -> str:
     return str(value)
 
 
-def _render_canonical_md(
+def render_canonical_md(
     frontmatter: dict[str, str],
-    ingredients: list[tuple[str, str | None, str, str | None]],
+    ingredients: list[IngredientLine],
     steps: list[str],
 ) -> str:
     """Render the Appendix A canonical markdown (single trailing newline).
 
-    Each ingredient is ``(qty, unit, item, suffix)`` where ``suffix`` is the
-    rendered structural metadata ``{code: ..., waste: ..., component: ...}``
-    or ``None`` (passo 1: emesso simmetricamente da recompose).
+    Unica implementazione: ``recompose`` la importa invece di rispecchiarla,
+    cosi' il round-trip T9/T11 non puo' rompersi per una divergenza di
+    formattazione fra due copie.
     """
     lines = ["---"]
     for key in CANONICAL_FRONTMATTER_ORDER:
@@ -177,15 +187,15 @@ def _render_canonical_md(
             lines.append(f"{key}: {frontmatter[key]}")
     lines.append("---")
     lines.append("## Ingredients")
-    for qty, unit, item, suffix in ingredients:
-        if unit:
-            lines.append(f"- {qty} {unit} {item}{suffix or ''}")
-        else:
-            lines.append(f"- {qty} {item}{suffix or ''}")
+    lines.extend(render_ingredient_line(ingredient) for ingredient in ingredients)
     lines.append("## Method")
     for index, step in enumerate(steps, start=1):
         lines.append(f"{index}. {step}")
     return "\n".join(lines) + "\n"
+
+
+# Nome storico mantenuto per i chiamanti interni.
+_render_canonical_md = render_canonical_md
 
 
 # ---------------------------------------------------------------------------
@@ -233,20 +243,17 @@ def canonicalize(
 
     term_map = _build_term_map(pack)
     msc_mapping = pack.msc_mapping()
-    ingredients: list[tuple[str, str | None, str]] = []
+    ingredients: list[IngredientLine] = []
     unresolved: list[str] = []
     seen_unresolved: set[str] = set()
 
     for ingredient in parsed.ingredients:
-        qty = Decimal(ingredient.qty)
         rule = pack.unit_rule_for(ingredient.unit)
-        if rule is not None:
-            qty = _apply_unit_rule(qty, rule)
-            unit = rule.to_unit
-        else:
-            unit = ingredient.unit
-
-        qty_text = _format_decimal(qty)
+        unit = rule.to_unit if rule is not None else ingredient.unit
+        # WP-F3: una riga senza dose ("q.b. sale") non ha una quantita' da
+        # convertire; l'unita' viene comunque rinominata.
+        qty_text = _convert_quantity(ingredient.qty, rule)
+        qty_max_text = _convert_quantity(ingredient.qty_max, rule)
         item = ingredient.item
         resolved = None
         if ingredient.code and ingredient.code in msc_mapping:
@@ -275,10 +282,19 @@ def canonicalize(
                 and item.casefold().startswith(unit.casefold() + " ")):
             unit = None
 
-        suffix = render_ingredient_suffix(
-            ingredient.code, ingredient.waste, ingredient.component
+        ingredients.append(
+            IngredientLine(
+                raw=ingredient.raw,
+                qty=qty_text,
+                unit=unit,
+                item=item,
+                code=ingredient.code,
+                waste=ingredient.waste,
+                component=ingredient.component,
+                qty_max=qty_max_text,
+                to_taste=ingredient.to_taste,
+            )
         )
-        ingredients.append((qty_text, unit, item, suffix or None))
 
     steps = list(parsed.steps)
     canonical_md = _render_canonical_md(frontmatter, ingredients, steps)
@@ -394,8 +410,22 @@ def generate_canon_log(
                 CanonLogEntry(
                     document_id,
                     f"ingredients[{index}].qty",
-                    before_ing.qty,
-                    after_ing.qty,
+                    before_ing.qty or "",
+                    after_ing.qty or "",
+                    rule.rule_id if rule else RULE_STRUCT_SERIALIZATION,
+                )
+            )
+
+        if before_ing.qty_max != after_ing.qty_max:
+            rule = pack.unit_rule_for(before_ing.unit) or pack.unit_rule_for(
+                after_ing.unit
+            )
+            entries.append(
+                CanonLogEntry(
+                    document_id,
+                    f"ingredients[{index}].qty_max",
+                    before_ing.qty_max or "",
+                    after_ing.qty_max or "",
                     rule.rule_id if rule else RULE_STRUCT_SERIALIZATION,
                 )
             )
@@ -470,14 +500,8 @@ def generate_canon_log(
 
 
 def _ingredient_line(ingredient: IngredientLine) -> str:
-    base = (
-        f"{ingredient.qty} {ingredient.unit} {ingredient.item}"
-        if ingredient.unit
-        else f"{ingredient.qty} {ingredient.item}"
-    )
-    return base + render_ingredient_suffix(
-        ingredient.code, ingredient.waste, ingredient.component
-    )
+    """Riga completa (usata nelle entry di canon-log strutturali)."""
+    return render_ingredient_line(ingredient).removeprefix("- ")
 
 
 def verify_canon_log(
@@ -499,9 +523,11 @@ def verify_canon_log(
         countable_units=pack.countable_units(),
     )
     frontmatter = {k: _fm_str(v) for k, v in parsed.frontmatter.items()}
-    ingredients: list[dict[str, str | None]] = [
+    ingredients: list[dict[str, Any]] = [
         {
             "qty": ing.qty,
+            "qty_max": ing.qty_max,
+            "to_taste": ing.to_taste,
             "unit": ing.unit,
             "item": ing.item,
             "code": ing.code,
@@ -537,10 +563,8 @@ def verify_canon_log(
             index = int(field.split("[")[1].split("]")[0])
             subfield = field.split(".")[1]
             ingredient = ingredients[index]
-            if subfield == "qty":
-                current = ingredient["qty"]
-            elif subfield == "unit":
-                current = ingredient["unit"] or ""
+            if subfield in ("qty", "qty_max", "unit"):
+                current = ingredient[subfield] or ""
             elif subfield == "item":
                 current = ingredient["item"]
             else:
@@ -552,12 +576,10 @@ def verify_canon_log(
                     f"canon-log entry {field!r} before_text {entry.before_text!r} "
                     f"does not match translated value {current!r}"
                 )
-            if subfield == "qty":
-                ingredient["qty"] = entry.after_text
-            elif subfield == "unit":
-                ingredient["unit"] = entry.after_text or None
-            else:
+            if subfield == "item":
                 ingredient["item"] = entry.after_text
+            else:
+                ingredient[subfield] = entry.after_text or None
             continue
 
         if field.startswith("steps["):
@@ -573,19 +595,21 @@ def verify_canon_log(
 
         raise CanonLogVerificationError(f"unknown canon-log field {field!r}")
 
-    ingredient_tuples = [
-        (
-            str(ing["qty"]),
-            ing["unit"],
-            str(ing["item"]),
-            render_ingredient_suffix(
-                ing.get("code"), ing.get("waste"), ing.get("component")
-            )
-            or None,
+    rebuilt = [
+        IngredientLine(
+            raw="",
+            qty=ing["qty"],
+            unit=ing["unit"],
+            item=str(ing["item"]),
+            code=ing.get("code"),
+            waste=ing.get("waste"),
+            component=ing.get("component"),
+            qty_max=ing.get("qty_max"),
+            to_taste=bool(ing.get("to_taste")),
         )
         for ing in ingredients
     ]
-    reconstructed = _render_canonical_md(frontmatter, ingredient_tuples, steps)
+    reconstructed = render_canonical_md(frontmatter, rebuilt, steps)
     if reconstructed != canonical_md:
         raise CanonLogVerificationError(
             "canon-log does not fully explain the translated->canonical diff: "

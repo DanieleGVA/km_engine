@@ -14,9 +14,27 @@ from __future__ import annotations
 import re
 from collections import Counter
 
-# A content number: integer or decimal with a dot (Italian corpus convention).
+from app.domain.quantities import (
+    VULGAR_FRACTIONS,
+    QuantityError,
+    parse_quantity,
+)
+
+# A content number: integer, decimal (dot or comma) or fraction.
 # The lookarounds keep it out of identifiers such as ``RIC-001``.
-NUMBER_RE = re.compile(r"(?<![\w.])-?\d+(?:\.\d+)?(?![\w.])")
+# WP-F3: le frazioni (``½``, ``1/2``, ``1 ½``) sono numeri di contenuto a
+# tutti gli effetti. Prima erano invisibili a P2: la sorgente ``½ cipolla`` e
+# il tradotto ``0.5 onion`` avevano multiset diversi e l'invariante non poteva
+# reggere. ``extract_numbers`` normalizza il valore, ``mask_numbers``
+# reinserisce il glifo originale.
+_FRACTION_CLASS = "".join(VULGAR_FRACTIONS)
+NUMBER_RE = re.compile(
+    rf"(?<![\w.,])-?(?:"
+    rf"\d+\s*/\s*\d+"
+    rf"|\d+(?:[.,]\d+)?(?:\s*[{_FRACTION_CLASS}])?"
+    rf"|[{_FRACTION_CLASS}]"
+    rf")(?![\w.,])"
+)
 
 _FRONTMATTER_RE = re.compile(r"\A---\s*\n.*?\n---\s*\n?", re.DOTALL)
 _STEP_RE = re.compile(r"^(\s*)(\d+)\.\s+(.*)$")
@@ -31,13 +49,22 @@ def strip_frontmatter(text: str) -> str:
     return text[match.end():] if match else text
 
 
+def _is_content_number(token: str) -> bool:
+    """False per i token all-zero ("00" di "farina 00": e' un tipo, non una dose)."""
+    return not re.fullmatch(r"0+", token.strip())
+
+
 def _find_numbers(text: str) -> list[str]:
-    # Skip all-zero tokens such as the "00" in "farina 00" (a flour type,
-    # not a quantity). Real recipe quantities are never written as "00".
-    return [
-        token for token in NUMBER_RE.findall(text)
-        if not re.fullmatch(r"0+", token)
-    ]
+    """Numeri di contenuto grezzi, nell'ordine in cui compaiono."""
+    return [token for token in NUMBER_RE.findall(text) if _is_content_number(token)]
+
+
+def normalize_number(token: str) -> str:
+    """Valore decimale del token (``½`` -> ``0.5``), o il token se non lo e'."""
+    try:
+        return parse_quantity(token)
+    except QuantityError:
+        return token.strip()
 
 
 def extract_numbers(text: str) -> list[str]:
@@ -51,10 +78,8 @@ def extract_numbers(text: str) -> list[str]:
     for line in body.splitlines():
         line = _SUFFIX_BLOCK_RE.sub("", line)  # il suffisso non e' contenuto
         match = _STEP_RE.match(line)
-        if match:
-            numbers.extend(_find_numbers(match.group(3)))
-        else:
-            numbers.extend(_find_numbers(line))
+        raw = _find_numbers(match.group(3) if match else line)
+        numbers.extend(normalize_number(token) for token in raw)
     return numbers
 
 
@@ -72,8 +97,11 @@ def mask_numbers(text: str) -> tuple[str, list[str]]:
         # Allineato a _find_numbers: i token all-zero (es. "00" di "farina 00")
         # non sono quantità e non vanno mascherati (P2: nessun numero alterato,
         # ma solo numeri di contenuto reali).
-        if re.fullmatch(r"0+", token):
+        if not _is_content_number(token):
             return token
+        # Il glifo originale viene conservato e reinserito tale e quale: la
+        # sorgente resta "½ cipolla", la normalizzazione avviene solo nel
+        # confronto dei multiset (extract_numbers).
         numbers.append(token)
         return f"{{N{len(numbers)}}}"
 

@@ -23,6 +23,7 @@ from app.domain.verify import (
     ParsedDoc,
     parse_source_md,
     parse_translated_body,
+    render_ingredient_line,
 )
 
 
@@ -68,11 +69,9 @@ def render_translated_document(
     lines.extend(f"{key}: {value}" for key, value in frontmatter.items())
     lines.append("---")
     lines.append("## Ingredients")
-    for ingredient in translated.ingredients:
-        if ingredient.unit:
-            lines.append(f"- {ingredient.qty} {ingredient.unit} {ingredient.item}")
-        else:
-            lines.append(f"- {ingredient.qty} {ingredient.item}")
+    lines.extend(
+        render_ingredient_line(ingredient) for ingredient in translated.ingredients
+    )
     lines.append("## Method")
     lines.extend(
         f"{index}. {step}" for index, step in enumerate(translated.steps, start=1)

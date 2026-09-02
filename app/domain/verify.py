@@ -31,13 +31,28 @@ from app.domain.errors import (
 from app.domain.normalize import normalize_text
 from app.domain.numbers import extract_numbers, numbers_multiset_equal
 from app.domain.pack import DomainPackBundle
+from app.domain.quantities import (
+    QTY_RANGE_RE,
+    TO_TASTE_EN,
+    TO_TASTE_HEAD_RE,
+    TO_TASTE_TAIL_RE,
+    QuantityError,
+    parse_quantity,
+)
 
 DIFFICULTY_MAP = {"facile": "easy", "medio": "medium", "difficile": "hard"}
 DIFFICULTY_EN = {"easy", "medium", "hard"}
 
 _TOKEN_RE = re.compile(r"[^\W\d_]+", flags=re.UNICODE)
-_INGREDIENT_RE = re.compile(r"^(\d+(?:\.\d+)?)\s+(.*)$")
 _STEP_RE = re.compile(r"^(\d+)\.\s+(.*)$")
+
+# Articolo o partitivo in testa all'item, residuo della segmentazione
+# ("il succo di 1 limone"): non fa parte del nome dell'ingrediente.
+_LEADING_ARTICLE_RE = re.compile(
+    r"^(?:(?:il|lo|la|i|gli|le|un|uno|una|dei|degli|delle)\s+"
+    r"|(?:l|un|dell|degl|all|nell)['’]\s*)",
+    re.IGNORECASE,
+)
 
 # Suffisso strutturale (passo 1): "{code: X, waste: Y%, component: Z}" in coda
 # alla riga ingrediente. Mai parte dell'item: e' metadato (item code, sfrido,
@@ -77,15 +92,24 @@ class IngredientLine:
     ``{code: ..., waste: ..., component: ...}`` suffix (passo 1 PROGRAMMA-UNICO):
     they are never part of ``item``, never cross the LLM, and are excluded
     from L2 tokens and P2 numbers.
+
+    WP-F3: ``qty`` puo' essere ``None`` (riga senza dose o "q.b."), ``qty_max``
+    porta l'estremo alto di un intervallo ("2-3 uova") e ``to_taste`` dice che
+    la dose e' a piacere. Prima il parser pretendeva una cifra iniziale su
+    ogni riga:
+    per soddisfarlo il corpus era stato riscritto iniettando "1 pizzico" su
+    2.160 righe, cioe' inventando una dose che il libro non dava (D4).
     """
 
     raw: str
-    qty: str
+    qty: str | None
     unit: str | None
     item: str
     code: str | None = None
     waste: str | None = None
     component: str | None = None
+    qty_max: str | None = None
+    to_taste: bool = False
 
 
 @dataclass
@@ -156,23 +180,51 @@ def _validate_frontmatter(
         )
 
 
+def _split_quantity(content: str) -> tuple[str | None, str | None, bool, str]:
+    """``"2-3 uova"`` -> ``("2", "3", False, "uova")``.
+
+    Ordine fisso (WP-F3): prima "q.b." (in testa o in coda), poi la quantita'
+    (intero, decimale, frazione, misto, intervallo), poi il resto. Una riga
+    senza quantita' e senza "q.b." e' comunque una riga valida: la dose e'
+    assente, non nulla.
+    """
+    text = content.strip()
+    to_taste = False
+
+    head = TO_TASTE_HEAD_RE.match(text)
+    if head:
+        to_taste = True
+        text = text[head.end():].strip()
+    else:
+        tail = TO_TASTE_TAIL_RE.search(text)
+        if tail:
+            to_taste = True
+            text = text[: tail.start()].strip()
+
+    match = QTY_RANGE_RE.match(text)
+    if not match:
+        return None, None, to_taste or True, text
+
+    try:
+        qty = parse_quantity(match.group(1))
+        qty_max = parse_quantity(match.group(2)) if match.group(2) else None
+    except QuantityError:
+        return None, None, to_taste or True, text
+    return qty, qty_max, to_taste, text[match.end():].strip()
+
+
 def _parse_ingredient(
     content: str,
     line_no: int,
     known_units: set[str],
     countable_units: set[str] | None = None,
 ) -> IngredientLine:
-    match = _INGREDIENT_RE.match(content)
-    if not match:
+    qty, qty_max, to_taste, rest = _split_quantity(content)
+    if not rest:
         raise ParseError(
-            f"line {line_no}: ingredient must start with a quantity "
-            f"(e.g. '200 g flour'), got {content!r}",
+            f"line {line_no}: ingredient item is empty, got {content!r}",
             line=line_no,
         )
-    qty = match.group(1)
-    rest = match.group(2).strip()
-    if not rest:
-        raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
 
     units = known_units
     countable = countable_units if countable_units is not None else set()
@@ -209,9 +261,74 @@ def _parse_ingredient(
         item = item[: suffix.start()].rstrip()
         if not item:
             raise ParseError(f"line {line_no}: ingredient item is empty", line=line_no)
+
+    # articolo in testa: non fa parte del nome ("il succo di 1 limone")
+    stripped_item = _LEADING_ARTICLE_RE.sub("", item, count=1).strip()
+    if stripped_item:
+        item = stripped_item
     return IngredientLine(
         raw=content, qty=qty, unit=unit, item=item,
         code=code, waste=waste, component=component,
+        qty_max=qty_max, to_taste=to_taste,
+    )
+
+
+def render_ingredient_line(
+    ingredient: IngredientLine,
+    *,
+    qty: str | None = None,
+    qty_max: str | None = None,
+    unit: str | None = None,
+    item: str | None = None,
+    to_taste_text: str = TO_TASTE_EN,
+) -> str:
+    """Rende una riga ingrediente. Unico renderer: canonico, tradotto, ricomposto.
+
+    Se i tre renderer divergessero anche di uno spazio l'invariante T9
+    (round-trip byte-identico) cadrebbe senza che nessun test unitario lo veda.
+    I parametri opzionali sovrascrivono i campi gia' convertiti (unita' e
+    quantita' dopo l'applicazione delle regole, item risolto dal glossario).
+    Il suffisso strutturale e' sempre derivato dalla riga.
+    """
+    qty_text = ingredient.qty if qty is None else qty
+    qty_max_text = ingredient.qty_max if qty_max is None else qty_max
+    unit_text = ingredient.unit if unit is None else unit
+    item_text = ingredient.item if item is None else item
+
+    if qty_text is None:
+        head = to_taste_text if ingredient.to_taste else ""
+    elif qty_max_text is not None:
+        head = f"{qty_text}-{qty_max_text}"
+    else:
+        head = qty_text
+
+    suffix = render_ingredient_suffix(
+        ingredient.code, ingredient.waste, ingredient.component
+    )
+    parts = [part for part in (head, unit_text, item_text) if part]
+    return "- " + " ".join(parts) + suffix
+
+
+def render_ingredient_parts(
+    qty: str | None,
+    unit: str | None,
+    item: str,
+    *,
+    qty_max: str | None = None,
+    to_taste: bool = False,
+    code: str | None = None,
+    waste: str | None = None,
+    component: str | None = None,
+    to_taste_text: str = TO_TASTE_EN,
+) -> str:
+    """Come :func:`render_ingredient_line` a partire dai campi sciolti."""
+    return render_ingredient_line(
+        IngredientLine(
+            raw="", qty=qty, unit=unit, item=item,
+            code=code, waste=waste, component=component,
+            qty_max=qty_max, to_taste=to_taste,
+        ),
+        to_taste_text=to_taste_text,
     )
 
 
