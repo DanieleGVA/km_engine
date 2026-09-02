@@ -1,6 +1,6 @@
 {
   "corpus_size": 15,
-  "coverage": 0.9677,
+  "coverage": 0.9785,
   "decisions": [
     {
       "canonical_item": "spaghetti",
@@ -171,11 +171,11 @@
       "term_id": "ING-OLIVE-OIL"
     },
     {
-      "canonical_item": "chicken (1.2 kg)",
+      "canonical_item": "chicken",
       "doc": "ric-005-pollo.md",
       "index": 0,
-      "resolved": false,
-      "term_id": null
+      "resolved": true,
+      "term_id": "ING-CHICKEN"
     },
     {
       "canonical_item": "rosemary",
@@ -619,14 +619,14 @@
       "term_id": "ING-GARLIC"
     },
     {
-      "canonical_item": "sweet almonds sbucciate",
+      "canonical_item": "sweet almonds peeled",
       "doc": "ric-103-amaretti.md",
       "index": 0,
       "resolved": false,
       "term_id": null
     },
     {
-      "canonical_item": "bitter almonds sbucciate",
+      "canonical_item": "bitter almonds peeled",
       "doc": "ric-103-amaretti.md",
       "index": 1,
       "resolved": false,
@@ -655,7 +655,7 @@
     }
   ],
   "generated_by": "app/agents/evaluator.py",
-  "resolved_mentions": 90,
+  "resolved_mentions": 91,
   "total_mentions": 93,
   "version": "1.0"
 }

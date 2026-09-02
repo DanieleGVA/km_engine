@@ -5,8 +5,8 @@ Pipeline deterministica eseguita sul PILOT (15 ricette validate).
 ## Esito gate
 
 - Round-trip: **15/15** (100.0%) — gate: PASS
-- Copertura glossario draft: **98.9%** (92/93 mention risolte)
-- Copertura glossario manuale: **96.8%** (90/93)
+- Copertura glossario draft: **100.0%** (93/93 mention risolte)
+- Copertura glossario manuale: **97.9%** (91/93)
 - Copertura relativa (draft/manuale): **102.2%** — soglia >= 90%: PASS
 - Gate complessivo: **PASS**
 
@@ -14,7 +14,7 @@ Pipeline deterministica eseguita sul PILOT (15 ricette validate).
 
 - Precision: **94.6%**
 - Recall: **96.7%**
-- Match: 87 (draft risolte 92, golden risolte 90)
+- Match: 88 (draft risolte 93, golden risolte 91)
 
 ## Codegen (suite-tipo A sul draft)
 
