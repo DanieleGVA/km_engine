@@ -255,7 +255,7 @@
       "source_terms": [
         "mandorle amare sbucciate"
       ],
-      "term": "bitter almonds sbucciate"
+      "term": "bitter almonds peeled"
     },
     {
       "contexts": [
@@ -585,7 +585,7 @@
       "source_terms": [
         "mandorle dolci sbucciate"
       ],
-      "term": "sweet almonds sbucciate"
+      "term": "sweet almonds peeled"
     },
     {
       "contexts": [
@@ -748,7 +748,7 @@
       "term": "golden"
     }
   ],
-  "generated_at": "2026-09-02T11:49:00.724240+00:00",
+  "generated_at": "2026-09-02T13:08:48.183054+00:00",
   "language": "it",
   "ontologies": [
     {
@@ -1160,7 +1160,7 @@
           "source_terms": [
             "mandorle amare sbucciate"
           ],
-          "term": "bitter almonds sbucciate"
+          "term": "bitter almonds peeled"
         },
         {
           "contexts": [
@@ -1490,7 +1490,7 @@
           "source_terms": [
             "mandorle dolci sbucciate"
           ],
-          "term": "sweet almonds sbucciate"
+          "term": "sweet almonds peeled"
         },
         {
           "contexts": [
