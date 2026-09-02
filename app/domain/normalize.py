@@ -41,6 +41,9 @@ _LEADING_CONNECTOR_RE = re.compile(
 )
 
 _WS_RE = re.compile(r"\s+")
+# Punteggiatura ai bordi: un traduttore lascia "salt," quando l'ingrediente
+# veniva da un elenco. Non fa parte del nome (vista nel golden reale).
+_EDGE_PUNCT_RE = re.compile(r"^[\s,;:.]+|[\s,;:.]+$")
 
 # Articolo o partitivo in testa: residuo della segmentazione, mai parte del
 # nome ("il succo di 1 limone"). Usato anche da ``verify._parse_ingredient``.
@@ -81,7 +84,7 @@ def normalize_key(text: str) -> str:
     """
     if not text:
         return ""
-    out = normalize_text(text)
+    out = _EDGE_PUNCT_RE.sub("", normalize_text(text))
     while True:
         stripped = _LEADING_CONNECTOR_RE.sub("", out, count=1)
         if stripped == out:

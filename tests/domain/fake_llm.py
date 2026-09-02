@@ -42,16 +42,21 @@ class CircularFakeLLMWarning(UserWarning):
 
 
 def load_golden_translations() -> dict[str, str]:
-    """``{masked_input: translated_body}`` dal golden reale, se esiste."""
+    """``{masked_input: masked_output}`` dal golden reale, se esiste.
+
+    Il valore e' la risposta GREZZA del modello (corpo mascherato tradotto),
+    non il documento finale: e' quello che un LLMClient restituisce, e solo
+    cosi' la pipeline esegue davvero re-iniezione dei numeri e verifica P2.
+    Restituire il documento gia' composto salterebbe quei passi.
+    """
     if not GOLDEN_MANIFEST.is_file():
         return {}
     manifest = json.loads(GOLDEN_MANIFEST.read_text(encoding="utf-8"))
-    translations: dict[str, str] = {}
-    for entry in manifest.get("documents", []):
-        path = GOLDEN_DIR / entry["file"]
-        if path.is_file():
-            translations[entry["masked_input"]] = path.read_text(encoding="utf-8")
-    return translations
+    return {
+        entry["masked_input"]: entry["masked_output"]
+        for entry in manifest.get("documents", [])
+        if entry.get("masked_output")
+    }
 
 
 def translate_masked(pack: DomainPackBundle, masked_input: str) -> str:

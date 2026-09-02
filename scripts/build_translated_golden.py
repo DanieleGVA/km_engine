@@ -25,7 +25,12 @@ import json
 import pathlib
 import sys
 
-from app.domain import build_translation_input, mask_numbers, parse_source_md
+from app.domain import (
+    FakeLLMClient,
+    build_translation_input,
+    mask_numbers,
+    parse_source_md,
+)
 from app.domain.config import get_llm_settings
 from app.domain.errors import DomainError
 from app.domain.llm import HttpLLMClient, translation_prompt_sha256
@@ -51,6 +56,16 @@ async def _build(
     known_units = pack.known_units()
     countable_units = pack.countable_units()
 
+    manifest_path = out_dir / "manifest.json"
+    existing: dict[str, dict] = {}
+    if resume and manifest_path.is_file():
+        previous = json.loads(manifest_path.read_text(encoding="utf-8"))
+        existing = {
+            entry["source"]: entry
+            for entry in previous.get("documents", [])
+            if "masked_output" in entry
+        }
+
     async def one(name: str, source_md: str) -> dict | None:
         path = out_dir / f"{pathlib.Path(name).stem}.md"
         try:
@@ -62,19 +77,27 @@ async def _build(
             print(f"  ! {name}: {exc}", file=sys.stderr)
             return None
 
-        row = {
-            "source": name,
-            "file": path.name,
-            "document_id": str(parsed.frontmatter.get("id", "")),
-            "masked_input": masked_input,
-        }
         # Resume: un batch lungo non deve ripagare le traduzioni gia' fatte.
-        if resume and path.is_file():
-            return row
+        cached = existing.get(name)
+        if resume and cached is not None and path.is_file():
+            return cached
 
         async with semaphore:
             try:
-                translated = await translate_document(pack, source_md, llm)
+                # Si salva la risposta GREZZA del modello (il corpo mascherato
+                # tradotto), non il documento finale: e' quello che il
+                # FakeLLMClient deve restituire ai test perche' la pipeline
+                # faccia davvero la re-iniezione dei numeri e la verifica P2.
+                # Salvare il documento gia' composto farebbe saltare quei
+                # passi e il golden mentirebbe su cosa e' stato verificato.
+                masked_output = await llm.translate(
+                    masked_input,
+                    source_lang=pack.language,
+                    target_lang=pack.canonical_language,
+                    glossary=glossary_labels(pack),
+                )
+                replay = FakeLLMClient({masked_input: masked_output})
+                translated = await translate_document(pack, source_md, replay)
             except DomainError as exc:
                 # Una ricetta che il modello traduce male (tipicamente P2: un
                 # numero aggiunto o perso) viene saltata, non fa cadere il
@@ -85,8 +108,13 @@ async def _build(
                 print(f"  ! {name}: {exc}", file=sys.stderr)
                 return None
             path.write_text(translated.translated_md, encoding="utf-8")
-            row["document_id"] = translated.document_id
-            return row
+            return {
+                "source": name,
+                "file": path.name,
+                "document_id": translated.document_id,
+                "masked_input": masked_input,
+                "masked_output": masked_output,
+            }
 
     results = await asyncio.gather(
         *(one(name, corpus[name]) for name in sorted(corpus))
