@@ -14,7 +14,6 @@ It writes a gate report JSON under ``docs/domain-briefs/`` and returns an
 from __future__ import annotations
 
 import json
-import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -27,6 +26,7 @@ from app.domain import (
     recompose_document,
     translate_document,
 )
+from app.domain.coverage import build_lookup, lookup_key, measure_documents
 from app.domain.pack import DomainPackBundle
 from app.storage.client import Neo4jClient
 from scripts.load_domain_pack import load_pack
@@ -40,6 +40,20 @@ GATE_RELATIVE_COVERAGE = 0.90
 
 
 @dataclass(frozen=True)
+class PackEvaluation:
+    """Esito della pipeline su un pack: decisioni per menzione + copertura."""
+
+    decisions: list[MentionDecision]
+    resolved_terms: int
+    total_terms: int
+    coverage: float
+    lines_resolved: int
+    lines_total: int
+    roundtrip_ok: int
+    roundtrip_total: int
+
+
+@dataclass(frozen=True)
 class MentionDecision:
     """One per-mention normalization decision."""
 
@@ -50,28 +64,6 @@ class MentionDecision:
     term_id: str | None
 
 
-def _strip_connectors(item: str) -> str:
-    """Mirror ``canonical._strip_item_connectors`` (kept local, no core edit)."""
-    out = re.sub(r"^(?:di|e)\s+", "", item.strip(), flags=re.IGNORECASE)
-    out = re.sub(r"\s+(?:di|e)\s+", " ", out, flags=re.IGNORECASE)
-    return out.strip().replace("\u2019", "'")
-
-
-def _term_map(pack: DomainPackBundle) -> dict[str, tuple[str, str]]:
-    """Mirror ``canonical._build_term_map`` (longest-first, exact phrase)."""
-    pairs: list[tuple[str, str, str]] = []
-    for entry in pack.glossary_entries():
-        for term in (entry.labels_en, entry.labels_it, *entry.aliases):
-            term = term.strip().casefold()
-            if term:
-                pairs.append((term, entry.labels_en, entry.id))
-    pairs.sort(key=lambda item: len(item[0]), reverse=True)
-    term_map: dict[str, tuple[str, str]] = {}
-    for term, label_en, entry_id in pairs:
-        term_map.setdefault(term, (label_en, entry_id))
-    return term_map
-
-
 async def _evaluate_pack(
     pack: DomainPackBundle,
     pack_dir: Path,
@@ -79,11 +71,17 @@ async def _evaluate_pack(
     client: Neo4jClient | None,
     doc_prefix: str,
     llm: LLMClient | None,
-) -> tuple[list[MentionDecision], int, int, int, int]:
-    """Run the pipeline for one pack and return decisions + metrics."""
+) -> PackEvaluation:
+    """Run the pipeline for one pack and return decisions + metrics.
+
+    La copertura non e' piu' contata qui con una copia locale del lookup: i
+    canonical.md prodotti vengono misurati da ``measure_documents``, la stessa
+    funzione usata da ``scripts/measure_coverage.py`` (WP-F0).
+    """
     llm = llm or build_fake_llm(pack, corpus)
-    term_map = _term_map(pack)
+    term_map = build_lookup(pack)
     decisions: list[MentionDecision] = []
+    canonical_docs: dict[str, str] = {}
     total = 0
     resolved = 0
     roundtrip_ok = 0
@@ -96,9 +94,10 @@ async def _evaluate_pack(
         source_md = corpus[name]
         translated = await translate_document(pack, source_md, llm)
         canonical = canonicalize(pack, translated.translated_md)
+        canonical_docs[name] = canonical.canonical_md
 
         for index, ingredient in enumerate(canonical.parsed.ingredients):
-            key = _strip_connectors(ingredient.item).casefold()
+            key = lookup_key(ingredient.item)
             hit = term_map.get(key)
             is_resolved = hit is not None
             total += 1
@@ -122,7 +121,17 @@ async def _evaluate_pack(
             if recomposed == canonical.canonical_md:
                 roundtrip_ok += 1
 
-    return decisions, resolved, total, roundtrip_ok, roundtrip_total
+    report = measure_documents(pack, canonical_docs, stage="translated")
+    return PackEvaluation(
+        decisions=decisions,
+        resolved_terms=resolved,
+        total_terms=total,
+        coverage=report.coverage,
+        lines_resolved=report.lines_resolved,
+        lines_total=report.lines_total,
+        roundtrip_ok=roundtrip_ok,
+        roundtrip_total=roundtrip_total,
+    )
 
 
 def _normalization_metrics(
@@ -188,15 +197,29 @@ async def evaluate_draft(
     draft_pack = load_domain_pack(draft_dir)
     manual_pack = load_domain_pack(manual_dir)
 
-    draft_decisions, draft_resolved, draft_total, draft_rt_ok, draft_rt_total = (
-        await _evaluate_pack(draft_pack, draft_dir, corpus, client, doc_prefix, llm)
+    draft_eval = await _evaluate_pack(
+        draft_pack, draft_dir, corpus, client, doc_prefix, llm
     )
-    golden_decisions, manual_resolved, manual_total, _, _ = await _evaluate_pack(
+    manual_eval = await _evaluate_pack(
         manual_pack, manual_dir, corpus, None, doc_prefix, llm
     )
+    draft_decisions = draft_eval.decisions
+    golden_decisions = manual_eval.decisions
+    draft_rt_ok = draft_eval.roundtrip_ok
+    draft_rt_total = draft_eval.roundtrip_total
 
-    draft_coverage = draft_resolved / draft_total if draft_total else 0.0
-    manual_coverage = manual_resolved / manual_total if manual_total else 0.0
+    draft_coverage = draft_eval.coverage
+    manual_coverage = manual_eval.coverage
+    # Chiavi storiche: la vecchia copertura per-menzione, conservata con
+    # suffisso ``_terms`` per confronto con i report precedenti a F0.
+    draft_coverage_terms = (
+        draft_eval.resolved_terms / draft_eval.total_terms
+        if draft_eval.total_terms else 0.0
+    )
+    manual_coverage_terms = (
+        manual_eval.resolved_terms / manual_eval.total_terms
+        if manual_eval.total_terms else 0.0
+    )
     relative_coverage = (
         draft_coverage / manual_coverage if manual_coverage else 0.0
     )
@@ -211,12 +234,18 @@ async def evaluate_draft(
         "roundtrip_ok": draft_rt_ok,
         "roundtrip_total": draft_rt_total,
         "roundtrip_ratio": round(roundtrip_ratio, 4),
-        "draft_resolved": draft_resolved,
-        "draft_total": draft_total,
+        "draft_resolved": draft_eval.lines_resolved,
+        "draft_total": draft_eval.lines_total,
         "draft_coverage": round(draft_coverage, 4),
-        "manual_resolved": manual_resolved,
-        "manual_total": manual_total,
+        "manual_resolved": manual_eval.lines_resolved,
+        "manual_total": manual_eval.lines_total,
         "manual_coverage": round(manual_coverage, 4),
+        "draft_resolved_terms": draft_eval.resolved_terms,
+        "draft_total_terms": draft_eval.total_terms,
+        "draft_coverage_terms": round(draft_coverage_terms, 4),
+        "manual_resolved_terms": manual_eval.resolved_terms,
+        "manual_total_terms": manual_eval.total_terms,
+        "manual_coverage_terms": round(manual_coverage_terms, 4),
         "relative_coverage": round(relative_coverage, 4),
         "normalization": normalization,
         "gate_roundtrip": gate_roundtrip,
@@ -232,8 +261,8 @@ async def evaluate_draft(
                 "version": "1.0",
                 "generated_by": "app/agents/evaluator.py",
                 "corpus_size": len(corpus),
-                "total_mentions": manual_total,
-                "resolved_mentions": manual_resolved,
+                "total_mentions": manual_eval.total_terms,
+                "resolved_mentions": manual_eval.resolved_terms,
                 "coverage": round(manual_coverage, 4),
                 "decisions": [
                     {
