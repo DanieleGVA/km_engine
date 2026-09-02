@@ -6,15 +6,15 @@ Pipeline deterministica eseguita sul PILOT (15 ricette validate).
 
 - Round-trip: **15/15** (100.0%) — gate: PASS
 - Copertura glossario draft: **100.0%** (93/93 mention risolte)
-- Copertura glossario manuale: **97.9%** (91/93)
-- Copertura relativa (draft/manuale): **102.2%** — soglia >= 90%: PASS
+- Copertura glossario manuale: **100.0%** (93/93)
+- Copertura relativa (draft/manuale): **100.0%** — soglia >= 90%: PASS
 - Gate complessivo: **PASS**
 
 ## Normalizzazione vs golden pilot A
 
 - Precision: **94.6%**
-- Recall: **96.7%**
-- Match: 88 (draft risolte 93, golden risolte 91)
+- Recall: **94.6%**
+- Match: 88 (draft risolte 93, golden risolte 93)
 
 ## Codegen (suite-tipo A sul draft)
 

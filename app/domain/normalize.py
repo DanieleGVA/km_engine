@@ -34,8 +34,10 @@ _ELISION_RE = re.compile(
 # Connettore in testa: residuo della segmentazione "2 spicchi | di aglio".
 # Solo in testa: i connettori INTERNI fanno parte del termine
 # ("olio extravergine di oliva" resta intero).
+# Anche le forme inglesi: il lookup gira sul documento TRADOTTO, dove il
+# residuo della segmentazione e' "of anchovies", non "di acciughe".
 _LEADING_CONNECTOR_RE = re.compile(
-    r"^(?:di|del|della|dello|dei|degli|delle|e|ed)\s+", re.IGNORECASE
+    r"^(?:di|del|della|dello|dei|degli|delle|e|ed|of|the)\s+", re.IGNORECASE
 )
 
 _WS_RE = re.compile(r"\s+")
@@ -43,7 +45,8 @@ _WS_RE = re.compile(r"\s+")
 # Articolo o partitivo in testa: residuo della segmentazione, mai parte del
 # nome ("il succo di 1 limone"). Usato anche da ``verify._parse_ingredient``.
 _LEADING_ARTICLE_RE = re.compile(
-    r"^(?:(?:il|lo|la|i|gli|le|un|uno|una|dei|degli|delle)\s+"
+    r"^(?:(?:il|lo|la|i|gli|le|un|uno|una|dei|degli|delle"
+    r"|the|a|an)\s+"
     r"|(?:l|un|dell|degl|all|nell)['\u2019]\s*)",
     re.IGNORECASE,
 )
@@ -277,9 +280,12 @@ class Resolver:
         while changed:
             changed = False
             for modifier in self._modifiers:
-                for candidate in (f" {modifier}", f"{modifier} "):
-                    if candidate.startswith(" ") and remaining.endswith(candidate):
-                        remaining = remaining[: -len(candidate)].strip()
+                # in coda (anche dopo virgola: "salted cod, soaked") o in testa
+                for candidate in (f" {modifier}", f", {modifier}", f"{modifier} "):
+                    if candidate.startswith((" ", ",")) and remaining.endswith(
+                        candidate
+                    ):
+                        remaining = remaining[: -len(candidate)].rstrip(" ,").strip()
                     elif candidate.endswith(" ") and remaining.startswith(candidate):
                         remaining = remaining[len(candidate):].strip()
                     else:

@@ -14,20 +14,20 @@
     "gate_coverage": true,
     "gate_relative_coverage": true,
     "gate_roundtrip": true,
-    "manual_coverage": 0.9785,
-    "manual_coverage_terms": 0.9785,
-    "manual_resolved": 91,
-    "manual_resolved_terms": 91,
+    "manual_coverage": 1.0,
+    "manual_coverage_terms": 1.0,
+    "manual_resolved": 93,
+    "manual_resolved_terms": 93,
     "manual_total": 93,
     "manual_total_terms": 93,
     "normalization": {
       "draft_resolved": 93,
-      "golden_resolved": 91,
+      "golden_resolved": 93,
       "matches": 88,
       "precision": 0.9462,
-      "recall": 0.967
+      "recall": 0.9462
     },
-    "relative_coverage": 1.022,
+    "relative_coverage": 1.0,
     "roundtrip_ok": 15,
     "roundtrip_ratio": 1.0,
     "roundtrip_total": 15

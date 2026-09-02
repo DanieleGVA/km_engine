@@ -27,7 +27,7 @@ import sys
 
 from app.domain import build_translation_input, mask_numbers, parse_source_md
 from app.domain.config import get_llm_settings
-from app.domain.errors import ParseError
+from app.domain.errors import DomainError
 from app.domain.llm import HttpLLMClient, translation_prompt_sha256
 from app.domain.pack import load_domain_pack
 from app.domain.translate import glossary_labels, translate_document
@@ -39,7 +39,12 @@ DEFAULT_OUT = REPO_ROOT / "tests" / "fixtures" / "corpus_marchesi_translated"
 
 
 async def _build(
-    pack, corpus: dict[str, str], out_dir: pathlib.Path, concurrency: int
+    pack,
+    corpus: dict[str, str],
+    out_dir: pathlib.Path,
+    concurrency: int,
+    *,
+    resume: bool = True,
 ) -> list[dict]:
     llm = HttpLLMClient()
     semaphore = asyncio.Semaphore(concurrency)
@@ -47,26 +52,41 @@ async def _build(
     countable_units = pack.countable_units()
 
     async def one(name: str, source_md: str) -> dict | None:
+        path = out_dir / f"{pathlib.Path(name).stem}.md"
+        try:
+            parsed = parse_source_md(
+                source_md, known_units=known_units, countable_units=countable_units
+            )
+            masked_input, _ = mask_numbers(build_translation_input(parsed))
+        except DomainError as exc:
+            print(f"  ! {name}: {exc}", file=sys.stderr)
+            return None
+
+        row = {
+            "source": name,
+            "file": path.name,
+            "document_id": str(parsed.frontmatter.get("id", "")),
+            "masked_input": masked_input,
+        }
+        # Resume: un batch lungo non deve ripagare le traduzioni gia' fatte.
+        if resume and path.is_file():
+            return row
+
         async with semaphore:
             try:
-                parsed = parse_source_md(
-                    source_md,
-                    known_units=known_units,
-                    countable_units=countable_units,
-                )
-                masked_input, _ = mask_numbers(build_translation_input(parsed))
                 translated = await translate_document(pack, source_md, llm)
-            except (ParseError, ValueError, RuntimeError) as exc:
+            except DomainError as exc:
+                # Una ricetta che il modello traduce male (tipicamente P2: un
+                # numero aggiunto o perso) viene saltata, non fa cadere il
+                # batch: il golden e' un campione, non un tutto-o-niente.
                 print(f"  ! {name}: {exc}", file=sys.stderr)
                 return None
-            path = out_dir / f"{pathlib.Path(name).stem}.md"
+            except (ValueError, RuntimeError) as exc:
+                print(f"  ! {name}: {exc}", file=sys.stderr)
+                return None
             path.write_text(translated.translated_md, encoding="utf-8")
-            return {
-                "source": name,
-                "file": path.name,
-                "document_id": translated.document_id,
-                "masked_input": masked_input,
-            }
+            row["document_id"] = translated.document_id
+            return row
 
     results = await asyncio.gather(
         *(one(name, corpus[name]) for name in sorted(corpus))
@@ -81,6 +101,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", default=str(DEFAULT_OUT))
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--concurrency", type=int, default=4)
+    parser.add_argument(
+        "--no-resume",
+        action="store_true",
+        help="ritraduce anche le ricette gia' presenti in --out",
+    )
     args = parser.parse_args(argv)
 
     pack = load_domain_pack(args.pack)
@@ -97,7 +122,11 @@ def main(argv: list[str] | None = None) -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"traduzione reale di {len(corpus)} ricette -> {out_dir}")
-    documents = asyncio.run(_build(pack, corpus, out_dir, args.concurrency))
+    documents = asyncio.run(
+        _build(
+            pack, corpus, out_dir, args.concurrency, resume=not args.no_resume
+        )
+    )
 
     manifest = {
         "version": "1.0",

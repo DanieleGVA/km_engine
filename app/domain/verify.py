@@ -200,11 +200,16 @@ def _split_quantity(content: str) -> tuple[str | None, str | None, bool, str]:
     text = content.strip()
     to_taste = False
 
-    head = TO_TASTE_HEAD_RE.match(text)
-    if head:
+    # Ripetutamente: un traduttore puo' rendere "q.b." due volte sulla stessa
+    # riga ("to taste, as needed salt"). Consumarne una sola lascerebbe
+    # l'altra dentro l'item, che diventa irrisolvibile.
+    while True:
+        head = TO_TASTE_HEAD_RE.match(text)
+        if not head:
+            break
         to_taste = True
         text = text[head.end():].strip()
-    else:
+    if not to_taste:
         tail = TO_TASTE_TAIL_RE.search(text)
         if tail:
             to_taste = True

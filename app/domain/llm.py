@@ -37,8 +37,16 @@ def build_translation_system_prompt(
     source_lang: str,
     target_lang: str,
     glossary: Sequence[str] | None = None,
+    *,
+    ingredient_section: str = "Ingredients",
+    method_section: str = "Method",
 ) -> str:
-    """Prompt di sistema della traduzione (WP-F6): P2 + vincolo di glossario.
+    """Prompt di sistema della traduzione (WP-F6): P2 + struttura + glossario.
+
+    Le intestazioni di sezione vanno dichiarate: un modello lasciato libero
+    traduce ``## Procedimento`` in ``## Procedure`` — corretto come inglese,
+    illeggibile per il parser, che cerca ``## Method``. Il documento tradotto
+    e' un formato, non prosa.
 
     E' una funzione pura cosi' il manifest del golden puo' registrarne
     l'hash: se il prompt cambia, il golden va rigenerato e si sa perche'.
@@ -53,6 +61,23 @@ def build_translation_system_prompt(
             "do not invent, drop or reorder numbers."
         ),
         "Do not translate, reformat or comment on the {Nk} placeholders.",
+        "",
+        (
+            "Reply with the translated document only: no preamble, no "
+            "comment, no code fence. Keep this exact structure:"
+        ),
+        "- first line: the translated title, nothing else;",
+        f"- a line reading exactly '## {ingredient_section}';",
+        (
+            "- one ingredient per line, starting with '- ', in the same "
+            "order as the source;"
+        ),
+        f"- a line reading exactly '## {method_section}';",
+        (
+            "- the steps, numbered '1. ', '2. ', ... in the same order as "
+            "the source, one per line."
+        ),
+        "",
     ]
     if glossary:
         # Nessun taglio: tagliare un elenco ordinato alfabeticamente
@@ -72,10 +97,13 @@ def translation_prompt_sha256(
     source_lang: str,
     target_lang: str,
     glossary: Sequence[str] | None = None,
+    **kwargs: str,
 ) -> str:
     """Hash del prompt, per il manifest del golden."""
     return hashlib.sha256(
-        build_translation_system_prompt(source_lang, target_lang, glossary).encode()
+        build_translation_system_prompt(
+            source_lang, target_lang, glossary, **kwargs
+        ).encode()
     ).hexdigest()
 
 

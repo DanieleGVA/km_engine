@@ -19,6 +19,7 @@ fuzzy_margin: 0.05
 # "il succo di 1 limone" e' un limone, con prep = juice. Il valore e'
 # l'etichetta inglese, perche' il markdown canonico e' in inglese.
 prep_prefixes:
+  # italiano (documento sorgente)
   succo di: juice
   il succo di: juice
   scorza grattugiata di: grated zest
@@ -30,6 +31,18 @@ prep_prefixes:
   mollica di: crumb
   polpa di: pulp
   punta di: tip
+  # inglese: il lookup gira sul documento TRADOTTO, dove il traduttore ha gia'
+  # reso "il succo di" come "the juice of" (visto nel golden reale)
+  juice of: juice
+  grated zest of: grated zest
+  zest of: zest
+  grated rind of: grated zest
+  rind of: zest
+  peel of: zest
+  leaves of: leaves
+  crumb of: crumb
+  pulp of: pulp
+  tip of: tip
 
 # Modificatori che NON cambiano l'identita' dell'ingrediente e possono essere
 # staccati per cercarne la testa. La lista e' CHIUSA di proposito: e' quello
@@ -88,6 +101,14 @@ modifiers:
   - mondati
   - lavato
   - lavati
+  - ammollato
+  - ammollata
+  - ammollati
+  - ammollate
+  - dissalato
+  - dissalata
+  - dissalati
+  - dissalate
   # taglio
   - tritato
   - tritata

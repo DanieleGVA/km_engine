@@ -35,9 +35,16 @@ QTY_RANGE_RE = re.compile(
 _MIXED_RE = re.compile(rf"^(\d+(?:[.,]\d+)?)\s*([{_FRACTION_CLASS}])$")
 _SLASH_RE = re.compile(r"^(\d+)\s*/\s*(\d+)$")
 
-# "q.b.", "qb", "a piacere", "to taste": la riga non ha una dose numerica.
-_TO_TASTE_ALT = r"q\.?\s?b\.?|qb|a piacere|quanto basta|to taste"
-TO_TASTE_HEAD_RE = re.compile(rf"^(?:{_TO_TASTE_ALT})(?=\s|$)[\s,]*", re.IGNORECASE)
+# "q.b." e come lo rende un traduttore: la riga non ha una dose numerica.
+# ``as needed``/``as required`` non sono ipotesi: sono le forme che il modello
+# di traduzione produce davvero al posto di "q.b." (viste nel golden reale).
+_TO_TASTE_ALT = (
+    r"q\.?\s?b\.?|qb|a piacere|quanto basta"
+    r"|to taste|as needed|as required|as desired"
+)
+TO_TASTE_HEAD_RE = re.compile(
+    rf"^(?:{_TO_TASTE_ALT})(?=[\s,]|$)[\s,]*", re.IGNORECASE
+)
 TO_TASTE_TAIL_RE = re.compile(
     rf"(?:^|[\s,])(?:{_TO_TASTE_ALT})\s*$", re.IGNORECASE
 )

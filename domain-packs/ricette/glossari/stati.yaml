@@ -189,3 +189,15 @@ entries:
     aliases: [lavato, lavati]
     definition: Washed.
     ontology_uri: null
+  - id: STA-AMMOLLATO
+    labels_en: soaked
+    labels_it: ammollato
+    aliases: [ammollato, ammollata, ammollati, ammollate]
+    definition: Softened by soaking in liquid.
+    ontology_uri: null
+  - id: STA-DISSALATO
+    labels_en: desalted
+    labels_it: dissalato
+    aliases: [dissalato, dissalata, dissalati, dissalate]
+    definition: Rinsed to remove the preserving salt.
+    ontology_uri: null
